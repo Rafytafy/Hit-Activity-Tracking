@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 //components
-import register from "./components/register";
+import Register from "./components/Register";
 
 function App() {
   return (
     <div className="App">
-      <register> </register>
+      <Register />
     </div>
   );
 }
