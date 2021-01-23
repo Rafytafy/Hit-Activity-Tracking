@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {Button, StyleSheet, Text, View,TextInput } from 'react-native';
 import firebase from 'firebase';
+import styles from '../styles';
 export  class login extends Component {
     constructor(props){
         super(props);
@@ -23,17 +24,17 @@ export  class login extends Component {
     }
     render() {
         return (
-            <View>
-                <TextInput
-                    placeholder='email'
+            <View style={styles.loginContainer}>
+                <TextInput style={styles.inputBox}
+                    placeholder='E-mail'
                     onChangeText={(email)=>this.setState({email})}
                 />
-                <TextInput
-                    placeholder='password'
+                <TextInput style={styles.inputBox}
+                    placeholder='Password'
                     secureTextEntry={true}
                     onChangeText={(password)=>this.setState({password})}
                 />
-                <Button
+                <Button style={styles.loginButton}
                     onPress={() =>this.authLogin()}
                     title='Login'
                 />

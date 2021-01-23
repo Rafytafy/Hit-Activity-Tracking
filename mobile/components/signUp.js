@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {Button, StyleSheet, Text, View,TextInput } from 'react-native';
 import firebase from 'firebase';
-
+import {styles} from '../styles'
 export class signUp extends Component {
     constructor(props){
         super(props);

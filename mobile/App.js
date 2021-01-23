@@ -19,7 +19,7 @@ import {createStackNavigator } from'@react-navigation/stack';
 import landing from './components/landing';
 import login from './components/login';
 import signUp from './components/signUp';
-
+import styles from './styles'
 
 if(firebase.apps.length === 0){
   firebase.initializeApp(firebaseConfig)
