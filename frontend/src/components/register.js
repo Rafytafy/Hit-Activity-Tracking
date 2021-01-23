@@ -51,10 +51,14 @@ const Register = (props) => {
               type="text"
               name="Weight"
               placeholder="Weight"> </Input>
-        </Row>
+          </Row>
+           <Row>
+        <Button color="secondary" size="lg">Register</Button>
+      </Row>
       </FormGroup>
       </Form>
-        <Button color="secondary" size="lg">Register</Button>
+     
+        
     </div>
      
     
