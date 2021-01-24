@@ -8,7 +8,6 @@ module.exports.isAuthenticated = (req, res, next) => {
         .then((decodedToken) => {
             const uid = decodedToken.uid;
             req.body.uid = uid;
-
             next();
         })
         .catch((error) => {
