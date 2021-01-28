@@ -22,7 +22,7 @@ const Register = (props) => {
           })
       })
       .then(() => {
-        axios.post('http://localhost:5000/register', {
+        axios.post('http://localhost:5000/register/subscriber', {
           tokenId,
           firstName,
           lastName
