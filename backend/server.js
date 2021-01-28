@@ -7,6 +7,8 @@ const express        = require('express'),
 
 const { isAuthenticated } = require('./middleware')
 
+var register = require('./routes/register/register')
+
 admin.initializeApp({
 credential: admin.credential.cert(serviceAccount),
 databaseURL: "https://hit-activity-tracking-default-rtdb.firebaseio.com"
@@ -17,16 +19,8 @@ app.use(cors())
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-//routes 
-app.post('/register', isAuthenticated, (req, res)=>{
-    res.send(req.body.uid)
-})
-
-app.post('/registerSub', isAuthenticated, (req, res) => {
-    let data = req.body;
-    console.log(data)
-    res.send(data);
-})
+//Routes 
+app.use('/register', register);
 
 const port = process.env.PORT || 5000;
 
