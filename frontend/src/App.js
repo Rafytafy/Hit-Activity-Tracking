@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
 import firebase from 'firebase';
 //components
 import Register from "./components/register";
+import Navbar from "./components/Navbar";
+import Home from "./components/Home";
 
 function App() {
   var firebaseConfig = {
@@ -21,9 +24,18 @@ function App() {
     firebase.app(); // if already initialized, use that one
  }
   return (
-    <div className="App">
-      <Register />
-    </div>
+    <Router>
+      <div>
+        <Navbar />
+        <Switch> 
+          <Route exact path="/" component={Register} />
+          <Route path = "/Home" component = {Home} />
+      </Switch> 
+      </div>
+    </Router>
+    
+     
+    
   );
 }
 
