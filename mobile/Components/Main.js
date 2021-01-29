@@ -3,18 +3,22 @@ import {Button, StyleSheet, Text, View,TextInput } from 'react-native';
 import {connect} from 'react-redux'
 import { bindActionCreators} from 'redux'
 import {loadSubToken} from '../Actions/SigningInActions'
+import firebase from 'firebase'
+const logOut = ()=>{
+  firebase.auth().signOut()
+}
 export class Main extends Component {
    componentDidMount() {
-     this.props.loadSubToken()
-  
-
-   }
+     loadSubToken()
+     }
     render() {
         return (
             <View>
             <Text>
               WElcome bod
-              
+              <Button
+              title='LogOut'
+              onPress={()=>logOut()}/>
             </Text>
           </View>
         )

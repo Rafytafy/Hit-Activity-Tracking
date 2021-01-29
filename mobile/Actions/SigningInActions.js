@@ -1,7 +1,7 @@
 import {SigningInActions} from '../Reducers/SigningIn.js'
 import firebase from 'firebase'
 
-export function loadSubToken() {
+export const loadSubToken= () => {
     return((dispatch) => {  
         firebase.auth().currentUser.getIdToken(true)
             .then((res) => {

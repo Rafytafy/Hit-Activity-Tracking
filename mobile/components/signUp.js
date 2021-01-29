@@ -1,5 +1,7 @@
 import React, { useState} from 'react'
 import {Button, Text, View,TextInput } from 'react-native';
+import firebase from 'firebase'
+import axios from 'axios'
 
 export function signUp() {
     const [firstName, setFirstName] = useState("")
