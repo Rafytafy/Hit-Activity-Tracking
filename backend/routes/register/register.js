@@ -3,6 +3,7 @@ const express = require('express'),
 
 const { isAuthenticated } = require('../../middleware')
 
+const Trainer = require('../../models/Trainer')
 
 //@route POST register/subscriber
 //@desc Save subscriber to database
@@ -17,7 +18,15 @@ router.post('/subscriber', isAuthenticated, (req, res) => {
 //@access private 
 
 router.post('/trainer', isAuthenticated, (req, res) => {
-    res.send(req.body);
+    const newTrainer = new Trainer({
+        name: {
+            firstName: req.body.firstName,
+            lastName: req.body.lastName
+        },
+        email: req.body.email
+    })
+
+    newTrainer.save().then(item => res.json(item));
 })
 
 module.exports = router;
