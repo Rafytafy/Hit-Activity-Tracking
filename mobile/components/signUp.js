@@ -1,96 +1,110 @@
-import React, { Component } from 'react'
-import {Button, StyleSheet, Text, View,TextInput } from 'react-native';
-import firebase from 'firebase';
-import {styles} from '../styles'
-export class signUp extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            firstName:'',
-            lastName:'',
-            birthdate:'',
-            weight:0,
-            heightFeet:0,
-            heightInches:0,
-            email: '',
-            password:'',
-            passwordCheck:''
-        }
-        this.register=this.register.bind(this)
-    }
-    register(){
-        const {  firstName,
-        lastName,
-        birthdate,
-        weight,
-        heightFeet,
-        heightInches,
-        email,
-        password,
-        passwordCheck}= this.state;
-        if (password==passwordCheck){
-            firebase.auth().createUserWithEmailAndPassword(email,password)
-            .then((result) => {
-                console.log(result)
-            })
-            .catch((error) => {
-                console.log(error)
-            })
-        }
-        
+import React, { useState} from 'react'
+import {Button, Text, View,TextInput } from 'react-native';
+
+export function signUp() {
+    const [firstName, setFirstName] = useState("")
+    const [lastName, setLastName] = useState("")
+    const [birthdate, setBirthdate] = useState("")
+    const [weight, setWeight] = useState(0)
+    const [heightFeet, setHeightFeet] = useState(0)
+    const [heightInches, setHeightInches] = useState(0)
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [passwordCheck, setPasswordCheck] = useState("")
     
+    const register = () =>  {if (password==passwordCheck){
+        firebase.auth().createUserWithEmailAndPassword(email,password)
+        .then( () => { firebase.auth().currentUser.getIdToken(true)
+            .then((res) => {
+                var tokenID = res.data()
+                axios.post('http://localhost:5000/register/subscriber',{
+                    tokenID,
+                    firstName,
+                    lastName,
+                    birthdate,
+                    weight,
+                    heightFeet,
+                    heightInches,
+                    email
+                })
+                .then((res) => {   
+                    console.log(res.data)
+                    })
+                .catch(err =>  {
+                   console.log(err)
+                    })
+            })
+        })
     }
-    render() {
+    else
+        {console.log('passwords dont match')}
+    }
+           
         return (
             <View>
                 <TextInput
                     placeholder='First Name'
-                    onChangeText={(firstName)=>this.setState({firstName})}
+                    onChangeText={(value)=>setFirstName(value)}
+                    name='firstName'
+                    type='text'
                 />
                 <TextInput
                     placeholder='Last Name'
-                    onChangeText={(lastName)=>this.setState({lastName})}
+                    onChangeText={(value)=>setLastName(value)}
+                    name='lastName'
                 />
                 <TextInput
                     placeholder='Birthdate (01/01/2021)'
-                    onChangeText={(birthdate)=>this.setState({birthdate})}
+                    onChangeText={(value)=>setBirthdate(value)}
+                    name='birthdate'
                 />
                 <TextInput
                     placeholder='weight'
-                    onChangeText={(weight)=>this.setState({weight})}
+                    onChangeText={(value)=>setWeight(value)}
+                    name='weight'
                 />
                 <Text
                     Height
                 />
                 <TextInput
                     placeholder='feet'
-                    onChangeText={(heightFeet)=>this.setState({heightFeet})}
+                    keyboardType = 'numeric'
+                    onChangeText={(value)=>setHeightFeet(value)}
+                    name='heightFeet'
                 />
                 <TextInput
                     placeholder='inches'
-                    onChangeText={(heightInches)=>this.setState({heightInches})}
+                    keyboardType = 'numeric'
+                    onChangeText={(value)=>setHeightInches(value)}
+                    name='heightInches'
                 />
                 <TextInput
                     placeholder='email'
-                    onChangeText={(email)=>this.setState({email})}
+                    keyboardType = 'numeric'
+                    onChangeText={(value)=>setEmail(value)}
+                    name='email'
                 />
                 <TextInput
                     placeholder='password'
                     secureTextEntry={true}
-                    onChangeText={(password)=>this.setState({password})}
+                    onChangeText={(value)=>setPassword(value)}
+                    name='password'
                 />
                 <TextInput
                     placeholder='password again'
                     secureTextEntry={true}
-                    onChangeText={(passwordCheck)=>this.setState({passwordCheck})}
+                    onChangeText={(value)=>setPasswordCheck(value)}
+                    name='passwordCheck'
                 />
                 <Button
-                    onPress={() =>this.register()}
+                    onPress={() =>register()}
                     title='Register'
                 />
             </View>
         )
     }
-}
 
-export default signUp
+
+
+
+export default signUp;

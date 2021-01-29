@@ -1,46 +1,42 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import {Button, StyleSheet, Text, View,TextInput } from 'react-native';
 import firebase from 'firebase';
 import styles from '../styles';
-export  class login extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            email: '',
-            password:''
-        }
-        this.authLogin=this.authLogin.bind(this)
+
+export  function login() {
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const authLogin =() =>{
+        
+        firebase.auth().signInWithEmailAndPassword(email, password)
+            .then((result) => {
+                console.log(result)
+            })
+            .catch((error) => {
+                console.log(error)
+            })
     }
-    authLogin(){
-        const {email, password}= this.state;
-        firebase.auth().signInWithEmailAndPassword(email,password)
-        .then((result) => {
-            console.log(result)
-        })
-        .catch((error) => {
-            console.log(error)
-        })
     
-    }
-    render() {
         return (
             <View style={styles.loginContainer}>
                 <TextInput style={styles.inputBox}
                     placeholder='E-mail'
-                    onChangeText={(email)=>this.setState({email})}
+                    onChangeText={(value)=>setEmail(value)}
+                    naem='email'
                 />
                 <TextInput style={styles.inputBox}
                     placeholder='Password'
                     secureTextEntry={true}
-                    onChangeText={(password)=>this.setState({password})}
+                    onChangeText={(value)=>setPassword(value)}
+                    name='password'
                 />
                 <Button style={styles.loginButton}
-                    onPress={() =>this.authLogin()}
+                    onPress={() =>authLogin()}
                     title='Login'
                 />
             </View>
         )
     }
-}
+
 
 export default login
