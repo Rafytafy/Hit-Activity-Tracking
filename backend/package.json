@@ -4,7 +4,7 @@
   "description": "Backend for mobile/web app ",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "author": "Rafael Montes",
   "license": "ISC",
@@ -12,5 +12,8 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "firebase-admin": "^9.4.2"
+  },
+  "devDependencies": {
+    "jest": "^26.6.3"
   }
 }
