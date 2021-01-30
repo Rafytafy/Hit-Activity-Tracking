@@ -12,8 +12,8 @@ const Login = (props) => {
   const [password, setPassword] = useState("");
 
   
-  function authLogin(){
-    const {email, password}= this.state;
+  const authLogin = () => {
+    
     firebase.auth().signInWithEmailAndPassword(email,password)
     .then((result) => {
         console.log(result)
@@ -29,26 +29,25 @@ const Login = (props) => {
    
     return (
     <div className="Login">
-      <Form>
-        <Form.Group size="lg" controlId="email">
-          <Form.Label>Email</Form.Label>
-          <Form.Control
-            autoFocus
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </Form.Group>
-        <Form.Group size="lg" controlId="password">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </Form.Group>
-        <Button onClick={authLogin} color="secondary" size="lg">Login</Button>
-      </Form>
+ <Form> 
+        <FormGroup>
+          <Row>
+            <Input onChange={(value) => setEmail(value.target.value)}
+              type="Email"
+              name="email"
+              placeholder="Email" />
+          </Row>
+          <Row> 
+            <Input onChange={(value) => setPassword(value.target.value)}
+              type="password"
+              name="Password"
+              placeholder="Password" />
+          </Row>
+          <Row>
+        <Button onClick = {authLogin} color="secondary" size="lg">Login</Button>
+      </Row>
+      </FormGroup>
+    </Form>
     </div>
   );
   
