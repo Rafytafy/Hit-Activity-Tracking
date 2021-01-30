@@ -1,24 +1,35 @@
 import React, {useState} from 'react'; 
+import firebase from 'firebase'
 import { Form, FormGroup, Label, Input, FormFeedback, FormText, Button, Row } from 'reactstrap';
 //import {./App.css}
 
 
-export default function Login() {
+
+const Login = (props) => {
+ 
 //States
-  const [] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  function validateBlank(){
-      return email.length > 0 && password.length > 0;
+  
+  function authLogin(){
+    const {email, password}= this.state;
+    firebase.auth().signInWithEmailAndPassword(email,password)
+    .then((result) => {
+        console.log(result)
+    })
+    .catch((error) => {
+        console.log(error)
+    })
   }
-
+  
   function handleSubmit(event){
       event.preventDefault();
   }
+   
     return (
     <div className="Login">
-      <Form onSubmit={handleSubmit}>
+      <Form>
         <Form.Group size="lg" controlId="email">
           <Form.Label>Email</Form.Label>
           <Form.Control
@@ -36,12 +47,11 @@ export default function Login() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
-        <Button block size="lg" type="submit" disabled={!validateBlank()}>
-          Login
-        </Button>
+        <Button onClick={authLogin} color="secondary" size="lg">Login</Button>
       </Form>
     </div>
   );
+  
 }
 
 export default Login;

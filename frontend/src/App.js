@@ -3,6 +3,7 @@ import './App.css';
 import firebase from 'firebase';
 //components
 import Register from "./components/register";
+import Login from "./components/Login";
 
 function App() {
   var firebaseConfig = {
@@ -22,7 +23,7 @@ function App() {
  }
   return (
     <div className="App">
-      <Register />
+      <Login/>
     </div>
   );
 }
