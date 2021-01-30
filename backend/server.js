@@ -1,4 +1,5 @@
 const express        = require('express'),
+      mongoose       = require('mongoose'),
       bodyParser     = require('body-parser'),
       cors           = require('cors'),
       admin          = require('firebase-admin'),
@@ -6,7 +7,8 @@ const express        = require('express'),
       app            = express();
 
 const { isAuthenticated } = require('./middleware');
-const Subscriber = require('./models/Subscriber');
+
+var register = require('./routes/register/register')
 
 admin.initializeApp({
 credential: admin.credential.cert(serviceAccount),
@@ -18,32 +20,19 @@ app.use(cors())
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-//routes 
-app.post('/register', isAuthenticated, (req, res)=>{
-    res.send(req.body.uid)
-})
+//Database config
+const db = require('./config/mongoKey').mongoURI;
 
-app.post('/register/subscriber', isAuthenticated, (req, res) => {
-    
-        const newSub = new Subscriber({
-                             
-            name: {
-                firstName: req.body.firstName,
-                lastName: req.body.lastName
-            },
-            email: req.body.email,
-            birthdate: req.body.birthdate,
-            weight: req.body.weight,
-            height:{
-                feet:req.body.feet,
-                inches:req.body.inches
-            },
-        })
-    
-        newSub.save().then(item => res.json(item));
-    })
-  
+//Connect to the database
+mongoose
+    .connect(db, {useNewUrlParser: true, useUnifiedTopology: true})
+    .then(() => console.log("mongoDB Connected..."))
+    .catch(err => console.log(err));
 
+mongoose.set('useFindAndModify', false);
+
+//Routes 
+app.use('/register', register);
 
 const port = process.env.PORT || 5000;
 
