@@ -12,12 +12,12 @@ const SubscriberSchema = new Schema({
         required: true
     },
     weight:{
-        type: Int16Array,
+        type: Number,
         required:true
     },
     height:{
-        feet:{type: Int16Array, required: true},
-        inches:{type: Int16Array, required: true}
+        feet:{type: Number, required: true},
+        inches:{type: Number, required: true}
     },
     email: {
         type: String,
@@ -30,4 +30,4 @@ const SubscriberSchema = new Schema({
     routines: []
 })
 
-module.exports = Robot = mongoose.model('trainer', TrainerSchema);
+module.exports = mongoose.model('Subscriber', SubscriberSchema);

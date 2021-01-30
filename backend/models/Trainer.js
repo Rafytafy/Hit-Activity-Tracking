@@ -18,4 +18,4 @@ const TrainerSchema = new Schema({
     routines: []
 })
 
-module.exports = Robot = mongoose.model('trainer', TrainerSchema);
+module.exports = mongoose.model('trainer', TrainerSchema);
