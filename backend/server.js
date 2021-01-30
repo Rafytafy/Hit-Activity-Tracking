@@ -5,7 +5,8 @@ const express        = require('express'),
       serviceAccount = require('./serviceAccountKey.json'),
       app            = express();
 
-const { isAuthenticated } = require('./middleware')
+const { isAuthenticated } = require('./middleware');
+const Subscriber = require('./models/Subscriber');
 
 admin.initializeApp({
 credential: admin.credential.cert(serviceAccount),
@@ -22,11 +23,27 @@ app.post('/register', isAuthenticated, (req, res)=>{
     res.send(req.body.uid)
 })
 
-app.post('/registerSub', isAuthenticated, (req, res) => {
-    let data = req.body;
-    console.log(data)
-    res.send(data);
-})
+app.post('/register/subscriber', isAuthenticated, (req, res) => {
+    
+        const newSub = new Subscriber({
+                             
+            name: {
+                firstName: req.body.firstName,
+                lastName: req.body.lastName
+            },
+            email: req.body.email,
+            birthdate: req.body.birthdate,
+            weight: req.body.weight,
+            height:{
+                feet:req.body.feet,
+                inches:req.body.inches
+            },
+        })
+    
+        newSub.save().then(item => res.json(item));
+    })
+  
+
 
 const port = process.env.PORT || 5000;
 
