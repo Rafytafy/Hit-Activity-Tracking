@@ -20,8 +20,8 @@ router.post('/subscriber', isAuthenticated, (req, res) => {
             birthdate: req.body.birthdate,
             weight: req.body.weight,
             height:{
-                feet:req.body.feet,
-                inches:req.body.inches
+                feet:req.body.heightFeet,
+                inches:req.body.heightInches
             },
         })
     

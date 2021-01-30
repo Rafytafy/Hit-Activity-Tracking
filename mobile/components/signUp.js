@@ -18,9 +18,10 @@ export function signUp() {
         firebase.auth().createUserWithEmailAndPassword(email,password)
         .then( () => { firebase.auth().currentUser.getIdToken(true)
             .then((res) => {
-                var tokenID = res.data()
+                var tokenId = res
+                console.log(tokenId)
                 axios.post('http://localhost:5000/register/subscriber',{
-                    tokenID,
+                    tokenId,
                     firstName,
                     lastName,
                     birthdate,
