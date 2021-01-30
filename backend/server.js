@@ -6,7 +6,7 @@ const express        = require('express'),
       serviceAccount = require('./serviceAccountKey.json'),
       app            = express();
 
-const { isAuthenticated } = require('./middleware')
+const { isAuthenticated } = require('./middleware');
 
 var register = require('./routes/register/register')
 
@@ -30,7 +30,6 @@ mongoose
     .catch(err => console.log(err));
 
 mongoose.set('useFindAndModify', false);
-
 
 //Routes 
 app.use('/register', register);
