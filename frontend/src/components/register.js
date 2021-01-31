@@ -31,15 +31,17 @@ const Register = (props) => {
         })
         .then((res) => {
           console.log(res);
+          //history.push('/Login')
           
         })
       })
+      
       .catch((error) => {
         console.log(error)
       })
    
-    history.push('/Home');
-  
+   
+    
     }
   
   return (

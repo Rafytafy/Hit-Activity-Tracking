@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
 import firebase from 'firebase';
@@ -17,26 +17,55 @@ function App() {
     messagingSenderId: "828801400123",
     appId: "1:828801400123:web:49474bcd4e2031ec6fcb1e"
   };
+
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [loaded, setLoaded] = useState(false);
+
   // Initialize Firebase
   if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
- }else {
+  } else {
     firebase.app(); // if already initialized, use that one
- }
-  return (
-    <Router>
+  }
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (!user) {
+        setLoggedIn(false)
+        setLoaded(true)
+      }
+      else {
+      setLoggedIn(true)
+      setLoaded(true)
+        
+      }
+    })
+  } );
+  if (!loaded) { 
+      return(
+        <h1 style={{flex:1,justifyContent:'center'}}>
+           Loading
+       </h1>
+      )
+  }
+  
+  if (!loggedIn)
+  { 
+    return ( 
+      <Register> </Register>
+    )
+    }
+  if (loggedIn)
+  { 
+    return ( 
       <div>
-        <Navbar />
-        <Switch> 
-          <Route exact path="/" component={Register} />
-          <Route path = "/Home" component = {Home} />
-      </Switch> 
+        <Router>
+          <Navbar />
+        <Route exact path = "/" component={Home} />
+        </Router>
       </div>
-    </Router>
-    
      
-    
-  );
+    )
+  }
 }
 
 export default App;

@@ -1,6 +1,4 @@
 import React, {useState} from 'react'; 
-import firebase from 'firebase'
-//import axios from 'axios'
 import { Nav, NavItem, Dropdown, DropdownItem, DropdownToggle, DropdownMenu, NavLink } from 'reactstrap';
 
 const NavBar = (props) => 
