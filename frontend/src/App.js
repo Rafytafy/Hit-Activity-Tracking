@@ -4,8 +4,12 @@ import './App.css';
 import firebase from 'firebase';
 //components
 import Register from "./components/register";
+
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
+
+//import Login from "./components/Login";
+
 
 function App() {
   var firebaseConfig = {
@@ -26,6 +30,7 @@ function App() {
     firebase.initializeApp(firebaseConfig);
   } else {
     firebase.app(); // if already initialized, use that one
+
   }
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
@@ -66,6 +71,13 @@ function App() {
      
     )
   }
+ }
+  //return (
+    //<div className="App">
+     // <Login/>
+    //</div>
+//  );
+
 }
 
 export default App;

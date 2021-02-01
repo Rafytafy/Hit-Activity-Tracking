@@ -22,6 +22,12 @@ app.post('/register', isAuthenticated, (req, res)=>{
     res.send(req.body.uid)
 })
 
+app.post('/registerSub', isAuthenticated, (req, res) => {
+    let data = req.body;
+    console.log(data)
+    res.send(data);
+})
+
 const port = process.env.PORT || 5000;
 
 app.listen(port, () => console.log(`Server started on port ${port}`));
