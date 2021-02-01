@@ -2,18 +2,20 @@ import React, {useState} from 'react';
 import firebase from 'firebase'
 import axios from 'axios'
 import { Form, FormGroup, Label, Input, FormFeedback, FormText, Button, Row } from 'reactstrap';
-
+import { useHistory } from 'react-router-dom';
 const Register = (props) => {
   //States
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const history = useHistory(); 
+    
+  
   const onSubmit = (e) => {
     e.preventDefault();
     let tokenId;
-
+    
     firebase.auth().createUserWithEmailAndPassword(email, password)
       .then( async () => {
         await firebase.auth().currentUser.getIdToken(true)
@@ -29,14 +31,19 @@ const Register = (props) => {
         })
         .then((res) => {
           console.log(res);
+          //history.push('/Login')
+          
         })
       })
+      
       .catch((error) => {
         console.log(error)
       })
+   
+   
+    
     }
   
-
   return (
     <div className="Register">
       
@@ -67,7 +74,7 @@ const Register = (props) => {
               placeholder="Password" />
           </Row>
           <Row>
-        <Button onClick={onSubmit} color="secondary" size="lg">Register</Button>
+            <Button onClick={onSubmit} color="secondary" size="lg">Register</Button>
       </Row>
       </FormGroup>
     </Form>
