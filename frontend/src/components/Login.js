@@ -1,4 +1,5 @@
-import React, {useState} from 'react'; 
+import React, { useState } from 'react'; 
+import { useHistory } from 'react-router-dom';
 import firebase from 'firebase'
 import { Form, FormGroup, Label, Input, FormFeedback, FormText, Button, Row } from 'reactstrap';
 //import {./App.css}
@@ -10,7 +11,7 @@ const Login = (props) => {
 //States
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const history = useHistory(); 
   
   const authLogin = () => {
     
@@ -27,6 +28,10 @@ const Login = (props) => {
       event.preventDefault();
   }
    
+  const toRegister = () => 
+  { 
+    history.push('/Register')
+    }
     return (
     <div className="Login">
  <Form> 
@@ -44,7 +49,8 @@ const Login = (props) => {
               placeholder="Password" />
           </Row>
           <Row>
-        <Button onClick = {authLogin} color="secondary" size="lg">Login</Button>
+              <Button onClick={authLogin} color="secondary" size="lg">Login</Button>
+              <Button onClick = {toRegister} color = "secondary" size = "lg"> Register </Button>
       </Row>
       </FormGroup>
     </Form>

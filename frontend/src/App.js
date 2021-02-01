@@ -8,7 +8,7 @@ import Register from "./components/register";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 
-//import Login from "./components/Login";
+import Login from "./components/Login";
 
 
 function App() {
@@ -56,7 +56,14 @@ function App() {
   if (!loggedIn)
   { 
     return ( 
-      <Register> </Register>
+      <div>
+        <Router>
+          <Route exact path="/" component={Login} />
+          <Route path = "/Register" component = {Register}></Route>
+        </Router>
+       
+      </div>
+      
     )
     }
   if (loggedIn)
@@ -72,11 +79,7 @@ function App() {
     )
   }
  }
-  //return (
-    //<div className="App">
-     // <Login/>
-    //</div>
-//  );
+  
 
 
 
