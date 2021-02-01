@@ -3,6 +3,10 @@ const mongoose = require('mongoose'),
 
 
 const TrainerSchema = new Schema({
+    uid: {
+        type: String,
+        required: true
+    },
     name: {
         firstName: {type: String, required: true},
         lastName: {type: String, required: true}
