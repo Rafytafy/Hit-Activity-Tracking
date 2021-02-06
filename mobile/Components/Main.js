@@ -4,12 +4,15 @@ import {connect} from 'react-redux'
 import { bindActionCreators} from 'redux'
 import {loadSubToken} from '../Actions/SigningInActions'
 import firebase from 'firebase'
+import GoogleFit, { Scopes } from 'react-native-google-fit' 
 const logOut = ()=>{
   firebase.auth().signOut()
 }
 export class Main extends Component {
    componentDidMount() {
      loadSubToken()
+    
+ 
      }
     render() {
         return (
