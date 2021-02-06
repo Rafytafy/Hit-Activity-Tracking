@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React ,{Component} from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
+
 
 import  firebase from 'firebase/app';
 const firebaseConfig = {
@@ -13,13 +14,24 @@ const firebaseConfig = {
   appId: "1:828801400123:web:46e50140b14c24be6fcb1e"
 };
 
-import {NavigationContainer } from'@react-navigation/native';
-import {createStackNavigator } from'@react-navigation/stack';
 
-import landing from './components/landing';
-import login from './components/login';
-import signUp from './components/signUp';
+
+import Landing from './components/Landing';
+import Login from './components/Login';
+import SignUp from './components/SignUp';
+import Main from './Components/Main'
 import styles from './styles'
+
+import {Provider} from 'react-redux'
+import {createStore,applyMiddleware} from 'redux'
+import rootReducer from './Reducers/Index'
+import thunk from 'redux-thunk'
+const store = createStore(rootReducer,applyMiddleware(thunk))
+
+
+import {NavigationContainer } from'@react-navigation/native';
+import {createStackNavigator } from'@react-navigation/stack'; 
+
 
 if(firebase.apps.length === 0){
   firebase.initializeApp(firebaseConfig)
@@ -29,61 +41,61 @@ const Stack = createStackNavigator();
 
 
 export class App extends Component {
-  constructor(props){
-    super(props);
-    this.state={loaded:false}
+  constructor(props) {
+    super()
+    this.state = {
+      loaded: false,
+    }
   }
-  componentDidMount(){
+
+  componentDidMount() {
     firebase.auth().onAuthStateChanged((user) => {
-      if(!user){
-        this.setState ({
-          loggedIn:  false,
-          loaded: true
+      if (!user) {
+        this.setState({
+          loggedIn: false,
+          loaded: true,
         })
-      }else{
-      this.setState ({
-        loggedIn:  true,
-        loaded: true
+      } else {
+        this.setState({
+          loggedIn: true,
+          loaded: true,
         })
       }
     })
   }
   render() {
-    const{loggedIn,loaded} = this.state
-    if(!loaded){
-      return(
-        <View style={{flex:1,justifyContent:'center'}}>
-          <Text>
-            Loading
-          </Text>
+    const { loggedIn, loaded } = this.state;
+    if (!loaded) {
+      return (
+        <View style={{ flex: 1, justifyContent: 'center' }}>
+          <Text>Loading</Text>
         </View>
       )
     }
-    if(!loggedIn){
+
+    if (!loggedIn) {
       return (
         <NavigationContainer>
-          <Stack.Navigator initialRouteName='landing'>
-            <Stack.Screen name ='landing' component={landing}/>
-            <Stack.Screen name ='login' component={login}/>
-            <Stack.Screen name ='signUp' component={signUp}/>
-          
+          <Stack.Navigator initialRouteName="Landing">
+            <Stack.Screen name="Landing" component={Landing} options={{ headerShown: false }} />
+            <Stack.Screen name="SignUp" component={SignUp} />
+            <Stack.Screen name="Login" component={Login} />
           </Stack.Navigator>
         </NavigationContainer>
-          );
-      }
-      if(loggedIn){
-        return(
-          <View>
-            <Text>
-              Welcome to The home page
-              
-            </Text>
-          </View>
-        )
-      }
+      );
+    }
+
+    return (
+      <Provider store={store}>
+        <NavigationContainer >
+          <Stack.Navigator initialRouteName="Main">
+            <Stack.Screen name="Main" component={Main} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </Provider>
+    )
   }
 }
-
 
 export default App
 
