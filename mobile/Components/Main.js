@@ -18,7 +18,7 @@ const Tab=createBottomTabNavigator();
 
 export class Main extends Component{
   componentDidMount(){
-     currentUser=loadSubToken()
+   
   }
   render() {
       return(
