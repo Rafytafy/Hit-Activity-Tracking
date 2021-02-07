@@ -1,6 +1,8 @@
-import React, {useState} from 'react'; 
+import React, { useState } from 'react'; 
+import { useHistory } from 'react-router-dom';
 import firebase from 'firebase'
 import { Form, FormGroup, Label, Input, FormFeedback, FormText, Button, Row } from 'reactstrap';
+import Heartbeat from './Heartbeat.png';
 //import {./App.css}
 
 
@@ -10,7 +12,7 @@ const Login = (props) => {
 //States
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const history = useHistory(); 
   
   const authLogin = () => {
     
@@ -27,10 +29,18 @@ const Login = (props) => {
       event.preventDefault();
   }
    
+  const toRegister = () => 
+  { 
+    history.push('/Register')
+    }
     return (
-    <div className="Login">
+        <div className = "login"> 
  <Form> 
-        <FormGroup>
+          <FormGroup>
+            <div className="title"> 
+             <img src ={Heartbeat} alt="Logo"/>  
+              <h1> Pulse Login</h1>
+              </div>
           <Row>
             <Input onChange={(value) => setEmail(value.target.value)}
               type="Email"
@@ -51,8 +61,8 @@ const Login = (props) => {
                 </Row>
             </div>
       </FormGroup>
-    </Form>
-    </div>
+          </Form>
+        </div>
   );
   
 }
