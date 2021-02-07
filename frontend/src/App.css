@@ -7,3 +7,8 @@
   font-size: 1.5rem;
   border: none;
 }
+.divider{
+  width: 15px;
+  height:auto;
+  display:inline-block;
+}
