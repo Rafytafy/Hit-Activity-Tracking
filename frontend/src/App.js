@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
 import firebase from 'firebase';
 //components
-import Register from "./components/register";
-
+import Register from "./components/Register";
 import Navbar from "./components/Navbar";
-import Home from "./components/Home";
-
+import Profile from "./components/Profile";
 import Login from "./components/Login";
-
+import Clients from "./components/Clients";
+import Dash from "./components/Dash";
 
 function App() {
   var firebaseConfig = {
@@ -59,7 +58,8 @@ function App() {
       <div>
         <Router>
           <Route exact path="/" component={Login} />
-          <Route path = "/Register" component = {Register}></Route>
+          <Route path="/Register" component={Register}>
+          </Route>
         </Router>
        
       </div>
@@ -72,8 +72,11 @@ function App() {
       <div>
         <Router>
           <Navbar />
-        <Route exact path = "/" component={Home} />
+          <Route exact path = "/Dash" component = {Dash}/>
+          <Route path="/Profile" component={Profile} />
+          <Route path="/Clients" component={Clients} />
         </Router>
+        
       </div>
      
     )

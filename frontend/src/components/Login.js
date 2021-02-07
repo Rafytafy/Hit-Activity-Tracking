@@ -33,7 +33,7 @@ const Login = (props) => {
     history.push('/Register')
     }
     return (
-    <div className="Login">
+        <div className = "Register"> 
  <Form> 
         <FormGroup>
           <Row>
@@ -47,14 +47,18 @@ const Login = (props) => {
               type="password"
               name="Password"
               placeholder="Password" />
-          </Row>
-          <Row>
-              <Button onClick={authLogin} color="secondary" size="lg">Login</Button>
-              <Button onClick = {toRegister} color = "secondary" size = "lg"> Register </Button>
-      </Row>
+            </Row>
+            <div className="button"> 
+            <Row>
+                <Button onClick={authLogin} color="secondary" size="lg">Sign in </Button>
+                </Row>
+                <Row> 
+                  <Button onClick={toRegister} color="secondary" size="lg"> Register </Button>
+                </Row>
+            </div>
       </FormGroup>
-    </Form>
-    </div>
+          </Form>
+        </div>
   );
   
 }

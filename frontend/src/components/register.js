@@ -1,16 +1,14 @@
 import React, {useState} from 'react'; 
 import firebase from 'firebase'
 import axios from 'axios'
-import { Form, FormGroup, Label, Input, FormFeedback, FormText, Button, Row } from 'reactstrap';
-import { useHistory } from 'react-router-dom';
+import { Form, FormGroup, Input, Button, Row } from 'reactstrap';
+import Heartbeat from './Heartbeat.png';
 const Register = (props) => {
   //States
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const history = useHistory(); 
-    
   
   const onSubmit = (e) => {
     e.preventDefault();
@@ -31,7 +29,7 @@ const Register = (props) => {
         })
         .then((res) => {
           console.log(res);
-          //history.push('/Login')
+          
           
         })
       })
@@ -46,9 +44,12 @@ const Register = (props) => {
   
   return (
     <div className="Register">
-      
       <Form> 
         <FormGroup>
+          <div className = "title"> 
+          <img src ={Heartbeat} alt="Logo"/>
+            <h1> Pulse </h1>
+          </div>
           <Row>
             <Input onChange={(value) => setFirstName(value.target.value)}
               type="text"
@@ -61,6 +62,7 @@ const Register = (props) => {
               name="lastName"
               placeholder="Last Name" />
           </Row>
+
           <Row>
             <Input onChange={(value) => setEmail(value.target.value)}
               type="Email"
@@ -72,15 +74,16 @@ const Register = (props) => {
               type="password"
               name="Password"
               placeholder="Password" />
-          </Row>
+            </Row>
+          <div className="button"> 
           <Row>
             <Button onClick={onSubmit} color="secondary" size="lg">Register</Button>
-      </Row>
+            </Row>
+            </div> 
       </FormGroup>
     </Form>
      
-        
-    </div>
+     </div>
      
     
       
