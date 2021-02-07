@@ -11,11 +11,10 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
-  NavbarText
 } from 'reactstrap';
 import Pulse from './Pulse.png';
 import firebase from 'firebase'; 
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory, Link, Router } from 'react-router-dom';
 
 const NavBar = (props) => {
   const history = useHistory(); 
@@ -24,9 +23,11 @@ const NavBar = (props) => {
     const toggle = () => setIsOpen(!isOpen);
     
     const signOut = () => { 
-        firebase.auth().signOut().then(() => {
+      firebase.auth().signOut().then(() => {
+        history.push('/');
   // Sign-out successful.
-}).catch((error) => {
+        }).catch((error) => {
+          
   // An error happened.
 });
 
@@ -74,7 +75,6 @@ const NavBar = (props) => {
               </DropdownMenu>
             </UncontrolledDropdown>
           </Nav>
-          <NavbarText>Simple Text</NavbarText>
         </Collapse>
       </Navbar>
     </div>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import firebase from 'firebase'
 import { Form, FormGroup, Label, Input, FormFeedback, FormText, Button, Row } from 'reactstrap';
+import Heartbeat from './Heartbeat.png';
 //import {./App.css}
 
 
@@ -33,9 +34,13 @@ const Login = (props) => {
     history.push('/Register')
     }
     return (
-        <div className = "Register"> 
+        <div className = "login"> 
  <Form> 
-        <FormGroup>
+          <FormGroup>
+            <div className="title"> 
+             <img src ={Heartbeat} alt="Logo"/>  
+              <h1> Pulse Login</h1>
+              </div>
           <Row>
             <Input onChange={(value) => setEmail(value.target.value)}
               type="Email"
@@ -50,10 +55,8 @@ const Login = (props) => {
             </Row>
             <div className="button"> 
             <Row>
-                <Button onClick={authLogin} color="secondary" size="lg">Sign in </Button>
-                </Row>
-                <Row> 
-                  <Button onClick={toRegister} color="secondary" size="lg"> Register </Button>
+                <Button onClick={authLogin} color="secondary" size="lg">Sign in</Button>
+                <Button onClick={toRegister} color="secondary" size="lg"> Register </Button>
                 </Row>
             </div>
       </FormGroup>

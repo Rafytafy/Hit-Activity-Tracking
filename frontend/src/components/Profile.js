@@ -6,7 +6,7 @@ import { Jumbotron } from 'reactstrap';
 const Profile = (props) => 
 {
     return (
-        <div className = "Jumbo"> 
+        <div className = "jumbo"> 
             <Jumbotron> 
                 <p> Trainer</p>
                 <h1> Trainer name </h1>

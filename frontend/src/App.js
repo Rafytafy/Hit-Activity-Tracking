@@ -38,52 +38,42 @@ function App() {
         setLoaded(true)
       }
       else {
-      setLoggedIn(true)
-      setLoaded(true)
+        setLoggedIn(true)
+        setLoaded(true)
         
       }
+      console.log('Login');
     })
-  } );
-  if (!loaded) { 
-      return(
-        <h1 style={{flex:1,justifyContent:'center'}}>
-           Loading
-       </h1>
-      )
+  });
+  if (!loaded) {
+    return (
+      <h1 style={{ flex: 1, justifyContent: 'center' }}>
+        Loading
+      </h1>
+    )
   }
   
-  if (!loggedIn)
-  { 
-    return ( 
-      <div>
-        <Router>
+  return (
+    <div>
+      <Router>
+        {!loggedIn ?
+            <>
           <Route exact path="/" component={Login} />
-          <Route path="/Register" component={Register}>
-          </Route>
-        </Router>
-       
-      </div>
-      
-    )
-    }
-  if (loggedIn)
-  { 
-    return ( 
-      <div>
-        <Router>
+          <Route path="/Register" component={Register}/>
+          </>
+            :
+          <>
           <Navbar />
-          <Route exact path = "/Dash" component = {Dash}/>
+          <Route exact path="/" component={Dash} />
           <Route path="/Profile" component={Profile} />
           <Route path="/Clients" component={Clients} />
-        </Router>
-        
-      </div>
-     
-    )
-  }
- }
-  
-
+          </>
+      }
+        </Router>    
+    </div>
+  );
+ 
+}
 
 
 export default App;

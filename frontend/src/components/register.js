@@ -3,13 +3,14 @@ import firebase from 'firebase'
 import axios from 'axios'
 import { Form, FormGroup, Input, Button, Row } from 'reactstrap';
 import Heartbeat from './Heartbeat.png';
+import { useHistory } from 'react-router-dom';
 const Register = (props) => {
   //States
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  
+  const history = useHistory(); 
   const onSubmit = (e) => {
     e.preventDefault();
     let tokenId;
@@ -38,17 +39,17 @@ const Register = (props) => {
         console.log(error)
       })
    
-   
+    history.push('/');
     
     }
   
   return (
-    <div className="Register">
+    <div className="register">
       <Form> 
         <FormGroup>
           <div className = "title"> 
           <img src ={Heartbeat} alt="Logo"/>
-            <h1> Pulse </h1>
+            <h1> Pulse Register </h1>
           </div>
           <Row>
             <Input onChange={(value) => setFirstName(value.target.value)}
