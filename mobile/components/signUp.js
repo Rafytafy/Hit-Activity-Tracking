@@ -19,7 +19,6 @@ export function signUp() {
         .then( () => { firebase.auth().currentUser.getIdToken(true)
             .then((res) => {
                 var tokenId = res
-                console.log(tokenId)
                 axios.post('http://localhost:5000/register/subscriber',{
                     tokenId,
                     firstName,

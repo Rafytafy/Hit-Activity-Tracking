@@ -11,7 +11,7 @@ const Subscriber = require('../../models/Subscriber');
 
 router.post('/subscriber', isAuthenticated, (req, res) => {
     const newSub = new Subscriber({
-                             
+            uid: req.body.tokenId,               
             name: {
                 firstName: req.body.firstName,
                 lastName: req.body.lastName
@@ -34,6 +34,7 @@ router.post('/subscriber', isAuthenticated, (req, res) => {
 
 router.post('/trainer', isAuthenticated, (req, res) => {
     const newTrainer = new Trainer({
+        uid: req.body.uid, 
         name: {
             firstName: req.body.firstName,
             lastName: req.body.lastName
