@@ -71,16 +71,11 @@ const Register = (props) => {
               placeholder="Password" />
           </Row>
           <Row>
-<<<<<<< Updated upstream:frontend/src/components/register.js
-        <Button onClick={onSubmit} color="secondary" size="lg">Register</Button>
-      </Row>
-=======
             <Button onClick={onSubmit} color="secondary" size="lg"> Register </Button>
             <div class = "divider"/> 
             <Button onClick={toLogin} color="secondary" size="lg"> Login </Button>
             </Row>
-            </div> 
->>>>>>> Stashed changes:frontend/src/components/Register.js
+     
       </FormGroup>
     </Form>
      

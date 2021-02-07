@@ -42,12 +42,6 @@ const Login = (props) => {
               type="password"
               name="Password"
               placeholder="Password" />
-<<<<<<< Updated upstream
-          </Row>
-          <Row>
-        <Button onClick = {authLogin} color="secondary" size="lg">Login</Button>
-      </Row>
-=======
             </Row>
             <div className="button"> 
             <Row>
@@ -56,7 +50,6 @@ const Login = (props) => {
                 <Button onClick={toRegister} color="secondary" size="lg"> Register </Button>
                 </Row>
             </div>
->>>>>>> Stashed changes
       </FormGroup>
     </Form>
     </div>
