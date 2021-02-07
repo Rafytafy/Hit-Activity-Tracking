@@ -1,9 +1,55 @@
-.Register {
+.jumbo {
+  padding-right: 200px;
+}
+
+.navbar {
+  color: inherit;
+  text-decoration: none;
+}
+
+.register {
   margin-top: 15rem;
-  min-height: 20vh;
+  margin-bottom: 295px;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1.5rem;
+  font-size: 100px;
   border: none;
+  padding: 0;
+  flex-direction: column;
+  text-align: center;
+  color: white;
+}
+.title {
+  color: white;
+  margin-bottom: 15px;
+  margin-top: 0;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 5px;
+  width: 300px;
+}
+
+body {
+  background: linear-gradient(180deg, #e0c3fc, #8ec5fc);
+  background-size: cover;
+}
+
+.login {
+  margin-top: 200px;
+  margin-bottom: 410px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 100px;
+  border: none;
+  padding: 0;
+  flex-direction: column;
+  text-align: center;
+  color: white;
 }

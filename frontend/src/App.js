@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
 import firebase from 'firebase';
 //components
-import Register from "./components/register";
-
+import Register from "./components/Register";
 import Navbar from "./components/Navbar";
-import Home from "./components/Home";
-
-//import Login from "./components/Login";
-
+import Profile from "./components/Profile";
+import Login from "./components/Login";
+import Clients from "./components/Clients";
+import Dash from "./components/Dash";
 
 function App() {
   var firebaseConfig = {
@@ -39,45 +38,42 @@ function App() {
         setLoaded(true)
       }
       else {
-      setLoggedIn(true)
-      setLoaded(true)
+        setLoggedIn(true)
+        setLoaded(true)
         
       }
+      console.log('Login');
     })
-  } );
-  if (!loaded) { 
-      return(
-        <h1 style={{flex:1,justifyContent:'center'}}>
-           Loading
-       </h1>
-      )
+  });
+  if (!loaded) {
+    return (
+      <h1 style={{ flex: 1, justifyContent: 'center' }}>
+        Loading
+      </h1>
+    )
   }
   
-  if (!loggedIn)
-  { 
-    return ( 
-      <Register> </Register>
-    )
-    }
-  if (loggedIn)
-  { 
-    return ( 
-      <div>
-        <Router>
+  return (
+    <div>
+      <Router>
+        {!loggedIn ?
+            <>
+          <Route exact path="/" component={Login} />
+          <Route path="/Register" component={Register}/>
+          </>
+            :
+          <>
           <Navbar />
-        <Route exact path = "/" component={Home} />
-        </Router>
-      </div>
-     
-    )
-  }
- }
-  //return (
-    //<div className="App">
-     // <Login/>
-    //</div>
-//  );
-
+          <Route exact path="/" component={Dash} />
+          <Route path="/Profile" component={Profile} />
+          <Route path="/Clients" component={Clients} />
+          </>
+      }
+        </Router>    
+    </div>
+  );
+ 
+}
 
 
 export default App;

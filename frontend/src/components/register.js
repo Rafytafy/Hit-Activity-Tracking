@@ -1,7 +1,8 @@
 import React, {useState} from 'react'; 
 import firebase from 'firebase'
 import axios from 'axios'
-import { Form, FormGroup, Label, Input, FormFeedback, FormText, Button, Row } from 'reactstrap';
+import { Form, FormGroup, Input, Button, Row } from 'reactstrap';
+import Heartbeat from './Heartbeat.png';
 import { useHistory } from 'react-router-dom';
 const Register = (props) => {
   //States
@@ -10,8 +11,6 @@ const Register = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory(); 
-    
-  
   const onSubmit = (e) => {
     e.preventDefault();
     let tokenId;
@@ -31,7 +30,7 @@ const Register = (props) => {
         })
         .then((res) => {
           console.log(res);
-          //history.push('/Login')
+          
           
         })
       })
@@ -40,15 +39,18 @@ const Register = (props) => {
         console.log(error)
       })
    
-   
+    history.push('/');
     
     }
   
   return (
-    <div className="Register">
-      
+    <div className="register">
       <Form> 
         <FormGroup>
+          <div className = "title"> 
+          <img src ={Heartbeat} alt="Logo"/>
+            <h1> Pulse Register </h1>
+          </div>
           <Row>
             <Input onChange={(value) => setFirstName(value.target.value)}
               type="text"
@@ -61,6 +63,7 @@ const Register = (props) => {
               name="lastName"
               placeholder="Last Name" />
           </Row>
+
           <Row>
             <Input onChange={(value) => setEmail(value.target.value)}
               type="Email"
@@ -72,15 +75,16 @@ const Register = (props) => {
               type="password"
               name="Password"
               placeholder="Password" />
-          </Row>
+            </Row>
+          <div className="button"> 
           <Row>
             <Button onClick={onSubmit} color="secondary" size="lg">Register</Button>
-      </Row>
+            </Row>
+            </div> 
       </FormGroup>
     </Form>
      
-        
-    </div>
+     </div>
      
     
       
