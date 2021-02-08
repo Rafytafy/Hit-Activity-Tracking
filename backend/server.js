@@ -9,6 +9,7 @@ const express        = require('express'),
 const { isAuthenticated } = require('./middleware');
 
 var register = require('./routes/register/register')
+var subData = require('./routes/subData/subData')
 
 admin.initializeApp({
 credential: admin.credential.cert(serviceAccount),
@@ -33,6 +34,7 @@ mongoose.set('useFindAndModify', false);
 
 //Routes 
 app.use('/register', register);
+app.use('/subData',subData)
 
 const port = process.env.PORT || 5000;
 
