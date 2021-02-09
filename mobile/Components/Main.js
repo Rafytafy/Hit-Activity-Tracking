@@ -6,19 +6,19 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import {loadSubToken} from '../Actions/SigningInActions'
 import ExerciseScreen from './Main/Exercise'
 import SearchScreen from './Main/Search'
 import ProfileScreen from './Main/Profile'
 import { NavigationContainer } from '@react-navigation/native'
-
+import {loadSubToken} from '../Actions/SubscriberActions'
 const Tab=createBottomTabNavigator();
 
 
 
 export class Main extends Component{
   componentDidMount(){
-   
+    loadSubToken()
+
   }
   render() {
       return(
@@ -55,7 +55,7 @@ export class Main extends Component{
 }
 
 const mapStateToProps=(store)=> ({
-  currentUser: store.signIn.currentUserToken
+  currentUser: store.subscriber.currentUser
 })
 const mapDispatchProps=(dispatch)=>bindActionCreators({loadSubToken}, dispatch)
 

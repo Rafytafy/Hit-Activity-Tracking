@@ -5,7 +5,8 @@ const { isAuthenticated } = require('../../middleware')
 
 const Subscriber = require('../../models/Subscriber');
 
-router.get('/getProfileData', isAuthenticated, (req, res) => {
+router.post('/getProfileData', isAuthenticated, (req, res) => {
+    console.log('this is stuff for rafy')
     Subscriber.findOne({uid : req.body.uid},  (err,user) =>{
         if(err) {console.log( err)}
         else{console.log(user)}
@@ -13,3 +14,4 @@ router.get('/getProfileData', isAuthenticated, (req, res) => {
     })
   
 })
+module.exports = router;

@@ -2,36 +2,29 @@ import {View, Text} from 'react-native'
 import axios from 'axios'
 import firebase from 'firebase'
 import React, { useState, useEffect} from 'react'
+import {loadSubToken,loadProfileData} from '../../Actions/SubscriberActions'
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
 
-
-export default function Profile() {
-    const getData = () => {
-        axios.get('http://localhost:5000/subData/getProfileData',{tokenId})
-        .then((res) =>{
-             const data = res.data
-            setProfileData(data)
-            console.log(profileData)})
-            .catch(()=>{alert('error getting data')})
-
-    }
-    const [profileData, setProfileData] = useState("")
-    const [tokenId, setCurtoken]  = useState("")
+function Profile() {
+           
     useEffect(()=>{
-      firebase.auth().currentUser.getIdToken(true).then((res)=>setCurtoken(res))
-      
-        console.log(tokenId)
-        getData()
+        loadProfileData(store.subscriber.currentUser)
+
     })
    
-   
-   
-   
+   console.log(store.subscriber.currentUser)
+   console.log(store.subscriber.profileData)
+      
     return (
         <View>
-            <Text>Profile
+            <Text>Profile 
                 <br/>
-                Name: '                        '
-            
+                Name: 
+                </Text>
+               
+                <Text>
+                           
                 Age: '           '
                 
                 Weight: '   '    
@@ -43,6 +36,10 @@ export default function Profile() {
     )
 }
 
-
-            
-    
+const mapStateToProps=(store)=> ({
+    currentUser: store.subscriber.currentUser,
+    profileData: store.subscriber.profileData
+  })
+  const mapDispatchProps=(dispatch)=>bindActionCreators({loadSubToken,loadProfileData}, dispatch)
+  
+  export default connect(mapStateToProps, mapDispatchProps) (Profile);
