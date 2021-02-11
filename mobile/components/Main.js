@@ -18,7 +18,7 @@ const Tab=createBottomTabNavigator();
 export class Main extends Component{
   componentDidMount(){
     loadSubToken()
-
+    
   }
   render() {
       return(
@@ -57,6 +57,6 @@ export class Main extends Component{
 const mapStateToProps=(store)=> ({
   currentUser: store.subscriber.currentUser
 })
-const mapDispatchProps=(dispatch)=>bindActionCreators({loadSubToken}, dispatch)
+const mapDispatchProps=(dispatch)=>({loadSubToken}, dispatch)
 
 export default connect(mapStateToProps, mapDispatchProps) (Main);

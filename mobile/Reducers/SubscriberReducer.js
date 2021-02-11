@@ -1,5 +1,6 @@
 export const subActions ={
     getSubToken: 'GET_SUB_TOKEN',
+    getSubTokenSuccess: 'GET_SUB_TOKEN_SUCCESS',
     getSubTokenFailed: 'GET_SUB_TOKEN_FAILED',
     getSubProfileData: 'GET_SUB_PROFILE_DATA',
     getSubProfileDataSuccess: 'GET_SUB_PROFILE_DATA_SUCCESS',
@@ -19,11 +20,19 @@ const subscriberReducer = (state = initialSubState, action) =>
         case subActions.getSubToken:
             return{
                 ...state,
+                loading:true
+            }
+        case subActions.getSubTokenSuccess:
+            return{
+                ...state,
+                loading:false,
                 currentUser:action.payload
             }
+
         case subActions.getSubTokenFailed:
             return{
                 ...state,
+                loading:false,
                 currentUser:action.payload
             }
             case subActions.getSubProfileData:
@@ -40,6 +49,7 @@ const subscriberReducer = (state = initialSubState, action) =>
             case subActions.getSubProfileDataFailed:
             return{
                 ...state,
+                loading:false,
                 error:action.payload
             }
     }

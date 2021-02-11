@@ -1,5 +1,6 @@
 import {subActions} from '../Reducers/SubscriberReducer'
 import firebase from 'firebase'
+import axios from 'axios'
 
 
 const callforSubProfileData = (dispatch,tokenId,success,failure) =>
@@ -15,23 +16,25 @@ const callforSubProfileData = (dispatch,tokenId,success,failure) =>
         })
 
 }
-export const loadSubToken= () => {
-    return((dispatch) => {  
-        firebase.auth().currentUser.getIdToken(true)
-            .then((res) => {
-                console.log(res)
-                console.log('dddd')
-                console.log(res.data)
-                console.log('ddddffff')
-                console.log(res.data())
-                dispatch({type: subActions.getSubToken, payload:res})
+export const loadSubToken= (dispatch) => {
+
+    dispatch({type:subActions.getSubToken})
   
-             })
-            .catch((err)=>
-            {
-                dispatch({type: subActions.getSubTokenFailed, payload:err})
+    firebase.auth().currentUser.getIdToken(true)
+        .then((res) => {
+            console.log(res)
+            console.log('dddd')
+            console.log(res.data)
+            console.log('ddddffff')
+            console.log(res.data())
+            dispatch({type: subActions.getSubTokenSuccess, payload:res})
+
             })
-    })
+        .catch((err)=>
+        {
+            dispatch({type: subActions.getSubTokenFailed, payload:err})
+        })
+  
 }
 
 export const loadProfileData = dispatch => tokenId =>
