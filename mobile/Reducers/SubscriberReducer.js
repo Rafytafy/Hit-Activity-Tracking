@@ -9,7 +9,7 @@ export const subActions ={
 const initialSubState = {
     error: null,
     currentUser:null,
-    profileData:null,
+    profileData:[],
     loading:false
     
 }

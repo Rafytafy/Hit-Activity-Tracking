@@ -23,10 +23,10 @@ import Main from './Components/Main'
 import styles from './styles'
 
 import {Provider} from 'react-redux'
-import {createStore,applyMiddleware,compose} from 'redux'
+import {createStore,applyMiddleware} from 'redux'
 import rootReducer from './Reducers/Index'
 import thunk from 'redux-thunk'
-const store = createStore(rootReducer,compose(applyMiddleware(thunk)));
+const store = createStore(rootReducer,applyMiddleware(thunk));
 
 
 import {NavigationContainer } from'@react-navigation/native';
