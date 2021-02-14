@@ -6,19 +6,23 @@ import axios from 'axios'
 export function signUp() {
     const [firstName, setFirstName] = useState("")
     const [lastName, setLastName] = useState("")
-    const [birthdate, setBirthdate] = useState("")
     const [weight, setWeight] = useState(0)
     const [heightFeet, setHeightFeet] = useState(0)
     const [heightInches, setHeightInches] = useState(0)
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [passwordCheck, setPasswordCheck] = useState("")
+    const [month , setMonth] = useState(0)
+    const [day,setDay ] = useState(0)
+    const [year, setYear] = useState(0)
     
     const register = () =>  {if (password==passwordCheck){
         firebase.auth().createUserWithEmailAndPassword(email,password)
         .then( () => { firebase.auth().currentUser.getIdToken(true)
             .then((res) => {
                 var tokenId = res
+                var birthdate = new Date(year,month,day)
+                         
                 axios.post('http://localhost:5000/register/subscriber',{
                     tokenId,
                     firstName,
@@ -55,15 +59,34 @@ export function signUp() {
                     onChangeText={(value)=>setLastName(value)}
                     name='lastName'
                 />
-                <TextInput
-                    placeholder='Birthdate (01/01/2021)'
-                    onChangeText={(value)=>setBirthdate(value)}
-                    name='birthdate'
+                 <Text
+                    Birthdate
                 />
+                <TextInput
+                    placeholder='Month (01)' 
+                    onChangeText={(value)=>setMonth(value-1)}
+                    name='month'
+                    maxLength={2}
+                />
+                  <TextInput
+                    placeholder='Day (01)' 
+                    onChangeText={(value)=>setDay(value)}
+                    maxLength={2}
+                    name='day'
+                />
+           
+                  <TextInput
+                  placeholder='Year (2001)' 
+                  onChangeText={(value)=>setYear(value)}
+                maxLength={4}
+                  name='year'
+              />
+             
                 <TextInput
                     placeholder='weight'
                     onChangeText={(value)=>setWeight(value)}
                     name='weight'
+                    maxLength={3}
                 />
                 <Text
                     Height
@@ -73,12 +96,14 @@ export function signUp() {
                     keyboardType = 'numeric'
                     onChangeText={(value)=>setHeightFeet(value)}
                     name='heightFeet'
+                    maxLength={1}
                 />
                 <TextInput
                     placeholder='inches'
                     keyboardType = 'numeric'
                     onChangeText={(value)=>setHeightInches(value)}
                     name='heightInches'
+                    maxLength={2}
                 />
                 <TextInput
                     placeholder='email'

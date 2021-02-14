@@ -29,9 +29,8 @@ export function loadProfileData(){
             axios.post(`http://localhost:5000/subData/getProfileData`,{tokenId})
             .then(res =>
             {
-                console.log("hello")
-                console.log(res.data)
-                console.log("hello")
+           
+            
                 dispatch({type:subActions.getSubProfileDataSuccess,payload:res.data})
             })
             .catch(err =>
