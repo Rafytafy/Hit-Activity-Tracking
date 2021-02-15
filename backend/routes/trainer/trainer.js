@@ -18,9 +18,9 @@ router.get('/', (req, res) => {
 //@route GET trainer/subscribers
 //@desc Get all trainers
 //@access public
-router.get('/subscribers/:id', async (req, res) => {
+router.get('/subscribers/:id', (req, res) => {
     let clients = []; 
-    await Trainer.findOne({ uid: req.params.id }, (err, trainer) => {
+    Trainer.findOne({ uid: req.params.id }, (err, trainer) => {
         if(err){
             console.log(err);
         }
