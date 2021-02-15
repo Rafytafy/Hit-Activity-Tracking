@@ -19,7 +19,8 @@ const TrainerSchema = new Schema({
         type: String,
         default: ''
     },
-    routines: []
+    routines: [],
+    clients: []
 })
 
 module.exports = mongoose.model('trainer', TrainerSchema);
