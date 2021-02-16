@@ -11,7 +11,7 @@ const Edit = (props) => {
     {
         fileButton.addEventListener('change', function(e) {
         let file = e.target.files[0]; 
-        let storageRef = firebase.storage().ref('folder_name/file_name' + file.name);
+        let storageRef = firebase.storage().ref('trainer_photos' + file.name);
         let task = storageRef.put(file);
         task.on('state_changed',
         
