@@ -9,6 +9,7 @@ import Profile from "./components/Profile";
 import Login from "./components/Login";
 import Clients from "./components/Clients";
 import Dash from "./components/Dash";
+import Edit from "./components/Edit";
 
 function App() {
   var firebaseConfig = {
@@ -66,7 +67,8 @@ function App() {
           <Navbar />
           <Route exact path="/" component={Dash} />
           <Route path="/Profile" component={Profile} />
-          <Route path="/Clients" component={Clients} />
+            <Route path="/Clients" component={Clients} />
+            <Route path ="/Edit" component = {Edit}/>
           </>
       }
         </Router>    

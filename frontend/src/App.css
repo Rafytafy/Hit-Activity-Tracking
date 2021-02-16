@@ -1,7 +1,15 @@
 .jumbo {
   padding-right: 200px;
 }
-
+.progressBar {
+  display: flex;
+  width: 50%;
+  padding: 0;
+  margin: 0;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
 .navbar {
   color: inherit;
   text-decoration: none;

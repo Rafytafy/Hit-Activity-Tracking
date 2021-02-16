@@ -64,7 +64,7 @@ const NavBar = (props) => {
               </DropdownToggle>
               <DropdownMenu right>
                 <DropdownItem>
-                 Edit Profile
+                  <Link to= "/Edit"> Edit Profile </Link>
                 </DropdownItem>
                 <DropdownItem onClick = {signOut}>
                   Sign Out
