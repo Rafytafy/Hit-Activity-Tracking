@@ -3,8 +3,6 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import { Container, Table} from 'reactstrap';
 
-
-
 class Clients extends Component {
     render() {
         return (
@@ -13,7 +11,6 @@ class Clients extends Component {
                 <h2>Clients</h2>
                 <Table>
                     <thread>
-                        
                         <th>Client Name</th>
                         <th>Email</th>
                         <th>Weight</th>
