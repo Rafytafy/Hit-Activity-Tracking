@@ -55,7 +55,8 @@ const Login = (props) => {
             </Row>
             <div className="button"> 
             <Row>
-                <Button onClick={authLogin} color="secondary" size="lg">Sign in</Button>
+                <Button onClick={authLogin} color="secondary" size="lg"> Sign in </Button>
+                <div class = "divider"/> 
                 <Button onClick={toRegister} color="secondary" size="lg"> Register </Button>
                 </Row>
             </div>
