@@ -12,6 +12,9 @@ import Profile from "./components/Profile";
 import Login from "./components/Login";
 import Clients from "./components/Clients";
 import Dash from "./components/Dash";
+import Edit from "./components/Edit";
+import Messages from "./components/Messages";
+import Routines from "./components/Routines";
 
 function App(props) {
   var firebaseConfig = {
@@ -69,7 +72,11 @@ function App(props) {
           <Navbar />
           <Route exact path="/" component={Dash} />
           <Route path="/Profile" component={Profile} />
-          <Route path="/Clients" component={Clients} />
+            <Route path="/Clients" component={Clients} />
+            <Route path="/Edit" component={Edit} />
+            <Route path="/Messages" component={Messages} />
+            <Route path="/Routines" component={Routines} />
+            
           </>
       }
         </Router>    

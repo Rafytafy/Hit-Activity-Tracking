@@ -58,13 +58,13 @@ const NavBar = (props) => {
                <Link to="/Profile"> Profile </Link>
               </NavLink>
             </NavItem>
-            <UncontrolledDropdown nav inNavbar>
-              <DropdownToggle nav caret>
+            <UncontrolledDropdown nav inNavbar >
+              <DropdownToggle nav caret >
                 Options
               </DropdownToggle>
               <DropdownMenu right>
                 <DropdownItem>
-                 Edit Profile
+                  <Link to= "/Edit"> Edit Profile </Link>
                 </DropdownItem>
                 <DropdownItem onClick = {signOut}>
                   Sign Out
