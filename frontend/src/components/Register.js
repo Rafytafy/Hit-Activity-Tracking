@@ -46,10 +46,14 @@ const Register = (props) => {
       .catch((error) => {
         console.log(error)
       })
-      
-    history.push('/');
+   
+    history.push('/')
     
     }
+    const toLogin = () => 
+    { 
+      history.push('')
+      }
   
   return (
     <div className="register">
@@ -86,9 +90,11 @@ const Register = (props) => {
             </Row>
           <div className="button"> 
           <Row>
-              <Button onClick={onSubmit} color="secondary" size="lg">Register</Button>
+            <Button onClick={onSubmit} color="secondary" size="lg"> Register </Button>
+            <div class = "divider"/> 
+            <Button onClick={toLogin} color="secondary" size="lg"> Login </Button>
             </Row>
-            </div> 
+        </div>
       </FormGroup>
     </Form>
      

@@ -82,3 +82,8 @@ body {
   height: auto;
   display: inline-block;
 }
+.divider {
+  width: 15px;
+  height: auto;
+  display: inline-block;
+}
