@@ -33,7 +33,7 @@ class Clients extends Component {
 }
 
 const mapStateToProps = (store) => ({
-    clients: store.clientList.clients
+    clients: store.clients.list
 })
 
 

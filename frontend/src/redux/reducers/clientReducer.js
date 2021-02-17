@@ -1,7 +1,7 @@
 import { FETCH_CLIENTS } from '../constants/index';
 
 const initialState = {
-  clients: []
+  list: []
 };
 // eslint-disable-next-line
 export default function(state = initialState, action) {
@@ -9,7 +9,7 @@ export default function(state = initialState, action) {
     case FETCH_CLIENTS:
       return {
         ...state,
-        clients: action.clientList
+        list: action.clientList
       };
     default:
       return state;

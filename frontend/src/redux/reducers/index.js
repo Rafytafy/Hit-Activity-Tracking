@@ -2,5 +2,5 @@ import { combineReducers } from 'redux';
 import clientReducer from './clientReducer';
 
 export default combineReducers({
-  clientList: clientReducer
+  clients: clientReducer
 });
