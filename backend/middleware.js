@@ -2,7 +2,7 @@ const admin = require('firebase-admin');
 
 module.exports.isAuthenticated = (req, res, next) => {
     let tokenId = req.body.tokenId
-
+   
     admin
         .auth()
         .verifyIdToken(tokenId)

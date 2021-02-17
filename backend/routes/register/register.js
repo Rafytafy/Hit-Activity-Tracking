@@ -11,7 +11,7 @@ const Subscriber = require('../../models/Subscriber');
 
 router.post('/subscriber', isAuthenticated, (req, res) => {
     const newSub = new Subscriber({
-            uid: req.body.tokenId,               
+            uid: req.body.uid,               
             name: {
                 firstName: req.body.firstName,
                 lastName: req.body.lastName
@@ -27,6 +27,7 @@ router.post('/subscriber', isAuthenticated, (req, res) => {
     
         newSub.save().then(item => res.json(item));
 })
+
 
 //@route POST register/trainer
 //@desc Save trainer to database
