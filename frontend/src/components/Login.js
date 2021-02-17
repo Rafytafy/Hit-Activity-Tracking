@@ -1,47 +1,70 @@
-import React, {useState} from 'react'; 
+import React, { useState } from 'react'; 
+import { useHistory } from 'react-router-dom';
+import firebase from 'firebase'
 import { Form, FormGroup, Label, Input, FormFeedback, FormText, Button, Row } from 'reactstrap';
+import Heartbeat from './Heartbeat.png';
 //import {./App.css}
 
 
-export default function Login() {
+
+const Login = (props) => {
+ 
 //States
-  const [] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  function validateBlank(){
-      return email.length > 0 && password.length > 0;
+  const history = useHistory(); 
+  
+  const authLogin = () => {
+    
+    firebase.auth().signInWithEmailAndPassword(email,password)
+    .then((result) => {
+        console.log(result)
+    })
+    .catch((error) => {
+        console.log(error)
+    })
   }
-
+  
   function handleSubmit(event){
       event.preventDefault();
   }
+   
+  const toRegister = () => 
+  { 
+    history.push('/Register')
+    }
     return (
-    <div className="Login">
-      <Form onSubmit={handleSubmit}>
-        <Form.Group size="lg" controlId="email">
-          <Form.Label>Email</Form.Label>
-          <Form.Control
-            autoFocus
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </Form.Group>
-        <Form.Group size="lg" controlId="password">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </Form.Group>
-        <Button block size="lg" type="submit" disabled={!validateBlank()}>
-          Login
-        </Button>
-      </Form>
-    </div>
+        <div className = "login"> 
+ <Form> 
+          <FormGroup>
+            <div className="title"> 
+             <img src ={Heartbeat} alt="Logo"/>  
+              <h1> Pulse Login</h1>
+              </div>
+          <Row>
+            <Input onChange={(value) => setEmail(value.target.value)}
+              type="Email"
+              name="email"
+              placeholder="Email" />
+          </Row>
+          <Row> 
+            <Input onChange={(value) => setPassword(value.target.value)}
+              type="password"
+              name="Password"
+              placeholder="Password" />
+            </Row>
+            <div className="button"> 
+            <Row>
+                <Button onClick={authLogin} color="secondary" size="lg"> Sign in </Button>
+                <div class = "divider"/> 
+                <Button onClick={toRegister} color="secondary" size="lg"> Register </Button>
+                </Row>
+            </div>
+      </FormGroup>
+          </Form>
+        </div>
   );
+  
 }
 
 export default Login;

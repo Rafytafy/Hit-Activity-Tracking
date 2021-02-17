@@ -11,6 +11,9 @@ const { isAuthenticated } = require('./middleware');
 var register = require('./routes/register/register')
 var subData = require('./routes/subData/subData')
 
+const trainer = require('./routes/trainer/trainer')
+
+
 admin.initializeApp({
 credential: admin.credential.cert(serviceAccount),
 databaseURL: "https://hit-activity-tracking-default-rtdb.firebaseio.com"
@@ -35,6 +38,7 @@ mongoose.set('useFindAndModify', false);
 //Routes 
 app.use('/register', register);
 app.use('/subData',subData)
+app.use('/trainer', trainer);
 
 const port = process.env.PORT || 5000;
 
