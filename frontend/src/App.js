@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
 import firebase from 'firebase';
+import { bindActionCreators } from 'redux';
+import {connect} from 'react-redux'
+import {fetchClients} from './redux/actions/index'
 //components
 import Register from "./components/Register";
 import Navbar from "./components/Navbar";
@@ -9,8 +12,11 @@ import Profile from "./components/Profile";
 import Login from "./components/Login";
 import Clients from "./components/Clients";
 import Dash from "./components/Dash";
+import Edit from "./components/Edit";
+import Messages from "./components/Messages";
+import Routines from "./components/Routines";
 
-function App() {
+function App(props) {
   var firebaseConfig = {
     apiKey: "AIzaSyDk_hueTUcYP2ULeS2dIIZwiKHybq8esC0",
     authDomain: "hit-activity-tracking.firebaseapp.com",
@@ -40,9 +46,9 @@ function App() {
       else {
         setLoggedIn(true)
         setLoaded(true)
-        
+        props.fetchClients();
       }
-      console.log('Login');
+      
     })
   });
   if (!loaded) {
@@ -66,7 +72,11 @@ function App() {
           <Navbar />
           <Route exact path="/" component={Dash} />
           <Route path="/Profile" component={Profile} />
-          <Route path="/Clients" component={Clients} />
+            <Route path="/Clients" component={Clients} />
+            <Route path="/Edit" component={Edit} />
+            <Route path="/Messages" component={Messages} />
+            <Route path="/Routines" component={Routines} />
+            
           </>
       }
         </Router>    
@@ -74,6 +84,6 @@ function App() {
   );
  
 }
+const mapDispatchProps = (dispatch) => bindActionCreators({fetchClients}, dispatch)
 
-
-export default App;
+export default connect(null, mapDispatchProps)(App);

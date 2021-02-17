@@ -1,5 +1,4 @@
-import React, {useState} from 'react'; 
-import firebase from 'firebase';
+import React from 'react'; 
 import { Jumbotron } from 'reactstrap';
 
 

@@ -11,6 +11,13 @@ const Register = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory(); 
+  
+  let img = document.getElementById('img');
+  let file = {};
+
+  function chooseFile(e) { 
+    file = e.target.files[0];
+  }
   const onSubmit = (e) => {
     e.preventDefault();
     let tokenId;
@@ -40,9 +47,13 @@ const Register = (props) => {
         console.log(error)
       })
    
-    history.push('/');
+    history.push('/')
     
     }
+    const toLogin = () => 
+    { 
+      history.push('')
+      }
   
   return (
     <div className="register">
@@ -79,9 +90,11 @@ const Register = (props) => {
             </Row>
           <div className="button"> 
           <Row>
-            <Button onClick={onSubmit} color="secondary" size="lg">Register</Button>
+            <Button onClick={onSubmit} color="secondary" size="lg"> Register </Button>
+            <div class = "divider"/> 
+            <Button onClick={toLogin} color="secondary" size="lg"> Login </Button>
             </Row>
-            </div> 
+        </div>
       </FormGroup>
     </Form>
      

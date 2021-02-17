@@ -1,7 +1,15 @@
 .jumbo {
   padding-right: 200px;
 }
-
+.progressBar {
+  display: flex;
+  width: 50%;
+  padding: 0;
+  margin: 0;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
 .navbar {
   color: inherit;
   text-decoration: none;
@@ -52,4 +60,30 @@ body {
   flex-direction: column;
   text-align: center;
   color: white;
+}
+
+.dash {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 75px;
+  min-height: 300px;
+  max-width: 100%;
+  color: inherit;
+  text-decoration: none;
+}
+
+.topDash {
+  margin-left: 20px;
+}
+
+.dashDivider {
+  width: 30px;
+  height: auto;
+  display: inline-block;
+}
+.divider {
+  width: 15px;
+  height: auto;
+  display: inline-block;
 }
