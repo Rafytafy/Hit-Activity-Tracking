@@ -14,6 +14,20 @@ router.get('/', (req, res) => {
     .then(items => res.json(items));
 })
 
+//@route GET trainer/:id
+//@desc Get user by id
+//@access public
+router.get('/:id', (req, res) => {
+    Trainer.find({uid: req.params.id}, (err, trainer) => {
+        if(err){
+            res.send("There was an error retrieveing the trainer");
+        }
+        else{
+            res.send(trainer);
+        }
+    })
+})
+
 
 //@route GET trainer/subscribers
 //@desc Get all trainers

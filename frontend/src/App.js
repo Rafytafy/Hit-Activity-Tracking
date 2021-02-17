@@ -4,7 +4,7 @@ import './App.css';
 import firebase from 'firebase';
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux'
-import {fetchClients} from './redux/actions/index'
+import {fetchClients, fetchCurrentUser} from './redux/actions/index'
 //components
 import Register from "./components/Register";
 import Navbar from "./components/Navbar";
@@ -46,6 +46,7 @@ function App(props) {
       else {
         setLoggedIn(true)
         setLoaded(true)
+        props.fetchCurrentUser()
         props.fetchClients();
       }
       
@@ -84,6 +85,6 @@ function App(props) {
   );
  
 }
-const mapDispatchProps = (dispatch) => bindActionCreators({fetchClients}, dispatch)
+const mapDispatchProps = (dispatch) => bindActionCreators({fetchClients, fetchCurrentUser}, dispatch)
 
 export default connect(null, mapDispatchProps)(App);

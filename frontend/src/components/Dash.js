@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { Jumbotron, Row, } from 'reactstrap';
 import firebase from 'firebase';
+import {connect} from 'react-redux'
 
 
 const Dash = (props) => {
@@ -16,7 +17,8 @@ const Dash = (props) => {
         <div> 
             <div className = "topDash"> 
             <h1> Trainer Dashboard</h1>
-            <h2> Hi Trainer, Welcome back!</h2>
+            <h2> Hi {props.currentUser.name.firstName}, Welcome back!</h2>
+            {console.log(props.currentUser)}
             </div>
             <di className = "dash">
                 <Row>
@@ -43,4 +45,8 @@ const Dash = (props) => {
     );
 }
 
-export default Dash;
+const mapStateToProps = (store) => ({
+    currentUser: store.user.data[0]
+})
+
+export default  connect(mapStateToProps, null)(Dash);
