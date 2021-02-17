@@ -5,7 +5,8 @@ const initialState = {
       name: {
           firstname: "",
           lastName: ""
-      }
+      },
+      uid: ""
   }]
 };
 // eslint-disable-next-line

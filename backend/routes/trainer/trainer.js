@@ -18,13 +18,11 @@ router.get('/', (req, res) => {
 //@desc Get user by id
 //@access public
 router.get('/:id', (req, res) => {
-    console.log(req.params.id)
     Trainer.find({uid: req.params.id}, (err, trainer) => {
         if(err){
             res.send("There was an error retrieveing the trainer");
         }
         else{
-            console.log(trainer)
             res.send(trainer);
         }
     })
@@ -36,24 +34,33 @@ router.get('/:id', (req, res) => {
 //@access public
 router.get('/subscribers/:id', (req, res) => {
     let clients = []; 
-    Trainer.findOne({ uid: req.params.id }, (err, trainer) => {
-        if(err){
-            console.log(err);
-        }
-        else{   
-             for(let i = 0; i < trainer.clients.length; i++){
-                Subscriber.findOne({ uid: trainer.clients[i]}, (err, subscriber) => {
-                    if(err){
-                        console.log(err)
-                    }
-                    else{
-                        clients.push(subscriber);
-                    }
-                })
+    console.log("TASDF")
+        Trainer.findOne({ uid: req.params.id }, (err, trainer) => {
+            if(err){
+                console.log(err);
             }
-            setTimeout(() => res.json(clients) , 2000);       
-        }
-    })
+            else{
+
+                console.log("THIAF SDFS F")   
+                console.log(req.params.uid)
+                for(let i = 0; i < trainer.clients.length; i++){
+                    Subscriber.findOne({ uid: trainer.clients[i]}, (err, subscriber) => {
+                        if(err){
+                            console.log(err)
+                        }
+                        else{
+                            
+                            clients.push(subscriber);
+                        }
+                    })
+                }
+                setTimeout(() => {
+                    console.log("Hello")
+                    console.log(clients)
+                    res.json(clients)} , 2000);       
+            }
+        })
+    
 })
 
 //@route put trainer/subscribers

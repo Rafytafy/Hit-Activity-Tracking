@@ -47,7 +47,8 @@ function App(props) {
         setLoggedIn(true)
         setLoaded(true)
         props.fetchCurrentUser();
-        props.fetchClients();
+        
+        
       }
       
     })
@@ -85,6 +86,8 @@ function App(props) {
   );
  
 }
+
+
 const mapDispatchProps = (dispatch) => bindActionCreators({fetchClients, fetchCurrentUser}, dispatch)
 
 export default connect(null, mapDispatchProps)(App);

@@ -1,7 +1,6 @@
-import React, { useState } from 'react'; 
-import { useHistory, Link } from 'react-router-dom';
+import React from 'react'; 
+import { useHistory } from 'react-router-dom';
 import { Jumbotron, Row, } from 'reactstrap';
-import firebase from 'firebase';
 import {connect} from 'react-redux'
 
 
@@ -18,7 +17,6 @@ const Dash = (props) => {
             <div className = "topDash"> 
             <h1> Trainer Dashboard</h1>
             <h2> Hi {props.currentUser.name.firstName}, Welcome back!</h2>
-            {console.log(props.currentUser)}
             </div>
             <di className = "dash">
                 <Row>
