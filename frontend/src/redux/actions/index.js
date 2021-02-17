@@ -5,8 +5,10 @@ import axios from 'axios';
 export function fetchCurrentUser() {
     return (async (dispatch) => {
         const uid = await firebase.auth().currentUser.uid
+        console.log(uid)
         axios.get(`http://localhost:5000/trainer/${uid}`)
         .then((res) => {
+            console.log(res)
             dispatch({type: FETCH_CURRENT_USER, userData: res.data})
         })
     })

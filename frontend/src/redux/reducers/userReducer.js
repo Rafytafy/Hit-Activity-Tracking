@@ -1,7 +1,12 @@
 import { FETCH_CURRENT_USER } from '../constants/index';
 
 const initialState = {
-  data: {}
+  data: [{
+      name: {
+          firstname: "",
+          lastName: ""
+      }
+  }]
 };
 // eslint-disable-next-line
 export default function(state = initialState, action) {

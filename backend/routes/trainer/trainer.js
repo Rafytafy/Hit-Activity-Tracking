@@ -18,11 +18,13 @@ router.get('/', (req, res) => {
 //@desc Get user by id
 //@access public
 router.get('/:id', (req, res) => {
+    console.log(req.params.id)
     Trainer.find({uid: req.params.id}, (err, trainer) => {
         if(err){
             res.send("There was an error retrieveing the trainer");
         }
         else{
+            console.log(trainer)
             res.send(trainer);
         }
     })

@@ -46,7 +46,7 @@ function App(props) {
       else {
         setLoggedIn(true)
         setLoaded(true)
-        props.fetchCurrentUser()
+        props.fetchCurrentUser();
         props.fetchClients();
       }
       
