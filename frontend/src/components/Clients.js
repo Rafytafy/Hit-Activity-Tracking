@@ -1,16 +1,37 @@
-import React, { useState } from 'react'; 
-import { useHistory } from 'react-router-dom';
-import firebase from 'firebase'
+import React, { Component } from 'react'; 
 
-const Clients = (props) => { 
+import {connect} from 'react-redux'
+import { Container, Table} from 'reactstrap';
 
-
-    return ( 
-
-        <div> 
-            <h1>hello WORLD</h1>
-        </div>
-    );
+class Clients extends Component {
+    render() {
+        return (
+            <div>
+            <Container>
+                <h2>Clients</h2>
+                <Table>
+                    <thread>
+                        <th>Client Name</th>
+                        <th>Email</th>
+                        <th>Weight</th>
+                    </thread>
+                    {this.props.clients.map((client) =>
+                        <tr key={client._id}>
+                            <th>{client.name.lastName}, {client.name.firstName}</th>
+                            <th>{client.email}</th>
+                            <th>{client.weight}lbs</th>
+                        </tr>
+                        )}
+                </Table>
+            </Container>
+            </div>
+        )
+    }
 }
 
-export default Clients;
+const mapStateToProps = (store) => ({
+    clients: store.clients.list
+})
+
+
+export default connect(mapStateToProps, null)(Clients);

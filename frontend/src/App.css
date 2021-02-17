@@ -53,3 +53,8 @@ body {
   text-align: center;
   color: white;
 }
+.divider{
+  width: 15px;
+  height:auto;
+  display:inline-block;
+}

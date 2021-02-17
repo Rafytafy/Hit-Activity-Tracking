@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
 import firebase from 'firebase';
+import { bindActionCreators } from 'redux';
+import {connect} from 'react-redux'
+import {fetchClients} from './redux/actions/index'
 //components
 import Register from "./components/Register";
 import Navbar from "./components/Navbar";
@@ -10,7 +13,7 @@ import Login from "./components/Login";
 import Clients from "./components/Clients";
 import Dash from "./components/Dash";
 
-function App() {
+function App(props) {
   var firebaseConfig = {
     apiKey: "AIzaSyDk_hueTUcYP2ULeS2dIIZwiKHybq8esC0",
     authDomain: "hit-activity-tracking.firebaseapp.com",
@@ -40,9 +43,9 @@ function App() {
       else {
         setLoggedIn(true)
         setLoaded(true)
-        
+        props.fetchClients();
       }
-      console.log('Login');
+      
     })
   });
   if (!loaded) {
@@ -74,6 +77,6 @@ function App() {
   );
  
 }
+const mapDispatchProps = (dispatch) => bindActionCreators({fetchClients}, dispatch)
 
-
-export default App;
+export default connect(null, mapDispatchProps)(App);

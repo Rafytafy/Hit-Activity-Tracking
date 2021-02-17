@@ -14,7 +14,7 @@ import {
 } from 'reactstrap';
 import Pulse from './Pulse.png';
 import firebase from 'firebase'; 
-import { useHistory, Link, Router } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 
 const NavBar = (props) => {
   const history = useHistory(); 
