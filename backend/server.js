@@ -8,8 +8,9 @@ const express        = require('express'),
 
 const { isAuthenticated } = require('./middleware');
 
-const register = require('./routes/register/register');
-const trainer = require('./routes/trainer/trainer')
+const register   = require('./routes/register/register'),
+      trainer    = require('./routes/trainer/trainer'),
+      subscriber = require('./routes/subscriber/subscriber');
 
 
 admin.initializeApp({
@@ -36,6 +37,7 @@ mongoose.set('useFindAndModify', false);
 //Routes 
 app.use('/register', register);
 app.use('/trainer', trainer);
+app.use('/subscriber', subscriber);
 
 const port = process.env.PORT || 5000;
 
