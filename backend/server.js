@@ -10,6 +10,7 @@ const { isAuthenticated } = require('./middleware');
 
 const register   = require('./routes/register/register'),
       trainer    = require('./routes/trainer/trainer'),
+      workout    = require('./routes/workout/workout'),
       subscriber = require('./routes/subscriber/subscriber');
 
 
@@ -38,6 +39,7 @@ mongoose.set('useFindAndModify', false);
 app.use('/register', register);
 app.use('/trainer', trainer);
 app.use('/subscriber', subscriber);
+app.use('/workout', workout)
 
 const port = process.env.PORT || 5000;
 
