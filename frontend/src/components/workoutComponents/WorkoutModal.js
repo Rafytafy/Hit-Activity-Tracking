@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { postWorkouts } from '../../redux/actions/index';
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux';

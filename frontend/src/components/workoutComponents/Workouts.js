@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Container, Table } from 'reactstrap'
 import {connect} from 'react-redux'
 import  WorkoutModal  from './WorkoutModal'
+import Detail from './Detail'
 
 class Workouts extends Component {
     componentWillReceiveProps(nextProps){
@@ -21,6 +22,7 @@ class Workouts extends Component {
                         <th>Name</th>
                         <th>Primary</th>
                         <th>Secondary</th>
+                        <th>Action</th>
                     </thead>
                     <tbody>
                     {this.props.workouts.map((workout) =>
@@ -28,6 +30,7 @@ class Workouts extends Component {
                                 <th>{workout.name}</th>
                                 <th>{workout.primary}</th>
                                 <th>{workout.secondary}</th>
+                                <th><Detail workout={workout} /></th>
                             </tr>
                             )}
                         <tr>

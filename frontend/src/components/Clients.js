@@ -14,7 +14,6 @@ class Clients extends Component {
 
     componentWillReceiveProps(prevProps){
         if(prevProps.currentUser.uid !== this.props.currentUser.uid){
-            console.log(prevProps.currentUser.uid)
             this.props.fetchClients(prevProps.currentUser.uid)
         }
     }
