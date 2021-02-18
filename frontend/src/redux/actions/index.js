@@ -1,4 +1,4 @@
-import {FETCH_CURRENT_USER, FETCH_CLIENTS} from '../constants/index';
+import {FETCH_CURRENT_USER, FETCH_CLIENTS, FETCH_WORKOUTS, POST_WORKOUT} from '../constants/index';
 import firebase from 'firebase'
 import axios from 'axios';
 
@@ -17,6 +17,24 @@ export function fetchClients(uid){
         axios.get(`http://localhost:5000/trainer/subscribers/${uid}`)
         .then((res) => {
             dispatch({type: FETCH_CLIENTS, clientList: res.data})
+        })
+    })
+}
+
+export function fetchWorkouts(){
+    return((dispatch) => {
+        axios.get(`http://localhost:5000/workout/`)
+        .then((res) => {
+            dispatch({type: FETCH_WORKOUTS, workoutList: res.data})
+        })
+    })
+}
+
+export function postWorkouts(newWorkout){
+    return((dispatch) => {
+        axios.post(`http://localhost:5000/workout/`, newWorkout)
+        .then((res) => {
+            dispatch({type: POST_WORKOUT, workoutList: res.data})
         })
     })
 }

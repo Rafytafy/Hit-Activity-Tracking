@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {
-    Button,
-    Modal,
-    ModalHeader,
-    ModalBody,
-    Form,
+import { postWorkouts } from '../../redux/actions/index';
+import { bindActionCreators } from 'redux';
+import {connect} from 'react-redux';
+import { Button, Modal, ModalHeader, ModalBody, Form,
     FormGroup,
     Label,
     Input,
@@ -17,7 +15,8 @@ class WorkoutModal extends Component {
         modal: false,
         name: '',
         primary: '',
-        secondary: ''
+        secondary: '',
+        instructions: ''
     }
 
     toggle = () => {
@@ -31,18 +30,18 @@ class WorkoutModal extends Component {
     };
 
     onSubmit = (e) => {
-
-
-        const newRobot = {
+        e.preventDefault()
+        const newWorkout = {
             name: this.state.name,
-            type: this.state.type
+            primary: this.state.primary,
+            secondary: this.state.secondary,
+            instructions: this.state.instructions
         };
 
         //Add item via addItem action 
-        
-         this.props.addRobot(newRobot)
+        console.log("Hello from modal")
+        this.props.postWorkouts(newWorkout)
 
-         //Close modal
          this.toggle();
     };
 
@@ -63,30 +62,39 @@ class WorkoutModal extends Component {
                     <ModalBody>
                         <Form onSubmit={this.onSubmit}>
                             <FormGroup>
-                                <Label for="robotName">Name</Label>
+                                <Label for="workoutName">Name</Label>
                                 <Input 
                                     type="text"
                                     name="name"
-                                    id="robotName"
+                                    id="workoutName"
                                     placeholder="Enter name of Workout"
                                     onChange={this.onChange}
                                 />
                                 
-                                <Label for="robotName">Primary</Label>
+                                <Label for="primary">Primary</Label>
                                 <Input 
                                     type="text"
-                                    name="name"
-                                    id="robotName"
+                                    name="primary"
+                                    id="primary"
                                     placeholder="Enter muscle group"
                                     onChange={this.onChange}
                                 />
                                 
-                                <Label for="robotName">Secondary</Label>
+                                <Label for="secondary">Secondary</Label>
+                                <Input 
+                                    type="text"
+                                    name="secondary"
+                                    id="secondary"
+                                    placeholder="Enter muscle group"
+                                    onChange={this.onChange}
+                                />
+
+                                <Label for="instructions">Instructions</Label>
                                 <Input 
                                     type="textarea"
-                                    name="name"
-                                    id="robotName"
-                                    placeholder="Enter muscle group"
+                                    name="instructions"
+                                    id="instructions"
+                                    placeholder="Enter instructions for workout"
                                     onChange={this.onChange}
                                 />
                                 
@@ -104,4 +112,6 @@ class WorkoutModal extends Component {
     }
 }
 
-export default WorkoutModal;
+const mapDispatchProps = (dispatch) => bindActionCreators({ postWorkouts }, dispatch)
+
+export default connect(null, mapDispatchProps)(WorkoutModal);

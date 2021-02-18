@@ -4,7 +4,7 @@ import './App.css';
 import firebase from 'firebase';
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux'
-import {fetchClients, fetchCurrentUser} from './redux/actions/index'
+import {fetchClients, fetchCurrentUser, fetchWorkouts} from './redux/actions/index'
 //components
 import Register from "./components/Register";
 import Navbar from "./components/Navbar";
@@ -15,7 +15,7 @@ import Dash from "./components/Dash";
 import Edit from "./components/Edit";
 import Messages from "./components/Messages";
 import Routines from "./components/Routines";
-import Workouts from "./components/Workouts";
+import Workouts from "./components/workoutComponents/Workouts";
 
 function App(props) {
   var firebaseConfig = {
@@ -48,8 +48,7 @@ function App(props) {
         setLoggedIn(true)
         setLoaded(true)
         props.fetchCurrentUser();
-        
-        
+        props.fetchWorkouts();
       }
       
     })
@@ -90,6 +89,6 @@ function App(props) {
 }
 
 
-const mapDispatchProps = (dispatch) => bindActionCreators({fetchClients, fetchCurrentUser}, dispatch)
+const mapDispatchProps = (dispatch) => bindActionCreators({fetchClients, fetchCurrentUser, fetchWorkouts}, dispatch)
 
 export default connect(null, mapDispatchProps)(App);

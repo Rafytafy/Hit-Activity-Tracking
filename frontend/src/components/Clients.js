@@ -6,6 +6,12 @@ import { Container, Table} from 'reactstrap';
 
 class Clients extends Component {
     
+    componentDidMount(){
+        if(this.props.clients.length === 0){
+            this.props.fetchClients(this.props.currentUser.uid)
+        }
+    }
+
     componentWillReceiveProps(prevProps){
         if(prevProps.currentUser.uid !== this.props.currentUser.uid){
             console.log(prevProps.currentUser.uid)
