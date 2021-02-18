@@ -15,7 +15,7 @@ const Detail = (props) => {
     <div>
       <Button color="info" onClick={toggle}>{buttonLabel}Detail</Button>
       <Modal isOpen={modal} toggle={toggle} className={className}>
-        <ModalHeader toggle={toggle}>Modal title</ModalHeader>
+        <ModalHeader toggle={toggle}>Detail of Workout</ModalHeader>
         <ModalBody>
             <h2>Name: {props.workout.name}</h2>
             <h5>Primary muscle group: {props.workout.primary}</h5>
