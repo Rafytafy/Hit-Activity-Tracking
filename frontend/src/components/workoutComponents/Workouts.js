@@ -1,13 +1,25 @@
 import React, { Component } from 'react'
 import { Container, Table } from 'reactstrap'
+import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux'
+import { clearWorkoutState } from '../../redux/actions/index'
 import  WorkoutModal  from './WorkoutModal'
 import Detail from './Detail'
+import Edit from './Edit'
+
 
 class Workouts extends Component {
     componentWillReceiveProps(nextProps){
         if(nextProps.newWorkout.name !== this.props.newWorkout.name){
             this.props.workouts.push(nextProps.newWorkout)
+        }
+        if(nextProps.deletedWorkout.name !== this.props.deletedWorkout.name){
+            let index = this.props.workouts.indexOf(nextProps.deletedWorkout)
+            console.log(index)
+            if(index !== -1){
+                this.props.workouts.splice(index, 1)
+                this.render()
+            }
         }
     }
     
@@ -30,7 +42,14 @@ class Workouts extends Component {
                                 <th>{workout.name}</th>
                                 <th>{workout.primary}</th>
                                 <th>{workout.secondary}</th>
-                                <th><Detail workout={workout} /></th>
+                                <th>
+                                    <div style={{display: "flex", justifyContent: "left"}}>
+                    
+                                    
+                                        <Detail workout={workout} />
+                                        <Edit workout={workout}/>
+                                    </div>
+                                </th>
                             </tr>
                             )}
                         <tr>
@@ -45,8 +64,8 @@ class Workouts extends Component {
 
 const mapStateToProps = (store) => ({
     workouts: store.workouts.list,
-    newWorkout: store.workouts.workout
+    newWorkout: store.workouts.workout,
+    deletedWorkout: store.workouts.deletedWorkout
 })
-
 
 export default connect(mapStateToProps, null)(Workouts)

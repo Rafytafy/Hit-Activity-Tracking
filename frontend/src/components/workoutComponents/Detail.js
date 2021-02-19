@@ -13,7 +13,7 @@ const Detail = (props) => {
 
   return (
     <div>
-      <Button color="info" onClick={toggle}>{buttonLabel}Detail</Button>
+      <Button color="info" size="sm" onClick={toggle}>{buttonLabel}Detail</Button>
       <Modal isOpen={modal} toggle={toggle} className={className}>
         <ModalHeader toggle={toggle}>Detail of Workout</ModalHeader>
         <ModalBody>

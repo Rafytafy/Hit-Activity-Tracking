@@ -1,4 +1,4 @@
-import {FETCH_CURRENT_USER, FETCH_CLIENTS, FETCH_WORKOUTS, POST_WORKOUT} from '../constants/index';
+import {FETCH_CURRENT_USER, FETCH_CLIENTS, FETCH_WORKOUTS, POST_WORKOUT, DELETE_WORKOUT, CLEAR_WORKOUT_STATE} from '../constants/index';
 import firebase from 'firebase'
 import axios from 'axios';
 
@@ -35,6 +35,15 @@ export function postWorkouts(newWorkout){
         axios.post(`http://localhost:5000/workout/`, newWorkout)
         .then((res) => {
             dispatch({type: POST_WORKOUT, workoutList: res.data})
+        })
+    })
+}
+
+export function deleteWorkout(deletedWorkout){
+    return((dispatch) => {
+        axios.delete(`http://localhost:5000/workout/${deletedWorkout._id}`)
+        .then((res) => {
+            dispatch({type: DELETE_WORKOUT, workout: deletedWorkout})
         })
     })
 }

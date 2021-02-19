@@ -21,5 +21,16 @@ router.post('/', (req, res) => {
 
     newWorkout.save().then(item => res.json(item));
 });
+
+router.delete('/:id', (req, res) => {
+    Workout.findByIdAndDelete(req.params.id, (err, workout) => {
+        if(err){
+            res.send("There was an error deleteing workout")
+        }
+        else{
+            res.send("Workout deleted")
+        }
+    })
+});
       
 module.exports = router;
