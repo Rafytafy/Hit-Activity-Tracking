@@ -14,7 +14,7 @@ import Clients from "./components/Clients";
 import Dash from "./components/Dash";
 import Edit from "./components/Edit";
 import Messages from "./components/Messages";
-import Routines from "./components/Routines";
+import Routines from "./components/routineComponents/Routines";
 import Workouts from "./components/workoutComponents/Workouts";
 
 function App(props) {

@@ -11,7 +11,8 @@ const { isAuthenticated } = require('./middleware');
 const register   = require('./routes/register/register'),
       trainer    = require('./routes/trainer/trainer'),
       workout    = require('./routes/workout/workout'),
-      subscriber = require('./routes/subscriber/subscriber');
+      subscriber = require('./routes/subscriber/subscriber'),
+      routine    = require('./routes/routine/routine')
 
 
 admin.initializeApp({
@@ -39,7 +40,8 @@ mongoose.set('useFindAndModify', false);
 app.use('/register', register);
 app.use('/trainer', trainer);
 app.use('/subscriber', subscriber);
-app.use('/workout', workout)
+app.use('/workout', workout);
+app.use('/routine', routine);
 
 const port = process.env.PORT || 5000;
 

@@ -34,15 +34,11 @@ router.get('/:id', (req, res) => {
 //@access public
 router.get('/subscribers/:id', (req, res) => {
     let clients = []; 
-    console.log("TASDF")
         Trainer.findOne({ uid: req.params.id }, (err, trainer) => {
             if(err){
                 console.log(err);
             }
             else{
-
-                console.log("THIAF SDFS F")   
-                console.log(req.params.uid)
                 for(let i = 0; i < trainer.clients.length; i++){
                     Subscriber.findOne({ uid: trainer.clients[i]}, (err, subscriber) => {
                         if(err){
@@ -55,8 +51,6 @@ router.get('/subscribers/:id', (req, res) => {
                     })
                 }
                 setTimeout(() => {
-                    console.log("Hello")
-                    console.log(clients)
                     res.json(clients)} , 2000);       
             }
         })

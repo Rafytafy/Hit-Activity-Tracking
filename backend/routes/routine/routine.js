@@ -1,0 +1,47 @@
+const express = require('express'),
+      router  = express.Router({mergeParams: true});
+
+const Routine = require('../../models/Routine');
+const Trainer = require('../../models/Trainer');
+
+//@route GET routine/:id
+//@desc Get routines of trainer
+//@access public
+router.get('/:id', (req, res) => {
+    Trainer.findOne({uid: req.params.id})
+        .populate('routines')
+        .exec((err, trainer) => {
+            if(err){
+                res.send(err);
+            }
+            else {
+                res.send(trainer.routines)
+            }
+        })
+})
+
+//@route POST routine/
+//@desc Create new routine
+//@access public
+router.post('/', (req, res) => {
+    const id = req.body.id
+    const newRoutine = new Routine({
+        trainerId: req.body.id,
+        name: req.body.name,
+        workouts: req.body.workouts,
+    })
+    console.log(id)
+    newRoutine.save()
+        .then( item => {
+            Trainer.findOneAndUpdate({ uid: req.body.id }, {"$push": {routines: item._id}}, (err, trainer) => {
+                if(err){
+                    res.send("Error could not push routine to traine");
+                }
+                else{ 
+                    res.send("Successfuly added routine to trainer");
+                }
+        })
+    });
+});
+      
+module.exports = router;
