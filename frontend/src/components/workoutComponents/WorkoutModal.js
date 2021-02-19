@@ -50,7 +50,7 @@ class WorkoutModal extends Component {
                 <Button
                     color="dark"
                     onClick={this.toggle}
-                    className="custom-button"
+                    style={{margin:".25em 0 1em 1em"}}
                 >Create Workout</Button>
 
                 <Modal

@@ -1,4 +1,4 @@
-import { FETCH_WORKOUTS, POST_WORKOUT, DELETE_WORKOUT } from '../constants/index';
+import { FETCH_WORKOUTS, POST_WORKOUT, DELETE_WORKOUT, UPDATE_WORKOUT } from '../constants/index';
 
 const initialState = {
   list: [{
@@ -8,7 +8,8 @@ const initialState = {
     secondary: ""
   }],
   workout: {},
-  deletedWorkout: {}
+  deletedWorkout: {},
+  updatedWorkout: {}
 };
 // eslint-disable-next-line
 export default function(state = initialState, action) {
@@ -27,6 +28,11 @@ export default function(state = initialState, action) {
     return {
       ...state,
       deletedWorkout: action.workout
+    };
+    case UPDATE_WORKOUT:
+    return {
+      ...state,
+      updatedWorkout: action.workout
     };
     default:
       return state;

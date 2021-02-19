@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { postWorkouts, deleteWorkout } from '../../redux/actions/index';
+import { deleteWorkout, updateWorkout } from '../../redux/actions/index';
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, Form, ModalFooter,
@@ -28,24 +28,7 @@ class WorkoutModal extends Component {
         this.setState({ [e.target.name]: e.target.value })
     };
 
-    onSubmit = (e) => {
-        e.preventDefault()
-        const newWorkout = {
-            name: this.state.name,
-            primary: this.state.primary,
-            secondary: this.state.secondary,
-            instructions: this.state.instructions
-        };
-
-        //Add item via addItem action 
-        console.log("Hello from modal")
-        this.props.postWorkouts(newWorkout)
-
-         this.toggle();
-    };
-
     onDelete = (e) => {
-        e.preventDefault();
         console.log(this.props.workout)
 
         this.props.deleteWorkout(this.props.workout);
@@ -54,7 +37,18 @@ class WorkoutModal extends Component {
     }
 
     onUpdate = (e) => {
-        e.preventDefault();
+        window.location.reload();
+
+        const newWorkout = {
+            _id: this.props.workout._id,
+            name: this.state.name,
+            primary: this.state.primary,
+            secondary: this.state.secondary,
+            instructions: this.state.instructions
+        }; 
+
+        this.props.updateWorkout(newWorkout)
+
         this.toggle();
     }
 
@@ -133,6 +127,6 @@ class WorkoutModal extends Component {
     }
 }
 
-const mapDispatchProps = (dispatch) => bindActionCreators({ postWorkouts, deleteWorkout }, dispatch)
+const mapDispatchProps = (dispatch) => bindActionCreators({ deleteWorkout, updateWorkout }, dispatch)
 
 export default connect(null, mapDispatchProps)(WorkoutModal);

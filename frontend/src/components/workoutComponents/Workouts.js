@@ -27,8 +27,10 @@ class Workouts extends Component {
         return (
             <Container>
                 <div>
-                <h2>Workouts</h2>
-                <WorkoutModal />
+                <div style={{display: "flex"}}>
+                    <h2>Workouts</h2>
+                    <WorkoutModal />
+                </div>
                 <Table>
                     <thead>
                         <th>Name</th>
@@ -65,7 +67,8 @@ class Workouts extends Component {
 const mapStateToProps = (store) => ({
     workouts: store.workouts.list,
     newWorkout: store.workouts.workout,
-    deletedWorkout: store.workouts.deletedWorkout
+    deletedWorkout: store.workouts.deletedWorkout,
+    updatedWorkout: store.workouts.updatedWorkout
 })
 
 export default connect(mapStateToProps, null)(Workouts)

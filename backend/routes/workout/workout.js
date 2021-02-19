@@ -22,6 +22,24 @@ router.post('/', (req, res) => {
     newWorkout.save().then(item => res.json(item));
 });
 
+router.put('/:id', (req, res) => {
+    Workout.findByIdAndUpdate(req.params.id, 
+        {
+            name: req.body.name,
+            primary: req.body.primary,
+            secondary: req.body.secondary,
+            instructions: req.body.instructions
+        }, 
+        (err, workout) => {
+            if(err){
+                res.send("There was an error updating workout")
+            }
+            else{
+                res.send("Workout Updated")
+            }
+    })
+});
+
 router.delete('/:id', (req, res) => {
     Workout.findByIdAndDelete(req.params.id, (err, workout) => {
         if(err){
