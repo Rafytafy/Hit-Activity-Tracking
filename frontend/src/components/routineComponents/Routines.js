@@ -11,6 +11,7 @@ function Routines(props) {
 
     const history = useHistory();   
     const toRoutineDetails = () => { history.push('/routineDetails') }
+    const toCreateRoutine = () => {history.push('/createRoutine')}
 
     const calculateDuration = (arr) =>{
         let totalDuration = 0
@@ -25,6 +26,10 @@ function Routines(props) {
         toRoutineDetails()
     }
 
+    const toCreateNewRoutinePage = () => {
+        toCreateRoutine()
+    }
+
     
         return (
             <Container>
@@ -37,11 +42,14 @@ function Routines(props) {
                                 <CardTitle tag="h5">{routine.name}</CardTitle>
                                 <CardSubtitle tag="h6" className="mb-2 text-muted">Duration: {calculateDuration(routine.workouts)}</CardSubtitle>
                                 <CardText></CardText>
-                                <Button onClick={() => toRoutineDetailPage(routine)}>Button</Button>
+                                <Button onClick={() => toRoutineDetailPage(routine)}>View</Button>
                             </CardBody>
                         </Card>
                     </Col>                        
                 )}
+                <Col xs="4" className="d-flex justify-content-center align-items-center">
+                    <Button size="lg" onClick={() => toCreateNewRoutinePage()}>Create new routine</Button>
+                </Col>
                 </Row>
             </Container>
         )
