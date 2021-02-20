@@ -4,7 +4,7 @@ import './App.css';
 import firebase from 'firebase';
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux'
-import {fetchClients, fetchCurrentUser, fetchWorkouts} from './redux/actions/index'
+import {fetchClients, fetchCurrentUser, fetchWorkouts, fetchRoutines} from './redux/actions/index'
 //components
 import Register from "./components/Register";
 import Navbar from "./components/Navbar";
@@ -16,6 +16,7 @@ import Edit from "./components/Edit";
 import Messages from "./components/Messages";
 import Routines from "./components/routineComponents/Routines";
 import Workouts from "./components/workoutComponents/Workouts";
+import RoutineDetails from "./components/routineComponents/routineDetails"
 
 function App(props) {
   var firebaseConfig = {
@@ -49,6 +50,7 @@ function App(props) {
         setLoaded(true)
         props.fetchCurrentUser();
         props.fetchWorkouts();
+        props.fetchRoutines();
       }
       
     })
@@ -79,7 +81,7 @@ function App(props) {
             <Route path="/Messages" component={Messages} />
             <Route path="/Routines" component={Routines} />
             <Route path="/workouts" component={Workouts} />
-            
+            <Route path="/routineDetails" component={RoutineDetails} />
           </>
       }
         </Router>    
@@ -89,6 +91,6 @@ function App(props) {
 }
 
 
-const mapDispatchProps = (dispatch) => bindActionCreators({fetchClients, fetchCurrentUser, fetchWorkouts}, dispatch)
+const mapDispatchProps = (dispatch) => bindActionCreators({fetchClients, fetchCurrentUser, fetchWorkouts, fetchRoutines}, dispatch)
 
 export default connect(null, mapDispatchProps)(App);

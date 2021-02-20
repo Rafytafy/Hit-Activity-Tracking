@@ -1,4 +1,4 @@
-import {FETCH_CURRENT_USER, FETCH_CLIENTS, FETCH_WORKOUTS, POST_WORKOUT, DELETE_WORKOUT, UPDATE_WORKOUT} from '../constants/index';
+import {FETCH_CURRENT_USER, FETCH_CLIENTS, FETCH_WORKOUTS, POST_WORKOUT, DELETE_WORKOUT, UPDATE_WORKOUT, FETCH_ROUTINES, SET_CURRENT_ROUTINE} from '../constants/index';
 import firebase from 'firebase'
 import axios from 'axios';
 
@@ -55,4 +55,20 @@ export function updateWorkout(updatedWorkout){
             dispatch({type: UPDATE_WORKOUT, workout: updatedWorkout})
         })
     })
+}
+
+export function fetchRoutines() {
+    return (async (dispatch) => {
+        const uid = await firebase.auth().currentUser.uid
+        axios.get(`http://localhost:5000/routine/${uid}`)
+        .then((res) => {
+            dispatch({type: FETCH_ROUTINES, routines: res.data})
+        })
+    })
+}
+
+export function setCurrentRoutine(selectedRoutine) {
+    return ( (dispatch) => {
+        dispatch({type: SET_CURRENT_ROUTINE, routine: selectedRoutine})
+    }) 
 }

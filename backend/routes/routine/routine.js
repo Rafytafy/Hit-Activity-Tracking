@@ -24,13 +24,11 @@ router.get('/:id', (req, res) => {
 //@desc Create new routine
 //@access public
 router.post('/', (req, res) => {
-    const id = req.body.id
     const newRoutine = new Routine({
         trainerId: req.body.id,
         name: req.body.name,
         workouts: req.body.workouts,
     })
-    console.log(id)
     newRoutine.save()
         .then( item => {
             Trainer.findOneAndUpdate({ uid: req.body.id }, {"$push": {routines: item._id}}, (err, trainer) => {
