@@ -11,7 +11,8 @@ const { isAuthenticated } = require('./middleware');
 const register   = require('./routes/register/register'),
       trainer    = require('./routes/trainer/trainer'),
       workout    = require('./routes/workout/workout'),
-      subscriber = require('./routes/subscriber/subscriber');
+      subscriber = require('./routes/subscriber/subscriber'),
+      subData    = require('./routes/subData/subData');
 
 
 admin.initializeApp({

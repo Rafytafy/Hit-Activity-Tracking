@@ -1,7 +1,8 @@
 const express = require('express'),
       router  = express.Router();
 
-      const Subscriber = require('../../models/Subscriber');
+const Subscriber = require('../../models/Subscriber');
+const Trainer = require('../../models/Trainer');
 
 //@route get subscriber/profilePicture/:id
 //@desc get profile path from subscriber
@@ -35,6 +36,14 @@ router.put('/profilePicture/:id', (req ,res) => {
     })
 })
 
-
+router.get('/trainers', (req,res)=> {
+    console.log('got to routse')
+    Trainer.find({},(err, trainers)=>{
+        if(err)
+         {res.json(err)}
+        else
+        {res.json(trainers)}
+    })
+})
 
 module.exports = router;

@@ -46,5 +46,16 @@ export function loadProfileData(){
     })
 }
 
+export function loadSearchResults(){
+    console.log('actions changed')
+    return((dispatch)=>{
+        axios.get(`http://localhost:5000/trainer/`)
+        .then((res)=>{
+            console.log('then action response')
+            dispatch({type: subActions.getSearchResult, payload:res.data})
+        })
+    })
+}
+
 
 
