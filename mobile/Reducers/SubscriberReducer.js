@@ -4,15 +4,19 @@ export const subActions ={
     getSubTokenFailed: 'GET_SUB_TOKEN_FAILED',
     getSubProfileData: 'GET_SUB_PROFILE_DATA',
     getSubProfileDataSuccess: 'GET_SUB_PROFILE_DATA_SUCCESS',
+
     getSubProfileDataFailed: 'GET_SUB_PROFILE_DATA_FAILED',
     getSearchResult:'GET_SEARCH_RESULT'
+
  }
 const initialSubState = {
     error: null,
     currentUser:null,
     profileData:[],
+
     loading:false,
     searchResult:''
+
     
 }
 const subscriberReducer = (state = initialSubState, action) =>
@@ -54,12 +58,14 @@ const subscriberReducer = (state = initialSubState, action) =>
                 loading:false,
                 error:action.payload
             }
+
             case subActions.getSearchResult:
                 
                 return{
                     ...state,                    
                     searchResult:action.payload
                 }
+
     }
     return state
 }
