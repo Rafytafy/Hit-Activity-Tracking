@@ -12,7 +12,7 @@ const SubscriberSchema = new Schema({
         lastName: {type: String, required: true}
     },
     birthdate:{
-        type: String, 
+        type: Date, 
         required: true
     },
     weight:{
