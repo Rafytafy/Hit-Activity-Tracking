@@ -8,10 +8,13 @@ const express        = require('express'),
 
 const { isAuthenticated } = require('./middleware');
 
-var register = require('./routes/register/register')
-var subData = require('./routes/subData/subData')
 
-const trainer = require('./routes/trainer/trainer')
+const register   = require('./routes/register/register'),
+      trainer    = require('./routes/trainer/trainer'),
+      workout    = require('./routes/workout/workout'),
+      subscriber = require('./routes/subscriber/subscriber'),
+      subData    = require('./routes/subData/subData');
+
 
 
 admin.initializeApp({
@@ -39,6 +42,8 @@ mongoose.set('useFindAndModify', false);
 app.use('/register', register);
 app.use('/subData',subData)
 app.use('/trainer', trainer);
+app.use('/subscriber', subscriber);
+app.use('/workout', workout)
 
 const port = process.env.PORT || 5000;
 

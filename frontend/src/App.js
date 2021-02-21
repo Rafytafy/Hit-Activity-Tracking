@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
 import firebase from 'firebase';
+import { bindActionCreators } from 'redux';
+import {connect} from 'react-redux'
+import {fetchClients, fetchCurrentUser, fetchWorkouts} from './redux/actions/index'
 //components
 import Register from "./components/Register";
 import Navbar from "./components/Navbar";
@@ -12,8 +15,9 @@ import Dash from "./components/Dash";
 import Edit from "./components/Edit";
 import Messages from "./components/Messages";
 import Routines from "./components/Routines";
+import Workouts from "./components/workoutComponents/Workouts";
 
-function App() {
+function App(props) {
   var firebaseConfig = {
     apiKey: "AIzaSyDk_hueTUcYP2ULeS2dIIZwiKHybq8esC0",
     authDomain: "hit-activity-tracking.firebaseapp.com",
@@ -43,9 +47,10 @@ function App() {
       else {
         setLoggedIn(true)
         setLoaded(true)
-        
+        props.fetchCurrentUser();
+        props.fetchWorkouts();
       }
-      console.log('Login');
+      
     })
   });
   if (!loaded) {
@@ -73,6 +78,7 @@ function App() {
             <Route path="/Edit" component={Edit} />
             <Route path="/Messages" component={Messages} />
             <Route path="/Routines" component={Routines} />
+            <Route path="/workouts" component={Workouts} />
             
           </>
       }
@@ -83,4 +89,6 @@ function App() {
 }
 
 
-export default App;
+const mapDispatchProps = (dispatch) => bindActionCreators({fetchClients, fetchCurrentUser, fetchWorkouts}, dispatch)
+
+export default connect(null, mapDispatchProps)(App);

@@ -1,9 +1,9 @@
 import React, { useState } from 'react'; 
 import { useHistory } from 'react-router-dom';
 import firebase from 'firebase'
-import { Form, FormGroup, Label, Input, FormFeedback, FormText, Button, Row } from 'reactstrap';
+import { Form, FormGroup, Input, Button, Row } from 'reactstrap';
 import Heartbeat from './Heartbeat.png';
-//import {./App.css}
+
 
 
 
@@ -23,10 +23,6 @@ const Login = (props) => {
     .catch((error) => {
         console.log(error)
     })
-  }
-  
-  function handleSubmit(event){
-      event.preventDefault();
   }
    
   const toRegister = () => 
