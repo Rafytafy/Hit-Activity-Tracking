@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
 })
 
 //@route GET trainer/:id
-//@desc Get user by id
+//@desc Get trainer by id
 //@access public
 router.get('/:id', (req, res) => {
     Trainer.find({uid: req.params.id}, (err, trainer) => {
@@ -30,7 +30,7 @@ router.get('/:id', (req, res) => {
 
 
 //@route GET trainer/subscribers
-//@desc Get all trainers
+//@desc Get all clients of trainer
 //@access public
 router.get('/subscribers/:id', (req, res) => {
     let clients = []; 
@@ -58,7 +58,7 @@ router.get('/subscribers/:id', (req, res) => {
 })
 
 //@route put trainer/subscribers
-//@desc add new scubscriber to trainer client list
+//@desc Add new scubscriber to trainer client list
 //@access public
 router.put('/subscribers', (req ,res) => {
     Trainer.findOneAndUpdate({ uid: req.body.trainerId }, {"$push": {clients: req.body.uid}})
