@@ -8,42 +8,33 @@ import {fetchTrainers} from '../../Actions/SubscriberActions'
 
 function Search(props) {
     const [search,setSearch]=useState('')
-    const [searchResults,setSearchResult]=useState('')
+    const [searchResults,setSearchResult]=useState([])
     const[user,setUser] = useState(null)
     
-    const[searchArray,setSearchArray]=useState([])
+ 
     useEffect(()=>
     {
         const{currentUser,searchResult}=props;
         setUser(currentUser)
         setSearchResult(searchResult)
-        console.log(searchResults)
-     
-        for (var i = 0; i < Math.min(searchResult.length,10); i++) {
-            
-            console.log(searchResult[i].name.firstName)
-            console.log(searchResult[i].name.lastName );
-           
-        }
-       
     })
     
- 
-
+   
     return (
         <View>
             <TextInput 
             onChangeText={(search)=>{props.fetchTrainers(search)}}
             />
-           {/* <FlatList
-         data={searchResults}
-         renderItem={({item})=>(
-            <ListItem
-            name={`${item.name.firstName} ${item.name.lastName}`}
-            />
-         )}
-         keyExtractor={item => item.email}
-           /> */}
+          
+             <FlatList
+             data={searchResults}
+             renderItem={({item})=>
+             <View style={{height: 50}}>
+             <Text style={{height: 50}}>{item.name.firstName} {item.name.lastName}</Text>
+             <View style={{height: 1,backgroundColor:'gray'}}></View>
+             </View>
+            }/>
+           
         </View>
     )
 }

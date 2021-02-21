@@ -15,7 +15,7 @@ const initialSubState = {
     profileData:[],
 
     loading:false,
-    searchResult:''
+    searchResult:[]
 
     
 }
