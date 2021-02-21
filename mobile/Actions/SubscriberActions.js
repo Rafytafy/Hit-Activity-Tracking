@@ -46,16 +46,30 @@ export function loadProfileData(){
     })
 }
 
-export function loadSearchResults(){
-    console.log('actions changed')
-    return((dispatch)=>{
-        axios.get(`http://localhost:5000/trainer/`)
-        .then((res)=>{
-            console.log('then action response')
+export function fetchTrainers(search){
+    
+    return((dispatch) => {
+        axios.get(`http://localhost:5000/subscriber/trainers/${search}`)
+        .then((res) => {
             dispatch({type: subActions.getSearchResult, payload:res.data})
         })
     })
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

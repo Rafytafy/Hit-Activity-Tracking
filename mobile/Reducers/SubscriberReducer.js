@@ -12,7 +12,7 @@ const initialSubState = {
     currentUser:null,
     profileData:[],
     loading:false,
-    searchResult:'hello '
+    searchResult:''
     
 }
 const subscriberReducer = (state = initialSubState, action) =>
@@ -55,7 +55,7 @@ const subscriberReducer = (state = initialSubState, action) =>
                 error:action.payload
             }
             case subActions.getSearchResult:
-                console.log('rreducesed')
+                
                 return{
                     ...state,                    
                     searchResult:action.payload

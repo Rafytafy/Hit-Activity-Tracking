@@ -36,14 +36,22 @@ router.put('/profilePicture/:id', (req ,res) => {
     })
 })
 
-router.get('/trainers', (req,res)=> {
-    console.log('got to routse')
-    Trainer.find({},(err, trainers)=>{
+router.get('/trainers/:search', (req,res)=> {
+    if(req.params.search=='' ||req.params.search==null ){
+        Trainer.find()
+        .then(items => res.json(items));   
+    }
+    else{
+    Trainer.find({$or: 
+        [{'name.firstName': {$regex: req.params.search ,$options:'i'}},
+        {'name.lastName': {$regex: req.params.search ,$options:'i'}}]},(err, trainers)=>{
         if(err)
          {res.json(err)}
         else
-        {res.json(trainers)}
+        {
+        res.json(trainers)}
     })
+}
 })
 
 module.exports = router;
