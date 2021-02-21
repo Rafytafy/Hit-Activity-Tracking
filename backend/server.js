@@ -8,10 +8,13 @@ const express        = require('express'),
 
 const { isAuthenticated } = require('./middleware');
 
+
 const register   = require('./routes/register/register'),
       trainer    = require('./routes/trainer/trainer'),
       workout    = require('./routes/workout/workout'),
-      subscriber = require('./routes/subscriber/subscriber');
+      subscriber = require('./routes/subscriber/subscriber'),
+      subData    = require('./routes/subData/subData');
+
 
 
 admin.initializeApp({
@@ -25,7 +28,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 //Database config
-const db = require('./config/mongoKey').mongoURI;
+const db = require('./config/mongoKey.js').mongoURI;
 
 //Connect to the database
 mongoose
@@ -37,6 +40,7 @@ mongoose.set('useFindAndModify', false);
 
 //Routes 
 app.use('/register', register);
+app.use('/subData',subData)
 app.use('/trainer', trainer);
 app.use('/subscriber', subscriber);
 app.use('/workout', workout)

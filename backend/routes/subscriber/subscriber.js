@@ -1,7 +1,8 @@
 const express = require('express'),
       router  = express.Router();
 
-      const Subscriber = require('../../models/Subscriber');
+const Subscriber = require('../../models/Subscriber');
+const Trainer = require('../../models/Trainer');
 
 //@route get subscriber/profilePicture/:id
 //@desc get profile path from subscriber
@@ -35,6 +36,22 @@ router.put('/profilePicture/:id', (req ,res) => {
     })
 })
 
-
+router.get('/trainers/:search', (req,res)=> {
+    if(req.params.search=='' ||req.params.search==null ){
+        Trainer.find()
+        .then(items => res.json(items));   
+    }
+    else{
+    Trainer.find({$or: 
+        [{'name.firstName': {$regex: req.params.search ,$options:'i'}},
+        {'name.lastName': {$regex: req.params.search ,$options:'i'}}]},(err, trainers)=>{
+        if(err)
+         {res.json(err)}
+        else
+        {
+        res.json(trainers)}
+    })
+}
+})
 
 module.exports = router;
