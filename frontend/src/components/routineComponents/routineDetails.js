@@ -15,7 +15,7 @@ function routineDetails(props) {
                 <ListGroup>
                     {props.routine.workouts.map((item) =>
                         <ListGroupItem>
-                            <ListGroupItemHeading>{console.log(item)}{item.workout.name}</ListGroupItemHeading>
+                            <ListGroupItemHeading>{item.workout.name}</ListGroupItemHeading>
                             <ListGroupItemText>Duration: {item.duration}</ListGroupItemText>
                             <ListGroupItemText>Primary: {item.workout.primary}</ListGroupItemText>
                             <ListGroupItemText>Secondary: {item.workout.secondary}</ListGroupItemText>

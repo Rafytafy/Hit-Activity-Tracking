@@ -17,6 +17,7 @@ import Messages from "./components/Messages";
 import Routines from "./components/routineComponents/Routines";
 import Workouts from "./components/workoutComponents/Workouts";
 import RoutineDetails from "./components/routineComponents/routineDetails"
+import CreateRoutine from "./components/routineComponents/createRoutine"
 
 function App(props) {
   var firebaseConfig = {
@@ -82,6 +83,7 @@ function App(props) {
             <Route path="/Routines" component={Routines} />
             <Route path="/workouts" component={Workouts} />
             <Route path="/routineDetails" component={RoutineDetails} />
+            <Route path="/createRoutine" component={CreateRoutine} />
           </>
       }
         </Router>    
