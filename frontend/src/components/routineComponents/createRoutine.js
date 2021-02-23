@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux';
-import {connect} from 'react-redux'
+import {connect} from 'react-redux';
+import {createNewRoutine} from '../../redux/actions/index'
 import {Container, Form, FormGroup, Label, Input, Button, ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText, Col, Row} from 'reactstrap'
 
 class createRoutine extends Component {
@@ -10,6 +11,7 @@ class createRoutine extends Component {
         selectedWorkout: {},
         duration: 0
     }
+    
     
     findWorkoutInArray(e){
         this.props.workouts.map((workout) => {
@@ -35,6 +37,17 @@ class createRoutine extends Component {
             selectedWorkoutPlans: newArr
         })
     }
+    onCreateRoutine(){
+        let newRoutine = {
+            id: this.props.currentUser.uid,
+            name: this.state.name,
+            workouts: this.state.selectedWorkoutPlans
+        }
+        console.log(newRoutine);
+
+        this.props.createNewRoutine(newRoutine)
+        window.location.reload(false);
+    }
 
     render() {
         return (
@@ -42,7 +55,7 @@ class createRoutine extends Component {
                 <Form>
                     <FormGroup>
                         <Label for="exampleSelectMulti">Name</Label>
-                        <Input type="text"></Input>        
+                        <Input type="text" onChange={(e) => this.setState({name: e.target.value})}></Input>        
                     </FormGroup>
                     <FormGroup>
                         <Label for="exampleSelectMulti">Select Workout</Label>
@@ -61,7 +74,7 @@ class createRoutine extends Component {
                         id="exampleNumber"
                         placeholder="number placeholder"
                         step=".5"
-                        onChange={(e) => this.setState({duration: e.target.value})}
+                        onChange={(e) => this.setState({duration: parseInt(e.target.value)})}
                         />
                     <Button onClick={() => this.addWorkoutToList()}>Add To Routine</Button>
                     </FormGroup>
@@ -86,7 +99,7 @@ class createRoutine extends Component {
                         )}
                         
                     </ListGroup>
-                    <Button color="success" className="float-right">Create routine</Button>
+                    <Button color="success" className="float-right" onClick={() => this.onCreateRoutine()}>Create routine</Button>
                 </Form>
             </Container>
         )
@@ -94,7 +107,10 @@ class createRoutine extends Component {
 }
 
 const mapStateToProps = (store) => ({
-    workouts: store.workouts.list
+    workouts: store.workouts.list,
+    currentUser: store.user.data[0]
 })
 
-export default connect(mapStateToProps, null)(createRoutine)
+const mapDispatchProps = (dispatch) => bindActionCreators({ createNewRoutine }, dispatch)
+
+export default connect(mapStateToProps, mapDispatchProps)(createRoutine)

@@ -41,5 +41,15 @@ router.post('/', (req, res) => {
         })
     });
 });
-      
+
+router.delete('/:id', (req, res) => {
+    Routine.findByIdAndDelete(req.params.id, (err, routine) => {
+        if(err){
+            res.send("There was an error deleteing workout")
+        }
+        else{
+            res.send("Workout deleted")
+        }
+    })
+});
 module.exports = router;

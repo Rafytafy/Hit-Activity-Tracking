@@ -36,7 +36,7 @@ function Routines(props) {
                 <h1>Your Routines</h1>
                 <Row>
                 {props.routines.map((routine) =>
-                    <Col xs="4">
+                    <Col xs="4" className="mb-3">
                         <Card>
                             <CardBody>
                                 <CardTitle tag="h5">{routine.name}</CardTitle>

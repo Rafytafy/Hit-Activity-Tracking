@@ -1,4 +1,4 @@
-import {FETCH_CURRENT_USER, FETCH_CLIENTS, FETCH_WORKOUTS, POST_WORKOUT, DELETE_WORKOUT, UPDATE_WORKOUT, FETCH_ROUTINES, SET_CURRENT_ROUTINE} from '../constants/index';
+import {FETCH_CURRENT_USER, FETCH_CLIENTS, FETCH_WORKOUTS, POST_WORKOUT, DELETE_WORKOUT, UPDATE_WORKOUT, FETCH_ROUTINES, SET_CURRENT_ROUTINE, CREATE_ROUTINE} from '../constants/index';
 import firebase from 'firebase'
 import axios from 'axios';
 
@@ -71,4 +71,13 @@ export function setCurrentRoutine(selectedRoutine) {
     return ( (dispatch) => {
         dispatch({type: SET_CURRENT_ROUTINE, routine: selectedRoutine})
     }) 
+}
+
+export function createNewRoutine(newRoutine) {
+    return ((dispatch) => {
+        axios.post('http://localhost:5000/routine', newRoutine)
+        .then((res) => {
+            dispatch({type: CREATE_ROUTINE, routine: newRoutine})
+        })
+    })
 }

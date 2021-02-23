@@ -10,7 +10,6 @@ const { isAuthenticated } = require('../../middleware')
 //@desc Get all trainers
 //@access public
 router.get('/', (req, res) => {
-    console.log('routes trainer')
     Trainer.find()
     .then(items => res.json(items));
 })
