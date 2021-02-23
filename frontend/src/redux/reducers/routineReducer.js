@@ -1,4 +1,4 @@
-import { FETCH_ROUTINES, SET_CURRENT_ROUTINE, CREATE_ROUTINE} from '../constants/index';
+import { FETCH_ROUTINES, SET_CURRENT_ROUTINE, CREATE_ROUTINE, DELETE_ROUTINE} from '../constants/index';
 
 const initialState = {
   list: [{
@@ -9,7 +9,8 @@ const initialState = {
     }]
   }],
   currentRoutine: {},
-  newRoutine: {}
+  newRoutine: {},
+  deletedRoutine: {}
 };
 // eslint-disable-next-line
 export default function(state = initialState, action) {
@@ -28,6 +29,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         newRoutine: action.routine
+      };
+      case DELETE_ROUTINE:
+      return {
+        ...state,
+        deletedRoutine: action.routine
       };
     default:
       return state;

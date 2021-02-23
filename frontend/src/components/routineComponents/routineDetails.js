@@ -1,11 +1,20 @@
 import React from 'react'
 import { Container, Jumbotron, Button, ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText } from 'reactstrap'
 import {connect} from 'react-redux'
-
+import  { bindActionCreators } from 'redux';
+import {deleteRoutine} from '../../redux/actions/index'
 import { calculateDuration } from '../../helperFunctions/functions'
+import { useHistory } from 'react-router-dom';
 
-
-function routineDetails(props) {
+function RoutineDetails(props) {
+    const history = useHistory();   
+    
+    const onDeleteRoutine = () =>{
+        props.deleteRoutine(props.routine);
+        history.push('/Routines');
+        window.location.reload(false);   
+    }
+    
     return (
         <Container>
             <Jumbotron className="mt-3">
@@ -24,7 +33,7 @@ function routineDetails(props) {
                     )}
                 </ListGroup>
                 <p className="lead">
-                    <Button color="danger" className="float-right mt-2">Delete Routine</Button>
+                    <Button color="danger" className="float-right mt-2" onClick={() => onDeleteRoutine()}>Delete Routine</Button>
                 </p>
             </Jumbotron>
         </Container>
@@ -33,4 +42,7 @@ function routineDetails(props) {
 const mapStateToProps = (store) => ({
     routine: store.routines.currentRoutine
 })
-export default connect(mapStateToProps, null)(routineDetails)
+
+const mapDispatchProps = (dispatch) => bindActionCreators({deleteRoutine}, dispatch)
+
+export default connect(mapStateToProps, mapDispatchProps)(RoutineDetails)

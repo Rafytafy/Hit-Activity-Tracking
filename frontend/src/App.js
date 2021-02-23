@@ -16,8 +16,8 @@ import Edit from "./components/Edit";
 import Messages from "./components/Messages";
 import Routines from "./components/routineComponents/Routines";
 import Workouts from "./components/workoutComponents/Workouts";
-import RoutineDetails from "./components/routineComponents/routineDetails"
-import CreateRoutine from "./components/routineComponents/createRoutine"
+import RoutineDetails from "./components/routineComponents/RoutineDetails"
+import CreateRoutine from "./components/routineComponents/CreateRoutine"
 
 function App(props) {
   var firebaseConfig = {

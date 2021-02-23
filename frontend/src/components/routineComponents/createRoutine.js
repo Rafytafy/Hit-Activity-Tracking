@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {createNewRoutine} from '../../redux/actions/index'
 import {Container, Form, FormGroup, Label, Input, Button, ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText, Col, Row} from 'reactstrap'
 
-class createRoutine extends Component {
+class CreateRoutine extends Component {
     state = {
         name: "",
         selectedWorkoutPlans: [],
@@ -66,17 +66,29 @@ class createRoutine extends Component {
                         </Input>        
                     </FormGroup>
                     <FormGroup>
-                    <h1>Workout: {this.state.selectedWorkout.name}</h1>
-                        <Label>Duration:</Label>
-                        <Input
-                        type="number"
-                        name="number"
-                        id="exampleNumber"
-                        placeholder="number placeholder"
-                        step=".5"
-                        onChange={(e) => this.setState({duration: parseInt(e.target.value)})}
-                        />
-                    <Button onClick={() => this.addWorkoutToList()}>Add To Routine</Button>
+                        
+                            
+                        <h4>Workout: {this.state.selectedWorkout.name}</h4>
+                        <Row>
+                            <Col xs="2">
+                            <Label className="float-right">Duration:</Label>
+                            </Col>
+                        
+                            <Col xs="8">
+                            
+                            <Input
+                            type="number"
+                            name="number"
+                            id="exampleNumber"
+                            placeholder="number placeholder"
+                            step=".5"
+                            onChange={(e) => this.setState({duration: parseInt(e.target.value)})}
+                            />
+                            </Col>
+                            <Col xs="2" className="d-flex justify-content-center">
+                            <Button  onClick={() => this.addWorkoutToList()}>Add To Routine</Button>
+                            </Col>
+                        </Row>
                     </FormGroup>
                     
                     <ListGroup>
@@ -113,4 +125,4 @@ const mapStateToProps = (store) => ({
 
 const mapDispatchProps = (dispatch) => bindActionCreators({ createNewRoutine }, dispatch)
 
-export default connect(mapStateToProps, mapDispatchProps)(createRoutine)
+export default connect(mapStateToProps, mapDispatchProps)(CreateRoutine)
