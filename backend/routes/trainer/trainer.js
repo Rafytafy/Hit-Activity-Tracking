@@ -10,13 +10,12 @@ const { isAuthenticated } = require('../../middleware')
 //@desc Get all trainers
 //@access public
 router.get('/', (req, res) => {
-    console.log('routes trainer')
     Trainer.find()
     .then(items => res.json(items));
 })
 
 //@route GET trainer/:id
-//@desc Get user by id
+//@desc Get trainer by id
 //@access public
 router.get('/:id', (req, res) => {
     Trainer.find({uid: req.params.id}, (err, trainer) => {
@@ -31,19 +30,15 @@ router.get('/:id', (req, res) => {
 
 
 //@route GET trainer/subscribers
-//@desc Get all trainers
+//@desc Get all clients of trainer
 //@access public
 router.get('/subscribers/:id', (req, res) => {
     let clients = []; 
-    console.log("TASDF")
         Trainer.findOne({ uid: req.params.id }, (err, trainer) => {
             if(err){
                 console.log(err);
             }
             else{
-
-                console.log("THIAF SDFS F")   
-                console.log(req.params.uid)
                 for(let i = 0; i < trainer.clients.length; i++){
                     Subscriber.findOne({ uid: trainer.clients[i]}, (err, subscriber) => {
                         if(err){
@@ -56,8 +51,6 @@ router.get('/subscribers/:id', (req, res) => {
                     })
                 }
                 setTimeout(() => {
-                    console.log("Hello")
-                    console.log(clients)
                     res.json(clients)} , 2000);       
             }
         })
@@ -65,7 +58,7 @@ router.get('/subscribers/:id', (req, res) => {
 })
 
 //@route put trainer/subscribers
-//@desc add new scubscriber to trainer client list
+//@desc Add new scubscriber to trainer client list
 //@access public
 router.put('/subscribers', (req ,res) => {
     Trainer.findOneAndUpdate({ uid: req.body.trainerId }, {"$push": {clients: req.body.uid}})

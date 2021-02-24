@@ -1,4 +1,6 @@
-import {FETCH_CURRENT_USER, FETCH_CLIENTS, FETCH_WORKOUTS, POST_WORKOUT, DELETE_WORKOUT, UPDATE_WORKOUT} from '../constants/index';
+import {FETCH_CURRENT_USER, FETCH_CLIENTS, 
+        FETCH_WORKOUTS, POST_WORKOUT, DELETE_WORKOUT, UPDATE_WORKOUT, 
+        FETCH_ROUTINES, SET_CURRENT_ROUTINE, CREATE_ROUTINE, DELETE_ROUTINE} from '../constants/index';
 import firebase from 'firebase'
 import axios from 'axios';
 
@@ -53,6 +55,40 @@ export function updateWorkout(updatedWorkout){
         axios.put(`http://localhost:5000/workout/${updatedWorkout._id}`, updatedWorkout)
         .then((res) => {
             dispatch({type: UPDATE_WORKOUT, workout: updatedWorkout})
+        })
+    })
+}
+
+export function fetchRoutines() {
+    return (async (dispatch) => {
+        const uid = await firebase.auth().currentUser.uid
+        axios.get(`http://localhost:5000/routine/${uid}`)
+        .then((res) => {
+            dispatch({type: FETCH_ROUTINES, routines: res.data})
+        })
+    })
+}
+
+export function setCurrentRoutine(selectedRoutine) {
+    return ( (dispatch) => {
+        dispatch({type: SET_CURRENT_ROUTINE, routine: selectedRoutine})
+    }) 
+}
+
+export function createNewRoutine(newRoutine) {
+    return ((dispatch) => {
+        axios.post('http://localhost:5000/routine', newRoutine)
+        .then((res) => {
+            dispatch({type: CREATE_ROUTINE, routine: newRoutine})
+        })
+    })
+}
+
+export function deleteRoutine(deletedRoutine){
+    return((dispatch) => {
+        axios.delete(`http://localhost:5000/routine/${deletedRoutine._id}`)
+        .then((res) => {
+            dispatch({type: DELETE_ROUTINE, routine: deletedRoutine})
         })
     })
 }
