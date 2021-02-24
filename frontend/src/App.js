@@ -49,9 +49,11 @@ function App(props) {
       else {
         setLoggedIn(true)
         setLoaded(true)
-        props.fetchCurrentUser();
+        setTimeout(() => {
+          props.fetchCurrentUser();
         props.fetchWorkouts();
         props.fetchRoutines();
+        }, 1000)
       }
       
     })
