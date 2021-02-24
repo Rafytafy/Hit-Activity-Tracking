@@ -1,10 +1,12 @@
 import {combineReducers} from 'redux'
-import signInReducer from './SigningIn'
+import subscriberReducer from './SubscriberReducer'
 
 
 
- const rootReducer = combineReducers({
-    signIn: signInReducer})
+
+const rootReducer = combineReducers({
+    subscriber: subscriberReducer
+})
 
 
 export default rootReducer
