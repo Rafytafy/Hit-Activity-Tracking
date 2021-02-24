@@ -18,7 +18,7 @@ router.post('/subscriber', isAuthenticated, (req, res) => {
             },
             email: req.body.email,
             birthdate: req.body.birthdate,
-            weight: req.body.weight,
+            initWeight:req.body.weight,
             height:{
                 feet:req.body.heightFeet,
                 inches:req.body.heightInches
@@ -26,7 +26,8 @@ router.post('/subscriber', isAuthenticated, (req, res) => {
         })
     
         newSub.save().then(item => res.json(item));
-})
+
+        })
 
 
 //@route POST register/trainer

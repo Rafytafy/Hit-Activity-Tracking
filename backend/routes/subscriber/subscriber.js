@@ -53,5 +53,24 @@ router.get('/trainers/:search', (req,res)=> {
     })
 }
 })
-
+router.put('/addWeight/:id', (req ,res) => {
+    
+    Subscriber.findByIdAndUpdate(req.params.id ,
+        {$push: 
+            {weights:
+                {
+                    weight:req.body.weight,
+                    date:req.body.date
+                }
+            }
+        }, (err, userweight) => {
+        if(err){
+            res.send("did not added weght");
+        }
+        else{
+            
+            res.send("did added witght");
+        }
+    })
+})
 module.exports = router;
