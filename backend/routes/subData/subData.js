@@ -10,8 +10,9 @@ router.post('/getProfileData', isAuthenticated, (req, res) => {
     Subscriber.findOne({uid : req.body.uid},  (err,user) =>{
         if(err) {res.json(err)}
         else{
+        
         res.json(user)}
-
+    
     })
   
 })

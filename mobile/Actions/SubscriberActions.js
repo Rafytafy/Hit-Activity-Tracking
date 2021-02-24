@@ -55,6 +55,18 @@ export function fetchTrainers(search){
         })
     })
 }
+export function addWeight(weight){
+    
+    return((dispatch)=>{
+        axios.put(`http://localhost:5000/subscriber/addWeight/${weight.id}`,weight)
+        .then((res) => {
+            dispatch({type: subActions.updateWeight})
+            console.log(res)
+
+        })
+    })
+    
+}
 
 
 
