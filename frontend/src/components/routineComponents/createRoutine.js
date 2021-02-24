@@ -13,7 +13,8 @@ function CreateRoutine(props) {
           [selectedWorkout, setSelectedWorkout] = useState({}),
           [duration, setDuration] = useState(0),
           [visibleError, setVisibleError] = useState(false),
-          [visibleComplete, setVisibleComplete] = useState(false)
+          [visibleComplete, setVisibleComplete] = useState(false),
+          [visibleNameError, setVisibleNameError] = useState(false);
     
     
     const findWorkoutInArray = (e) =>{
@@ -36,6 +37,7 @@ function CreateRoutine(props) {
             setSelectedWorkoutPlans([...selectedWorkoutPlans, plan])
             setSelectedWorkout({});
             setDuration(0);
+            setVisibleError(false)
         }
     }
 
@@ -44,15 +46,20 @@ function CreateRoutine(props) {
         setSelectedWorkoutPlans(newArr);
     }
     const onCreateRoutine = () =>{
-        let newRoutine = {
-            id: props.currentUser.uid,
-            name: name,
-            workouts: selectedWorkoutPlans
+        if(name === ''){
+            setVisibleNameError(true)
         }
-
-        props.createNewRoutine(newRoutine)
-        history.push('/Routines')
-        window.location.reload(false);
+        else{
+            let newRoutine = {
+                id: props.currentUser.uid,
+                name: name,
+                workouts: selectedWorkoutPlans
+            }
+    
+            props.createNewRoutine(newRoutine)
+            history.push('/Routines')
+            window.location.reload(false);
+        }
     }
 
     
@@ -61,6 +68,7 @@ function CreateRoutine(props) {
             <Jumbotron className="mt-5">
                 <Alert color='danger' isOpen={visibleError} toggle={() => setVisibleError(false)}>Make sure you have a workout selected and a duration before you add to routine</Alert>
                 <Alert color='success' isOpen={visibleComplete} toggle={() => setVisibleComplete(false)}>Successfuly created new routine</Alert>
+                <Alert color='danger' isOpen={visibleNameError} toggle={() => setVisibleNameError(false)}>You need to add a name to the routine</Alert>
                 <Form>
                     <h1>Create New Routine</h1>
                     <FormGroup className="d-flex">
