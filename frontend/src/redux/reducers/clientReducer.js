@@ -1,7 +1,9 @@
-import { FETCH_CLIENTS } from '../constants/index';
+import { FETCH_CLIENTS, SET_CURRENT_CLIENT} from '../constants/index';
 
 const initialState = {
-  list: []
+  list: [{
+    currentClient:{}
+  }]
 };
 // eslint-disable-next-line
 export default function(state = initialState, action) {
@@ -11,7 +13,14 @@ export default function(state = initialState, action) {
         ...state,
         list: action.clientList
       };
+    case SET_CURRENT_CLIENT:
+      return {
+        ...state,
+        currentClient: action.client
+      }
+
     default:
       return state;
   }
 }
+

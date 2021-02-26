@@ -1,8 +1,10 @@
 import React, { Component } from 'react'; 
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux'
-import {fetchClients, fetchCurrentUser} from '../redux/actions/index'
-import { Container, Table} from 'reactstrap';
+import {fetchClients, fetchCurrentUser} from '../../redux/actions/index'
+import { Container, Table, Button} from 'reactstrap';
+import { useHistory } from 'react-router-dom';
+
 
 class Clients extends Component {
     
@@ -17,7 +19,6 @@ class Clients extends Component {
             this.props.fetchClients(prevProps.currentUser.uid)
         }
     }
-    
     render() {
         return (
             <div>
@@ -25,6 +26,7 @@ class Clients extends Component {
                     <h2>Clients</h2>
                     <Table>
                         <thead>
+                            <th>Activity</th>
                             <th>Client Name</th>
                             <th>Email</th>
                             <th>Weight</th>
@@ -32,6 +34,7 @@ class Clients extends Component {
                         <tbody>
                         {this.props.clients.map((client) =>
                             <tr key={client._id}>
+                                <th><Button onClick={() => toClientDetailPage(client)}> View </Button></th>
                                 <th>{client.name.lastName}, {client.name.firstName}</th>
                                 <th>{client.email}</th>
                                 <th>{client.weight}lbs</th>
@@ -44,11 +47,17 @@ class Clients extends Component {
         )
     }
 }
+const history = useHistory();   
+const toClientDetails = () => { history.push('/clientDetails') }
 
 const mapStateToProps = (store) => ({
     clients: store.clients.list,
     currentUser: store.user.data[0]
 })
+const toClientDetailPage = (client) =>{
+   props.setCurrentClient(client)
+    toClientDetails()
+}
 
 const mapDispatchProps = (dispatch) => bindActionCreators({fetchClients, fetchCurrentUser}, dispatch)
 
