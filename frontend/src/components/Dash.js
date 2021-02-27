@@ -17,7 +17,7 @@ const Dash = (props) => {
         <div> 
             <div className = "topDash"> 
                 <h1> Trainer Dashboard</h1>
-                <h2> Hi Trainer, Welcome back!</h2>
+                <h2> Hi {props.currentUser.name.firstName}, Welcome back!</h2>
             </div>
                 <div className = "dash">
                     <Row>

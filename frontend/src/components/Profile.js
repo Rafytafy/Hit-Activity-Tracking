@@ -3,6 +3,7 @@ import { Jumbotron } from 'reactstrap';
 import axios from 'axios'; 
 import firebase from 'firebase'; 
 import ProfilePic from './ProfilePic';
+import { connect } from 'react-redux';
 const Profile = (props) => 
 {
 
@@ -22,8 +23,8 @@ const Profile = (props) =>
         <div className="jumbo">
             <Jumbotron>
                  <ProfilePic profilePath = {img} />
-                <p> Trainer</p>
-                <h1> Trainer name </h1>
+                <p> </p>
+                <h1> {props.currentUser.name.firstName} </h1>
                 <h2> Trainer location, socials</h2>
                 <hr/>
                 <h2> Weight Loss, Diets, Workout Plans </h2>
@@ -40,4 +41,8 @@ const Profile = (props) =>
     
 }
 
-export default Profile; 
+const mapStateToProps = (store) => ({
+    currentUser: store.user.data[0]
+})
+
+export default  connect(mapStateToProps, null)(Profile);
