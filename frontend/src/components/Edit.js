@@ -28,6 +28,7 @@ const Edit = (props) => {
             let profilePath = snapshot.metadata.fullPath
             console.log(snapshot);
                 console.log(uid);
+                setImg(profilePath)
                 axios.put(`http://localhost:5000/trainer/profilePicture/${uid}`, { path: profilePath })
                 
                 .then((res) => {
@@ -45,10 +46,12 @@ const Edit = (props) => {
         <div className="edit">
             <Row> 
                 <h1> Set Profile Picture </h1>
+            </Row>
                 <label className="custom-file-upload">
                     <Input type="file" onChange={pickFile} />
                     Choose Profile Picture
                 </label>
+            <Row>
                 <ProfilePic profilePath = {img} />
             </Row>
            

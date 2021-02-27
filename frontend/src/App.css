@@ -46,6 +46,7 @@ input[type="file"] {
   align-items: center;
   border: none;
   text-align: center;
+  flex-direction: column;
 }
 .title {
   color: white;
