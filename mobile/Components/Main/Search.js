@@ -8,42 +8,34 @@ import {fetchTrainers} from '../../Actions/SubscriberActions'
 
 function Search(props) {
     const [search,setSearch]=useState('')
-    const [searchResults,setSearchResult]=useState('')
+    const [searchResults,setSearchResult]=useState([])
     const[user,setUser] = useState(null)
     
-    const[searchArray,setSearchArray]=useState([])
+ 
     useEffect(()=>
     {
         const{currentUser,searchResult}=props;
         setUser(currentUser)
         setSearchResult(searchResult)
-        console.log(searchResults)
-     
-        for (var i = 0; i < Math.min(searchResult.length,10); i++) {
-            
-            console.log(searchResult[i].name.firstName)
-            console.log(searchResult[i].name.lastName );
-           
-        }
-       
     })
     
- 
-
+   
     return (
         <View>
-            <TextInput 
+            <TextInput style={{borderColor:'#acfacb',borderWidth:2,height:50,fontSize:16,fontSize:24, backgroundColor:'#f1f1f1'}}
+            placeholder='Search For Trainer'
             onChangeText={(search)=>{props.fetchTrainers(search)}}
             />
-           {/* <FlatList
-         data={searchResults}
-         renderItem={({item})=>(
-            <ListItem
-            name={`${item.name.firstName} ${item.name.lastName}`}
-            />
-         )}
-         keyExtractor={item => item.email}
-           /> */}
+          
+             <FlatList
+             data={searchResults}
+             renderItem={({item})=>
+             <View style={{height: 50,backgroundColor:'#bbc2ff', borderColor:'#acfacb',borderWidth:2, borderRadius:5}}>
+             <Text style={{height: 50, fontSize:22,color: '#fdfdfd' }}>{item.name.firstName} {item.name.lastName}</Text>
+             <View style={{backgroundColor:'gray'}}></View>
+             </View>
+            }/>
+           
         </View>
     )
 }

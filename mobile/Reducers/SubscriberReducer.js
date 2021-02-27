@@ -4,9 +4,13 @@ export const subActions ={
     getSubTokenFailed: 'GET_SUB_TOKEN_FAILED',
     getSubProfileData: 'GET_SUB_PROFILE_DATA',
     getSubProfileDataSuccess: 'GET_SUB_PROFILE_DATA_SUCCESS',
-
+    updateWeight:'UPDATE_SUB_WEIGHT',
+    updateWeightFailed:'UPDATE_SUB_WEIGHT_FAILED',
     getSubProfileDataFailed: 'GET_SUB_PROFILE_DATA_FAILED',
-    getSearchResult:'GET_SEARCH_RESULT'
+    getSearchResult:'GET_SEARCH_RESULT',
+    getSearchResultFailed:'GET_SEARCH_RESULT_FAILED'
+    
+
 
  }
 const initialSubState = {
@@ -15,7 +19,7 @@ const initialSubState = {
     profileData:[],
 
     loading:false,
-    searchResult:''
+    searchResult:[]
 
     
 }
@@ -61,9 +65,27 @@ const subscriberReducer = (state = initialSubState, action) =>
 
             case subActions.getSearchResult:
                 
-                return{
-                    ...state,                    
-                    searchResult:action.payload
+            return{
+                ...state,                    
+                searchResult:action.payload
+                }
+            case subActions.getSearchResultFailed:
+            
+            return{
+                ...state,                    
+                error: action.payload
+                }
+            case subActions.updateWeight:
+                
+            return{
+                ...state,                    
+             }
+            case subActions.updateWeightFailed:
+            
+            return{
+                ...state,  
+                error:action.payload
+                
                 }
 
     }
