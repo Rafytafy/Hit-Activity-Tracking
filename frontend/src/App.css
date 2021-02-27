@@ -28,6 +28,25 @@
   text-align: center;
   color: white;
 }
+
+input[type="file"] {
+  display: none;
+}
+
+.custom-file-upload {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.edit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  text-align: center;
+}
 .title {
   color: white;
   margin-bottom: 15px;
@@ -46,6 +65,7 @@
 body {
   background: linear-gradient(180deg, #e0c3fc, #8ec5fc);
   background-size: cover;
+  height: 100%;
 }
 
 .login {

@@ -12,12 +12,6 @@ const Register = (props) => {
   const [password, setPassword] = useState("");
   const history = useHistory(); 
   
-  let img = document.getElementById('img');
-  let file = {};
-
-  function chooseFile(e) { 
-    file = e.target.files[0];
-  }
   const onSubmit = (e) => {
     e.preventDefault();
     let tokenId;

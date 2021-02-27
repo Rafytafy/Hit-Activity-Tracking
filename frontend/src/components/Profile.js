@@ -1,12 +1,27 @@
-import React from 'react'; 
+import React, { useEffect, useState } from 'react'; 
 import { Jumbotron } from 'reactstrap';
-
-
+import axios from 'axios'; 
+import firebase from 'firebase'; 
+import ProfilePic from './ProfilePic';
 const Profile = (props) => 
 {
+
+    const [img, setImg] = useState("");
+    const uid = firebase.auth().currentUser.uid;
+
+    useEffect(() => {
+        axios.get(`http://localhost:5000/trainer/${uid}`).then((res) => {
+            console.log(res);
+        setImg(res.data[0].profilePicURL)
+            
+        })
+        
+    },[]);
+
     return (
-        <div className = "jumbo"> 
-            <Jumbotron> 
+        <div className="jumbo">
+            <Jumbotron>
+                 <ProfilePic profilePath = {img} />
                 <p> Trainer</p>
                 <h1> Trainer name </h1>
                 <h2> Trainer location, socials</h2>
@@ -18,6 +33,7 @@ const Profile = (props) =>
                 mollit anim id est laborum."
                  </p>
             </Jumbotron>
+           
        </div>
     );
 
