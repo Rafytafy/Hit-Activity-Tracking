@@ -25,11 +25,13 @@ export function loadProfileData(){
         dispatch({type:subActions.getSubProfileData})
         firebase.auth().currentUser.getIdToken(true)
         .then((res) => {
+            console.log(res)
             var tokenId=res
             axios.post(`http://localhost:5000/subData/getProfileData`,{tokenId})
             .then(res =>
             {
-           
+                console.log(res)
+                
             
                 dispatch({type:subActions.getSubProfileDataSuccess,payload:res.data})
             })
@@ -53,6 +55,9 @@ export function fetchTrainers(search){
         .then((res) => {
             dispatch({type: subActions.getSearchResult, payload:res.data})
         })
+        .catch((err)=>{
+            dispatch({type: subActions.getSearchResultFailed, payload:err})
+        })
     })
 }
 export function addWeight(weight){
@@ -63,6 +68,9 @@ export function addWeight(weight){
             dispatch({type: subActions.updateWeight})
             console.log(res)
 
+        })
+        .catch((err)=>{
+            dispatch({type: subActions.updateWeightFailed, payload:err})
         })
     })
     

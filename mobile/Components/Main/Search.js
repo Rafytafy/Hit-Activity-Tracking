@@ -22,16 +22,17 @@ function Search(props) {
    
     return (
         <View>
-            <TextInput 
+            <TextInput style={{borderColor:'#acfacb',borderWidth:2,height:50,fontSize:16,fontSize:24, backgroundColor:'#f1f1f1'}}
+            placeholder='Search For Trainer'
             onChangeText={(search)=>{props.fetchTrainers(search)}}
             />
           
              <FlatList
              data={searchResults}
              renderItem={({item})=>
-             <View style={{height: 50}}>
-             <Text style={{height: 50}}>{item.name.firstName} {item.name.lastName}</Text>
-             <View style={{height: 1,backgroundColor:'gray'}}></View>
+             <View style={{height: 50,backgroundColor:'#bbc2ff', borderColor:'#acfacb',borderWidth:2, borderRadius:5}}>
+             <Text style={{height: 50, fontSize:22,color: '#fdfdfd' }}>{item.name.firstName} {item.name.lastName}</Text>
+             <View style={{backgroundColor:'gray'}}></View>
              </View>
             }/>
            
