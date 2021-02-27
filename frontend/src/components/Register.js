@@ -1,6 +1,9 @@
 import React, {useState} from 'react'; 
 import firebase from 'firebase'
 import axios from 'axios'
+import { bindActionCreators } from 'redux';
+import {connect} from 'react-redux'
+import {fetchCurrentUser, fetchWorkouts, fetchRoutines} from '../redux/actions/index'
 import { Form, FormGroup, Input, Button, Row } from 'reactstrap';
 import Heartbeat from './Heartbeat.png';
 import { useHistory } from 'react-router-dom';
@@ -29,17 +32,17 @@ const Register = (props) => {
             tokenId = result;
           })
       })
-      .then(() => {
-        axios.post('http://localhost:5000/register/trainer', {
+      .then(async () => {
+        await axios.post('http://localhost:5000/register/trainer', {
           tokenId,
           firstName,
           lastName,
           email
         })
         .then((res) => {
-          console.log(res);
-          
-          
+          props.fetchCurrentUser();
+          props.fetchWorkouts();
+          props.fetchRoutines();
         })
       })
       
@@ -108,4 +111,6 @@ const Register = (props) => {
     );
 }
 
-export default Register;
+const mapDispatchProps = (dispatch) => bindActionCreators({fetchCurrentUser, fetchWorkouts, fetchRoutines}, dispatch)
+
+export default connect(null, mapDispatchProps)(Register)

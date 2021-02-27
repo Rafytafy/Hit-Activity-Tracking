@@ -19,7 +19,10 @@ const TrainerSchema = new Schema({
         type: String,
         default: ''
     },
-    routines: [],
+    routines: [{
+        type: Schema.Types.ObjectId,
+        ref: "routine"
+    }],
     clients: []
 })
 
