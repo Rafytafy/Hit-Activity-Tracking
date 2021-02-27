@@ -14,7 +14,6 @@ import Clients from "./components/Clients";
 import Dash from "./components/Dash";
 import Edit from "./components/Edit";
 import Messages from "./components/Messages";
-import Routines from "./components/Routines";
 import Workouts from "./components/workoutComponents/Workouts";
 
 function App(props) {
@@ -77,9 +76,7 @@ function App(props) {
             <Route path="/Clients" component={Clients} />
             <Route path="/Edit" component={Edit} />
             <Route path="/Messages" component={Messages} />
-            <Route path="/Routines" component={Routines} />
             <Route path="/workouts" component={Workouts} />
-            
           </>
       }
         </Router>    
