@@ -15,10 +15,12 @@ const SubscriberSchema = new Schema({
         type: Date, 
         required: true
     },
-    weight:{
-        type: Number,
-        required:true
+    initWeight:{
+        type: Number, 
+        required: true
     },
+    weights:  []
+    ,
     height:{
         feet:{type: Number, required: true},
         inches:{type: Number, required: true}

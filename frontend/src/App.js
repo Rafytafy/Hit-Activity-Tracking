@@ -4,7 +4,7 @@ import './App.css';
 import firebase from 'firebase';
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux'
-import {fetchClients, fetchCurrentUser, fetchWorkouts} from './redux/actions/index'
+import {fetchClients, fetchCurrentUser, fetchWorkouts, fetchRoutines} from './redux/actions/index'
 //components
 import Register from "./components/Register";
 import Navbar from "./components/Navbar";
@@ -14,7 +14,10 @@ import Clients from "./components/Clients";
 import Dash from "./components/Dash";
 import Edit from "./components/Edit";
 import Messages from "./components/Messages";
+import Routines from "./components/routineComponents/Routines";
 import Workouts from "./components/workoutComponents/Workouts";
+import RoutineDetails from "./components/routineComponents/RoutineDetails"
+import CreateRoutine from "./components/routineComponents/CreateRoutine"
 
 function App(props) {
   var firebaseConfig = {
@@ -46,8 +49,11 @@ function App(props) {
       else {
         setLoggedIn(true)
         setLoaded(true)
-        props.fetchCurrentUser();
+        setTimeout(() => {
+          props.fetchCurrentUser();
         props.fetchWorkouts();
+        props.fetchRoutines();
+        }, 1000)
       }
       
     })
@@ -77,6 +83,8 @@ function App(props) {
             <Route path="/Edit" component={Edit} />
             <Route path="/Messages" component={Messages} />
             <Route path="/workouts" component={Workouts} />
+            <Route path="/routineDetails" component={RoutineDetails} />
+            <Route path="/createRoutine" component={CreateRoutine} />
           </>
       }
         </Router>    
@@ -86,6 +94,6 @@ function App(props) {
 }
 
 
-const mapDispatchProps = (dispatch) => bindActionCreators({fetchClients, fetchCurrentUser, fetchWorkouts}, dispatch)
+const mapDispatchProps = (dispatch) => bindActionCreators({fetchClients, fetchCurrentUser, fetchWorkouts, fetchRoutines}, dispatch)
 
 export default connect(null, mapDispatchProps)(App);
