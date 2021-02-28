@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
 import firebase from 'firebase';
+import { bindActionCreators } from 'redux';
+import {connect} from 'react-redux'
+import {fetchClients, fetchCurrentUser, fetchWorkouts, fetchRoutines} from './redux/actions/index'
 //components
 import Register from "./components/Register";
 import Navbar from "./components/Navbar";
@@ -11,9 +14,12 @@ import Clients from "./components/Clients";
 import Dash from "./components/Dash";
 import Edit from "./components/Edit";
 import Messages from "./components/Messages";
-import Routines from "./components/Routines";
+import Routines from "./components/routineComponents/Routines";
+import Workouts from "./components/workoutComponents/Workouts";
+import RoutineDetails from "./components/routineComponents/RoutineDetails"
+import CreateRoutine from "./components/routineComponents/CreateRoutine"
 
-function App() {
+function App(props) {
   var firebaseConfig = {
     apiKey: "AIzaSyDk_hueTUcYP2ULeS2dIIZwiKHybq8esC0",
     authDomain: "hit-activity-tracking.firebaseapp.com",
@@ -43,9 +49,13 @@ function App() {
       else {
         setLoggedIn(true)
         setLoaded(true)
-        
+        setTimeout(() => {
+          props.fetchCurrentUser();
+        props.fetchWorkouts();
+        props.fetchRoutines();
+        }, 1000)
       }
-      console.log('Login');
+      
     })
   });
   if (!loaded) {
@@ -72,8 +82,9 @@ function App() {
             <Route path="/Clients" component={Clients} />
             <Route path="/Edit" component={Edit} />
             <Route path="/Messages" component={Messages} />
-            <Route path="/Routines" component={Routines} />
-            
+            <Route path="/workouts" component={Workouts} />
+            <Route path="/routineDetails" component={RoutineDetails} />
+            <Route path="/createRoutine" component={CreateRoutine} />
           </>
       }
         </Router>    
@@ -83,4 +94,6 @@ function App() {
 }
 
 
-export default App;
+const mapDispatchProps = (dispatch) => bindActionCreators({fetchClients, fetchCurrentUser, fetchWorkouts, fetchRoutines}, dispatch)
+
+export default connect(null, mapDispatchProps)(App);

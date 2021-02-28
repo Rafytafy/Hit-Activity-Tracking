@@ -1,9 +1,12 @@
 import React, { useState } from 'react'; 
 import { useHistory } from 'react-router-dom';
 import firebase from 'firebase'
-import { Form, FormGroup, Label, Input, FormFeedback, FormText, Button, Row } from 'reactstrap';
+import { bindActionCreators } from 'redux';
+import {connect} from 'react-redux'
+import {fetchCurrentUser, fetchWorkouts, fetchRoutines} from '../redux/actions/index'
+import { Form, FormGroup, Input, Button, Row } from 'reactstrap';
 import Heartbeat from './Heartbeat.png';
-//import {./App.css}
+
 
 
 
@@ -14,19 +17,19 @@ const Login = (props) => {
   const [password, setPassword] = useState("");
   const history = useHistory(); 
   
-  const authLogin = () => {
+  const authLogin = async () => {
     
-    firebase.auth().signInWithEmailAndPassword(email,password)
+    await firebase.auth().signInWithEmailAndPassword(email,password)
     .then((result) => {
+        console.log("ASDFASDFADSFASDAFDSAFSDFADS")
         console.log(result)
+        props.fetchCurrentUser();
+        props.fetchWorkouts();
+        props.fetchRoutines();
     })
     .catch((error) => {
         console.log(error)
     })
-  }
-  
-  function handleSubmit(event){
-      event.preventDefault();
   }
    
   const toRegister = () => 
@@ -67,4 +70,6 @@ const Login = (props) => {
   
 }
 
-export default Login;
+const mapDispatchProps = (dispatch) => bindActionCreators({fetchCurrentUser, fetchWorkouts, fetchRoutines}, dispatch)
+
+export default connect(null, mapDispatchProps)(Login)
