@@ -1,43 +1,64 @@
-import React, { useState } from 'react'; 
-import { useHistory } from 'react-router-dom';
+import React, {useState, useEffect} from 'react'; 
 import firebase from 'firebase'
-import { Progress, Input } from 'reactstrap';
-let uploader = document.getElementById('uploader');
-let fileButton = document.getElementById('fileButton'); 
+import { Input } from 'reactstrap';
+import axios from 'axios';
+import ProfilePic from './ProfilePic';
+import { Row } from 'reactstrap';
+const Edit = (props) => {
+    const [img, setImg] = useState("");
 
-const Edit = (props) => { 
-    const onChange = () => { 
-         if (fileButton)
-    {
-        fileButton.addEventListener('change', function(e) {
-        let file = e.target.files[0]; 
-        let storageRef = firebase.storage().ref('trainer_photos' + file.name);
-        let task = storageRef.put(file);
-        task.on('state_changed',
+    const uid = firebase.auth().currentUser.uid;
+    
+    useEffect(() => {
+        axios.get(`http://localhost:5000/trainer/${uid}`).then((res) => {
+            console.log(res);
+        setImg(res.data[0].profilePicURL)
+            
+        })
         
-            function progress(snapshot) {
-                let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                uploader.value = percentage;
-            },
-            function error(err) {
+    },[]);
+        
+    const pickFile = (e) => {
+        console.log("hello")
+        let file = e.target.files[0];
+        let storageRef = firebase.storage().ref('trainer_photos/' + file.name);
+        storageRef.put(file)
             
-            },
+            .then(async (snapshot) => {
+            let profilePath = snapshot.metadata.fullPath
+            console.log(snapshot);
+                console.log(uid);
+                setImg(profilePath)
+                axios.put(`http://localhost:5000/trainer/profilePicture/${uid}`, { path: profilePath })
+                
+                .then((res) => {
+                    console.log(res);
+                    
+                })
             
-            function complete() {
-
-            }
+                .catch((error) => {
+                console.log(error)
+      })
+    })
+      }    
+    
+    return (
+        <div className="edit">
+            <Row> 
+                <h1> Set Profile Picture </h1>
+            </Row>
+                <label className="custom-file-upload">
+                    <Input type="file" onChange={pickFile} />
+                    Choose Profile Picture
+                </label>
+            <Row>
+                <ProfilePic profilePath = {img} />
+            </Row>
+           
+                
+            </div>
         );
-    });
-    }
     
 }
-     return ( 
-
-        <div className = "progressBar"> 
-            <Input type = "file" onChange = {onChange} />
-        </div>
-    );
-}
-
 export default Edit;
 

@@ -1,14 +1,30 @@
-import React from 'react'; 
+import React, { useEffect, useState } from 'react'; 
 import { Jumbotron } from 'reactstrap';
-
-
+import axios from 'axios'; 
+import firebase from 'firebase'; 
+import ProfilePic from './ProfilePic';
+import { connect } from 'react-redux';
 const Profile = (props) => 
 {
+
+    const [img, setImg] = useState("");
+    const uid = firebase.auth().currentUser.uid;
+
+    useEffect(() => {
+        axios.get(`http://localhost:5000/trainer/${uid}`).then((res) => {
+            console.log(res);
+        setImg(res.data[0].profilePicURL)
+            
+        })
+        
+    },[]);
+
     return (
-        <div className = "jumbo"> 
-            <Jumbotron> 
-                <p> Trainer</p>
-                <h1> Trainer name </h1>
+        <div className="jumbo">
+            <Jumbotron>
+                 <ProfilePic profilePath = {img} />
+                <p> </p>
+                <h1> {props.currentUser.name.firstName} </h1>
                 <h2> Trainer location, socials</h2>
                 <hr/>
                 <h2> Weight Loss, Diets, Workout Plans </h2>
@@ -18,10 +34,15 @@ const Profile = (props) =>
                 mollit anim id est laborum."
                  </p>
             </Jumbotron>
+           
        </div>
     );
 
     
 }
 
-export default Profile; 
+const mapStateToProps = (store) => ({
+    currentUser: store.user.data[0]
+})
+
+export default  connect(mapStateToProps, null)(Profile);

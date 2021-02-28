@@ -68,10 +68,11 @@ function Profile(props) {
                   {height.feet}'{height.inches}"
                 </Text>
              </View>
-             <TextInput
-                    placeholder='Month (01)' 
+             <View style={{flex: 1, flexDirection: 'row',margin:40, justifyContent:'center'}}>
+             <TextInput  style={{borderColor:'#acfacb',borderWidth:2,height:40,fontSize:16,fontSize:16, backgroundColor:'#f1f1f1', width:50, marginRight:30 }}
+                    placeholder='175' 
                     onChangeText={(value)=>setWeightToAdd(value)}
-                    name='month'
+                    name='weightInput'
                     maxLength={3}
                     
                 />
@@ -88,10 +89,12 @@ function Profile(props) {
                     date:todayDate
                   }
                   props.addWeight(newWeight)
+                  
                 }}
                 title= 'Add Weight'
             />
-             <Button 
+            </View>
+             <Button style={{height:40,fontSize:16}}
                 onPress={() => logOut()}
                 title= 'Log Out'
             />
