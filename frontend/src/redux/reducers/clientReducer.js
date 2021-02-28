@@ -2,6 +2,8 @@ import { FETCH_CLIENTS, SET_CURRENT_CLIENT} from '../constants/index';
 
 const initialState = {
   list: [{
+    _id: "",
+    name: "",
     currentClient:{}
   }]
 };

@@ -6,6 +6,7 @@ import { Container, Table, Button} from 'reactstrap';
 import { useHistory } from 'react-router-dom';
 
 
+
 class Clients extends Component {
     
     componentDidMount(){
@@ -20,6 +21,14 @@ class Clients extends Component {
         }
     }
     render() {
+        //const{ history } = this.props
+        const toClientDetails = () => { this.history.push('/clientDetails') }
+        
+        const toClientDetailPage = (client) =>{
+            this.props.setCurrentClient(client)
+             toClientDetails()
+        }
+         
         return (
             <div>
                 <Container>
@@ -47,17 +56,11 @@ class Clients extends Component {
         )
     }
 }
-const history = useHistory();   
-const toClientDetails = () => { history.push('/clientDetails') }
 
 const mapStateToProps = (store) => ({
     clients: store.clients.list,
     currentUser: store.user.data[0]
 })
-const toClientDetailPage = (client) =>{
-   props.setCurrentClient(client)
-    toClientDetails()
-}
 
 const mapDispatchProps = (dispatch) => bindActionCreators({fetchClients, fetchCurrentUser}, dispatch)
 

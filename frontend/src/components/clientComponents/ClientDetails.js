@@ -5,7 +5,7 @@ import  { bindActionCreators } from 'redux';
 import {useHistory} from 'react-router-dom';
 
 
-function RoutineDetails(props) {
+function ClientDetails(props) {
     const history = useHistory();   
 
 
@@ -18,9 +18,9 @@ function RoutineDetails(props) {
         </div>
     );
 
-    const mapStateToProps = (store) => ({
+const mapStateToProps = (store) => ({
         routine: store.clients.currentClient
     })
 }
 
-export default connect(mapStateToProps, mapDispatchProps)(ClientDetails)
+export default connect(null)(ClientDetails)
