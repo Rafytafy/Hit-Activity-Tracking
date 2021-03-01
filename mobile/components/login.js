@@ -26,16 +26,20 @@ export  function login() {
                 onChangeText={(value)=>setEmail(value)}
                 naem='email'
             />
-            <TextInput style={{borderColor:'#acfacb',borderWidth:2,height:40,fontSize:16,fontSize:16, backgroundColor:'#f1f1f1', width:250,marginTop:15 }}
+            <TextInput style={{borderColor:'#acfacb',borderWidth:2,height:40,fontSize:16,fontSize:16, backgroundColor:'#f1f1f1', width:250,marginTop:15,marginBottom:20 }}
                 placeholder='Password'
                 secureTextEntry={true}
                 onChangeText={(value)=>setPassword(value)}
                 name='password'
             />
-            <Button style={styles.loginButton}
+            <View style={{backgroundColor:'#bbc2ff',borderWidth:2,borderColor:'#acfacb',borderRadius:20}}>
+                 <Button 
+            color='rgba(0, 0, 0, 0)'
                 onPress={() =>authLogin()}
                 title='Login'
             />
+            </View>
+           
         </View>
         )
     }

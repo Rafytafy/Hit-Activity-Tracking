@@ -135,10 +135,14 @@ export function signUp() {
                     onChangeText={(value)=>setPasswordCheck(value)}
                     name='passwordCheck'
                 />
-                <Button style={{marginTop:35}}
+                  <View style={{backgroundColor:'#bbc2ff',borderWidth:2,borderColor:'#acfacb',borderRadius:20}}>
+                <Button 
+                color='rgba(0, 0, 0, 0)'
+                style={{marginTop:35}}
                     onPress={() =>register()}
                     title='Register'
                 />
+                </View>
             </View>
         )
     }

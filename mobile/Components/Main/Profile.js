@@ -71,14 +71,16 @@ function Profile(props) {
                 </Text>
              </View>
              <View style={{flex: 1, flexDirection: 'row',margin:40, justifyContent:'center'}}>
-             <TextInput  style={{borderColor:'#acfacb',borderWidth:2,height:40,fontSize:16,fontSize:16, backgroundColor:'#f1f1f1', width:50, marginRight:30 }}
+             <TextInput  style={{borderColor:'#acfacb',borderWidth:2,height:40,fontSize:16,fontSize:16, backgroundColor:'#f1f1f1', width:50, marginRight:30,alignItems:'center' }}
                     placeholder='175' 
                     onChangeText={(value)=>setWeightToAdd(value)}
                     name='weightInput'
                     maxLength={3}
                     
                 />
-             <Button 
+            <View style={{height:40,fontSize:16,backgroundColor:'#bbc2ff',borderWidth:2,borderColor:'#acfacb',borderRadius:20}}>
+               <Button 
+               color='rgba(0, 0, 0, 0)'
                 onPress={() => {
                   var today = new Date();
                   var cDay=today.getDate();
@@ -96,10 +98,17 @@ function Profile(props) {
                 title= 'Add Weight'
             />
             </View>
-             <Button style={{height:40,fontSize:16}}
+            
+            </View >
+            
+            <View style={{height:40,fontSize:16,backgroundColor:'#bbc2ff',borderWidth:2,borderColor:'#acfacb',borderRadius:20}}>
+            <Button 
+              color='rgba(0, 0, 0, 0)'
                 onPress={() => logOut()}
                 title= 'Log Out'
             />
+            </View>
+            
         </View>
     )
 }
