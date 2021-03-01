@@ -6,21 +6,25 @@ import {useHistory} from 'react-router-dom';
 
 
 function ClientDetails(props) {
-    const history = useHistory();   
-
-
-
+    const history = useHistory();
 
     return ( 
 
-        <div> 
-            <h1>hello WORLD</h1>
-        </div>
-    );
+        <Container>
+        <Jumbotron className="mt-3">
+            <h1 className="display-3">Desai, Parth</h1>
+            <h3>Recent Activity</h3>
 
-const mapStateToProps = (store) => ({
-        routine: store.clients.currentClient
-    })
+            <hr className="my-2" />
+            <Button onClick={() => history.push('/Clients')}> Back to Clients</Button>
+        </Jumbotron>
+    </Container>
+)
 }
 
-export default connect(null)(ClientDetails)
+const mapStateToProps = (store) => ({
+        client: store.clients.currentClient
+    })
+const mapDispatchProps = (dispatch) => bindActionCreators(dispatch)
+
+export default connect(mapStateToProps, null)(ClientDetails)

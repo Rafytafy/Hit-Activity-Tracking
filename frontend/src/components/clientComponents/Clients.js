@@ -1,9 +1,10 @@
 import React, { Component } from 'react'; 
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux'
-import {fetchClients, fetchCurrentUser} from '../../redux/actions/index'
+import {fetchClients, fetchCurrentUser, setCurrentClient} from '../../redux/actions/index'
 import { Container, Table, Button} from 'reactstrap';
-import { useHistory } from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
+
 
 
 
@@ -20,14 +21,15 @@ class Clients extends Component {
             this.props.fetchClients(prevProps.currentUser.uid)
         }
     }
-    render() {
-        //const{ history } = this.props
-        const toClientDetails = () => { this.history.push('/clientDetails') }
-        
-        const toClientDetailPage = (client) =>{
+    toClientDetails() { 
+        this.props.history.push('/clientDetails') 
+    }
+    toClientDetailPage (client){
             this.props.setCurrentClient(client)
-             toClientDetails()
+             this.toClientDetails()
         }
+
+    render() {
          
         return (
             <div>
@@ -43,7 +45,7 @@ class Clients extends Component {
                         <tbody>
                         {this.props.clients.map((client) =>
                             <tr key={client._id}>
-                                <th><Button onClick={() => toClientDetailPage(client)}> View </Button></th>
+                                <th><Button onClick={() => this.toClientDetailPage(client)}> View </Button></th>
                                 <th>{client.name.lastName}, {client.name.firstName}</th>
                                 <th>{client.email}</th>
                                 <th>{client.weight}lbs</th>
@@ -57,11 +59,12 @@ class Clients extends Component {
     }
 }
 
+
 const mapStateToProps = (store) => ({
     clients: store.clients.list,
     currentUser: store.user.data[0]
 })
 
-const mapDispatchProps = (dispatch) => bindActionCreators({fetchClients, fetchCurrentUser}, dispatch)
+const mapDispatchProps = (dispatch) => bindActionCreators({fetchClients, fetchCurrentUser, setCurrentClient}, dispatch)
 
-export default connect(mapStateToProps, mapDispatchProps)(Clients);
+export default withRouter(connect( mapStateToProps, mapDispatchProps)(Clients));
