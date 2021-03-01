@@ -75,7 +75,16 @@ export function addWeight(weight){
     })
     
 }
-
+export function clearSearch(){
+    
+    return((dispatch)=>{
+     
+            dispatch({type: subActions.clearSearch})
+      
+      
+    })
+    
+}
 
 
 

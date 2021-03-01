@@ -2,7 +2,7 @@ import {View, Text,FlatList, Button, TextInput} from 'react-native'
 import axios from 'axios'
 import firebase from 'firebase'
 import React, { useState, useEffect} from 'react'
-import {addWeight} from '../../Actions/SubscriberActions'
+import {addWeight,clearSearch} from '../../Actions/SubscriberActions'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 
@@ -40,6 +40,8 @@ function Profile(props) {
          
           const logOut = () => {
             firebase.auth().signOut()
+            props.clearSearch()
+
           } 
           
          
@@ -108,6 +110,6 @@ const mapStateToProps=(store)=> ({
     
   })
  
-const mapDispatchProps=(dispatch)=> bindActionCreators({addWeight},dispatch)   
+const mapDispatchProps=(dispatch)=> bindActionCreators({addWeight,clearSearch},dispatch)   
   
 export default connect(mapStateToProps, mapDispatchProps) (Profile);

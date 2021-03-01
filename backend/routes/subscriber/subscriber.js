@@ -42,9 +42,10 @@ router.get('/trainers/:search', (req,res)=> {
         .then(items => res.json(items));   
     }
     else{
+    var search=`^${req.params.search}`
     Trainer.find({$or: 
-        [{'name.firstName': {$regex: req.params.search ,$options:'i'}},
-        {'name.lastName': {$regex: req.params.search ,$options:'i'}}]},(err, trainers)=>{
+        [{'name.firstName': {$regex: search ,$options:'i'}},
+        {'name.lastName': {$regex: search ,$options:'i'}}]},(err, trainers)=>{
         if(err)
          {res.json(err)}
         else
