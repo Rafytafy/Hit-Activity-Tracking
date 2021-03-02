@@ -1,4 +1,4 @@
-import {FETCH_CURRENT_USER, FETCH_CLIENTS, 
+import {FETCH_CURRENT_USER, FETCH_CLIENTS, SET_CURRENT_CLIENT,
         FETCH_WORKOUTS, POST_WORKOUT, DELETE_WORKOUT, UPDATE_WORKOUT, 
         FETCH_ROUTINES, SET_CURRENT_ROUTINE, CREATE_ROUTINE, DELETE_ROUTINE} from '../constants/index';
 import firebase from 'firebase'
@@ -21,6 +21,11 @@ export function fetchClients(uid){
             dispatch({type: FETCH_CLIENTS, clientList: res.data})
         })
     })
+}
+export function setCurrentClient(selectedClient) {
+    return ((dispatch) => {
+        dispatch({type: SET_CURRENT_CLIENT, client: selectedClient})
+    }) 
 }
 
 export function fetchWorkouts(){
