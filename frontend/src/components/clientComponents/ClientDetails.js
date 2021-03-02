@@ -12,7 +12,7 @@ function ClientDetails(props) {
 
         <Container>
         <Jumbotron className="mt-3">
-            <h1 className="display-3">Desai, Parth</h1>
+            <h1 className="display-3"></h1>
             <h3>Recent Activity</h3>
 
             <hr className="my-2" />
