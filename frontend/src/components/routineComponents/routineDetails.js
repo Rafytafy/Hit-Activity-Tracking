@@ -1,7 +1,7 @@
 import React from 'react'
 import { Container, Jumbotron, Button, ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText } from 'reactstrap'
 import {connect} from 'react-redux'
-import  { bindActionCreators } from 'redux';
+import  {bindActionCreators} from 'redux';
 import {deleteRoutine} from '../../redux/actions/index'
 import { calculateDuration } from '../../helperFunctions/functions'
 import { useHistory } from 'react-router-dom';
