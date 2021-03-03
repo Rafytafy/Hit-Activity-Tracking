@@ -3,6 +3,7 @@ import { Container, Jumbotron, Button, ListGroup, ListGroupItem, ListGroupItemHe
 import {connect} from 'react-redux'
 import  { bindActionCreators } from 'redux';
 import {useHistory} from 'react-router-dom';
+import DefaultPicture from '../../images/default-profile-picture.png'
 
 
 function ClientDetails(props) {
@@ -10,15 +11,22 @@ function ClientDetails(props) {
 
     return ( 
 
-        <Container>
+    <div className="container-fluid">
         <Jumbotron className="mt-3">
-            <h1 className="display-3"></h1>
+            <div className="d-flex">
+                <img src={DefaultPicture} style={{width: '10em'}}/>
+                <div>
+                    <h7>Client Name:</h7>
+                    <h1 className="display-4">{props.client.name.firstName}</h1>
+                </div>
+            </div>
             <h3>Recent Activity</h3>
-
+            <h3>Current Program</h3>
+            <Button onClick={() => history.push('/createProgram')}>Create new Program</Button>
             <hr className="my-2" />
             <Button onClick={() => history.push('/Clients')}> Back to Clients</Button>
         </Jumbotron>
-    </Container>
+    </div>
 )
 }
 
