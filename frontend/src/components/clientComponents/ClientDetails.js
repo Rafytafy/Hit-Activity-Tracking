@@ -33,6 +33,5 @@ function ClientDetails(props) {
 const mapStateToProps = (store) => ({
         client: store.clients.currentClient
     })
-const mapDispatchProps = (dispatch) => bindActionCreators(dispatch)
-
+    
 export default connect(mapStateToProps, null)(ClientDetails)

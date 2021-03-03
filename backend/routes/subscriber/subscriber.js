@@ -73,4 +73,19 @@ router.put('/addWeight/:id', (req ,res) => {
         }
     })
 })
+
+//@route put subscriber/program/:id
+//@desc update program of subscriber
+//@access public
+//Required _id(params): if of object
+router.put('/program/:id', (req, res) => {
+    Subscriber.findByIdAndUpdate(req.params.id, {routines: req.body.routines}, (err, subscriber) =>{
+        if(err){
+            res.send(`Error in updating user program. Error: ${err}`)
+        }
+        else{
+            res.send("Updated program for Subscriber")
+        }
+    })
+})
 module.exports = router;
