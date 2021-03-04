@@ -5,7 +5,13 @@ const initialState = {
     _id: "",
     name: "",
   }],
-  currentClient:{}
+  currentClient:{
+    name: {
+      firstName: "",
+      lastName: ""
+    },
+    routines: []
+  }
 };
 // eslint-disable-next-line
 export default function(state = initialState, action) {

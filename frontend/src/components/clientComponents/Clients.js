@@ -11,7 +11,8 @@ import {withRouter} from 'react-router-dom';
 class Clients extends Component {
     
     componentDidMount(){
-        if(this.props.clients.length === 0){
+        //1 becuase default length in client list is one
+        if(this.props.clients.length === 1){
             this.props.fetchClients(this.props.currentUser.uid)
         }
     }
