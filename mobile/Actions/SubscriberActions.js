@@ -25,12 +25,12 @@ export function loadProfileData(){
         dispatch({type:subActions.getSubProfileData})
         firebase.auth().currentUser.getIdToken(true)
         .then((res) => {
-            console.log(res)
+           
             var tokenId=res
             axios.post(`http://localhost:5000/subData/getProfileData`,{tokenId})
             .then(res =>
             {
-                console.log(res)
+            
                 
             
                 dispatch({type:subActions.getSubProfileDataSuccess,payload:res.data})
@@ -85,7 +85,21 @@ export function clearSearch(){
     })
     
 }
+export function fetchTrainer(name){
+    
+    return((dispatch)=>{
+        axios.get(`http://localhost:5000/subscriber/getTrainer/?first=${name.first}&last=${name.last}` )      
+        .then((res) => {
+            console.log(res.data[0])
+            dispatch({type: subActions.fetchedTrainer,payload:res.data[0]})
+            
 
+        })
+        .catch((err)=>{
+            dispatch({type: subActions.fetchedTrainerFailed, payload:err})
+        })
+    })
+}
 
 
 

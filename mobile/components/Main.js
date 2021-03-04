@@ -9,6 +9,7 @@ import {bindActionCreators} from 'redux'
 import ExerciseScreen from './Main/Exercise'
 import SearchScreen from './Main/Search'
 import ProfileScreen from './Main/Profile'
+import TrainerScreen from './Main/Trainer'
 import { NavigationContainer } from '@react-navigation/native'
 import {loadSubToken,loadProfileData} from '../Actions/SubscriberActions'
 const Tab=createBottomTabNavigator();
@@ -20,7 +21,6 @@ export class Main extends Component{
    this.props.loadSubToken();
    this.props.loadProfileData();
    
-    
   }
   render() {
       return(

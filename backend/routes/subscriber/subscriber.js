@@ -66,12 +66,24 @@ router.put('/addWeight/:id', (req ,res) => {
             }
         }, (err, userweight) => {
         if(err){
-            res.send("did not added weght");
-        }
+            res.send("did not add weight")}
         else{
-            
-            res.send("did added witght");
-        }
+            res.send("did add weight")}
     })
 })
+
+router.get('/getTrainer/',(req,res)=>{
+    var first=req.query.first
+    var last=req.query.last
+    Trainer.find({$and: 
+        [{'name.firstName': first},
+        {'name.lastName': last}]},(err, trainer)=>{
+        if(err)
+         {res.json(err)}
+        else
+        {res.json(trainer)}
+    })
+})
+
+
 module.exports = router;

@@ -21,7 +21,7 @@ function Profile(props) {
             const{currentUser,profileData}=props
             setProfData(profileData)
             setUser(profileData._id)
-            console.log(profileData._id)
+            
             setName(profileData.name)
            setHeight(profileData.height)
             var today = new Date();

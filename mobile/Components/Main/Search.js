@@ -1,9 +1,10 @@
 
 import React, { useState, useEffect} from 'react'
-import {View, Text,TextInput,FlatList,ListItem} from 'react-native'
+import {View, Text,TextInput,FlatList,ListItem,Button,Modal} from 'react-native'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import {fetchTrainers} from '../../Actions/SubscriberActions'
+import {fetchTrainers,fetchTrainer} from '../../Actions/SubscriberActions'
+import Trainer from './Trainer'
 
 
 function Search(props) {
@@ -13,9 +14,9 @@ function Search(props) {
     
  
     useEffect(()=>
-    {
-        const{currentUser,searchResult}=props;
-        setUser(currentUser)
+    {   
+        const{currentUser,searchResult,profileData}=props;
+        setUser(profileData.uid)
         setSearchResult(searchResult)
     })
     
@@ -32,7 +33,20 @@ function Search(props) {
              renderItem={({item})=>
              <View style={{justifyContent:'center',alignItems:'center',height: 50,width:300,backgroundColor:'#bbc2ff', borderColor:'#acfacb',borderWidth:2, borderRadius:8,margin:5}}>
              <Text style={{height: 50, fontSize:22,color: '#fdfdfd' }}>{item.name.firstName} {item.name.lastName}</Text>
-             <View style={{backgroundColor:'gray'}}></View>
+             <Button
+             title='More info'
+             onPress={() => {
+                
+                const name = {
+                  first:item.name.firstName,
+                  last:item.name.lastName
+                  
+                }
+                props.fetchTrainer(name)
+                Trainer()
+              }}/>
+                 
+         
              </View>
             }/>
            
@@ -41,8 +55,9 @@ function Search(props) {
 }
 const mapStateToProps=(store)=> ({
     currentUser: store.subscriber.currentUser,
-    searchResult: store.subscriber.searchResult
+    searchResult: store.subscriber.searchResult,
+    profileData: store.subscriber.profileData
     
   })
-  const mapDispatchProps=(dispatch)=> bindActionCreators({fetchTrainers},dispatch)
+  const mapDispatchProps=(dispatch)=> bindActionCreators({fetchTrainers,fetchTrainer},dispatch)
 export default connect(mapStateToProps,mapDispatchProps)(Search);
