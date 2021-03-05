@@ -28,6 +28,26 @@
   text-align: center;
   color: white;
 }
+
+input[type="file"] {
+  display: none;
+}
+
+.custom-file-upload {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.edit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  text-align: center;
+  flex-direction: column;
+}
 .title {
   color: white;
   margin-bottom: 15px;
