@@ -85,5 +85,32 @@ router.get('/getTrainer/',(req,res)=>{
     })
 })
 
+router.put('/subcribeToTrainer/', (req ,res) => {
+   
+    Trainer.findByIdAndUpdate(req.body.trainer ,
+        {$push: 
+            {clients:
+                
+                  req.body.user
+                
+            }
+        }, (err, sub) => {
+        if(err){
+            res.send("didnt sub")}
+        else{
+            res.send("subed")}
+    })
+})
 
+router.get('/getWeights/:id',(req,res)=>{
+    
+    Subscriber.findById(req.params.id,(err, sub)=>{
+        if(err)
+         {res.json(err)}
+        else
+        {
+           console.log(sub)
+            res.json(sub.weights)}
+    })
+})
 module.exports = router;

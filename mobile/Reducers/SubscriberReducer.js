@@ -10,8 +10,13 @@ export const subActions ={
     getSearchResult:'GET_SEARCH_RESULT',
     getSearchResultFailed:'GET_SEARCH_RESULT_FAILED',
     clearSearch:'CLAER_SEARCH',
-    fetchedTrained:'FETCHED_TRAINER',
-    fetchedTrainerFailed:'FETCHED_TRAINER_FAILED'
+    fetchedTrainer:'FETCHED_TRAINER',
+    fetchedTrainerFailed:'FETCHED_TRAINER_FAILED',
+    subscribe:'SUBSCRIBED',
+    subscribeFailed:'SUBSCRIBED_FAILED',
+    getWeights:'GET_WEIGHTS_FAILED',
+    
+    getWeightsFailed:'GET_WEIGHTS_FAILED'
 
 
  }
@@ -19,10 +24,10 @@ const initialSubState = {
     error: null,
     currentUser:null,
     profileData:[],
-    trainerInfo:[],
+    trainer:[],
     loading:false,
-    searchResult:[]
-
+    searchResult:[],
+    weights:[]
     
 }
 const subscriberReducer = (state = initialSubState, action) =>
@@ -53,10 +58,13 @@ const subscriberReducer = (state = initialSubState, action) =>
                 loading:true
             }
             case subActions.getSubProfileDataSuccess:
+            var p = action.payload
+            var id = p._id
             return{
                 ...state,
                 loading:false,
-                profileData:action.payload
+                profileData:action.payload,
+                currentUser:id
             }
             case subActions.getSubProfileDataFailed:
             return{
@@ -94,20 +102,46 @@ const subscriberReducer = (state = initialSubState, action) =>
                     ...state,
                     searchResult:[]
                 }
-            case subActions.fetchedTrained:
-                console.log(action.payload)    
+            case subActions.fetchedTrainer:
+                   
             return{
                     ...state,
                     trainer:action.payload
                     
                 }
-            case subActions.fetchedTrained:
-                console.log(action.payload)  
+            case subActions.fetchedTrainedFailed:
+                 
                 return{
                     ...state,
                     error:action.payload
                 }
-
+            case subActions.subscribe:
+                
+                return{
+                    ...state,
+                    
+                }
+            case subActions.subscribeFailed:
+                
+                return{
+                    ...state,
+                    error:action.payload
+                } 
+            case subActions.getWeights:
+            
+                return{
+                    ...state,
+                    weights:action.payload
+                    
+                }      
+            case subActions.getWeightsFailed:
+        
+                return{
+                    ...state,
+                    error:action.payload
+                }           
+            
+                
     }
     return state
 }

@@ -89,7 +89,7 @@ export class App extends Component {
       <Provider store={store}>
         <NavigationContainer >
           <Stack.Navigator initialRouteName="Main">
-            <Stack.Screen name="Main" component={Main} />
+            <Stack.Screen name="Main" component={Main} options={{ headerShown: false }} />
           </Stack.Navigator>
         </NavigationContainer>
       </Provider>
