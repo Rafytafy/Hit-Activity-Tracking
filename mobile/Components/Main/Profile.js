@@ -2,7 +2,7 @@ import {View, Text,FlatList, Button, TextInput} from 'react-native'
 import axios from 'axios'
 import firebase from 'firebase'
 import React, { useState, useEffect} from 'react'
-import {addWeight} from '../../Actions/SubscriberActions'
+import {addWeight,clearSearch} from '../../Actions/SubscriberActions'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 
@@ -21,7 +21,7 @@ function Profile(props) {
             const{currentUser,profileData}=props
             setProfData(profileData)
             setUser(profileData._id)
-            console.log(profileData._id)
+            
             setName(profileData.name)
            setHeight(profileData.height)
             var today = new Date();
@@ -40,6 +40,8 @@ function Profile(props) {
          
           const logOut = () => {
             firebase.auth().signOut()
+            props.clearSearch()
+
           } 
           
          
@@ -47,18 +49,18 @@ function Profile(props) {
 
     return (
         <View >
-           
-            <br/>
+         <Text>{"\n"}</Text>
+
+          
             <View style={{alignItems: 'center'}}> 
               <Text  style={{marginTop:100}}>
                 {name.firstName}  {name.lastName} 
               </Text>
             </View>
            
-            <br/>
-            <View style={{flex: 1, flexDirection: 'row',justifyContent: 'space-between',
-                          margin:40}}>
-                <Text >
+            <Text>{"\n"}</Text>
+            <View style={{ flexDirection: 'row',justifyContent: 'space-between',alignItems: 'center',marginHorizontal:15}}>
+                <Text style={{color:'#000000'}}>
                   {profData.initWeight} lbs.
                 </Text>   
                 <Text >
@@ -69,14 +71,25 @@ function Profile(props) {
                 </Text>
              </View>
              <View style={{flex: 1, flexDirection: 'row',margin:40, justifyContent:'center'}}>
-             <TextInput  style={{borderColor:'#acfacb',borderWidth:2,height:40,fontSize:16,fontSize:16, backgroundColor:'#f1f1f1', width:50, marginRight:30 }}
+             <TextInput  style={{  padding:10,marginRight:30, 
+        borderRadius:20,
+        borderColor:'#acfacb',
+        borderWidth:2,
+        height:40,
+        fontSize:16,
+        fontSize:16, 
+        backgroundColor:'#f1f1f1',
+         width:70,
+         alignItems:'center' }}
                     placeholder='175' 
                     onChangeText={(value)=>setWeightToAdd(value)}
                     name='weightInput'
                     maxLength={3}
                     
                 />
-             <Button 
+            <View style={{height:40,fontSize:16,backgroundColor:'#bbc2ff',borderWidth:2,borderColor:'#acfacb',borderRadius:20}}>
+               <Button 
+               color='rgba(0, 0, 0, 0)'
                 onPress={() => {
                   var today = new Date();
                   var cDay=today.getDate();
@@ -92,12 +105,23 @@ function Profile(props) {
                   
                 }}
                 title= 'Add Weight'
+                color='#fdfdfd'
             />
             </View>
-             <Button style={{height:40,fontSize:16}}
+            
+            </View >
+            <Text>{"\n"}</Text>
+            <Text>{"\n"}</Text>
+            <Text>{"\n"}</Text>
+
+            <View style={{height:40,fontSize:16,backgroundColor:'#bbc2ff',borderWidth:2,borderColor:'#acfacb',borderRadius:20}}>
+            <Button 
+              color='#fdfdfd'
                 onPress={() => logOut()}
                 title= 'Log Out'
             />
+            </View>
+            
         </View>
     )
 }
@@ -108,6 +132,6 @@ const mapStateToProps=(store)=> ({
     
   })
  
-const mapDispatchProps=(dispatch)=> bindActionCreators({addWeight},dispatch)   
+const mapDispatchProps=(dispatch)=> bindActionCreators({addWeight,clearSearch},dispatch)   
   
 export default connect(mapStateToProps, mapDispatchProps) (Profile);

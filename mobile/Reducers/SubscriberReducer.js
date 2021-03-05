@@ -8,8 +8,10 @@ export const subActions ={
     updateWeightFailed:'UPDATE_SUB_WEIGHT_FAILED',
     getSubProfileDataFailed: 'GET_SUB_PROFILE_DATA_FAILED',
     getSearchResult:'GET_SEARCH_RESULT',
-    getSearchResultFailed:'GET_SEARCH_RESULT_FAILED'
-    
+    getSearchResultFailed:'GET_SEARCH_RESULT_FAILED',
+    clearSearch:'CLAER_SEARCH',
+    fetchedTrained:'FETCHED_TRAINER',
+    fetchedTrainerFailed:'FETCHED_TRAINER_FAILED'
 
 
  }
@@ -17,7 +19,7 @@ const initialSubState = {
     error: null,
     currentUser:null,
     profileData:[],
-
+    trainerInfo:[],
     loading:false,
     searchResult:[]
 
@@ -86,6 +88,24 @@ const subscriberReducer = (state = initialSubState, action) =>
                 ...state,  
                 error:action.payload
                 
+                }
+            case subActions.clearSearch:
+                return{
+                    ...state,
+                    searchResult:[]
+                }
+            case subActions.fetchedTrained:
+                console.log(action.payload)    
+            return{
+                    ...state,
+                    trainer:action.payload
+                    
+                }
+            case subActions.fetchedTrained:
+                console.log(action.payload)  
+                return{
+                    ...state,
+                    error:action.payload
                 }
 
     }
