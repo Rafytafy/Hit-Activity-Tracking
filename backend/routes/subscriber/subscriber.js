@@ -4,6 +4,21 @@ const express = require('express'),
 const Subscriber = require('../../models/Subscriber');
 const Trainer = require('../../models/Trainer');
 
+
+//@route get subscriber/:id
+//@desc get subscriber data by id
+//@access public
+router.get('/:id', (req ,res) => {
+    Subscriber.findById( req.params.id, (err, subscriber) => {
+        if(err){
+            res.send("There was an error retrieving the user")
+        }
+        else{
+            res.send(subscriber);
+        }
+    })
+})
+
 //@route get subscriber/profilePicture/:id
 //@desc get profile path from subscriber
 //@access public
@@ -42,9 +57,10 @@ router.get('/trainers/:search', (req,res)=> {
         .then(items => res.json(items));   
     }
     else{
+    var search=`^${req.params.search}`
     Trainer.find({$or: 
-        [{'name.firstName': {$regex: req.params.search ,$options:'i'}},
-        {'name.lastName': {$regex: req.params.search ,$options:'i'}}]},(err, trainers)=>{
+        [{'name.firstName': {$regex: search ,$options:'i'}},
+        {'name.lastName': {$regex: search ,$options:'i'}}]},(err, trainers)=>{
         if(err)
          {res.json(err)}
         else
@@ -65,12 +81,39 @@ router.put('/addWeight/:id', (req ,res) => {
             }
         }, (err, userweight) => {
         if(err){
-            res.send("did not added weght");
+            res.send("did not add weight")}
+        else{
+            res.send("did add weight")}
+    })
+})
+
+//@route put subscriber/program/:id
+//@desc update program of subscriber
+//@access public
+//Required _id(params): if of object
+router.put('/program/:id', (req, res) => {
+    Subscriber.findByIdAndUpdate(req.params.id, {routines: req.body.routines}, (err, subscriber) =>{
+        if(err){
+            res.send(`Error in updating user program. Error: ${err}`)
         }
         else{
-            
-            res.send("did added witght");
+            res.send("Updated program for Subscriber")
         }
     })
 })
+
+router.get('/getTrainer/',(req,res)=>{
+    var first=req.query.first
+    var last=req.query.last
+    Trainer.find({$and: 
+        [{'name.firstName': first},
+        {'name.lastName': last}]},(err, trainer)=>{
+        if(err)
+         {res.json(err)}
+        else
+        {res.json(trainer)}
+    })
+})
+
+
 module.exports = router;

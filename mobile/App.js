@@ -16,11 +16,11 @@ const firebaseConfig = {
 
 
 
-import Landing from './components/Landing';
-import Login from './components/Login';
-import SignUp from './components/SignUp';
+import Landing from './Components/Landing';
+import Login from './Components/Login';
+import SignUp from './Components/Signup';
 import Main from './Components/Main'
-import styles from './styles'
+
 
 import {Provider} from 'react-redux'
 import {createStore,applyMiddleware} from 'redux'

@@ -10,14 +10,16 @@ import Register from "./components/Register";
 import Navbar from "./components/Navbar";
 import Profile from "./components/Profile";
 import Login from "./components/Login";
-import Clients from "./components/Clients";
+import Clients from "./components/clientComponents/Clients";
+import ClientDetails from "./components/clientComponents/ClientDetails";
 import Dash from "./components/Dash";
 import Edit from "./components/Edit";
 import Messages from "./components/Messages";
 import Routines from "./components/routineComponents/Routines";
 import Workouts from "./components/workoutComponents/Workouts";
-import RoutineDetails from "./components/routineComponents/RoutineDetails"
-import CreateRoutine from "./components/routineComponents/CreateRoutine"
+import RoutineDetails from "./components/routineComponents/RoutineDetails";
+import CreateRoutine from "./components/routineComponents/CreateRoutine";
+import CreateProgram from "./components/clientComponents/ClientNewProgram";
 
 function App(props) {
   var firebaseConfig = {
@@ -80,12 +82,14 @@ function App(props) {
           <Route exact path="/" component={Dash} />
           <Route path="/Profile" component={Profile} />
             <Route path="/Clients" component={Clients} />
+            <Route path="/clientDetails/:id" component={ClientDetails} />
             <Route path="/Edit" component={Edit} />
             <Route path="/Messages" component={Messages} />
-            <Route path="/Routines" component={Routines} />
             <Route path="/workouts" component={Workouts} />
-            <Route path="/routineDetails" component={RoutineDetails} />
+            <Route path="/Routines" component={Routines} />
+            <Route path="/routineDetails/:id" component={RoutineDetails} />
             <Route path="/createRoutine" component={CreateRoutine} />
+            <Route path="/createProgram/:id" component={CreateProgram} />
           </>
       }
         </Router>    
