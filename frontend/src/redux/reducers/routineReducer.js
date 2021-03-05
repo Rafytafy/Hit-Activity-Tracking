@@ -8,7 +8,10 @@ const initialState = {
         duration: 0
     }]
   }],
-  currentRoutine: {},
+  currentRoutine: {
+    name: "",
+    workouts: []
+  },
   newRoutine: {},
   deletedRoutine: {}
 };

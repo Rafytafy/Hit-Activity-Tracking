@@ -4,6 +4,21 @@ const express = require('express'),
 const Subscriber = require('../../models/Subscriber');
 const Trainer = require('../../models/Trainer');
 
+
+//@route get subscriber/:id
+//@desc get subscriber data by id
+//@access public
+router.get('/:id', (req ,res) => {
+    Subscriber.findById( req.params.id, (err, subscriber) => {
+        if(err){
+            res.send("There was an error retrieving the user")
+        }
+        else{
+            res.send(subscriber);
+        }
+    })
+})
+
 //@route get subscriber/profilePicture/:id
 //@desc get profile path from subscriber
 //@access public
@@ -69,6 +84,21 @@ router.put('/addWeight/:id', (req ,res) => {
             res.send("did not add weight")}
         else{
             res.send("did add weight")}
+    })
+})
+
+//@route put subscriber/program/:id
+//@desc update program of subscriber
+//@access public
+//Required _id(params): if of object
+router.put('/program/:id', (req, res) => {
+    Subscriber.findByIdAndUpdate(req.params.id, {routines: req.body.routines}, (err, subscriber) =>{
+        if(err){
+            res.send(`Error in updating user program. Error: ${err}`)
+        }
+        else{
+            res.send("Updated program for Subscriber")
+        }
     })
 })
 
