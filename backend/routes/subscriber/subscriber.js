@@ -11,7 +11,7 @@ const Trainer = require('../../models/Trainer');
 router.get('/:id', (req ,res) => {
     Subscriber.findById( req.params.id, (err, subscriber) => {
         if(err){
-            res.send("There was an error retrieve the path of user profile")
+            res.send("There was an error retrieving the user")
         }
         else{
             res.send(subscriber);

@@ -1,14 +1,24 @@
-import React from 'react'
+import React, {useEffect} from 'react'
+import axios from 'axios'
 import { Container, Jumbotron, Button, ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText } from 'reactstrap'
 import {connect} from 'react-redux'
 import  {bindActionCreators} from 'redux';
-import {deleteRoutine} from '../../redux/actions/index'
+import {deleteRoutine, setCurrentRoutine} from '../../redux/actions/index'
 import { calculateDuration } from '../../helperFunctions/functions'
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
 function RoutineDetails(props) {
     const history = useHistory();   
-    
+    let { id } = useParams();
+
+    useEffect(() => {
+        if(props.routine.name === ""){
+            axios.get(`http://localhost:5000/routine/${id}`)
+            .then((req) => {
+                props.setCurrentRoutine(req.data)
+            })
+        }
+      });
     const onDeleteRoutine = () =>{
         props.deleteRoutine(props.routine);
         history.push('/Routines');
@@ -43,6 +53,6 @@ const mapStateToProps = (store) => ({
     routine: store.routines.currentRoutine
 })
 
-const mapDispatchProps = (dispatch) => bindActionCreators({deleteRoutine}, dispatch)
+const mapDispatchProps = (dispatch) => bindActionCreators({deleteRoutine, setCurrentRoutine}, dispatch)
 
 export default connect(mapStateToProps, mapDispatchProps)(RoutineDetails)

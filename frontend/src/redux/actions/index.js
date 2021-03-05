@@ -68,7 +68,7 @@ export function updateWorkout(updatedWorkout){
 export function fetchRoutines() {
     return (async (dispatch) => {
         const uid = await firebase.auth().currentUser.uid
-        axios.get(`http://localhost:5000/routine/${uid}`)
+        axios.get(`http://localhost:5000/trainer/routines/${uid}`)
         .then((res) => {
             dispatch({type: FETCH_ROUTINES, routines: res.data})
         })
