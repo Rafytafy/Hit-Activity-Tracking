@@ -82,15 +82,14 @@ function App(props) {
           <Route exact path="/" component={Dash} />
           <Route path="/Profile" component={Profile} />
             <Route path="/Clients" component={Clients} />
-            <Route path="/clientDetails" component={ClientDetails} />
+            <Route path="/clientDetails/:id" component={ClientDetails} />
             <Route path="/Edit" component={Edit} />
             <Route path="/Messages" component={Messages} />
             <Route path="/workouts" component={Workouts} />
-
-
+            <Route path="/Routines" component={Routines} />
             <Route path="/routineDetails" component={RoutineDetails} />
             <Route path="/createRoutine" component={CreateRoutine} />
-            <Route path="/createProgram" component={CreateProgram} />
+            <Route path="/createProgram/:id" component={CreateProgram} />
           </>
       }
         </Router>    

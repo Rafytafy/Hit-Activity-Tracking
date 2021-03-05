@@ -22,12 +22,12 @@ class Clients extends Component {
             this.props.fetchClients(prevProps.currentUser.uid)
         }
     }
-    toClientDetails() { 
-        this.props.history.push('/clientDetails') 
+    toClientDetails(id) { 
+        this.props.history.push(`/clientDetails/${id}`) 
     }
     toClientDetailPage (client){
             this.props.setCurrentClient(client)
-             this.toClientDetails()
+             this.toClientDetails(client._id)
         }
 
     render() {

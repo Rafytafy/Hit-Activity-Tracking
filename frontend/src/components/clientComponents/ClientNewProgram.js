@@ -1,17 +1,29 @@
-import React, { useState } from 'react'
-import { useHistory } from 'react-router-dom';
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import { useHistory, useParams } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux'
+import {setCurrentClient} from '../../redux/actions/index'
 import {createProgram} from '../../redux/actions/index'
 import { Jumbotron, Container, Input, Button, ListGroup, ListGroupItem, FormGroup, Row } from 'reactstrap'
 
 
 function ClientNewProgram(props) {
     const history = useHistory();
+    let { id } = useParams();
 
     const [selectedRoutine, setSelectedRoutine] = useState({}),
           [selectedRoutinesForProgram, setSelectedRoutinesForProgram] = useState([]);
 
+    useEffect(() => {
+    if(props.client.name.firstName === ""){
+        axios.get(`http://localhost:5000/subscriber/${id}`)
+        .then((req) => {
+            props.setCurrentClient(req.data)
+        })
+    }
+    });
+    
     const findRoutineInArray = (e) =>{
         props.routines.map((routine) => {
             if(routine.name == e.target.value){
@@ -80,6 +92,6 @@ const mapStateToProps = (store) => ({
     routines: store.routines.list
 })
 
-const mapDispatchProps = (dispatch) => bindActionCreators({ createProgram }, dispatch)
+const mapDispatchProps = (dispatch) => bindActionCreators({ createProgram, setCurrentClient }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchProps)(ClientNewProgram)

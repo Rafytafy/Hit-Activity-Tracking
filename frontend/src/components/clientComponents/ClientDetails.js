@@ -1,14 +1,25 @@
-import React from 'react'
+import React, {useEffect} from 'react'
+import axios from 'axios'
 import { Container, Jumbotron, Button, ListGroup, ListGroupItem } from 'reactstrap'
 import {connect} from 'react-redux'
 import  { bindActionCreators } from 'redux';
-import {useHistory} from 'react-router-dom';
+import {setCurrentClient} from '../../redux/actions/index'
+import {useHistory, useParams} from 'react-router-dom';
 import DefaultPicture from '../../images/default-profile-picture.png'
 
 
 function ClientDetails(props) {
     const history = useHistory();
+    let { id } = useParams();
 
+    useEffect(() => {
+        if(props.client.name.firstName === ""){
+            axios.get(`http://localhost:5000/subscriber/${id}`)
+            .then((req) => {
+                props.setCurrentClient(req.data)
+            })
+        }
+      });
     return ( 
 
     <Container className="container-fluid">
@@ -43,7 +54,7 @@ function ClientDetails(props) {
                 
             }
             <div className="clearfix">
-                <Button className="mt-3 float-right" onClick={() => history.push('/createProgram')}>Create new Program</Button>
+                <Button className="mt-3 float-right" onClick={() => history.push(`/createProgram/${props.client._id}`)}>Create new Program</Button>
             </div>
             <hr className="my-2" />
             <Button onClick={() => history.push('/Clients')}> Back to Clients</Button>
@@ -56,4 +67,6 @@ const mapStateToProps = (store) => ({
         client: store.clients.currentClient
     })
     
-export default connect(mapStateToProps, null)(ClientDetails)
+const mapDispatchProps = (dispatch) => bindActionCreators({ setCurrentClient }, dispatch)
+
+export default connect(mapStateToProps, mapDispatchProps)(ClientDetails)

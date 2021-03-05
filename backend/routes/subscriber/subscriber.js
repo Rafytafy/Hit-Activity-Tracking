@@ -4,6 +4,21 @@ const express = require('express'),
 const Subscriber = require('../../models/Subscriber');
 const Trainer = require('../../models/Trainer');
 
+
+//@route get subscriber/:id
+//@desc get subscriber data by id
+//@access public
+router.get('/:id', (req ,res) => {
+    Subscriber.findById( req.params.id, (err, subscriber) => {
+        if(err){
+            res.send("There was an error retrieve the path of user profile")
+        }
+        else{
+            res.send(subscriber);
+        }
+    })
+})
+
 //@route get subscriber/profilePicture/:id
 //@desc get profile path from subscriber
 //@access public
