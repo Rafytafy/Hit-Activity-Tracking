@@ -3,7 +3,7 @@ import { Button,  Text, View, Image} from 'react-native';
 
 export default function Landing({ navigation }){
     return(
-        <View style={{flex:1,justifyContent:'center',alignItems:'center',backgroundColor:'#888888'}}>
+        <View style={{flex:1,justifyContent:'center',alignItems:'center',backgroundColor:'#333333'}}>
             <View style={{flex:1}}>
             </View >
              <View style={{flex:4,justifyContent:'center',alignItems:'center'}}> 
@@ -19,6 +19,7 @@ export default function Landing({ navigation }){
             <Button 
             color='rgba(0, 0, 0, 0)'
             title='Login'
+            color='#fdfdfd'
             onPress={() => navigation.navigate('Login')}/>
             </View>
             <View style={{flex:1}}>
@@ -28,6 +29,7 @@ export default function Landing({ navigation }){
             <Button 
             color='rgba(0, 0, 0, 0)'
             title='Sign Up'
+            color='#fdfdfd'
             onPress={() => navigation.navigate('SignUp')}/>
             </View>
             <View style={{flex:3}}>

@@ -27,7 +27,7 @@ export function loadProfileData(){
         .then((res) => {
            
             var tokenId=res
-            axios.post(`http://localhost:5000/subData/getProfileData`,{tokenId})
+            axios.post(`http://10.0.0.9:5000/subData/getProfileData`,{tokenId})
             .then(res =>
             {
             
@@ -51,7 +51,7 @@ export function loadProfileData(){
 export function fetchTrainers(search){
     
     return((dispatch) => {
-        axios.get(`http://localhost:5000/subscriber/trainers/${search}`)
+        axios.get(`http://10.0.0.9:5000/subscriber/trainers/${search}`)
         .then((res) => {
             dispatch({type: subActions.getSearchResult, payload:res.data})
         })
@@ -63,7 +63,7 @@ export function fetchTrainers(search){
 export function addWeight(weight){
     
     return((dispatch)=>{
-        axios.put(`http://localhost:5000/subscriber/addWeight/${weight.id}`,weight)
+        axios.put(`http://10.0.0.9:5000/subscriber/addWeight/${weight.id}`,weight)
         .then((res) => {
             dispatch({type: subActions.updateWeight})
             console.log(res)
@@ -88,7 +88,7 @@ export function clearSearch(){
 export function fetchTrainer(name){
     
     return((dispatch)=>{
-        axios.get(`http://localhost:5000/subscriber/getTrainer/?first=${name.first}&last=${name.last}` )      
+        axios.get(`http://10.0.0.9:5000/subscriber/getTrainer/?first=${name.first}&last=${name.last}` )      
         .then((res) => {
             console.log(res.data[0])
             dispatch({type: subActions.fetchedTrainer,payload:res.data[0]})

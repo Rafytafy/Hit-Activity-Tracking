@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import {Button, StyleSheet, Text, View,TextInput,Dimensions } from 'react-native';
+import {Button, StyleSheet, Text, View,TextInput,Dimensions,Alert } from 'react-native';
 import firebase from 'firebase';
 
 const styles = StyleSheet.create({
@@ -27,9 +27,19 @@ export  function login() {
         
         firebase.auth().signInWithEmailAndPassword(email, password)
             .then((result) => {
+                
+                
                 console.log(result)
             })
             .catch((error) => {
+                Alert.alert(
+                    "Error",
+                    `${error}`,
+                    [
+                     
+                      { text: "OK", onPress: () => console.log("OK Pressed") }
+                    ]
+                  );
                 console.log(error)
             })
     }
@@ -56,6 +66,7 @@ export  function login() {
             color='rgba(0, 0, 0, 0)'
                 onPress={() =>authLogin()}
                 title='Login'
+                color='#fdfdfd'
             />
              </View >
                <View style={{flex:2}}>
