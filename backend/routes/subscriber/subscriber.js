@@ -103,6 +103,7 @@ router.put('/program/:id', (req, res) => {
 })
 
 router.get('/getTrainer/',(req,res)=>{
+    console.log('called')
     var first=req.query.first
     var last=req.query.last
     Trainer.find({$and: 

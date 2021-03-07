@@ -2,6 +2,7 @@ import {
   View,
   Text,
   FlatList,
+  TouchableHighlight,
   Button,
   TextInput,
   ScrollView,
@@ -17,7 +18,7 @@ import {
 } from "../../Actions/SubscriberActions";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-
+import styles from '../../styles'
 function Profile(props) {
   const [profData, setProfData] = useState([]);
   const [name, setName] = useState([]);
@@ -60,17 +61,18 @@ function Profile(props) {
     return `${mon}/${day}/${year}`;
   };
 
-  const theweights = (w) => {
-    var rw = w.reverse();
-    return rw;
-  };
+ 
   return (
-    <ScrollView style={{backgroundColor: "#333333" }}>
-      <View style={{ marginTop: 50, backgroundColor: "#333333" }}>
-        <Text>{"\n"}</Text>
+    <ScrollView style={styles.scrollContainer}>
+      
+      <View style={{marginTop:300, alignItems: "center", justifyContent: "center" }}>
+  
 
-        <View style={{ alignItems: "center" }}>
-          <Text style={{ color: "#fdfdfd" ,fontSize:28}}>
+        <View style={styles.profileCard}>
+          <View>
+            
+          
+          <Text style={{ fontSize:32, color:"#333"}}>
             {name.firstName} {name.lastName}
           </Text>
         </View>
@@ -84,12 +86,15 @@ function Profile(props) {
             marginHorizontal: 15,
           }}
         >
-          <Text style={{ color: "#fdfdfd",fontSize:24 }}>{profData.initWeight} lbs.</Text>
-          <Text style={{ color: "#fdfdfd",fontSize:24 }}>{age} Years</Text>
-          <Text style={{ color: "#fdfdfd",fontSize:24 }}>
+          <Text style={styles.stats}>{profData.initWeight} lbs.</Text>
+          <Text style={styles.stats}>{age} Years</Text>
+          <Text style={styles.stats}>
             {height.feet}'{height.inches}"
           </Text>
         </View>
+        </View>
+        <Text >{'\n'}</Text>
+        <View style={styles.profileCard}>
         <View
           style={{
             flex: 1,
@@ -99,37 +104,18 @@ function Profile(props) {
           }}
         >
           <TextInput
-            style={{
-              padding: 10,
-              marginRight: 30,
-              borderRadius: 20,
-              borderColor: "#acfacb",
-              borderWidth: 2,
-              height: 40,
-              fontSize: 16,
-              fontSize: 16,
-              backgroundColor: "#f1f1f1",
-              width: 70,
-              alignItems: "center",
-            }}
+            style={{...styles.numberInput,fontSize:25}}
             placeholder="175"
             onChangeText={(value) => setWeightToAdd(value)}
             name="weightInput"
             maxLength={3}
             keyboardType="numeric"
           />
-          <View
-            style={{
-              height: 40,
-              fontSize: 16,
-              backgroundColor: "#bbc2ff",
-              borderWidth: 2,
-              borderColor: "#acfacb",
-              borderRadius: 20,
-            }}
-          >
-            <Button
-              color="rgba(0, 0, 0, 0)"
+   
+            <TouchableHighlight
+              style={{...styles.loginButton,width:150,marginLeft:20,marginVertical:8}}
+              activeOpacity={0.2}
+              underlayColor="#0F7E78"
               onPress={() => {
                 var today = new Date();
                 var cDay = today.getDate();
@@ -152,48 +138,40 @@ function Profile(props) {
               }}
               title="Add Weight"
               color="#fdfdfd"
-            />
-          </View>
+            >
+              <Text style={{ fontSize: 20, color: "#fdfdfd" }}>Add Weight</Text>
+              </TouchableHighlight>
+         
+        </View>
         </View>
         <Text>{"\n"}</Text>
 
+        <TouchableHighlight
+          style={styles.loginButton}
+          activeOpacity={0.2}
+          underlayColor="#0F7E78"
+           onPress={() => logOut()}
+          >
+  <Text style={{ fontSize: 20, color: "#fdfdfd" }}>Log Out</Text>
+          </TouchableHighlight>
+          <Text>{"\n"}</Text>
         <View style={{ justifyContent: "center", alignItems: "center" }}>
           <FlatList
             data={weightss}
             renderItem={({ item }) => (
               <View
-                style={{
-                  justifyContent: "center",
-                  alignItems: "center",
-                  height: 80,
-                  width: 300,
-                  backgroundColor: "#bbc2ff",
-                  borderColor: "#acfacb",
-                  borderWidth: 2,
-                  borderRadius: 8,
-                  margin: 5,
-                }}
+                style={styles.weightCard}
               >
-                <Text style={{ fontSize: 22, color: "#fdfdfd" }}>
-                  {item.weight} on {formatDate(item.date)}
+                <Text style={{ fontSize: 22, color: "#333" }}>
+                  {item.weight} lbs. on {formatDate(item.date)}
                 </Text>
               </View>
             )}
           />
         </View>
-        <View
-          style={{
-            marginBottom: 40,
-            height: 40,
-            fontSize: 16,
-            backgroundColor: "#bbc2ff",
-            borderWidth: 2,
-            borderColor: "#acfacb",
-            borderRadius: 20,
-          }}
-        >
-          <Button color="#fdfdfd" onPress={() => logOut()} title="Log Out" />
-        </View>
+  
+         
+    
       </View>
     </ScrollView>
   );

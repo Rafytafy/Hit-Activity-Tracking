@@ -66,7 +66,7 @@ export function addWeight(weight){
         axios.put(`http://10.0.0.9:5000/subscriber/addWeight/${weight.id}`,weight)
         .then((res) => {
             dispatch({type: subActions.updateWeight,payload:'Weight Added'})
-            console.log(res)
+            
 
         })
         .catch((err)=>{
@@ -86,11 +86,11 @@ export function clearSearch(){
     
 }
 export function fetchTrainer(name){
-    
+  console.log(name.first)
     return((dispatch)=>{
         axios.get(`http://10.0.0.9:5000/subscriber/getTrainer/?first=${name.first}&last=${name.last}` )      
         .then((res) => {
-            
+            console.log(res.data)
             dispatch({type: subActions.fetchedTrainer,payload:res.data[0]})
             
 
@@ -101,8 +101,10 @@ export function fetchTrainer(name){
     })
 }
 
+
+
 export function subscribe(subPair){
-    console.log(subPair)
+    
     return((dispatch)=>{
     axios.put(`http://10.0.0.9:5000/subscriber/subcribeToTrainer/`,subPair)
     .then((res)=>{
@@ -117,7 +119,7 @@ export function getWeights(id){
     return((dispatch)=>{
         axios.get(`http://10.0.0.9:5000/subscriber/getWeights/${id}` )      
         .then((res) => {
-            console.log(res)
+           
             dispatch({type: subActions.getWeights ,payload:res.data})
             
 

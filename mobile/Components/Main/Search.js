@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import {
   View,
@@ -16,7 +17,7 @@ import {
   fetchTrainer,
   subscribe,
 } from "../../Actions/SubscriberActions";
-
+import styles from '../../styles'
 const filler = {
   firstName: "who",
   lastName: "cares",
@@ -45,34 +46,15 @@ function Search(props) {
 
   return (
     <View
-      style={{
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "#333333",
-      }}
+      style={styles.container}
     >
-      <View style={{}}>
-        <Text>
-          {'\n\n\n\n\n\n\n\n\n\n'}
-        </Text>
+      <View style={{...styles.singupCard,marginTop:200,height:80,justifyContent:'center',paddingBottom:20}}>
+       
       <TextInput
-        style={{
-          borderColor: "#acfacb",
-          borderWidth: 2,
-          height: 50,
-          fontSize: 16,
-          fontSize: 24,
-          backgroundColor: "#f1f1f1",
-          width: 300,
-          borderRadius: 20,
-          padding: 15
-          
-          
-          
-        }}
+        style={styles.textInput}
         placeholder="Search For Trainer"
         onChangeText={(search) => {
-          props.fetchTrainers(search);
+          if(search){props.fetchTrainers(search)};
         }}
       />
       </View>
@@ -81,24 +63,23 @@ function Search(props) {
         data={searchResults}
         renderItem={({ item }) => (
           <View
+            style={styles.weightCard}
+          >
+             <View
             style={{
-              justifyContent: "center",
-              alignItems: "center",
-              height: 80,
-              width: 300,
-              backgroundColor: "#bbc2ff",
-              borderColor: "#acfacb",
-              borderWidth: 2,
-              borderRadius: 8,
-              margin: 5,
+              flexDirection: "row",
+              justifyContent: "space-between",
+              
             }}
           >
-            <Text style={{ fontSize: 22, color: "#fdfdfd" }}>
+            <Text style={{ fontSize: 20, color: "#333" }}>
               {item.name.firstName} {item.name.lastName}
             </Text>
-            <Button
-              style={{ height: 1, fontSize: 6 }}
-              title="More info"
+            <TouchableHighlight
+              style={{...styles.loginButton,height:30,width:100,marginHorizontal:10}}
+              activeOpacity={0.2}
+              underlayColor="#0F7E78"
+              
               onPress={() => {
                 const name = {
                   first: item.name.firstName,
@@ -108,7 +89,12 @@ function Search(props) {
 
                 setModalVisible(!modalVisible);
               }}
-            />
+            >
+            <Text style={{ fontSize: 12, color: "#fdfdfd" }}>
+              More Info
+            </Text>
+            </TouchableHighlight>
+          </View>
           </View>
         )}
       />
@@ -153,20 +139,11 @@ function Search(props) {
                 {"\n"}
                 {"\n"}
               </Text>
-              <View
-            style={{
-              height: 50,
-              width:150,
-              fontSize: 16,
-              backgroundColor: "#bbc2ff",
-              borderWidth: 2,
-              borderColor: "#acfacb",
-              borderRadius: 20,
-             alignItems:'center',
-             justifyContent:'center'
-            }}>
+              
               <TouchableHighlight
-               
+                style={{...styles.loginButton,height:40,width:130,marginHorizontal:10}}
+                activeOpacity={0.2}
+              underlayColor="#0F7E78"
                 onPress={() => {
                   const subPair = {
                     user: user,
@@ -175,31 +152,22 @@ function Search(props) {
                   props.subscribe(subPair);
                 }}
               >
-                <Text style={{fontSize:25,color:'#fdfdfd'}}>Subscribe</Text>
+                <Text style={{fontSize:20,color:'#fdfdfd'}}>Subscribe</Text>
               </TouchableHighlight>
-              </View>
+             
               <Text>{"\n\n\n\n"}</Text>
-              <View
-            style={{
-              height: 50,
-              width:100,
-              fontSize: 16,
-              backgroundColor: "#bbc2ff",
-              borderWidth: 2,
-              borderColor: "#acfacb",
-              borderRadius: 20,
-             alignItems:'center',
-             justifyContent:'center'
-            }}>
-              <TouchableHighlight
               
+              <TouchableHighlight
+               style={{...styles.loginButton,height:40,width:130,marginHorizontal:10}}
+               activeOpacity={0.2}
+             underlayColor="#0F7E78"
                 onPress={() => {
                   setModalVisible(!modalVisible);
                 }}
               >
-                <Text style={{fontSize:25,color:'#fdfdfd'}}>Exit </Text>
+                <Text style={{fontSize:20,color:'#fdfdfd'}}>Exit </Text>
               </TouchableHighlight>
-              </View>
+       
             </View>
           </View>
         </Modal>

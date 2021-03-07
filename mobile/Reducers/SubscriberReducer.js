@@ -9,7 +9,7 @@ export const subActions ={
     getSubProfileDataFailed: 'GET_SUB_PROFILE_DATA_FAILED',
     getSearchResult:'GET_SEARCH_RESULT',
     getSearchResultFailed:'GET_SEARCH_RESULT_FAILED',
-    clearSearch:'CLAER_SEARCH',
+    clearSearch:'CLEAR_SEARCH',
     fetchedTrainer:'FETCHED_TRAINER',
     fetchedTrainerFailed:'FETCHED_TRAINER_FAILED',
     subscribe:'SUBSCRIBED',
