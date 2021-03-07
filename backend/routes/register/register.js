@@ -10,6 +10,8 @@ const Subscriber = require('../../models/Subscriber');
 //@access private 
 
 router.post('/subscriber', isAuthenticated, (req, res) => {
+    var w= req.body.weight
+    var  today= new Date().getTime()
     const newSub = new Subscriber({
             uid: req.body.uid,               
             name: {
@@ -25,9 +27,30 @@ router.post('/subscriber', isAuthenticated, (req, res) => {
             },
         })
     
-        newSub.save().then(item => res.json(item));
+        newSub.save().then(item => {
+  
+                Subscriber.findByIdAndUpdate(
+                  item._id,
+                  {
+                    $push: {
+                      weights: {
+                        weight: w,
+                        date: today,
+                      },
+                    },
+                  },
+                  (err, userweight) => {
+                    if (err) {
+                      res.send("did not add weight");
+                    } else {
+                      res.send("did add weight");
+                    }
+                  }
+                );
+              });
+        });
 
-        })
+     
 
 
 //@route POST register/trainer
