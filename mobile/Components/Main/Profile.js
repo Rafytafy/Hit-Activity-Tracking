@@ -3,7 +3,7 @@ import {
   Text,
   FlatList,
   TouchableHighlight,
-  Button,
+  Image,
   TextInput,
   ScrollView,
   Alert,
@@ -27,12 +27,14 @@ function Profile(props) {
   const [height, setHeight] = useState([]);
   const [weightss, setWeights] = useState([]);
   const [weightToAdd, setWeightToAdd] = useState();
+  const [subIMG, setSubIMG] = useState();
 
   useEffect(() => {
     const { currentUser, profileData, weights } = props;
 
     setProfData(profileData);
     setUser(profileData._id);
+    console.log(profileData._id)
     setWeights(weights);
     setName(profileData.name);
     setHeight(profileData.height);
@@ -46,6 +48,21 @@ function Profile(props) {
     var diff = Math.abs(todayDate - birth);
     const age = Math.floor(diff / 31536000000);
     setAge(age);
+     
+    if(profileData.profilePicURL!=='') {
+      firebase.storage().ref(profileData.profilePicURL).getDownloadURL().then((url) => {
+          setSubIMG(url);
+         console.log(url)
+        
+      })
+    }
+    else{
+      firebase.storage().ref('empty.png').getDownloadURL().then((url) => {
+        setSubIMG(url);
+        console.log(url)
+    })
+  }
+
   });
 
   const logOut = () => {
@@ -65,11 +82,14 @@ function Profile(props) {
   return (
     <ScrollView style={styles.scrollContainer}>
       
-      <View style={{marginTop:300, alignItems: "center", justifyContent: "center" }}>
+      <View style={{marginTop:450, alignItems: "center", justifyContent: "center" }}>
   
 
         <View style={styles.profileCard}>
-          <View>
+          
+        <Image source={{uri:subIMG}}
+                style={{height:200,width:200,borderRadius:100,marginBottom:30}}/>
+                <View>
             
           
           <Text style={{ fontSize:32, color:"#333"}}>

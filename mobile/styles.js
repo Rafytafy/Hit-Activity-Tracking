@@ -113,17 +113,15 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
     borderBottomColor: color2,
   },
-  weightCard:{
-  
+  weightCard: {
     justifyContent: "center",
-  alignItems: "center",
-  height: 80,
-  width: 300,
-  backgroundColor: color3,
-  borderRadius: 8,
-  margin: 5,
-  }
-  
+    alignItems: "center",
+    height: 80,
+    width: 350,
+    backgroundColor: color3,
+    borderRadius: 8,
+    margin: 5,
+  },
 });
 
 export default styles;
