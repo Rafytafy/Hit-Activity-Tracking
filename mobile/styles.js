@@ -1,8 +1,8 @@
 import { StyleSheet } from "react-native";
-var color1 = "#7E0F15";
-var color2 = "#0F7E78";
-var color3 = "#FAFAFA";
-var color4 = "#333333";
+export const color1 = "#7E0F15";
+export const color2 = "#0F7E78";
+export const color3 = "#FAFAFA";
+export const color4 = "#333333";
 const styles = StyleSheet.create({
   landContainer: {
     flex: 1,
