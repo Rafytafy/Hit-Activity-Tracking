@@ -185,7 +185,10 @@ function Search(props) {
                     user: user,
                     trainer: trainerid,
                   };
-                  props.subscribe(subPair);
+                  props.subscribe(subPair)
+                  Alert.alert("Subscribed To ", `${trainerName.firstName} ${trainerName.lastName}`, [
+                    { text: "OK", onPress: () => console.log("OK Pressed") },
+                  ]);;
                 }}
               >
                 <Text style={{ fontSize: 20, color: "#fdfdfd" }}>

@@ -1,7 +1,6 @@
 import {
   View,
   Text,
-  FlatList,
   TouchableHighlight,
   Image,
   TextInput,
@@ -91,7 +90,10 @@ function Profile(props) {
 
   const logOut = () => {
     firebase.auth().signOut();
-    props.clearState();
+    setTimeout(() => {
+      props.clearState();
+    }, 500);
+    
   };
 
  

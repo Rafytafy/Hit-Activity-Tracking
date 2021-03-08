@@ -122,6 +122,15 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     margin: 5,
   },
+  programCard:{
+    justifyContent: "center",
+    alignItems: "center",
+    height: 80,
+    width: 350,
+    backgroundColor: color3,
+    borderRadius: 8,
+    margin: 5,
+  }
 });
 
 export default styles;

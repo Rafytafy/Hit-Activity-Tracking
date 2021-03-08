@@ -15,8 +15,9 @@ export const subActions ={
     subscribe:'SUBSCRIBED',
     subscribeFailed:'SUBSCRIBED_FAILED',
     getWeights:'GET_WEIGHTS_FAILED',
-    
-    getWeightsFailed:'GET_WEIGHTS_FAILED'
+    getWeightsFailed:'GET_WEIGHTS_FAILED',
+    getRoutines:'GET_ROUTINES',
+    getRoutinesFailed:'GET_ROUTINES_FAILED'
 
 
  }
@@ -27,8 +28,8 @@ const initialSubState = {
     trainer:[],
     loading:false,
     searchResult:[],
-    weights:[]
-    
+    weights:[],
+    rotuines:[]
 }
 const subscriberReducer = (state = initialSubState, action) =>
 {
@@ -99,7 +100,11 @@ const subscriberReducer = (state = initialSubState, action) =>
                 }
             case subActions.clearState:
                 return{
-                    initialSubState
+                    ...state,
+                    profileData:initialSubState.profileData,
+                    currentUser:initialSubState.currentUser,
+                    weights:initialSubState.weights,
+                    searchResult:initialSubState.searchResult
                 }
             case subActions.fetchedTrainer:
                    
@@ -140,7 +145,18 @@ const subscriberReducer = (state = initialSubState, action) =>
                     ...state,
                     error:action.payload
                 }           
-            
+            case subActions.getRoutines:
+                return{
+                    ...state,
+                    routines:action.payload
+                }
+            case subActions.getRoutinesFailed:
+    
+                return{
+                    ...state,
+                    error:action.payload
+                }  
+
                 
     }
     return state
