@@ -9,9 +9,15 @@ export const subActions ={
     getSubProfileDataFailed: 'GET_SUB_PROFILE_DATA_FAILED',
     getSearchResult:'GET_SEARCH_RESULT',
     getSearchResultFailed:'GET_SEARCH_RESULT_FAILED',
-    clearSearch:'CLAER_SEARCH',
-    fetchedTrained:'FETCHED_TRAINER',
-    fetchedTrainerFailed:'FETCHED_TRAINER_FAILED'
+    clearState:'CLEAR_STATE',
+    fetchedTrainer:'FETCHED_TRAINER',
+    fetchedTrainerFailed:'FETCHED_TRAINER_FAILED',
+    subscribe:'SUBSCRIBED',
+    subscribeFailed:'SUBSCRIBED_FAILED',
+    getWeights:'GET_WEIGHTS_FAILED',
+    getWeightsFailed:'GET_WEIGHTS_FAILED',
+    getRoutines:'GET_ROUTINES',
+    getRoutinesFailed:'GET_ROUTINES_FAILED'
 
 
  }
@@ -19,11 +25,11 @@ const initialSubState = {
     error: null,
     currentUser:null,
     profileData:[],
-    trainerInfo:[],
+    trainer:[],
     loading:false,
-    searchResult:[]
-
-    
+    searchResult:[],
+    weights:[],
+    rotuines:[]
 }
 const subscriberReducer = (state = initialSubState, action) =>
 {
@@ -53,10 +59,13 @@ const subscriberReducer = (state = initialSubState, action) =>
                 loading:true
             }
             case subActions.getSubProfileDataSuccess:
+            var p = action.payload
+            var id = p._id
             return{
                 ...state,
                 loading:false,
-                profileData:action.payload
+                profileData:action.payload,
+                currentUser:id
             }
             case subActions.getSubProfileDataFailed:
             return{
@@ -89,25 +98,66 @@ const subscriberReducer = (state = initialSubState, action) =>
                 error:action.payload
                 
                 }
-            case subActions.clearSearch:
+            case subActions.clearState:
                 return{
                     ...state,
-                    searchResult:[]
+                    profileData:initialSubState.profileData,
+                    currentUser:initialSubState.currentUser,
+                    weights:initialSubState.weights,
+                    searchResult:initialSubState.searchResult
                 }
-            case subActions.fetchedTrained:
-                console.log(action.payload)    
+            case subActions.fetchedTrainer:
+                   
             return{
                     ...state,
                     trainer:action.payload
                     
                 }
-            case subActions.fetchedTrained:
-                console.log(action.payload)  
+            case subActions.fetchedTrainedFailed:
+                 
                 return{
                     ...state,
                     error:action.payload
                 }
+            case subActions.subscribe:
+                
+                return{
+                    ...state,
+                    
+                }
+            case subActions.subscribeFailed:
+                
+                return{
+                    ...state,
+                    error:action.payload
+                } 
+            case subActions.getWeights:
+         
+                return{
+                    ...state,
+                    weights:action.payload,
+                    
+                    
+                }      
+            case subActions.getWeightsFailed:
+        
+                return{
+                    ...state,
+                    error:action.payload
+                }           
+            case subActions.getRoutines:
+                return{
+                    ...state,
+                    routines:action.payload
+                }
+            case subActions.getRoutinesFailed:
+    
+                return{
+                    ...state,
+                    error:action.payload
+                }  
 
+                
     }
     return state
 }

@@ -1,81 +1,71 @@
-import React, { useState } from 'react'
-import {Button, StyleSheet, Text, View,TextInput,Dimensions,Alert } from 'react-native';
-import firebase from 'firebase';
+import React, { useState } from "react";
+import {
+  TouchableHighlight,
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  Dimensions,
+  Alert,
+} from "react-native";
+import firebase from "firebase";
+import styles from "../styles";
 
-const styles = StyleSheet.create({
-    inputBox:{
-        padding:10,
-        borderRadius:20,
-        borderColor:'#acfacb',
-        borderWidth:2,
-        height:40,
-        fontSize:16,
-        fontSize:16, 
-        backgroundColor:'#f1f1f1',
-         width:250,
-         marginTop:15,
-         marginBottom:20 
-    }
-})
+export function login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  var { width, height } = Dimensions.get("window");
+  height = height - 55;
+  const authLogin = () => {
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((error) => {
+        Alert.alert("Error", `${error}`, [
+          { text: "OK", onPress: () => console.log("OK Pressed") },
+        ]);
+        console.log(error);
+      });
+  };
 
-export  function login() {
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
-    var { width, height } = Dimensions.get('window');
-    height=height-55
-    const authLogin =() =>{
-        
-        firebase.auth().signInWithEmailAndPassword(email, password)
-            .then((result) => {
-                
-                
-                console.log(result)
-            })
-            .catch((error) => {
-                Alert.alert(
-                    "Error",
-                    `${error}`,
-                    [
-                     
-                      { text: "OK", onPress: () => console.log("OK Pressed") }
-                    ]
-                  );
-                console.log(error)
-            })
-    }
-    
-        return (
-            <View style={{alignItems: 'center', backgroundColor:'#bbc2ff',height:height,width:width}}>
-                   <View style={{flex:2}}>
-            </View >
-            <View style={{flex:3}}>
-           
-            <TextInput style={styles.inputBox}
-                placeholder='E-mail'
-                onChangeText={(value)=>setEmail(value)}
-                naem='email'
-            />
-            <TextInput style={styles.inputBox}
-                placeholder='Password'
-                secureTextEntry={true}
-                onChangeText={(value)=>setPassword(value)}
-                name='password'
-            />
-            <View style={{backgroundColor:'#bbc2ff',borderWidth:2,borderColor:'#acfacb',borderRadius:20}}>
-                 <Button 
-            color='rgba(0, 0, 0, 0)'
-                onPress={() =>authLogin()}
-                title='Login'
-                color='#fdfdfd'
-            />
-             </View >
-               <View style={{flex:2}}>
-            </View >
-            </View>
-           
-        </View>
-        )
-    }
+  return (
+    <View style={styles.container}>
+      <View style={styles.inputCard}>
+        <Text style={{ fontSize: 36, marginBottom: 70 }}>Welcome to Pulse</Text>
+        <TextInput
+          style={styles.loginInputBox}
+          placeholder="E-mail"
+          placeholderTextColor="#999"
+          onChangeText={(value) => setEmail(value)}
+          name="email"
+          keyboardType="text"
+          type="text"
+        />
+        <TextInput
+          style={styles.loginInputBox}
+          placeholder="Password"
+          placeholderTextColor="#999"
+          secureTextEntry={true}
+          onChangeText={(value) => setPassword(value)}
+          name="password"
+          keyboardType="text"
+          type="text"
+        />
 
+        <TouchableHighlight
+          style={styles.loginButton}
+          onPress={() => authLogin()}
+          activeOpacity={0.2}
+          underlayColor="#0F7E78"
+        >
+          <Text style={{ fontSize: 25, color: "#fdfdfd" }}>Login</Text>
+        </TouchableHighlight>
+      </View>
+    </View>
+  );
+}
 
-export default login
+export default login;
