@@ -112,22 +112,33 @@ export function getWeights(id) {
     axios
       .get(`http://10.0.0.9:5000/subscriber/getWeights/${id}`)
       .then((res) => {
-         
-          const newList=[]
-          for (let i=0; i<res.data.length;i++){
-          
-            const obj = {
-                  x:Number(res.data[i].date),
-                  y:Number(res.data[i].weight)
-              }
-              
-              newList.push(obj)
-          }
-        
+        const newList = [];
+        for (let i = 0; i < res.data.length; i++) {
+          const obj = {
+            x: Number(res.data[i].date),
+            y: Number(res.data[i].weight),
+          };
+
+          newList.push(obj);
+        }
+
         dispatch({ type: subActions.getWeights, payload: newList });
       })
       .catch((err) => {
         dispatch({ type: subActions.getWeightsFailed, payload: err });
+      });
+  };
+}
+
+export function getRoutines(id) {
+  return (dispatch) => {
+    axios
+      .get(`http://10.0.0.9:5000/subscriber/getRoutines/${id}`)
+      .then((res) => {
+        dispatch({ type: subActions.getRoutines, payload: res.data });
+      })
+      .catch((err) => {
+        dispatch({ type: subActions.getRoutinesFailed, payload: err });
       });
   };
 }

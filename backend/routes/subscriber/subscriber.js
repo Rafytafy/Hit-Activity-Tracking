@@ -149,4 +149,13 @@ router.get("/getWeights/:id", (req, res) => {
     }
   });
 });
+router.get("/getRoutines/:id", (req, res) => {
+  Subscriber.findById(req.params.id, (err, sub) => {
+    if (err) {
+      res.json(err);
+    } else {
+      res.json(sub.routines);
+    }
+  });
+});
 module.exports = router;
