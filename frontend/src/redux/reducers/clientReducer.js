@@ -4,6 +4,7 @@ const initialState = {
   list: [{
     _id: "",
     name: "",
+    weights: [{}]
   }],
   currentClient:{
     name: {
