@@ -19,6 +19,19 @@ function Exercise(props) {
     const { currentUser, profileData, routines } = props;
     setUser(currentUser);
   });
+
+    const renderProgramCards = () => {
+      return (
+        props.routines.map((routine) => (
+          <View style={styles.programCard}>
+          <Text>{routine.name}</Text>
+          {routine.workouts.map((item) => (
+            <Text>{item.workout.name}</Text>
+          ))}
+          </View>
+        ))
+      )
+    }
   return (
     <ScrollView style={styles.scrollContainer}>
       <View
@@ -28,15 +41,9 @@ function Exercise(props) {
           alignItems: "center",
         }}
       >
-        <View style={styles.programCard}>
-          <Text>Exercise</Text>
-          <Text>
-            {/* {routines.this} {rotuiines.that} you get the point rafy, this is a card for the routines 
-             prolly want ot make a funtion to loop throught the routines and create cards 
-             flat list that i have on the search page casues problems in a scroll view
-            programCard is teh last one on the stlyes sheet for cahnges you want to make there*/}
-          </Text>
-        </View>
+      
+        {renderProgramCards()}
+
       </View>
     </ScrollView>
   );
@@ -44,7 +51,7 @@ function Exercise(props) {
 const mapStateToProps = (store) => ({
   currentUser: store.subscriber.currentUser,
   profileData: store.subscriber.profileData,
-  rotuines: store.subscriber.rotuines,
+  routines: store.subscriber.profileData.routines
 });
 
 const mapDispatchProps = (dispatch) =>
