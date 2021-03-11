@@ -6,6 +6,7 @@ import {
   TextInput,
   ScrollView,
   Alert,
+  Modal
 } from "react-native";
 import {
   VictoryChart,
@@ -42,7 +43,7 @@ function Profile(props) {
   const [weightToAdd, setWeightToAdd] = useState();
   const [subIMG, setSubIMG] = useState();
   const [xticks, setXticks] = useState([]);
-
+  const [modalVisible, setModalVisible] = useState(false);
   useEffect(() => {
     const { currentUser, profileData, weights } = props;
     if (typeof profileData._id !== "undefined") {
@@ -110,7 +111,21 @@ function Profile(props) {
         }}
       >
         <View style={styles.profileCard}>
-          <Image
+         
+         <TouchableHighlight 
+          style={{
+            height: 200,
+            width: 200,
+            borderRadius: 100,
+            marginBottom: 30,
+         
+         }}
+         activeOpacity={0.2}
+         underlayColor="#0F7E78"
+         onPress={() => { setModalVisible(!modalVisible)}}
+         
+         >
+         <Image
             source={{ uri: subIMG }}
             style={{
               height: 200,
@@ -119,6 +134,7 @@ function Profile(props) {
               marginBottom: 30,
             }}
           />
+           </TouchableHighlight> 
           <View>
             <Text style={{ fontSize: 32, color: "#333" }}>
               {name.firstName} {name.lastName}
@@ -142,6 +158,106 @@ function Profile(props) {
           </View>
         </View>
         <Text>{"\n"}</Text>
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            Alert.alert("Modal has been closed.");
+          }}
+        >
+          <View
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+             <View
+              style={{
+                margin: 20,
+                backgroundColor: "white",
+                borderRadius: 20,
+                padding: 35,
+                alignItems: "center",
+                shadowColor: "#000",
+                shadowOffset: {
+                  width: 0,
+                  height: 2,
+                },
+                shadowOpacity: 0.25,
+                shadowRadius: 4,
+                elevation: 5,
+                height:'70%',
+              width:'85%',
+              alignItems:'center',
+              justifyContent:'center'
+              }}
+            >
+          
+
+              <TouchableHighlight
+                style={{
+                  ...styles.loginButton,
+                  height: 40,
+                  width: 130,
+                  marginHorizontal: 10,
+                }}
+                activeOpacity={0.2}
+                underlayColor="#0F7E78"
+                onPress={() => {
+                  
+                 
+                }}
+              >
+                <Text style={{ fontSize: 20, color: "#fdfdfd" }}>
+                  Choose photo {"\n"} From Gallery
+                </Text>
+              </TouchableHighlight>
+              <TouchableHighlight
+                style={{
+                  ...styles.loginButton,
+                  height: 40,
+                  width: 130,
+                  marginHorizontal: 10,
+                }}
+                activeOpacity={0.2}
+                underlayColor="#0F7E78"
+                onPress={() => {
+                  
+                 
+                }}
+              >
+                <Text style={{ fontSize: 20, color: "#fdfdfd" }}>
+                  Take a Photo
+                </Text>
+              </TouchableHighlight>
+
+              <Text>{"\n\n\n\n"}</Text>
+
+              <TouchableHighlight
+                style={{
+                  ...styles.loginButton,
+                  height: 40,
+                  width: 130,
+                  marginHorizontal: 10,
+                }}
+                activeOpacity={0.2}
+                underlayColor="#0F7E78"
+                onPress={() => {
+                  setModalVisible(!modalVisible);
+                }}
+              >
+                <Text style={{ fontSize: 20, color: "#fdfdfd" }}>Exit </Text>
+              </TouchableHighlight>
+            </View>
+          </View>
+        </Modal>
+        
         <View style={styles.profileCard}>
           <View
             style={{
@@ -195,7 +311,7 @@ function Profile(props) {
         <Text>{"\n"}</Text>
 
        
-        <View style={{ ...styles.weightCard, height: 250, width: 380 }}>
+        {/* <View style={{ ...styles.weightCard, height: 250, width: 380 }}>
           <VictoryChart height={220} width={350}>
             <VictoryLine
               style={{
@@ -222,7 +338,7 @@ function Profile(props) {
           </VictoryChart>
 
       
-        </View>
+        </View> */}
         <Text>{"\n"}</Text>
         <TouchableHighlight
           style={styles.loginButton}
