@@ -1,6 +1,6 @@
 import {FETCH_CURRENT_USER, FETCH_CLIENTS, SET_CURRENT_CLIENT,
         FETCH_WORKOUTS, POST_WORKOUT, DELETE_WORKOUT, UPDATE_WORKOUT, 
-        FETCH_ROUTINES, SET_CURRENT_ROUTINE, CREATE_ROUTINE, DELETE_ROUTINE} from '../constants/index';
+        FETCH_ROUTINES, SET_CURRENT_ROUTINE, CREATE_ROUTINE, DELETE_ROUTINE } from '../constants/index';
 import firebase from 'firebase'
 import axios from 'axios';
 
@@ -97,3 +97,4 @@ export function deleteRoutine(deletedRoutine){
         })
     })
 }
+

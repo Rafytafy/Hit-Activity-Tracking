@@ -15,6 +15,23 @@ const TrainerSchema = new Schema({
         type: String,
         required: true
     },
+    bio: {
+        type: String,
+        
+    },
+    location: {
+        type: String,
+        
+    },
+    plans: {
+        type: String,
+         
+    },
+
+    socials: {
+        type: String,
+        
+    },
     profilePicURL: {
         type: String,
         default: ''

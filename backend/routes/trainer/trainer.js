@@ -105,5 +105,19 @@ router.put('/profilePicture/:id', (req ,res) => {
     })
 })
 
-      
+router.put('/:id', (req, res) => {
+    Trainer.findOneAndUpdate({ uid: req.params.id }, req.body, (err, trainer) => {
+        if (err) {
+            return res.send("Error: could not add path to trainer");
+            
+        }
+        if (!trainer) {
+            return res.send("Theres no trainer :(")
+        }
+        
+        res.send("Successfully updated trainer");
+            
+    })
+})
+
 module.exports = router;

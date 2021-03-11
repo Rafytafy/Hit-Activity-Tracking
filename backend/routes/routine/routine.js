@@ -12,11 +12,14 @@ router.get('/:id', (req, res) => {
         .populate('routines')
         .exec((err, trainer) => {
             if(err){
-                res.send(err);
+                return res.send(err);
+            
             }
-            else {
-                res.send(trainer.routines)
+            if(!trainer) {
+               return res.send(err);
             }
+        
+             res.send(trainer.routines)
         })
 })
 

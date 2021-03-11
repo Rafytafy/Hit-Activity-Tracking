@@ -1,4 +1,4 @@
-import React, { Component, componentDidMount } from 'react';
+import React, { Component } from 'react';
 import { postWorkouts } from '../../redux/actions/index';
 import { bindActionCreators } from 'redux';
 import firebase from 'firebase';

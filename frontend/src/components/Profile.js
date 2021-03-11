@@ -24,7 +24,7 @@ const Profile = (props) =>
             <Jumbotron>
                  <ProfilePic profilePath = {img} />
                 <p> </p>
-                <h1> {props.currentUser.name.firstName} </h1>
+                <h1>  </h1>
                 <h2> Trainer location, socials</h2>
                 <hr/>
                 <h2> Weight Loss, Diets, Workout Plans </h2>
