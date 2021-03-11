@@ -21,20 +21,20 @@ const Dash = (props) => {
             </div>
                 <div className = "dash">
                     <Row>
-                    <Jumbotron onClick = { toMessages } > 
+                    <Jumbotron className="shadow-lg rounded" onClick = { toMessages } > 
                         <h1>Messages</h1>
                     </Jumbotron>
                     <div className="dashDivider"/>
-                    <Jumbotron onClick = { toClients }> 
-                        <h1> Clients</h1>
+                    <Jumbotron className="shadow-lg rounded" onClick = { toClients }> 
+                        <h1>Clients</h1>
                     </Jumbotron>
                         <div className = "dashDivider"/>
-                    <Jumbotron onClick = { toRoutines }> 
-                        <h1> Routines</h1>
+                    <Jumbotron className="shadow-lg" onClick = { toRoutines }> 
+                        <h1>Routines</h1>
                     </Jumbotron>
                     <div className = "dashDivider"/>
-                    <Jumbotron onClick = { toWorkouts }> 
-                        <h1> Workout</h1>
+                    <Jumbotron className="shadow-lg" onClick = { toWorkouts }> 
+                        <h1> Workouts</h1>
                     </Jumbotron>
                 </Row> 
                 </div>
