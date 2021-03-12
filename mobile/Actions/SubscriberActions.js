@@ -142,3 +142,34 @@ export function getRoutines(id) {
       });
   };
 }
+export function uploadPhoto(picPair) {
+  return (dispatch) =>
+    axios
+      .put(`http://10.0.0.9:5000/subscriber/uploadSubPhoto/`, picPair)
+      .then((res) => {
+        dispatch({
+          type: subActions.uploadSubPhoto,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        dispatch({ type: subActions.uploadSubPhotoFailed, payload: err });
+      });
+}
+export function getPhoto(id) {
+  return (dispatch) => {
+    axios
+      .get(`http://10.0.0.9:5000/subscriber/getSubPhoto/${id}`)
+      .then((res) => {
+       
+
+         
+     
+
+        dispatch({ type: subActions.getPhoto, payload: res.data });
+      })
+      .catch((err) => {
+        dispatch({ type: subActions.getPhotoFailed, payload: err });
+      });
+  };
+}
