@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
   programCard:{
     justifyContent: "center",
     alignItems: "center",
-    height: 80,
+    height: 350,
     width: 350,
     backgroundColor: color3,
     borderRadius: 8,

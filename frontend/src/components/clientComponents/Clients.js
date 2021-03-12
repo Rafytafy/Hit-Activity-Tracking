@@ -30,6 +30,24 @@ class Clients extends Component {
              this.toClientDetails(client._id)
         }
 
+    renderClientsTable(){
+        if(this.props.clients !== undefined){
+            return (
+                this.props.clients.map((client) =>
+                    <tr key={client._id}>
+                        <th><Button onClick={() => this.toClientDetailPage(client)}> View </Button></th>
+                        <th>{client.name.lastName}, {client.name.firstName}</th>
+                        <th>{client.email}</th>
+                        <th>{client.weights[client.weights.length - 1].weight}lbs</th>
+                    </tr>
+                    )
+            )
+        }
+        else{
+            <></>
+        }
+    }
+
     render() {
          
         return (
@@ -44,14 +62,7 @@ class Clients extends Component {
                             <th>Weight</th>
                         </thead>
                         <tbody>
-                        {this.props.clients.map((client) =>
-                            <tr key={client._id}>
-                                <th><Button onClick={() => this.toClientDetailPage(client)}> View </Button></th>
-                                <th>{client.name.lastName}, {client.name.firstName}</th>
-                                <th>{client.email}</th>
-                                <th>{client.weights[client.weights.length - 1].weight}lbs</th>
-                            </tr>
-                            )}
+                        {this.renderClientsTable()}
                         </tbody>
                     </Table>
                 </Container>
