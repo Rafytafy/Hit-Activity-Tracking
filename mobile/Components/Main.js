@@ -6,7 +6,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import firebase from 'firebase'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import ExerciseScreen from './Main/Exercise'
+import ProgramScreen from './Main/programComponents/Program'
 import SearchScreen from './Main/Search'
 import ProfileScreen from './Main/Profile'
 
@@ -31,7 +31,7 @@ export class Main extends Component{
       return(
           
           <Tab.Navigator initialRouteName="Exercises">
-             <Tab.Screen name="Exercises" component={ExerciseScreen} 
+             <Tab.Screen name="Program" component={ProgramScreen} 
               options={{ 
                 tabBarIcon:({color, size})=>(
                     <MaterialCommunityIcons name="basketball" color={color} size={26}/>
