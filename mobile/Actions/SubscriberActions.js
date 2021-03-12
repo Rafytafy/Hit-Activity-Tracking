@@ -27,7 +27,7 @@ export function loadProfileData() {
       .then((res) => {
         var tokenId = res;
         axios
-          .post(`http://10.0.0.9:5000/subData/getProfileData`, { tokenId })
+          .post(`http://hit-activity-tracking-backend.herokuapp.com/subData/getProfileData`, { tokenId })
           .then((res) => {
             dispatch({
               type: subActions.getSubProfileDataSuccess,
@@ -50,7 +50,7 @@ export function loadProfileData() {
 export function fetchTrainers(search) {
   return (dispatch) => {
     axios
-      .get(`http://10.0.0.9:5000/subscriber/trainers/${search}`)
+      .get(`http://hit-activity-tracking-backend.herokuapp.com/subscriber/trainers/${search}`)
       .then((res) => {
         dispatch({ type: subActions.getSearchResult, payload: res.data });
       })
@@ -62,7 +62,7 @@ export function fetchTrainers(search) {
 export function addWeight(weight) {
   return (dispatch) => {
     axios
-      .put(`http://10.0.0.9:5000/subscriber/addWeight/${weight.id}`, weight)
+      .put(`http://hit-activity-tracking-backend.herokuapp.com/subscriber/addWeight/${weight.id}`, weight)
       .then((res) => {
         dispatch({ type: subActions.updateWeight, payload: "Weight Added" });
       })
@@ -81,7 +81,7 @@ export function fetchTrainer(name) {
   return (dispatch) => {
     axios
       .get(
-        `http://10.0.0.9:5000/subscriber/getTrainer/${name.first}/${name.last}`
+        `http://hit-activity-tracking-backend.herokuapp.com/subscriber/getTrainer/${name.first}/${name.last}`
       )
       .then((res) => {
         dispatch({ type: subActions.fetchedTrainer, payload: res.data[0] });
@@ -95,7 +95,7 @@ export function fetchTrainer(name) {
 export function subscribe(subPair) {
   return (dispatch) => {
     axios
-      .put(`http://10.0.0.9:5000/subscriber/subcribeToTrainer/`, subPair)
+      .put(`http://hit-activity-tracking-backend.herokuapp.com/subscriber/subcribeToTrainer/`, subPair)
       .then((res) => {
         dispatch({
           type: subActions.subscribe,
@@ -110,7 +110,7 @@ export function subscribe(subPair) {
 export function getWeights(id) {
   return (dispatch) => {
     axios
-      .get(`http://10.0.0.9:5000/subscriber/getWeights/${id}`)
+      .get(`http://hit-activity-tracking-backend.herokuapp.com/subscriber/getWeights/${id}`)
       .then((res) => {
         const newList = [];
         for (let i = 0; i < res.data.length; i++) {
@@ -133,7 +133,7 @@ export function getWeights(id) {
 export function getRoutines(id) {
   return (dispatch) => {
     axios
-      .get(`http://10.0.0.9:5000/subscriber/getRoutines/${id}`)
+      .get(`http://hit-activity-tracking-backend.herokuapp.com/subscriber/getRoutines/${id}`)
       .then((res) => {
         dispatch({ type: subActions.getRoutines, payload: res.data });
       })
