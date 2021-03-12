@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux'
 import {setCurrentClient} from '../../redux/actions/index'
 import {createProgram} from '../../redux/actions/index'
-import { Jumbotron, Container, Input, Button, ListGroup, ListGroupItem, FormGroup, Row } from 'reactstrap'
+import { Alert, Jumbotron, Container, Input, Button, ListGroup, ListGroupItem, FormGroup, Row } from 'reactstrap'
 
 
 function ClientNewProgram(props) {
@@ -13,6 +13,7 @@ function ClientNewProgram(props) {
     let { id } = useParams();
 
     const [selectedRoutine, setSelectedRoutine] = useState({}),
+          [visibleError, setVisibleError] = useState(false),
           [selectedRoutinesForProgram, setSelectedRoutinesForProgram] = useState([]);
 
     useEffect(() => {
@@ -33,8 +34,15 @@ function ClientNewProgram(props) {
     }
     
     const addRoutineToList = () =>{
-        setSelectedRoutinesForProgram([...selectedRoutinesForProgram, selectedRoutine])
-        setSelectedRoutine({}); 
+        
+        if(selectedRoutine.name === undefined){
+            setVisibleError(true)
+        }
+        else{
+            setVisibleError(false)
+            setSelectedRoutinesForProgram([...selectedRoutinesForProgram, selectedRoutine])
+            setSelectedRoutine({}); 
+        }
     }
 
     const removeFromWorkoutPlanArray = (routine) => {
@@ -48,17 +56,18 @@ function ClientNewProgram(props) {
         clientWithNewProgram.routines = selectedRoutinesForProgram
         console.log(clientWithNewProgram)
         props.createProgram(clientWithNewProgram)
-        history.push('/clientDetails')
+        history.push(`/clientDetails/${props.client._id}`)
           
     }
 
     return (
         <div>
             <Container>
-                <Jumbotron>
+                <Jumbotron className="mt-4">
                     <h1 className="display-4">Create Program for {props.client.name.firstName}</h1>
                     <FormGroup className="clearfix">
                         <h3>Select routines for program</h3>
+                        <Alert color='danger' isOpen={visibleError} toggle={() => setVisibleError(false)}>Select a routine to add to program</Alert>
                         <Input type="select" name="selectMulti" id="exampleSelectMulti" multiple onChange={ (e) => findRoutineInArray(e)}>
                             {props.routines.map((routine) => 
                                 <option value={routine.name}>{routine.name}</option>
@@ -67,6 +76,7 @@ function ClientNewProgram(props) {
                         <Button  className="float-right mt-3" onClick={() => addRoutineToList()}>Add To Program</Button> 
                     </FormGroup>
                     <hr className="my-2" />
+                    <Container>
                     <ListGroup>
                         {selectedRoutinesForProgram.map((routine) =>
                             <Row>
@@ -75,6 +85,7 @@ function ClientNewProgram(props) {
                             </Row>
                         )}
                     </ListGroup>
+                    </Container>
                     {selectedRoutinesForProgram.length > 0 ?
                         <Button color="success" className="float-right" onClick={() => onCreateProgram()}>Create Program</Button>
                         :

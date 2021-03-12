@@ -49,7 +49,7 @@ class Clients extends Component {
                                 <th><Button onClick={() => this.toClientDetailPage(client)}> View </Button></th>
                                 <th>{client.name.lastName}, {client.name.firstName}</th>
                                 <th>{client.email}</th>
-                                <th>{client.weight}lbs</th>
+                                <th>{client.weights[client.weights.length - 1].weight}lbs</th>
                             </tr>
                             )}
                         </tbody>

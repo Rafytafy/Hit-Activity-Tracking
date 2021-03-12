@@ -9,14 +9,15 @@ export const subActions ={
     getSubProfileDataFailed: 'GET_SUB_PROFILE_DATA_FAILED',
     getSearchResult:'GET_SEARCH_RESULT',
     getSearchResultFailed:'GET_SEARCH_RESULT_FAILED',
-    clearSearch:'CLAER_SEARCH',
+    clearState:'CLEAR_STATE',
     fetchedTrainer:'FETCHED_TRAINER',
     fetchedTrainerFailed:'FETCHED_TRAINER_FAILED',
     subscribe:'SUBSCRIBED',
     subscribeFailed:'SUBSCRIBED_FAILED',
     getWeights:'GET_WEIGHTS_FAILED',
-    
-    getWeightsFailed:'GET_WEIGHTS_FAILED'
+    getWeightsFailed:'GET_WEIGHTS_FAILED',
+    getRoutines:'GET_ROUTINES',
+    getRoutinesFailed:'GET_ROUTINES_FAILED'
 
 
  }
@@ -27,8 +28,8 @@ const initialSubState = {
     trainer:[],
     loading:false,
     searchResult:[],
-    weights:[]
-    
+    weights:[],
+    rotuines:[]
 }
 const subscriberReducer = (state = initialSubState, action) =>
 {
@@ -97,10 +98,13 @@ const subscriberReducer = (state = initialSubState, action) =>
                 error:action.payload
                 
                 }
-            case subActions.clearSearch:
+            case subActions.clearState:
                 return{
                     ...state,
-                    searchResult:[]
+                    profileData:initialSubState.profileData,
+                    currentUser:initialSubState.currentUser,
+                    weights:initialSubState.weights,
+                    searchResult:initialSubState.searchResult
                 }
             case subActions.fetchedTrainer:
                    
@@ -128,10 +132,11 @@ const subscriberReducer = (state = initialSubState, action) =>
                     error:action.payload
                 } 
             case subActions.getWeights:
-            
+         
                 return{
                     ...state,
-                    weights:action.payload
+                    weights:action.payload,
+                    
                     
                 }      
             case subActions.getWeightsFailed:
@@ -140,7 +145,18 @@ const subscriberReducer = (state = initialSubState, action) =>
                     ...state,
                     error:action.payload
                 }           
-            
+            case subActions.getRoutines:
+                return{
+                    ...state,
+                    routines:action.payload
+                }
+            case subActions.getRoutinesFailed:
+    
+                return{
+                    ...state,
+                    error:action.payload
+                }  
+
                 
     }
     return state

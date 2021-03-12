@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
+import firebase from 'firebase'
 import {
   View,
   Text,
   TextInput,
   FlatList,
-  Button,
+  Image,
   Modal,
   TouchableHighlight,
   Alert,
@@ -17,10 +18,12 @@ import {
   subscribe,
 } from "../../Actions/SubscriberActions";
 
+import styles from "../../styles";
 const filler = {
   firstName: "who",
   lastName: "cares",
 };
+
 function Search(props) {
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResult] = useState([]);
@@ -30,6 +33,7 @@ function Search(props) {
   const [modalVisible, setModalVisible] = useState(false);
   const [trainerName, setTrainerName] = useState(filler);
   const [trainerEmail, setTrainerEmail] = useState("filler");
+  const [trainerIMG, setTrainerIMG] = useState("filler");
 
   useEffect(() => {
     const { currentUser, searchResult, profileData, trainer } = props;
@@ -40,78 +44,80 @@ function Search(props) {
       settrainerid(trainer._id);
       setTrainerName(trainer.name);
       setTrainerEmail(trainer.email);
+      
+      if(trainer.profilePicURL!=='') {
+        firebase.storage().ref(trainer.profilePicURL).getDownloadURL().then((url) => {
+            setTrainerIMG(url);
+           
+        })
+      }
     }
   });
 
   return (
-    <View
-      style={{
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "#333333",
-      }}
-    >
-      <View style={{}}>
-        <Text>
-          {'\n\n\n\n\n\n\n\n\n\n'}
-        </Text>
-      <TextInput
+    <View style={styles.container}>
+      <View
         style={{
-          borderColor: "#acfacb",
-          borderWidth: 2,
-          height: 50,
-          fontSize: 16,
-          fontSize: 24,
-          backgroundColor: "#f1f1f1",
-          width: 300,
-          borderRadius: 20,
-          padding: 15
-          
-          
-          
+          ...styles.singupCard,
+          marginTop: 200,
+          height: 80,
+          justifyContent: "center",
+          paddingBottom: 20,
         }}
-        placeholder="Search For Trainer"
-        onChangeText={(search) => {
-          props.fetchTrainers(search);
-        }}
-      />
+      >
+        <TextInput
+          style={styles.textInput}
+          placeholder="Search For Trainer"
+          onChangeText={(search) => {
+            if (search) {
+              props.fetchTrainers(search);
+            }
+          }}
+        />
       </View>
-<View>
-      <FlatList
-        data={searchResults}
-        renderItem={({ item }) => (
-          <View
-            style={{
-              justifyContent: "center",
-              alignItems: "center",
-              height: 80,
-              width: 300,
-              backgroundColor: "#bbc2ff",
-              borderColor: "#acfacb",
-              borderWidth: 2,
-              borderRadius: 8,
-              margin: 5,
-            }}
-          >
-            <Text style={{ fontSize: 22, color: "#fdfdfd" }}>
-              {item.name.firstName} {item.name.lastName}
-            </Text>
-            <Button
-              style={{ height: 1, fontSize: 6 }}
-              title="More info"
-              onPress={() => {
-                const name = {
-                  first: item.name.firstName,
-                  last: item.name.lastName,
-                };
-                props.fetchTrainer(name);
+      <View>
+        <FlatList
+          data={searchResults}
+          renderItem={({ item }) => (
+            <View style={styles.weightCard}>
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems:'center'
+                }}
+              >
+               
+                <Text style={{ fontSize: 20, color: "#333" }}>
+                  {item.name.firstName} {item.name.lastName}
+                </Text>
+                <TouchableHighlight
+                  style={{
+                    ...styles.loginButton,
+                    height: 30,
+                    width: 100,
+                    marginHorizontal: 10,
+                  }}
+                  activeOpacity={0.2}
+                  underlayColor="#0F7E78"
+                  onPress={() => {
+                    const name = {
+                      first: item.name.firstName,
+                      last: item.name.lastName,
+                    };
+                    props.fetchTrainer(name);
 
-                setModalVisible(!modalVisible);
-              }}
-            />
-          </View>
-        )}
-      />
+                    setModalVisible(!modalVisible);
+                  }}
+                >
+                  <Text style={{ fontSize: 12, color: "#fdfdfd" }}>
+                    More Info
+                  </Text>
+                </TouchableHighlight>
+              </View>
+            </View>
+          )}
+        />
       </View>
       <View>
         <Modal
@@ -133,73 +139,80 @@ function Search(props) {
               alignItems: "center",
             }}
           >
-            <View style={{    margin: 20,
-    backgroundColor: "white",
-    borderRadius: 20,
-    padding: 35,
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5}}>
-              <Text>
+             <View
+              style={{
+                margin: 20,
+                backgroundColor: "white",
+                borderRadius: 20,
+                padding: 35,
+                alignItems: "center",
+                shadowColor: "#000",
+                shadowOffset: {
+                  width: 0,
+                  height: 2,
+                },
+                shadowOpacity: 0.25,
+                shadowRadius: 4,
+                elevation: 5,
+                height:'70%',
+              width:'85%',
+              alignItems:'center',
+              justifyContent:'center'
+              }}
+            >
+               <Image source={{uri:trainerIMG}}
+                style={{height:200,width:200,borderRadius:100,marginBottom:30}}/>
+              <Text style={{textAlign:'center',fontSize:20}}>
                 {trainerName.firstName} {trainerName.lastName}
-                {"\n"}
+                {"\n\n"}
+              
                 {trainerEmail}
-                {"\n"}
+                {"\n\n"}
                 {"\n"}
               </Text>
-              <View
-            style={{
-              height: 50,
-              width:150,
-              fontSize: 16,
-              backgroundColor: "#bbc2ff",
-              borderWidth: 2,
-              borderColor: "#acfacb",
-              borderRadius: 20,
-             alignItems:'center',
-             justifyContent:'center'
-            }}>
+
               <TouchableHighlight
-               
+                style={{
+                  ...styles.loginButton,
+                  height: 40,
+                  width: 130,
+                  marginHorizontal: 10,
+                }}
+                activeOpacity={0.2}
+                underlayColor="#0F7E78"
                 onPress={() => {
                   const subPair = {
                     user: user,
                     trainer: trainerid,
                   };
-                  props.subscribe(subPair);
+                  props.subscribe(subPair)
+                  Alert.alert("Subscribed To ", `${trainerName.firstName} ${trainerName.lastName}`, [
+                    { text: "OK", onPress: () => console.log("OK Pressed") },
+                  ]);;
                 }}
               >
-                <Text style={{fontSize:25,color:'#fdfdfd'}}>Subscribe</Text>
+                <Text style={{ fontSize: 20, color: "#fdfdfd" }}>
+                  Subscribe
+                </Text>
               </TouchableHighlight>
-              </View>
+
               <Text>{"\n\n\n\n"}</Text>
-              <View
-            style={{
-              height: 50,
-              width:100,
-              fontSize: 16,
-              backgroundColor: "#bbc2ff",
-              borderWidth: 2,
-              borderColor: "#acfacb",
-              borderRadius: 20,
-             alignItems:'center',
-             justifyContent:'center'
-            }}>
+
               <TouchableHighlight
-              
+                style={{
+                  ...styles.loginButton,
+                  height: 40,
+                  width: 130,
+                  marginHorizontal: 10,
+                }}
+                activeOpacity={0.2}
+                underlayColor="#0F7E78"
                 onPress={() => {
                   setModalVisible(!modalVisible);
                 }}
               >
-                <Text style={{fontSize:25,color:'#fdfdfd'}}>Exit </Text>
+                <Text style={{ fontSize: 20, color: "#fdfdfd" }}>Exit </Text>
               </TouchableHighlight>
-              </View>
             </View>
           </View>
         </Modal>

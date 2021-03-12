@@ -23,8 +23,8 @@ export class Main extends Component{
    this.props.loadProfileData();
    setTimeout(() => {
     this.props.getWeights(this.props.profileData._id);
-    console.log(this.props.profileData._id);
-   }, 3000);
+    
+   }, 2500);
   
   }
   render() {
