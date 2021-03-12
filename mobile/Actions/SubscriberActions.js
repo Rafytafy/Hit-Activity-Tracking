@@ -158,13 +158,15 @@ export function uploadPhoto(picPair) {
 }
 export function getPhoto(id) {
   return (dispatch) => {
+   setTimeout(() => {
     axios
-      .get(`http://hit-activity-tracking-backend.herokuapp.com/getSubPhoto/${id}`)
-      .then((res) => {
-        dispatch({ type: subActions.getPhoto, payload: res.data });
-      })
-      .catch((err) => {
-        dispatch({ type: subActions.getPhotoFailed, payload: err });
-      });
+    .get(`http://hit-activity-tracking-backend.herokuapp.com/subscriber/getSubPhoto/${id}`)
+    .then((res) => {
+      dispatch({ type: subActions.getPhoto, payload: res.data });
+    })
+    .catch((err) => {
+      dispatch({ type: subActions.getPhotoFailed, payload: err });
+    });
+   }, 2000);
   };
 }

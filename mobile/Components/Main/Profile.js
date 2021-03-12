@@ -93,7 +93,7 @@ function Profile(props) {
       setAge(age);
     }
     if (profileImg !== "") {
-      console.log(profileImg);
+    
       firebase
         .storage()
         .ref(profileImg)
@@ -148,9 +148,10 @@ function Profile(props) {
         path: path,
       };
       props.uploadPhoto(picPair);
+     
       setTimeout(() => {
         props.getPhoto(user);
-      }, 1000);
+      }, 3000);
     }
   };
 
@@ -173,9 +174,10 @@ function Profile(props) {
       };
 
       props.uploadPhoto(picPair);
+   
       setTimeout(() => {
         props.getPhoto(user);
-      }, 1000);
+      }, 3000);
     }
   };
 
