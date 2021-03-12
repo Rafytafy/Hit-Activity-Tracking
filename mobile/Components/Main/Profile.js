@@ -26,7 +26,7 @@ import {
   clearState,
   getWeights,
   uploadPhoto,
-  getPhoto
+  getPhoto,
 } from "../../Actions/SubscriberActions";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -93,7 +93,7 @@ function Profile(props) {
       setAge(age);
     }
     if (profileImg !== "") {
-      console.log(profileImg)
+      console.log(profileImg);
       firebase
         .storage()
         .ref(profileImg)
@@ -149,7 +149,7 @@ function Profile(props) {
       };
       props.uploadPhoto(picPair);
       setTimeout(() => {
-        props.getPhoto(user)
+        props.getPhoto(user);
       }, 1000);
     }
   };
@@ -174,7 +174,7 @@ function Profile(props) {
 
       props.uploadPhoto(picPair);
       setTimeout(() => {
-        props.getPhoto(user)
+        props.getPhoto(user);
       }, 1000);
     }
   };
@@ -436,7 +436,7 @@ const mapStateToProps = (store) => ({
 
 const mapDispatchProps = (dispatch) =>
   bindActionCreators(
-    { addWeight, clearState, getWeights, uploadPhoto,getPhoto },
+    { addWeight, clearState, getWeights, uploadPhoto, getPhoto },
     dispatch
   );
 

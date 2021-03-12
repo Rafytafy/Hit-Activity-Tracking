@@ -127,7 +127,7 @@ router.get("/getTrainer/:first/:last", (req, res) => {
 });
 
 router.put("/subcribeToTrainer/", (req, res) => {
-  console.log(req.body.trainer)
+  console.log(req.body.trainer);
   Trainer.findByIdAndUpdate(
     req.body.trainer,
     { $push: { clients: req.body.user } },
@@ -160,17 +160,14 @@ router.get("/getRoutines/:id", (req, res) => {
   });
 });
 router.put("/uploadSubPhoto/", (req, res) => {
-  console.log(req.body.user)
-  console.log(req.body.path)
   Subscriber.findByIdAndUpdate(
     req.body.user,
-    { profilePicURL:req.body.path},
+    { profilePicURL: req.body.path },
     (err, sub) => {
       if (err) {
         res.send("picupl");
       } else {
-       
-        res.json(sub)
+        res.json(sub);
       }
     }
   );

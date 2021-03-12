@@ -20,8 +20,8 @@ export const subActions = {
   getRoutinesFailed: "GET_ROUTINES_FAILED",
   uploadSubPhoto: "UPLOAD_SUB_PHOTO",
   uploadSubPhotoFailed: "UPLOAD_SUB_PHOTO_FAILED",
-  getPhoto:'GET_SUB_PHOTO',
-  getPhotoFailed:'GET_SUB_PHOTO_FAILED',
+  getPhoto: "GET_SUB_PHOTO",
+  getPhotoFailed: "GET_SUB_PHOTO_FAILED",
 };
 const initialSubState = {
   error: null,
@@ -32,7 +32,7 @@ const initialSubState = {
   searchResult: [],
   weights: [],
   rotuines: [],
-  profileImg:null
+  profileImg: null,
 };
 const subscriberReducer = (state = initialSubState, action) => {
   switch (action.type) {
@@ -62,13 +62,13 @@ const subscriberReducer = (state = initialSubState, action) => {
     case subActions.getSubProfileDataSuccess:
       var p = action.payload;
       var id = p._id;
-      var img = p.profilePicURL
+      var img = p.profilePicURL;
       return {
         ...state,
         loading: false,
         profileData: action.payload,
         currentUser: id,
-        profileImg:img
+        profileImg: img,
       };
     case subActions.getSubProfileDataFailed:
       return {
@@ -145,26 +145,24 @@ const subscriberReducer = (state = initialSubState, action) => {
       };
 
     case subActions.uploadSubPhoto:
-        var p = action.payload
-        var img = p.profilePicURL
-        
+      var p = action.payload;
+      var img = p.profilePicURL;
+
       return {
         ...state,
-        profileImg:img
+        profileImg: img,
       };
     case subActions.uploadSubPhotoFailed:
       return {
         ...state,
         error: action.payload,
       };
-      case subActions.getPhoto:
-     
-        
+    case subActions.getPhoto:
       return {
         ...state,
-        profileImg:action.payload
+        profileImg: action.payload,
       };
-      case subActions.getPhotoFailed:
+    case subActions.getPhotoFailed:
       return {
         ...state,
         error: action.payload,

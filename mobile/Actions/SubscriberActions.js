@@ -161,11 +161,6 @@ export function getPhoto(id) {
     axios
       .get(`http://10.0.0.9:5000/subscriber/getSubPhoto/${id}`)
       .then((res) => {
-       
-
-         
-     
-
         dispatch({ type: subActions.getPhoto, payload: res.data });
       })
       .catch((err) => {

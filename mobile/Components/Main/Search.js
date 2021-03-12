@@ -161,7 +161,7 @@ function Search(props) {
               }}
             >
                <Image source={{uri:trainerIMG}}
-                style={{height:200,width:200,borderRadius:100,marginBottom:30}}/>
+                style={{height:150,width:150,borderRadius:100,marginBottom:10}}/>
               <Text style={{textAlign:'center',fontSize:20}}>
                 {trainerName.firstName} {trainerName.lastName}
                 {"\n\n"}
