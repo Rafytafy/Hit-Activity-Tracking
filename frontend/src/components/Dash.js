@@ -21,7 +21,7 @@ const Dash = (props) => {
             </div>
                 <div className = "dash">
                     <Row>
-                    <Jumbotron className="shadow-lg rounded" onClick = { toMessages } > 
+                    <Jumbotron className="shaded" onClick = { toMessages } > 
                         <h1>Messages</h1>
                     </Jumbotron>
                     <div className="dashDivider"/>

@@ -66,7 +66,14 @@
   padding-top: 40px;
   text-align: center;
 }
-
+.workouts{
+  background-color: #98afc7  !important;
+  color: white  !important;
+  padding-top: 3%;
+}
+.workouts table{
+  color: white;
+}
 
 input[type="file"] {
   display: none;
@@ -107,13 +114,13 @@ input[type="file"] {
 
 html {
   height: 100%;
-  background-color: #98AFC7;
+  background-color: #98AFC7 !important;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 body {
-  background-color: #98AFC7;
+  background-color: #98AFC7 !important;
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -147,6 +154,7 @@ body {
 .topDash {
   margin-left: 20px;
   background-color: #98afc7;
+  color: white;
 
 }
 .dashDivider {
