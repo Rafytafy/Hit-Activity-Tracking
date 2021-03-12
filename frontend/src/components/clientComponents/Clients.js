@@ -31,7 +31,7 @@ class Clients extends Component {
         }
 
     renderClientsTable(){
-        if(this.props.clients !== undefined){
+        if(this.props.clients.length !== 0){
             return (
                 this.props.clients.map((client) =>
                     <tr key={client._id}>
@@ -44,7 +44,8 @@ class Clients extends Component {
             )
         }
         else{
-            <></>
+            console.log("There is no clients")
+            return(<></>)
         }
     }
 
