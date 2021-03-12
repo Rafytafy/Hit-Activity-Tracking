@@ -145,7 +145,7 @@ export function getRoutines(id) {
 export function uploadPhoto(picPair) {
   return (dispatch) =>
     axios
-      .put(`http://10.0.0.9:5000/subscriber/uploadSubPhoto/`, picPair)
+      .put(`http://hit-activity-tracking-backend.herokuapp.com/subscriber/uploadSubPhoto/`, picPair)
       .then((res) => {
         dispatch({
           type: subActions.uploadSubPhoto,
@@ -159,7 +159,7 @@ export function uploadPhoto(picPair) {
 export function getPhoto(id) {
   return (dispatch) => {
     axios
-      .get(`http://10.0.0.9:5000/subscriber/getSubPhoto/${id}`)
+      .get(`http://hit-activity-tracking-backend.herokuapp.com/getSubPhoto/${id}`)
       .then((res) => {
         dispatch({ type: subActions.getPhoto, payload: res.data });
       })
