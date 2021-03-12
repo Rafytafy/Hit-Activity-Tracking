@@ -165,8 +165,8 @@ router.put("/uploadSubPhoto/", (req, res) => {
     { profilePicURL: req.body.path },
     (err, sub) => {
       if (err) {
-        res.send("picupl");
-      } else {
+        res.send("pic not uploaded");
+      } else {w
         res.json(sub);
       }
     }
