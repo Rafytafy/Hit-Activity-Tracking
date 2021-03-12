@@ -24,12 +24,16 @@ export const subActions ={
 const initialSubState = {
     error: null,
     currentUser:null,
-    profileData:[],
+    profileData:[{
+        routines: [{
+            name: ""
+        }]
+    }],
     trainer:[],
     loading:false,
     searchResult:[],
     weights:[],
-    rotuines:[]
+    routines:[]
 }
 const subscriberReducer = (state = initialSubState, action) =>
 {

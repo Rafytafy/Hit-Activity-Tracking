@@ -50,7 +50,7 @@ export function signUp() {
                   var birthdate = new Date(year, month, day);
 
                   axios
-                    .post("http://10.0.0.9:5000/register/subscriber", {
+                    .post("http://hit-activity-tracking-backend.herokuapp.com/register/subscriber", {
                       tokenId,
                       firstName,
                       lastName,
