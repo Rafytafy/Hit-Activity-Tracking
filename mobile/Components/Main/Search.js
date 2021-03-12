@@ -196,7 +196,7 @@ function Search(props) {
                 </Text>
               </TouchableHighlight>
 
-              <Text>{"\n\n\n\n"}</Text>
+              <Text>{"\n\n"}</Text>
 
               <TouchableHighlight
                 style={{
