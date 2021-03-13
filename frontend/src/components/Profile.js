@@ -38,7 +38,6 @@ const Profile = (props) =>
                 <h2> Socials </h2>
                 <h4> {socials} </h4>
                 <hr />
-
                 <h2> Weight Loss, Diets, Workout Plans </h2>
                 <h4> {plans} </h4>
                 <h3> Bio </h3>
