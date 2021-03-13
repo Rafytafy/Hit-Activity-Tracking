@@ -10,7 +10,7 @@ import { Container, Row, Col, Card, CardImg, CardText, CardBody,
 function Routines(props) {
 
     const history = useHistory();   
-    const toRoutineDetails = () => { history.push('/routineDetails') }
+    const toRoutineDetails = (id) => { history.push(`/routineDetails/${id}`) }
     const toCreateRoutine = () => {history.push('/createRoutine')}
 
     const calculateDuration = (arr) =>{
@@ -23,7 +23,7 @@ function Routines(props) {
     
     const toRoutineDetailPage = (routine) =>{
         props.setCurrentRoutine(routine)
-        toRoutineDetails()
+        toRoutineDetails(routine._id)
     }
 
     const toCreateNewRoutinePage = () => {

@@ -5,7 +5,7 @@ const Routine = require('../../models/Routine');
 const Trainer = require('../../models/Trainer');
 
 //@route GET routine/:id
-//@desc Get routines of trainer
+//@desc Get routine by id
 //@access public
 router.get('/:id', (req, res) => {
     Trainer.findOne({uid: req.params.id})
