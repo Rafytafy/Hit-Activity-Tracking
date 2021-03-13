@@ -1,7 +1,7 @@
 import React, {useState, useEffect,} from 'react'; 
 import firebase from 'firebase'
 import axios from 'axios';
-import ProfilePic from './ProfilePic';
+import ProfileInfo from './ProfileInfo';
 import { Row, Form, FormGroup, Input, Label, Button } from 'reactstrap';
 
 const Edit = (props) => {
@@ -77,7 +77,7 @@ const Edit = (props) => {
                     Choose Profile Picture
                 </label>
             <Row>
-                <ProfilePic profilePath = {img} />
+                <ProfileInfo profilePath = {img} />
                     </Row>
             <Label for="locationName">Location</Label>
                                 <Input 

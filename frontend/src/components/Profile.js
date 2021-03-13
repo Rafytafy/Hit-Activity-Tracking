@@ -2,9 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Jumbotron } from 'reactstrap';
 import axios from 'axios'; 
 import firebase from 'firebase'; 
-import ProfilePic from './ProfilePic';
+import ProfileInfo from './ProfileInfo';
 import { connect } from 'react-redux';
-import ProfileInfo from './ProfilePic';
 const Profile = (props) => 
 {
     const [img, setImg] = useState("");
