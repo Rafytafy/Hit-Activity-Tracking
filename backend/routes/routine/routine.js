@@ -8,14 +8,19 @@ const Trainer = require('../../models/Trainer');
 //@desc Get routine by id
 //@access public
 router.get('/:id', (req, res) => {
-    Routine.findById( req.params.id, (err, routine) => {
-        if(err){
-            res.send("There was an error retrieve the path of user profile")
-        }
-        else{
-            res.send(routine);
-        }
-    })
+    Trainer.findOne({uid: req.params.id})
+        .populate('routines')
+        .exec((err, trainer) => {
+            if(err){
+                return res.send(err);
+            
+            }
+            if(!trainer) {
+               return res.send(err);
+            }
+        
+             res.send(trainer.routines)
+        })
 })
 
 //@route POST routine/

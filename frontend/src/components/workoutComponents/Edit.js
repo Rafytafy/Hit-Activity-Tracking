@@ -2,11 +2,14 @@ import React, { Component } from 'react';
 import { deleteWorkout, updateWorkout } from '../../redux/actions/index';
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux';
-import { Button, Modal, ModalHeader, ModalBody, Form, ModalFooter,
+import {
+    Button, Modal, ModalHeader, ModalBody, Form, ModalFooter,
     FormGroup,
     Label,
     Input,
-} from 'reactstrap'
+    Row,
+} from 'reactstrap';
+import firebase from 'firebase'
 
 class WorkoutModal extends Component {
     
@@ -15,7 +18,8 @@ class WorkoutModal extends Component {
         name: this.props.workout.name,
         primary: this.props.workout.primary,
         secondary: this.props.workout.secondary,
-        instructions: this.props.workout.instructions
+        instructions: this.props.workout.instructions,
+        imageURL: this.props.workout.imageURL
     }
 
     toggle = () => {
@@ -44,12 +48,28 @@ class WorkoutModal extends Component {
             name: this.state.name,
             primary: this.state.primary,
             secondary: this.state.secondary,
-            instructions: this.state.instructions
+            instructions: this.state.instructions,
+            imageURL: this.state.imageURL
         }; 
 
         this.props.updateWorkout(newWorkout)
 
         this.toggle();
+    }
+
+     setPicture = (e) => { 
+        let file = e.target.files[0];
+        let storageRef = firebase.storage().ref('workout_photos/' + file.name);
+        storageRef.put(file)
+        .then(async (snapshot) => {
+            let imgPath = snapshot.metadata.fullPath
+            console.log(snapshot);
+            this.setState({ imageURL: imgPath })
+            firebase.storage().ref(imgPath).getDownloadURL().then((url) => {
+            this.setState({ imageURL: url})
+            })
+    })
+        
     }
 
     render() {
@@ -106,6 +126,12 @@ class WorkoutModal extends Component {
                                     value={this.state.instructions}
                                     onChange={this.onChange}
                                 />
+                                 <Row> </Row>
+                                <label className="custom-file-upload">
+                                <Input type="file" onChange={this.setPicture} />
+                                 Choose Image
+                                </label>
+                                <img src={this.state.imageURL} alt="text" style={{height:'100px', width:'100px'}}/>
                             </FormGroup>
                         </Form>
                     </ModalBody>

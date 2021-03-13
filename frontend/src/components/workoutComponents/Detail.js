@@ -20,8 +20,10 @@ const Detail = (props) => {
             <h2>Name: {props.workout.name}</h2>
             <h5>Primary muscle group: {props.workout.primary}</h5>
             <h5>Secondary mucle group: {props.workout.secondary}</h5>
-            <h5>instructions: </h5>
-            <p>{props.workout.instructions}</p>
+          <h5>instructions: </h5>
+          <p>{props.workout.instructions}</p>
+          <h5> image: </h5>
+         <img src={props.workout.imageURL} alt="text" style={{height:'200px', width:'300px'}}/>
         </ModalBody>
         <ModalFooter>
           <Button color="secondary" onClick={toggle}>Back</Button>

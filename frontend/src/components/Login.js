@@ -61,6 +61,7 @@ const Login = (props) => {
                 <Button onClick={authLogin} color="secondary" size="lg"> Sign in </Button>
                 <div class = "divider"/> 
                 <Button onClick={toRegister} color="secondary" size="lg"> Register </Button>
+                
                 </Row>
             </div>
       </FormGroup>
