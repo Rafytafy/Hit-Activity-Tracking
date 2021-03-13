@@ -17,6 +17,7 @@ router.post('/', (req, res) => {
         primary: req.body.primary,
         secondary: req.body.secondary,
         instructions: req.body.instructions,
+        imageURL: req.body.imageURL
     })
 
     newWorkout.save().then(item => res.json(item));
@@ -28,7 +29,8 @@ router.put('/:id', (req, res) => {
             name: req.body.name,
             primary: req.body.primary,
             secondary: req.body.secondary,
-            instructions: req.body.instructions
+            instructions: req.body.instructions,
+            imageURL: req.body.imageURL
         }, 
         (err, workout) => {
             if(err){
@@ -50,5 +52,29 @@ router.delete('/:id', (req, res) => {
         }
     })
 });
-      
+
+router.put('/workoutPicture/', (req ,res) => {
+    Workout.findOneAndUpdate({ uid: req.params.id }, {imageURL: req.body.path}, (err, workout) => {
+        if(err){
+            res.send("Error could not add path to workout");
+        }
+        else{
+            
+            res.send("Successfuly added picture to workout");
+        }
+    })
+})
+
+router.get('/workoutPicture/', (req ,res) => {
+    Trainer.findOne({ uid: req.params.id }, (err, workout) => {
+        if(err){
+            res.send("There was an error retrieve the path of workoutPicture")
+        }
+        else{
+            res.send(workout.imageURL);
+        }
+    })
+})
+
+
 module.exports = router;

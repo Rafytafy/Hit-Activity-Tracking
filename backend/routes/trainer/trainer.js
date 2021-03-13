@@ -28,6 +28,22 @@ router.get('/:id', (req, res) => {
     })
 })
 
+//@route GET trainer/routines/:id
+//@desc Get routines of trainer
+//@access public
+router.get('/routines/:id', (req, res) => {
+    Trainer.findOne({uid: req.params.id})
+        .populate('routines')
+        .exec((err, trainer) => {
+            if(err){
+                res.send(err);
+            }
+            else {
+                res.send(trainer.routines)
+            }
+        })
+})
+
 
 //@route GET trainer/subscribers
 //@desc Get all clients of trainer
@@ -105,5 +121,19 @@ router.put('/profilePicture/:id', (req ,res) => {
     })
 })
 
-      
+router.put('/:id', (req, res) => {
+    Trainer.findOneAndUpdate({ uid: req.params.id }, req.body, (err, trainer) => {
+        if (err) {
+            return res.send("Error: could not add path to trainer");
+            
+        }
+        if (!trainer) {
+            return res.send("Theres no trainer :(")
+        }
+        
+        res.send("Successfully updated trainer");
+            
+    })
+})
+
 module.exports = router;

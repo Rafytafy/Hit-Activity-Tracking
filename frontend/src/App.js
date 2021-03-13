@@ -19,6 +19,7 @@ import Routines from "./components/routineComponents/Routines";
 import Workouts from "./components/workoutComponents/Workouts";
 import RoutineDetails from "./components/routineComponents/RoutineDetails";
 import CreateRoutine from "./components/routineComponents/CreateRoutine";
+import CreateProgram from "./components/clientComponents/ClientNewProgram";
 
 function App(props) {
   var firebaseConfig = {
@@ -81,12 +82,14 @@ function App(props) {
           <Route exact path="/" component={Dash} />
           <Route path="/Profile" component={Profile} />
             <Route path="/Clients" component={Clients} />
-            <Route path="/clientDetails" component={ClientDetails} />
+            <Route path="/clientDetails/:id" component={ClientDetails} />
             <Route path="/Edit" component={Edit} />
             <Route path="/Messages" component={Messages} />
             <Route path="/workouts" component={Workouts} />
-            <Route path="/routineDetails" component={RoutineDetails} />
+            <Route path="/Routines" component={Routines} />
+            <Route path="/routineDetails/:id" component={RoutineDetails} />
             <Route path="/createRoutine" component={CreateRoutine} />
+            <Route path="/createProgram/:id" component={CreateProgram} />
           </>
       }
         </Router>    

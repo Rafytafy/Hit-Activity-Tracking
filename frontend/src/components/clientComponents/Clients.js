@@ -11,7 +11,8 @@ import {withRouter} from 'react-router-dom';
 class Clients extends Component {
     
     componentDidMount(){
-        if(this.props.clients.length === 0){
+        //1 becuase default length in client list is one
+        if(this.props.clients.length === 1){
             this.props.fetchClients(this.props.currentUser.uid)
         }
     }
@@ -21,13 +22,32 @@ class Clients extends Component {
             this.props.fetchClients(prevProps.currentUser.uid)
         }
     }
-    toClientDetails() { 
-        this.props.history.push('/clientDetails') 
+    toClientDetails(id) { 
+        this.props.history.push(`/clientDetails/${id}`) 
     }
     toClientDetailPage (client){
             this.props.setCurrentClient(client)
-             this.toClientDetails()
+             this.toClientDetails(client._id)
         }
+
+    renderClientsTable(){
+        if(this.props.clients.length !== 0){
+            return (
+                this.props.clients.map((client) =>
+                    <tr key={client._id}>
+                        <th><Button onClick={() => this.toClientDetailPage(client)}> View </Button></th>
+                        <th>{client.name.lastName}, {client.name.firstName}</th>
+                        <th>{client.email}</th>
+                        <th>{client.weights[client.weights.length - 1].weight}lbs</th>
+                    </tr>
+                    )
+            )
+        }
+        else{
+            console.log("There is no clients")
+            return(<></>)
+        }
+    }
 
     render() {
          
@@ -43,14 +63,7 @@ class Clients extends Component {
                             <th>Weight</th>
                         </thead>
                         <tbody>
-                        {this.props.clients.map((client) =>
-                            <tr key={client._id}>
-                                <th><Button onClick={() => this.toClientDetailPage(client)}> View </Button></th>
-                                <th>{client.name.lastName}, {client.name.firstName}</th>
-                                <th>{client.email}</th>
-                                <th>{client.weight}lbs</th>
-                            </tr>
-                            )}
+                        {this.renderClientsTable()}
                         </tbody>
                     </Table>
                 </Container>
