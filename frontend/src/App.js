@@ -87,7 +87,7 @@ function App(props) {
             <Route path="/Messages" component={Messages} />
             <Route path="/workouts" component={Workouts} />
             <Route path="/Routines" component={Routines} />
-            <Route path="/routineDetails/:id" component={RoutineDetails} />
+            <Route path="/RoutineDetails/:id" component={RoutineDetails} />
             <Route path="/createRoutine" component={CreateRoutine} />
             <Route path="/createProgram/:id" component={CreateProgram} />
           </>

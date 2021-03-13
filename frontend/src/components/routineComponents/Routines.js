@@ -32,19 +32,19 @@ function Routines(props) {
 
     
         return (
-            <Container>
+            <Container className='routines'>
                 <h1>Your Routines</h1>
                 <Row>
                 {props.routines.map((routine) =>
                     <Col xs="4" className="mb-3">
-                        <Card>
+                        <Card className="shadow">
                             <CardBody>
                                 <CardTitle tag="h5">{routine.name}</CardTitle>
                                 <CardSubtitle tag="h6" className="mb-2 text-muted">Duration: {calculateDuration(routine.workouts)}</CardSubtitle>
                                 <CardText></CardText>
                                 <Button onClick={() => toRoutineDetailPage(routine)}>View</Button>
                             </CardBody>
-                        </Card>
+                        </Card>                    
                     </Col>                        
                 )}
                 <Col xs="4" className="d-flex justify-content-center align-items-center">

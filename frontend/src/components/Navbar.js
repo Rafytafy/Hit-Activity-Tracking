@@ -1,4 +1,4 @@
-import React, { useState, } from 'react';
+import React, { useState } from 'react';
 import {
   Collapse,
   Navbar,
@@ -36,30 +36,34 @@ const NavBar = (props) => {
   return (
       <div>
       
-      <Navbar color="light" light expand="md">
-        
+      <Navbar className="color.nav" variant="dark" expand="md">
         <Link to="/">
-          <NavbarBrand>
-            <img src={Pulse} alt="Logo" />
+          <NavbarBrand className='brand'>
+            <img src={Pulse} alt="Logo"/>
             Pulse PT
         </NavbarBrand>
         </Link>
         
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
-          <Nav className="mr-auto" navbar>
+          <Nav className="ml-auto" navbar>
             <NavItem>
               <NavLink>
-                <Link to="/Clients"> Clients</Link>
+                <Link to="/Clients" className='inactive'> Clients</Link>
+                </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink>
+                <Link to="/Messages" className='inactive'> Messages</Link>
                 </NavLink>
             </NavItem>
             <NavItem>
               <NavLink> 
-               <Link to="/Profile"> Profile </Link>
+               <Link to="/Profile" className='inactive'> Profile</Link>
               </NavLink>
             </NavItem>
             <UncontrolledDropdown nav inNavbar >
-              <DropdownToggle nav caret >
+              <DropdownToggle nav caret className='inactive'>
                 Options
               </DropdownToggle>
               <DropdownMenu right>

@@ -5,8 +5,8 @@ const Messages = (props) => {
 
     return ( 
 
-        <div> 
-            <h1>hello WORLD</h1>
+        <div className='messages'> 
+            <h1>Messages</h1>
         </div>
     );
 }

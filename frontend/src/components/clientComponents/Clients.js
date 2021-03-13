@@ -52,9 +52,9 @@ class Clients extends Component {
     render() {
          
         return (
-            <div>
+            <div className="clients">
                 <Container>
-                    <h2>Clients</h2>
+                    <h1>Clients</h1>
                     <Table>
                         <thead>
                             <th>Activity</th>
