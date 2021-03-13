@@ -5,8 +5,8 @@ import ProfilePic from './ProfilePic';
 import { Row, Form, FormGroup, Input, Label, Button } from 'reactstrap';
 
 const Edit = (props) => {
-    const [img, setImg] =  useState("");
     const uid = firebase.auth().currentUser.uid;
+    const [img, setImg] =  useState("");
     const [location, setLocation] = useState("");
     const [plans, setPlans] = useState("");
     const [socials, setSocials] = useState("");

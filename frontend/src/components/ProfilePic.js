@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'; 
 import firebase from 'firebase'; 
 
-const ProfilePic = (props) => {
+const ProfileInfo = (props) => {
     const [img, setImg] = useState("");
     useEffect(() => {
         console.log("hello hello")
@@ -23,4 +23,4 @@ return (
  
 }
 
-export default ProfilePic;
+export default ProfileInfo;
