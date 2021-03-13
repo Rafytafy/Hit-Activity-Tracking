@@ -151,10 +151,15 @@ body {
   text-decoration: none;
   background-color: #98afc7;
 }
+.dash button{
+  width: 250px;
+  height: 180px;
+}
 .topDash {
   margin-left: 20px;
   background-color: #98afc7;
   color: white;
+  padding-top: 50px;
 
 }
 .dashDivider {
