@@ -3,6 +3,7 @@ import firebase from 'firebase'
 import axios from 'axios';
 import ProfileInfo from './ProfileInfo';
 import { Row, Form, FormGroup, Input, Label, Button } from 'reactstrap';
+import { useHistory } from 'react-router-dom';
 
 const Edit = (props) => {
     const uid = firebase.auth().currentUser.uid;
@@ -11,6 +12,7 @@ const Edit = (props) => {
     const [plans, setPlans] = useState("");
     const [socials, setSocials] = useState("");
     const [bio, setBio] = useState("");
+    const history = useHistory();
     useEffect(() => {
         axios.get(`http://localhost:5000/trainer/${uid}`).then((res) => {
             console.log(res);
@@ -39,8 +41,10 @@ const Edit = (props) => {
     const onSubmit = (e) => {
         
         axios.put(`http://localhost:5000/trainer/${uid}`, {bio, location, socials, plans}).then((res) => {
-        console.log(res);
-       })
+            console.log(res);
+            history.push('/Profile');
+        })
+       
     }
     function pickFile(e) {
             console.log("hello");
