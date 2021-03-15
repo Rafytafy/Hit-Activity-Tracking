@@ -26,7 +26,7 @@ class Workouts extends Component {
     render() {
         return (
             <Container>
-                <div>
+                <div className="workouts">
                 <div style={{display: "flex"}}>
                     <h2>Workouts</h2>
                     <WorkoutModal />

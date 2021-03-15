@@ -1,14 +1,18 @@
-import React, {useState, useEffect} from 'react'; 
+import React, {useState, useEffect,} from 'react'; 
 import firebase from 'firebase'
-import { Input } from 'reactstrap';
 import axios from 'axios';
-import ProfilePic from './ProfilePic';
-import { Row } from 'reactstrap';
-const Edit = (props) => {
-    const [img, setImg] = useState("");
+import ProfileInfo from './ProfileInfo';
+import { Row, Form, FormGroup, Input, Label, Button } from 'reactstrap';
+import { useHistory } from 'react-router-dom';
 
+const Edit = (props) => {
     const uid = firebase.auth().currentUser.uid;
-    
+    const [img, setImg] =  useState("");
+    const [location, setLocation] = useState("");
+    const [plans, setPlans] = useState("");
+    const [socials, setSocials] = useState("");
+    const [bio, setBio] = useState("");
+    const history = useHistory();
     useEffect(() => {
         axios.get(`http://localhost:5000/trainer/${uid}`).then((res) => {
             console.log(res);
@@ -16,49 +20,112 @@ const Edit = (props) => {
             
         })
         
-    },[]);
+    }, []);
+    const onChange = (e) => {
+        switch (e.target.name) {
+            case "location":
+                setLocation(e.target.value)
+                break;
+            case "plans":
+                setPlans(e.target.value)
+                break;
+            case "socials":
+                setSocials(e.target.value)
+                break;
+            case "bio":
+                setBio(e.target.value)
+                break;
+            default: console.log("u suck")
+        }   
+    }
+    const onSubmit = (e) => {
         
-    const pickFile = (e) => {
-        console.log("hello")
-        let file = e.target.files[0];
-        let storageRef = firebase.storage().ref('trainer_photos/' + file.name);
-        storageRef.put(file)
-            
-            .then(async (snapshot) => {
-            let profilePath = snapshot.metadata.fullPath
-            console.log(snapshot);
-                console.log(uid);
-                setImg(profilePath)
-                axios.put(`http://localhost:5000/trainer/profilePicture/${uid}`, { path: profilePath })
-                
-                .then((res) => {
-                    console.log(res);
-                    
-                })
-            
-                .catch((error) => {
-                console.log(error)
-      })
-    })
-      }    
-    
+        axios.put(`http://localhost:5000/trainer/${uid}`, {bio, location, socials, plans}).then((res) => {
+            console.log(res);
+            history.push('/Profile');
+        })
+       
+    }
+    function pickFile(e) {
+            console.log("hello");
+            let file = e.target.files[0];
+            let storageRef = firebase.storage().ref('trainer_photos/' + file.name);
+            storageRef.put(file)
+
+                .then(async (snapshot) => {
+                    let profilePath = snapshot.metadata.fullPath;
+                    console.log(snapshot);
+                    console.log(uid);
+                    setImg(profilePath);
+                    axios.put(`http://localhost:5000/trainer/profilePicture/${uid}`, { path: profilePath })
+
+                        .then((res) => {
+                            console.log(res);
+
+                        })
+
+                        .catch((error) => {
+                            console.log(error);
+                        });
+                });
+        }    
     return (
         <div className="edit">
+            <Form onSubmit = {onSubmit}>
+            <FormGroup>
             <Row> 
-                <h1> Set Profile Picture </h1>
+                <h1> Edit Profile </h1>
             </Row>
                 <label className="custom-file-upload">
                     <Input type="file" onChange={pickFile} />
                     Choose Profile Picture
                 </label>
             <Row>
-                <ProfilePic profilePath = {img} />
-            </Row>
-           
-                
+                <ProfileInfo profilePath = {img} />
+                    </Row>
+            <Label for="locationName">Location</Label>
+                                <Input 
+                                    type="text"
+                                    name="location"
+                                    id="locationName"
+                                    placeholder="Enter Location"
+                                    onChange={onChange}
+                    />
+            <Label for="socialName">Socials</Label>
+                                <Input 
+                                    type="textarea"
+                                    name="socials"
+                                    id="socialName"
+                                    placeholder="Enter Socials"
+                        onChange={onChange}
+                        
+                    />
+                    <Label for="workoutPlans"> Workout Plans</Label>
+                                <Input 
+                                    type="text"
+                                    name="plans"
+                                    id="planName"
+                                    placeholder="Enter Workout Plans"
+                        onChange={onChange}
+                    />
+                    <Label for="bio"> Bio</Label>
+                                <Input 
+                                    type="textarea"
+                                    name="bio"
+                                    id="bioName"
+                                    placeholder="Enter Bio"
+                        onChange={onChange}
+                    />
+             </FormGroup>
+            </Form>
+            <Button
+                    color="dark"
+                    onClick={onSubmit}
+                    style={{margin:".25em 0 1em 1em"}}
+                >Save Profile</Button>
             </div>
         );
     
 }
-export default Edit;
 
+export default Edit;

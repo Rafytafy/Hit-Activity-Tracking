@@ -18,6 +18,7 @@ import Login from "./Components/login";
 import SignUp from "./Components/signUp";
 import Main from "./Components/Main";
 
+
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import rootReducer from "./Reducers/Index";
@@ -98,6 +99,7 @@ export class App extends Component {
               component={Main}
               options={{ headerShown: false }}
             />
+         
           </Stack.Navigator>
         </NavigationContainer>
       </Provider>

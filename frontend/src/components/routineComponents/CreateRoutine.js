@@ -19,7 +19,7 @@ function CreateRoutine(props) {
     
     const findWorkoutInArray = (e) =>{
         props.workouts.map((workout) => {
-            if(workout.name == e.target.value){
+            if(workout.name === e.target.value){
                 setSelectedWorkout(workout)
             }
         })

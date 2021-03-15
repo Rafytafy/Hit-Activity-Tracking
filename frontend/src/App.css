@@ -10,11 +10,41 @@
   justify-content: center;
   flex-direction: column;
 }
+
 .navbar {
-  color: inherit;
+  background-color: #56A5EC;
   text-decoration: none;
+  font-size: 1.6EM;
+  font-weight: bold;
+}
+.inactive{
+  color: white;
+  padding-right: 25px;
+}
+.brand{
+  font-size: 1.5em !important;
+  color: white;
 }
 
+.color.nav{
+  color: black;
+}
+
+.clients{
+  padding-top: 40px;
+  background-color: #98afc7;
+  color:white;
+}
+.clients th{
+  color:white;
+  font-size: 1.3em;
+}
+.messages{
+  padding-left: 40px;
+  padding-top: 40px;
+  color:white;
+  background-color: #98afc7;
+}
 .register {
   margin-top: 15rem;
   margin-bottom: 295px;
@@ -26,6 +56,25 @@
   padding: 0;
   flex-direction: column;
   text-align: center;
+  background-color: #98afc7;
+}
+.routines{
+  color: white;
+  background-color: #98afc7;
+}
+.routines h1{
+  padding-top: 40px;
+  text-align: center;
+}
+.routines h5{
+  color: rgb(97, 97, 97);
+}
+.workouts{
+  background-color: #98afc7  !important;
+  color: white  !important;
+  padding-top: 3%;
+}
+.workouts table{
   color: white;
 }
 
@@ -49,11 +98,14 @@ input[type="file"] {
   flex-direction: column;
 }
 .title {
-  color: white;
+  color: #98AFC7;
   margin-bottom: 15px;
   margin-top: 0;
 }
 
+.shaded{
+  border-radius: 3rem !important;
+}
 .button {
   display: flex;
   justify-content: center;
@@ -65,13 +117,13 @@ input[type="file"] {
 
 html {
   height: 100%;
-  background: linear-gradient(180deg, #e0c3fc, #8ec5fc);
+  background-color: #98AFC7 !important;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 body {
-  background: linear-gradient(180deg, #e0c3fc, #8ec5fc);
+  background-color: #98AFC7 !important;
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -87,7 +139,7 @@ body {
   padding: 0;
   flex-direction: column;
   text-align: center;
-  color: white;
+  background-color: #98afc7;
 }
 
 .dash {
@@ -97,21 +149,31 @@ body {
   margin-top: 75px;
   min-height: 300px;
   max-width: 100%;
+  border-radius: 7rem;
   color: inherit;
   text-decoration: none;
+  background-color: #98afc7;
 }
-
+.dash button{
+  width: 250px;
+  height: 180px;
+}
 .topDash {
   margin-left: 20px;
-}
+  background-color: #98afc7;
+  color: white;
+  padding-top: 50px;
 
+}
 .dashDivider {
   width: 30px;
   height: auto;
   display: inline-block;
+  background-color: #98afc7;
 }
 .divider {
   width: 15px;
   height: auto;
   display: inline-block;
+  background-color: #98afc7;
 }

@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import { postWorkouts } from '../../redux/actions/index';
 import { bindActionCreators } from 'redux';
-import {connect} from 'react-redux';
-import { Button, Modal, ModalHeader, ModalBody, Form,
+import firebase from 'firebase';
+import { connect } from 'react-redux';
+
+import {
+    Button, Modal, ModalHeader, ModalBody, Form,
     FormGroup,
     Label,
     Input,
-} from 'reactstrap'
+    Row
+} from 'reactstrap';
 
 class WorkoutModal extends Component {
     
@@ -15,9 +19,10 @@ class WorkoutModal extends Component {
         name: '',
         primary: '',
         secondary: '',
-        instructions: ''
+        instructions: '',
+        imageURL: ''
     }
-
+    
     toggle = () => {
         this.setState({
             modal: !this.state.modal
@@ -27,15 +32,33 @@ class WorkoutModal extends Component {
     onChange = (e) => {
         this.setState({ [e.target.name]: e.target.value })
     };
-
+    setPicture = (e) => { 
+        let file = e.target.files[0];
+        let storageRef = firebase.storage().ref('workout_photos/' + file.name);
+        storageRef.put(file)
+        .then(async (snapshot) => {
+            let imgPath = snapshot.metadata.fullPath
+            console.log(snapshot);
+            this.setState({ imageURL: imgPath })
+            firebase.storage().ref(imgPath).getDownloadURL().then((url) => {
+            this.setState({ imageURL: url})
+            })
+    })
+        
+        
+    
+    }
     onSubmit = (e) => {
+        window.location.reload();
         e.preventDefault()
         const newWorkout = {
             name: this.state.name,
             primary: this.state.primary,
             secondary: this.state.secondary,
-            instructions: this.state.instructions
+            instructions: this.state.instructions,
+            imageURL: this.state.imageURL,
         };
+ 
 
         //Add item via addItem action 
         console.log("Hello from modal")
@@ -44,9 +67,11 @@ class WorkoutModal extends Component {
          this.toggle();
     };
 
+   
     render() {
         return (
             <div>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
                 <Button
                     color="dark"
                     onClick={this.toggle}
@@ -70,23 +95,71 @@ class WorkoutModal extends Component {
                                     onChange={this.onChange}
                                 />
                                 
+                                
                                 <Label for="primary">Primary</Label>
                                 <Input 
-                                    type="text"
+                                    type="select"
                                     name="primary"
                                     id="primary"
                                     placeholder="Enter muscle group"
-                                    onChange={this.onChange}
-                                />
-                                
+                                    onChange={this.onChange}>
+                                        <option value="" disabled selected>Main muscle group</option>
+                                        <option value="Full Body">Full Body</option>
+                                        <option value="Upper Body">Upper Body</option>
+                                        <option value="Lower Body">Lower Body</option>
+                                        <option value="Arms">Arms</option>
+                                        <option value="Biceps">Biceps</option>
+                                        <option value="Triceps">Triceps</option>
+                                        <option value="Forearms">Forearms</option>
+                                        <option value="Abs">Abs</option>
+                                        <option value="Obliques">Obliques</option>
+                                        <option value="Back">Back</option>
+                                        <option value="Upper Back">Back (Upper)</option>
+                                        <option value="Lower Back">Back (Lower)</option>
+                                        <option value="Chest">Chest</option>
+                                        <option value="Upper Chest">Chest (Upper)</option>
+                                        <option value="Lower Chest">Chest (Lower)</option>
+                                        <option value="Shoulders">Shoulders</option>
+                                        <option value="Deltoids">Deltoids</option>
+                                        <option value="Traps">Traps</option>
+                                        <option value="Hamstrings">Hamstrings</option>
+                                        <option value="Quadriceps">Quadriceps</option>
+                                        <option value="Calves">Calves</option>
+                                    <br/>
+                                </Input>
+                                    
+                            
                                 <Label for="secondary">Secondary</Label>
                                 <Input 
-                                    type="text"
+                                    type="select"
                                     name="secondary"
                                     id="secondary"
                                     placeholder="Enter muscle group"
-                                    onChange={this.onChange}
-                                />
+                                    onChange={this.onChange}>
+                                        <option value="" disabled selected>Secondary muscle group</option>
+                                        <option value="Full Body">Full Body</option>
+                                        <option value="Upper Body">Upper Body</option>
+                                        <option value="Lower Body">Lower Body</option>
+                                        <option value="Arms">Arms</option>
+                                        <option value="Biceps">Biceps</option>
+                                        <option value="Triceps">Triceps</option>
+                                        <option value="Forearms">Forearms</option>
+                                        <option value="Abs">Abs</option>
+                                        <option value="Obliques">Obliques</option>
+                                        <option value="Back">Back</option>
+                                        <option value="Upper Back">Back (Upper)</option>
+                                        <option value="Lower Back">Back (Lower)</option>
+                                        <option value="Chest">Chest</option>
+                                        <option value="Upper Chest">Chest (Upper)</option>
+                                        <option value="Lower Chest">Chest (Lower)</option>
+                                        <option value="Shoulders">Shoulders</option>
+                                        <option value="Deltoids">Deltoids</option>
+                                        <option value="Traps">Traps</option>
+                                        <option value="Hamstrings">Hamstrings</option>
+                                        <option value="Quadriceps">Quadriceps</option>
+                                        <option value="Calves">Calves</option>
+                                    <br/>
+                                </Input>
 
                                 <Label for="instructions">Instructions</Label>
                                 <Input 
@@ -96,7 +169,14 @@ class WorkoutModal extends Component {
                                     placeholder="Enter instructions for workout"
                                     onChange={this.onChange}
                                 />
-                                
+                                <Label for="picture"> Add Image </Label>
+                                <Row> </Row>
+                                <label className="custom-file-upload">
+                                <Input type="file" onChange={this.setPicture} />
+                                 Choose Image
+                                </label>
+                                <img src={this.state.imageURL} alt="text" style={{height:'100px', width:'100px'}}/>
+                    
                                 <Button
                                     color="dark"
                                     style={{marginTop: '2rem'}}

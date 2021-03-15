@@ -2,24 +2,31 @@ import {
   View,
   Text,
   TouchableHighlight,
+  TouchableOpacity,
   Image,
   TextInput,
   ScrollView,
   Alert,
+  Modal,
 } from "react-native";
 import {
   VictoryChart,
   VictoryLabel,
   VictoryAxis,
   VictoryLine,
-  VictoryScatter
+  VictoryScatter,
 } from "victory-native";
+import * as ImagePicker from "expo-image-picker";
+import { Camera } from "expo-camera";
 import firebase from "firebase";
+
 import React, { useState, useEffect } from "react";
 import {
   addWeight,
   clearState,
   getWeights,
+  uploadPhoto,
+  getPhoto,
 } from "../../Actions/SubscriberActions";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -42,16 +49,32 @@ function Profile(props) {
   const [weightToAdd, setWeightToAdd] = useState();
   const [subIMG, setSubIMG] = useState();
   const [xticks, setXticks] = useState([]);
+  const [modalVisible, setModalVisible] = useState(false);
 
+  const [type, setType] = useState(Camera.Constants.Type.back);
+  const [newIMG, setImg] = useState(null);
+
+  const [newIMGURI, setNewIMGURI] = useState(null);
   useEffect(() => {
-    const { currentUser, profileData, weights } = props;
+    async () => {
+      if (Platform.OS !== "web") {
+        const {
+          pickStatus,
+        } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+        if (pickStatus !== "granted") {
+          alert("Sorry, we need camera  permissions to make this work!");
+        }
+      }
+    };
+    const { currentUser, profileData, weights, profileImg } = props;
     if (typeof profileData._id !== "undefined") {
       setWeights(weights);
       // var last=new Date([weights.length-1].x).getTime()
       // var first = new Date(weights[0].x).getTime()
       // var diff= last-first
       // var wl=weights.length
-      
+
       // console.log(diff)
       setProfData(profileData);
       setUser(profileData._id);
@@ -69,10 +92,11 @@ function Profile(props) {
       const age = Math.floor(diff / 31536000000);
       setAge(age);
     }
-    if (profileData.profilePicURL !== "") {
+    if (profileImg !== "") {
+    
       firebase
         .storage()
-        .ref(profileData.profilePicURL)
+        .ref(profileImg)
         .getDownloadURL()
         .then((url) => {
           setSubIMG(url);
@@ -93,12 +117,69 @@ function Profile(props) {
     setTimeout(() => {
       props.clearState();
     }, 500);
-    
   };
 
- 
+  const uploadImg = async (uri, path) => {
+    console.log("start");
 
+    const response = await fetch(uri);
 
+    const blob = await response.blob();
+    const task = firebase.storage().ref().child(path).put(blob);
+    setNewIMGURI(path);
+  };
+
+  const takePhoto = async () => {
+    const { camStatus } = await ImagePicker.requestCameraPermissionsAsync();
+    let result = await ImagePicker.launchCameraAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (!result.cancelled) {
+      setImg(result.uri);
+      const path = `subscriber_photos/${user}/${Math.random(100)}`;
+      uploadImg(result.uri, path);
+
+      const picPair = {
+        user: user,
+        path: path,
+      };
+      props.uploadPhoto(picPair);
+     
+      setTimeout(() => {
+        props.getPhoto(user);
+      }, 3000);
+    }
+  };
+
+  const choosephoto = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (!result.cancelled) {
+      setImg(result.uri);
+      const path = `subscriber_photos/${user}/${Math.random(100)}`;
+      uploadImg(result.uri, path);
+
+      const picPair = {
+        user: user,
+        path: path,
+      };
+
+      props.uploadPhoto(picPair);
+   
+      setTimeout(() => {
+        props.getPhoto(user);
+      }, 3000);
+    }
+  };
 
   return (
     <ScrollView style={styles.scrollContainer}>
@@ -110,15 +191,29 @@ function Profile(props) {
         }}
       >
         <View style={styles.profileCard}>
-          <Image
-            source={{ uri: subIMG }}
+          <TouchableHighlight
             style={{
               height: 200,
               width: 200,
               borderRadius: 100,
               marginBottom: 30,
             }}
-          />
+            activeOpacity={0.2}
+            underlayColor="#0F7E78"
+            onPress={() => {
+              setModalVisible(!modalVisible);
+            }}
+          >
+            <Image
+              source={{ uri: subIMG }}
+              style={{
+                height: 200,
+                width: 200,
+                borderRadius: 100,
+                marginBottom: 30,
+              }}
+            />
+          </TouchableHighlight>
           <View>
             <Text style={{ fontSize: 32, color: "#333" }}>
               {name.firstName} {name.lastName}
@@ -142,6 +237,103 @@ function Profile(props) {
           </View>
         </View>
         <Text>{"\n"}</Text>
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            Alert.alert("Modal has been closed.");
+          }}
+        >
+          <View
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <View
+              style={{
+                margin: 20,
+                backgroundColor: "white",
+                borderRadius: 20,
+                padding: 35,
+                alignItems: "center",
+                shadowColor: "#000",
+                shadowOffset: {
+                  width: 0,
+                  height: 2,
+                },
+                shadowOpacity: 0.25,
+                shadowRadius: 4,
+                elevation: 5,
+                height: "70%",
+                width: "85%",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <TouchableHighlight
+                style={{
+                  ...styles.loginButton,
+                  height: 40,
+                  width: 130,
+                  marginHorizontal: 10,
+                }}
+                activeOpacity={0.2}
+                underlayColor="#0F7E78"
+                onPress={() => {
+                  choosephoto();
+                }}
+              >
+                <Text style={{ fontSize: 20, color: "#fdfdfd" }}>
+                  Choose photo
+                </Text>
+              </TouchableHighlight>
+              <TouchableHighlight
+                style={{
+                  ...styles.loginButton,
+                  height: 40,
+                  width: 130,
+                  marginHorizontal: 10,
+                  marginVertical: 10,
+                }}
+                activeOpacity={0.2}
+                underlayColor="#0F7E78"
+                onPress={() => {
+                  takePhoto();
+                }}
+              >
+                <Text style={{ fontSize: 20, color: "#fdfdfd" }}>
+                  Take a Photo
+                </Text>
+              </TouchableHighlight>
+
+              <Text>{"\n\n\n\n"}</Text>
+
+              <TouchableHighlight
+                style={{
+                  ...styles.loginButton,
+                  height: 40,
+                  width: 130,
+                  marginHorizontal: 10,
+                }}
+                activeOpacity={0.2}
+                underlayColor="#0F7E78"
+                onPress={() => {
+                  setModalVisible(!modalVisible);
+                }}
+              >
+                <Text style={{ fontSize: 20, color: "#fdfdfd" }}>Exit </Text>
+              </TouchableHighlight>
+            </View>
+          </View>
+        </Modal>
+
         <View style={styles.profileCard}>
           <View
             style={{
@@ -194,8 +386,7 @@ function Profile(props) {
         </View>
         <Text>{"\n"}</Text>
 
-       
-        <View style={{ ...styles.weightCard, height: 250, width: 380 }}>
+        {/* <View style={{ ...styles.weightCard, height: 250, width: 380 }}>
           <VictoryChart height={220} width={350}>
             <VictoryLine
               style={{
@@ -222,7 +413,7 @@ function Profile(props) {
           </VictoryChart>
 
       
-        </View>
+        </View> */}
         <Text>{"\n"}</Text>
         <TouchableHighlight
           style={styles.loginButton}
@@ -242,9 +433,13 @@ const mapStateToProps = (store) => ({
   currentUser: store.subscriber.currentUser,
   profileData: store.subscriber.profileData,
   weights: store.subscriber.weights,
+  profileImg: store.subscriber.profileImg,
 });
 
 const mapDispatchProps = (dispatch) =>
-  bindActionCreators({ addWeight, clearState, getWeights }, dispatch);
+  bindActionCreators(
+    { addWeight, clearState, getWeights, uploadPhoto, getPhoto },
+    dispatch
+  );
 
 export default connect(mapStateToProps, mapDispatchProps)(Profile);
