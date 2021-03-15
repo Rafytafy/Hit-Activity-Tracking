@@ -66,6 +66,9 @@
   padding-top: 40px;
   text-align: center;
 }
+.routines h5{
+  color: rgb(97, 97, 97);
+}
 .workouts{
   background-color: #98afc7  !important;
   color: white  !important;
