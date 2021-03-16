@@ -22,6 +22,7 @@ export const subActions = {
   uploadSubPhotoFailed: "UPLOAD_SUB_PHOTO_FAILED",
   getPhoto: "GET_SUB_PHOTO",
   getPhotoFailed: "GET_SUB_PHOTO_FAILED",
+  setCurrentRoutine: "SET_CURRENT_ROUTINE"
 };
 const initialSubState = {
   error: null,
@@ -37,6 +38,7 @@ const initialSubState = {
   weights: [],
   rotuines: [],
   profileImg: null,
+  currentRoutine: {}
 };
 const subscriberReducer = (state = initialSubState, action) => {
   switch (action.type) {
@@ -171,6 +173,11 @@ const subscriberReducer = (state = initialSubState, action) => {
         ...state,
         error: action.payload,
       };
+    case subActions.setCurrentRoutine:
+      return {
+        ...state,
+        currentRoutine: action.payload,
+      }
   }
   return state;
 };
