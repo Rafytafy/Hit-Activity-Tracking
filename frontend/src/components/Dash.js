@@ -1,6 +1,6 @@
 import React from 'react'; 
 import { useHistory } from 'react-router-dom';
-import { Jumbotron, Row, Button} from 'reactstrap';
+import { Row, Button} from 'reactstrap';
 import {connect} from 'react-redux'
 
 
@@ -17,7 +17,7 @@ const Dash = (props) => {
         <div> 
             <div className = "topDash"> 
                 <h1> Trainer Dashboard</h1>
-                <h2> Hi Welcome back!</h2>
+                <h2> Hi {props.currentUser.name.firstName}, Welcome back!</h2>
             </div>
                 <div className = "dash">
                     <Row>

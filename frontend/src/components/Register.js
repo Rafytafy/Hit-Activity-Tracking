@@ -89,7 +89,7 @@ const Register = (props) => {
           <Row>
             <Button onClick={onSubmit} color="secondary" size="lg"> Register </Button>
             <div class = "divider"/> 
-            <Button onClick={toLogin} color="secondary" size="lg"> Login </Button>
+            <Button onClick={toLogin} color="secondary" size="lg"> Back to Login </Button>
             </Row>
         </div>
       </FormGroup>
