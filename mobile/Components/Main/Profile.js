@@ -31,6 +31,7 @@ import {
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import styles, { color2 } from "../../styles";
+import Fitbit from './Fitbit'
 const filler = {
   firstName: "who",
   lastName: "cares",
@@ -423,6 +424,7 @@ function Profile(props) {
         >
           <Text style={{ fontSize: 20, color: "#fdfdfd" }}>Log Out</Text>
         </TouchableHighlight>
+        <Fitbit />
         <Text>{"\n"}</Text>
       </View>
     </ScrollView>

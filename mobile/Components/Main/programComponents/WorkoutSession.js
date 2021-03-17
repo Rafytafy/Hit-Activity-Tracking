@@ -31,8 +31,6 @@ function WorkoutSession(props) {
             console.log("Hello from new function")
     
         }
-
-    
     }
 
     const workout = async (item) => {
@@ -52,8 +50,6 @@ function WorkoutSession(props) {
     }
 
     const setNextWorkout = () => {
-        console.log(props.routine.workouts.length)
-        console.log(currentIterationOfSession + 1)
         if(props.routine.workouts.length !== currentIterationOfSession + 1){
             setCurrentIterationOfSession(currentIterationOfSession + 1)
             setWorkoutDuration(props.routine.workouts[currentIterationOfSession + 1].duration * 60)
@@ -85,14 +81,13 @@ function WorkoutSession(props) {
                 <CountDown
                     id={idOfWorkout}
                     until={workoutDuration}
-                    onPress={() => alert('hello')}
                     size={20}
                     timeToShow={['M', 'S']}
                     onFinish={() => setNextWorkout()}
                 />
             </View>
             }
-            
+      
         </View>
     )
 }
