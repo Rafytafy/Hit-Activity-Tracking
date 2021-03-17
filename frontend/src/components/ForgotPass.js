@@ -6,6 +6,7 @@ import Heartbeat from './Heartbeat.png';
 const ForgotPass = () => {
     const [email, setEmail] = useState("");
     const [alert, setAlert] = useState(false);
+    const [error, setError] = useState(false);
     const history = useHistory();
 
 const forgotPassword = () => {
@@ -14,10 +15,14 @@ const forgotPassword = () => {
         setAlert(true)
     })
       .catch((error) => {
-      console.log(error)
+          console.log(error)
+          setError(true);
     })
     }  
- const onDismiss = () => { setAlert(false) }
+    const onDismiss = () => {
+        setAlert(false)
+        setError(false)
+    }
  const toLogin = () => { history.push("/")}
     return (
         <div className="login">
@@ -38,9 +43,10 @@ const forgotPassword = () => {
                     <Row> 
                         <Button onClick={toLogin} color="secondary" size="lg"> Back to Login </Button>
                         </Row>
-                    
+                    <div className = "space"/>
                         <Row>
-                          <Alert color="info" className="class" isOpen={alert} toggle={onDismiss}> A recovery password has been sent to your email. </Alert>
+                            <Alert color="info" isOpen={alert} toggle={onDismiss}> A recovery password has been sent to your email. </Alert>
+                            <Alert color = "danger" isOpen={error} toggle = {onDismiss}> Please enter a valid Email. </Alert>
                     </Row>
           </div>
                     </FormGroup>
@@ -48,7 +54,5 @@ const forgotPassword = () => {
         </div>
 
     );
-
-   
 }
 export default ForgotPass;
