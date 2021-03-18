@@ -1,6 +1,9 @@
-.jumbo {
-  padding-right: 200px;
+:root{
+  --white1: #F0F4F8;
+  --secondaryColor: #486581;
+  --primaryColor: #9FB3C8;
 }
+
 .progressBar {
   display: flex;
   width: 50%;
@@ -12,18 +15,20 @@
 }
 
 .navbar {
-  background-color: #56a5ec;
+  background-color: var(--secondaryColor);
   text-decoration: none;
   font-size: 1.6em;
   font-weight: bold;
+  color:var(--white1);
 }
+
 .inactive {
-  color: white;
+  color: var(--white1);
   padding-right: 25px;
 }
 .brand {
   font-size: 1.5em !important;
-  color: white;
+  color: var(--white1);
 }
 
 .color.nav {
@@ -32,18 +37,18 @@
 
 .clients {
   padding-top: 40px;
-  background-color: #98afc7;
-  color: white;
+  background-color: var(--primaryColor);
+  color: var(--white1);
 }
 .clients th {
-  color: white;
+  color: var(--white1);
   font-size: 1.3em;
 }
 .messages {
   padding-left: 40px;
   padding-top: 40px;
-  color: white;
-  background-color: #98afc7;
+  color: var(--white1);
+  background-color: var(--primaryColor);
 }
 .register {
   margin-top: 15rem;
@@ -56,11 +61,11 @@
   padding: 0;
   flex-direction: column;
   text-align: center;
-  background-color: #98afc7;
+  background-color: var(--primaryColor);
 }
 .routines {
-  color: white;
-  background-color: #98afc7;
+  color: var(--white1);
+  background-color: var(--primaryColor);
 }
 .routines h1 {
   padding-top: 40px;
@@ -70,12 +75,12 @@
   color: rgb(97, 97, 97);
 }
 .workouts {
-  background-color: #98afc7 !important;
-  color: white !important;
+  background-color: var(--primaryColor) !important;
+  color: var(--white1) !important;
   padding-top: 3%;
 }
 .workouts table {
-  color: white;
+  color: var(--white1);
 }
 
 input[type="file"] {
@@ -98,7 +103,7 @@ input[type="file"] {
   flex-direction: column;
 }
 .title {
-  color: #98afc7;
+  color: var(--primaryColor);
   margin-bottom: 15px;
   margin-top: 0;
 }
@@ -117,13 +122,13 @@ input[type="file"] {
 
 html {
   height: 100%;
-  background-color: #98afc7 !important;
+  background-color: var(--primaryColor) !important;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 body {
-  background-color: #98afc7 !important;
+  background-color: var(--primaryColor) !important;
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -138,7 +143,7 @@ body {
   padding: 0;
   flex-direction: column;
   text-align: center;
-  background-color: #98afc7;
+  background-color: var(--primaryColor);
 }
 
 .dash {
@@ -151,29 +156,32 @@ body {
   border-radius: 7rem;
   color: inherit;
   text-decoration: none;
-  background-color: #98afc7;
+  background-color: var(--primaryColor);
 }
 .dash button {
   width: 250px;
   height: 180px;
+  color: var(--secondaryColor);
+  background-color: var(--white1);
+  
 }
 .topDash {
   margin-left: 20px;
-  background-color: #98afc7;
-  color: white;
+  background-color: var(--primaryColor);
+  color: var(--white1);
   padding-top: 50px;
 }
 .dashDivider {
   width: 30px;
   height: auto;
   display: inline-block;
-  background-color: #98afc7;
+  background-color: var(--primaryColor);
 }
 .divider {
   width: 15px;
   height: auto;
   display: inline-block;
-  background-color: #98afc7;
+  background-color: var(--primaryColor);
 }
 
 .space {
