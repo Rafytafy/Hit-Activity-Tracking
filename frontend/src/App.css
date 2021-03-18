@@ -12,37 +12,37 @@
 }
 
 .navbar {
-  background-color: #56A5EC;
+  background-color: #56a5ec;
   text-decoration: none;
-  font-size: 1.6EM;
+  font-size: 1.6em;
   font-weight: bold;
 }
-.inactive{
+.inactive {
   color: white;
   padding-right: 25px;
 }
-.brand{
+.brand {
   font-size: 1.5em !important;
   color: white;
 }
 
-.color.nav{
+.color.nav {
   color: black;
 }
 
-.clients{
+.clients {
   padding-top: 40px;
   background-color: #98afc7;
-  color:white;
+  color: white;
 }
-.clients th{
-  color:white;
+.clients th {
+  color: white;
   font-size: 1.3em;
 }
-.messages{
+.messages {
   padding-left: 40px;
   padding-top: 40px;
-  color:white;
+  color: white;
   background-color: #98afc7;
 }
 .register {
@@ -58,23 +58,23 @@
   text-align: center;
   background-color: #98afc7;
 }
-.routines{
+.routines {
   color: white;
   background-color: #98afc7;
 }
-.routines h1{
+.routines h1 {
   padding-top: 40px;
   text-align: center;
 }
-.routines h5{
+.routines h5 {
   color: rgb(97, 97, 97);
 }
-.workouts{
-  background-color: #98afc7  !important;
-  color: white  !important;
+.workouts {
+  background-color: #98afc7 !important;
+  color: white !important;
   padding-top: 3%;
 }
-.workouts table{
+.workouts table {
   color: white;
 }
 
@@ -98,12 +98,12 @@ input[type="file"] {
   flex-direction: column;
 }
 .title {
-  color: #98AFC7;
+  color: #98afc7;
   margin-bottom: 15px;
   margin-top: 0;
 }
 
-.shaded{
+.shaded {
   border-radius: 3rem !important;
 }
 .button {
@@ -117,13 +117,13 @@ input[type="file"] {
 
 html {
   height: 100%;
-  background-color: #98AFC7 !important;
+  background-color: #98afc7 !important;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 body {
-  background-color: #98AFC7 !important;
+  background-color: #98afc7 !important;
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -134,7 +134,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 100px;
   border: none;
   padding: 0;
   flex-direction: column;
@@ -154,7 +153,7 @@ body {
   text-decoration: none;
   background-color: #98afc7;
 }
-.dash button{
+.dash button {
   width: 250px;
   height: 180px;
 }
@@ -163,7 +162,6 @@ body {
   background-color: #98afc7;
   color: white;
   padding-top: 50px;
-
 }
 .dashDivider {
   width: 30px;
@@ -176,4 +174,11 @@ body {
   height: auto;
   display: inline-block;
   background-color: #98afc7;
+}
+
+.space {
+  margin-top: 1px;
+  margin-bottom: 1px;
+  padding-top: 1px;
+  padding-bottom: 1px;
 }
