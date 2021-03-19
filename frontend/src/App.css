@@ -175,7 +175,6 @@ body {
   width: 30px;
   height: auto;
   display: inline-block;
-  background-color: var(--primaryColor);
 }
 .divider {
   width: 15px;
