@@ -4,14 +4,11 @@ import firebase from 'firebase'
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux'
 import {fetchCurrentUser, fetchWorkouts, fetchRoutines} from '../redux/actions/index'
-import { Form, FormGroup, Input, Button, Row } from 'reactstrap';
+import { Form, FormGroup, Input, Button, Row,   } from 'reactstrap';
 import Heartbeat from './Heartbeat.png';
 
-
-
-
 const Login = (props) => {
- 
+
 //States
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -31,15 +28,16 @@ const Login = (props) => {
         console.log(error)
     })
   }
-   
-  const toRegister = () => 
-  { 
-    history.push('/Register')
-    }
-    return (
-        <div className = "login"> 
+  
+  
+  const forgotPassword = () => { history.push('/ForgotPass')}
+  const toRegister = () => { history.push('/Register') }
+
+  return (
+      <div className="login">
  <Form> 
-          <FormGroup>
+        <FormGroup>
+          
             <div className="title"> 
              <img src ={Heartbeat} alt="Logo"/>  
               <h1> Pulse Login</h1>
@@ -59,13 +57,16 @@ const Login = (props) => {
             <div className="button"> 
             <Row>
                 <Button onClick={authLogin} color="secondary" size="lg"> Sign in </Button>
-                <div class = "divider"/> 
+                <div className = "divider"/> 
                 <Button onClick={toRegister} color="secondary" size="lg"> Register </Button>
                 
-                </Row>
-            </div>
+            </Row>
+            
+            <div className = "space"/>
+            <Button onClick={forgotPassword} color="secondary" size="lg"> Forgot Password?</Button>
+          </div>
       </FormGroup>
-          </Form>
+        </Form>
         </div>
   );
   
