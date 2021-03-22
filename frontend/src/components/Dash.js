@@ -1,6 +1,6 @@
 import React from 'react'; 
 import { useHistory } from 'react-router-dom';
-import { Jumbotron, Row, Button} from 'reactstrap';
+import { Row, Button} from 'reactstrap';
 import {connect} from 'react-redux'
 
 
@@ -17,24 +17,24 @@ const Dash = (props) => {
         <div> 
             <div className = "topDash"> 
                 <h1> Trainer Dashboard</h1>
-                <h2> Hi Welcome back!</h2>
+                <h2> Hi {props.currentUser.name.firstName}, Welcome back!</h2>
             </div>
                 <div className = "dash">
                     <Row>
 
-                    <Button className="shaded" onClick = {toMessages} > 
+                    <Button className="shaded shadow-lg" onClick = {toMessages} > 
                         <h1>Messages</h1>
                     </Button>
                     <div className="dashDivider"/>
-                    <Button className="shaded" size="lg" onClick = { toClients }> 
+                    <Button className="shaded shadow-lg" size="lg" onClick = { toClients }> 
                         <h1>Clients</h1>
                     </Button>
                         <div className = "dashDivider"/>
-                    <Button className="shaded" onClick = { toRoutines }> 
+                    <Button className="shaded shadow-lg" onClick = { toRoutines }> 
                         <h1>Routines</h1>
                     </Button>
                     <div className = "dashDivider"/>
-                    <Button className="shaded" onClick = { toWorkouts }> 
+                    <Button className="shaded shadow-lg" onClick = { toWorkouts }> 
                         <h1> Workouts</h1>
                     </Button>
                     </Row> 
