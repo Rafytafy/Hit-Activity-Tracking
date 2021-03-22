@@ -183,4 +183,24 @@ router.get("/getSubPhoto/:id", (req, res) => {
   });
 });
 
+//@route put subscriber/accessToken/:id
+//@desc add access token to user
+//@access public
+router.put("/fitbitTokens/:id", (req, res) => {
+  Subscriber.findByIdAndUpdate(
+    req.params.id,
+    { 
+      accessToken: req.body.accessToken,
+      refreshToken: req.body.refreshToken
+    },
+    (err, subscriber) => {
+      if (err) {
+        res.send("Error could not add tokens to subscriber");
+      } else {
+        res.send("Successfuly added tokens to subscriber");
+      }
+    }
+  );
+});
+
 module.exports = router;
