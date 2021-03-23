@@ -170,3 +170,9 @@ export function getPhoto(id) {
    }, 2000);
   };
 }
+
+export function setCurrentRoutine(routine){
+  return (dispatch) => {
+    dispatch({type: subActions.setCurrentRoutine, payload: routine})
+  }
+}
