@@ -1,7 +1,23 @@
-:root{
-  --white1: #F0F4F8;
+:root {
+  --white1: #f0f4f8;
   --secondaryColor: #486581;
-  --primaryColor: #9FB3C8;
+  --primaryColor: #9fb3c8;
+}
+.fixRow {
+  margin-right: 0 !important;
+}
+.profile {
+  color: var(--white1);
+}
+.profileInfo {
+  margin-top: 2rem;
+}
+.fixCol {
+  padding: 0 !important;
+}
+
+.greeting {
+  margin-top: 2rem;
 }
 
 .progressBar {
@@ -19,7 +35,7 @@
   text-decoration: none;
   font-size: 1.6em;
   font-weight: bold;
-  color:var(--white1);
+  color: var(--white1);
 }
 
 .inactive {
@@ -163,7 +179,6 @@ body {
   height: 180px;
   color: var(--secondaryColor);
   background-color: var(--white1);
-  
 }
 .topDash {
   margin-left: 20px;

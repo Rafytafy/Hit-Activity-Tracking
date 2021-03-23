@@ -17,6 +17,7 @@ import Landing from "./Components/landing";
 import Login from "./Components/login";
 import SignUp from "./Components/signUp";
 import Main from "./Components/Main";
+import WorkoutSessionScreen from "./Components/Main/programComponents/WorkoutSession"
 
 
 import { Provider } from "react-redux";
@@ -99,7 +100,7 @@ export class App extends Component {
               component={Main}
               options={{ headerShown: false }}
             />
-         
+            <Stack.Screen name='WorkoutSession' component={WorkoutSessionScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </Provider>

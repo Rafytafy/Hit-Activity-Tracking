@@ -17,7 +17,7 @@ const ProfileInfo = (props) => {
 return (
     <div>
         
-        <img src={img} alt="text" style={{height:'200px', width:'300px'}}/>
+        <img src={img} alt="text" style={{ width: '15em' }}/>
     </div>
 );
  

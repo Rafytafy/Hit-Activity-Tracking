@@ -2,17 +2,14 @@ import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
-  TouchableHighlight,
-  Image,
-  TextInput,
+  Button,
   ScrollView,
-  Alert,
-  Dimensions,
+  Dimensions
 } from "react-native";
 import { getRoutines } from "../../../Actions/SubscriberActions";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import {loadSubToken, loadProfileData} from '../../../Actions/SubscriberActions'
+import {loadSubToken, loadProfileData, setCurrentRoutine} from '../../../Actions/SubscriberActions'
 import styles from "../../../styles";
 function Program(props) {
   let screenWidth = Dimensions.get('window').width;
@@ -28,6 +25,11 @@ function Program(props) {
     }
     return totalDuration
 }
+  const startWorkout = (routine) => {
+    props.setCurrentRoutine(routine)
+    props.navigation.navigate('WorkoutSession')
+  } 
+
     const renderProgramCards = () => {
       if(typeof props.routines !== "undefined"){
         return (
@@ -43,6 +45,10 @@ function Program(props) {
               <View style={styles.programCard}>
               <Text style={{fontSize: 24}}>{routine.name}</Text>
               <Text>Duration: {calculateDuration(routine.workouts)}</Text>
+              <Button
+                title="Start"
+                onPress={() => startWorkout(routine)} 
+              />
               </View>
             </View>
             
@@ -69,6 +75,6 @@ const mapStateToProps = (store) => ({
   routines: store.subscriber.profileData.routines
 });
 
-const mapDispatchProps = (dispatch) => bindActionCreators({ loadSubToken, loadProfileData }, dispatch);
+const mapDispatchProps = (dispatch) => bindActionCreators({ loadSubToken, loadProfileData, setCurrentRoutine }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchProps)(Program);
