@@ -115,7 +115,7 @@ export function getWeights(id) {
         const newList = [];
         for (let i = 0; i < res.data.length; i++) {
           const obj = {
-            x: Number(res.data[i].date),
+            x: new Date(res.data[i].date),
             y: Number(res.data[i].weight),
           };
 

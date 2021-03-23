@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
-export const color1 = "#7E0F15";
-export const color2 = "#0F7E78";
-export const color3 = "#FAFAFA";
+export const color1 = "#9FB3C8";
+export const color2 = "#486581";
+export const color3 = "#f0f4f8";
 export const color4 = "#333333";
 const styles = StyleSheet.create({
   landContainer: {

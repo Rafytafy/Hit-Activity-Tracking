@@ -24,13 +24,13 @@ import React, { useState, useEffect } from "react";
 import {
   addWeight,
   clearState,
-  getWeights,
   uploadPhoto,
+  getWeights,
   getPhoto,
 } from "../../Actions/SubscriberActions";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import styles, { color2 } from "../../styles";
+import styles, { color2,color3 } from "../../styles";
 const filler = {
   firstName: "who",
   lastName: "cares",
@@ -50,7 +50,7 @@ function Profile(props) {
   const [subIMG, setSubIMG] = useState();
   const [xticks, setXticks] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
-
+ const [curWeight,setCurWeight] = useState('...');
   const [type, setType] = useState(Camera.Constants.Type.back);
   const [newIMG, setImg] = useState(null);
 
@@ -68,14 +68,13 @@ function Profile(props) {
       }
     };
     const { currentUser, profileData, weights, profileImg } = props;
+    
     if (typeof profileData._id !== "undefined") {
       setWeights(weights);
-      // var last=new Date([weights.length-1].x).getTime()
-      // var first = new Date(weights[0].x).getTime()
-      // var diff= last-first
-      // var wl=weights.length
-
-      // console.log(diff)
+     
+      var wl=weights.length
+      setCurWeight(weights[wl-1].y)
+     
       setProfData(profileData);
       setUser(profileData._id);
 
@@ -229,7 +228,7 @@ function Profile(props) {
               marginHorizontal: 15,
             }}
           >
-            <Text style={styles.stats}>{profData.initWeight} lbs.</Text>
+            <Text style={styles.stats}>{curWeight} lbs.</Text>
             <Text style={styles.stats}>{age} Years</Text>
             <Text style={styles.stats}>
               {height.feet}'{height.inches}"
@@ -290,7 +289,7 @@ function Profile(props) {
                   choosephoto();
                 }}
               >
-                <Text style={{ fontSize: 20, color: "#fdfdfd" }}>
+                <Text style={{ fontSize: 20, color: color3 }}>
                   Choose photo
                 </Text>
               </TouchableHighlight>
@@ -308,7 +307,7 @@ function Profile(props) {
                   takePhoto();
                 }}
               >
-                <Text style={{ fontSize: 20, color: "#fdfdfd" }}>
+                <Text style={{ fontSize: 20, color:color3 }}>
                   Take a Photo
                 </Text>
               </TouchableHighlight>
@@ -328,7 +327,7 @@ function Profile(props) {
                   setModalVisible(!modalVisible);
                 }}
               >
-                <Text style={{ fontSize: 20, color: "#fdfdfd" }}>Exit </Text>
+                <Text style={{ fontSize: 20, color:color3 }}>Exit </Text>
               </TouchableHighlight>
             </View>
           </View>
@@ -378,15 +377,15 @@ function Profile(props) {
                 }, 2000);
               }}
               title="Add Weight"
-              color="#fdfdfd"
+              color={color3}
             >
-              <Text style={{ fontSize: 20, color: "#fdfdfd" }}>Add Weight</Text>
+              <Text style={{ fontSize: 20, color: color3}}>Add Weight</Text>
             </TouchableHighlight>
           </View>
         </View>
         <Text>{"\n"}</Text>
 
-        {/* <View style={{ ...styles.weightCard, height: 250, width: 380 }}>
+        <View style={{ ...styles.weightCard, height: 250, width: 380 }}>
           <VictoryChart height={220} width={350}>
             <VictoryLine
               style={{
@@ -397,13 +396,16 @@ function Profile(props) {
                   border: "1px solid #ccc",
                 },
               }}
+             
+              // tickFormat={(x) => new Date(x).getMonth() }
               data={weightss}
               
             
             />
           <VictoryScatter
           data={weightss}
-          size={7}
+          size={5
+          }
           style={{
             data:{
               fill:color2
@@ -413,7 +415,7 @@ function Profile(props) {
           </VictoryChart>
 
       
-        </View> */}
+        </View>
         <Text>{"\n"}</Text>
         <TouchableHighlight
           style={styles.loginButton}
@@ -421,7 +423,7 @@ function Profile(props) {
           underlayColor="#0F7E78"
           onPress={() => logOut()}
         >
-          <Text style={{ fontSize: 20, color: "#fdfdfd" }}>Log Out</Text>
+          <Text style={{ fontSize: 20, color: color3 }}>Log Out</Text>
         </TouchableHighlight>
         <Text>{"\n"}</Text>
       </View>

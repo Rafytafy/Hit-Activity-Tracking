@@ -33,6 +33,9 @@ function Search(props) {
   const [modalVisible, setModalVisible] = useState(false);
   const [trainerName, setTrainerName] = useState(filler);
   const [trainerEmail, setTrainerEmail] = useState("filler");
+  const [trainerBio, setTrainerBio] = useState("");
+  const [trainerLoc, setTrainerLoc] = useState("");
+  const [trainerSoc, setTrainerSoc] = useState("");
   const [trainerIMG, setTrainerIMG] = useState("filler");
 
   useEffect(() => {
@@ -44,12 +47,30 @@ function Search(props) {
       settrainerid(trainer._id);
       setTrainerName(trainer.name);
       setTrainerEmail(trainer.email);
+      if(trainer.bio!==''){
+setTrainerBio(trainer.bio)
+      }
+      if(trainer.location!==''){
+        setTrainerLoc(trainer.location)
+      }
+      if(trainer.socials!==''){
+        setTrainerSoc(trainer.socials)
+      }
+      
       
       if(trainer.profilePicURL!=='') {
         firebase.storage().ref(trainer.profilePicURL).getDownloadURL().then((url) => {
             setTrainerIMG(url);
            
         })
+      }else {
+        firebase
+          .storage()
+          .ref("empty.png")
+          .getDownloadURL()
+          .then((url) => {
+            setTrainerIMG(url);
+          });
       }
     }
   });
@@ -168,7 +189,13 @@ function Search(props) {
               
                 {trainerEmail}
                 {"\n\n"}
-                {"\n"}
+                {trainerBio}
+                {"\n\n"}
+                {trainerLoc}
+                {"\n\n"}
+                {trainerSoc}
+                {"\n\n"}
+              
               </Text>
 
               <TouchableHighlight
