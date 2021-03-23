@@ -4,6 +4,9 @@ import axios from 'axios';
 import firebase from 'firebase'; 
 import ProfileInfo from './ProfileInfo';
 import { connect } from 'react-redux';
+import Edit from './Edit';
+import DefaultPicture from '../../images/default-profile-picture.png'
+
 const Profile = (props) => 
 {
     const [img, setImg] = useState("");
@@ -28,7 +31,9 @@ const Profile = (props) =>
 
     return (
         <div className="jumbo">
+            
             <Jumbotron>
+                
                 <ProfileInfo profilePath={img} />
                 <p> </p>
                 <h1>  </h1>
@@ -37,10 +42,11 @@ const Profile = (props) =>
                 <h2> Socials </h2>
                 <h4> {socials} </h4>
                 <hr />
-                <h2> Weight Loss, Diets, Workout Plans </h2>
+                <h2> Workout Plans </h2>
                 <h4> {plans} </h4>
                 <h3> Bio </h3>
                 <p> {bio} </p>
+                <Edit />
             </Jumbotron>
            
        </div>

@@ -1,9 +1,11 @@
-:root{
-  --white1: #F0F4F8;
+:root {
+  --white1: #f0f4f8;
   --secondaryColor: #486581;
-  --primaryColor: #9FB3C8;
+  --primaryColor: #9fb3c8;
 }
-
+.fix {
+  margin-right: 15px !important;
+}
 .progressBar {
   display: flex;
   width: 50%;
@@ -19,7 +21,7 @@
   text-decoration: none;
   font-size: 1.6em;
   font-weight: bold;
-  color:var(--white1);
+  color: var(--white1);
 }
 
 .inactive {
@@ -163,7 +165,6 @@ body {
   height: 180px;
   color: var(--secondaryColor);
   background-color: var(--white1);
-  
 }
 .topDash {
   margin-left: 20px;

@@ -53,31 +53,15 @@ const NavBar = (props) => {
                 </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink>
-                <Link to="/Messages" className='inactive'> Messages</Link>
-                </NavLink>
-            </NavItem>
-            <NavItem>
               <NavLink> 
                <Link to="/Profile" className='inactive'> Profile</Link>
               </NavLink>
             </NavItem>
-            <UncontrolledDropdown nav inNavbar >
-              <DropdownToggle nav caret className='inactive'>
-                Options
-              </DropdownToggle>
-              <DropdownMenu right>
-                <DropdownItem>
-                  <Link to= "/Edit"> Edit Profile </Link>
-                </DropdownItem>
-                <DropdownItem onClick = {signOut}>
-                  Sign Out
-                </DropdownItem>
-                <DropdownItem>
-                  Switch User
-                </DropdownItem>
-              </DropdownMenu>
-            </UncontrolledDropdown>
+            <NavItem>
+              <NavLink>
+                <Link onClick = {signOut} className = 'inactive'> Sign Out </Link>
+              </NavLink>
+            </NavItem>
           </Nav>
         </Collapse>
       </Navbar>
