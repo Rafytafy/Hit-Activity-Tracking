@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'; 
-import { Jumbotron } from 'reactstrap';
+import { Row, Col, Container } from 'reactstrap';
 import axios from 'axios'; 
 import firebase from 'firebase'; 
 import ProfileInfo from './ProfileInfo';
@@ -30,25 +30,31 @@ const Profile = (props) =>
     },[]);
 
     return (
-        <div className="jumbo">
-            
-            <Jumbotron>
-                
-                <ProfileInfo profilePath={img} />
-                <p> </p>
-                <h1>  </h1>
-                <h2> Trainer location </h2>
-                <h4> {location} </h4>
-                <h2> Socials </h2>
-                <h4> {socials} </h4>
-                <hr />
-                <h2> Workout Plans </h2>
-                <h4> {plans} </h4>
-                <h3> Bio </h3>
+        <div className="profile">
+            <Row className = "fixRow">
+                <Col sm={{ size: 'auto'} }>  <img src={DefaultPicture} style={{ width: '15em' }} alt="Logo" />
+                    {/* <ProfileInfo profilePath={img} /> */}
+                    <br />
+                    <h3> Programs </h3>
+                </Col>
+                <Container className = "profileInfo"> 
+                    <Col> <h3> Trainer </h3>
+            <h1> {props.currentUser.name.firstName} {props.currentUser.name.lastName}</h1>
+                        <h4> {location} {socials} </h4>
+                        <br />
+                        <br/>
+            <h4> {plans} </h4>
+
                 <p> {bio} </p>
-                <Edit />
-            </Jumbotron>
-           
+                        <Edit />
+                    </Col>
+                </Container>
+                
+                
+             <Col>
+            </Col>
+            </Row>
+            
        </div>
     );
 

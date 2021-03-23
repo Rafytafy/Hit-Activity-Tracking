@@ -7,10 +7,7 @@ import {
   Nav,
   NavItem,
   NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
+
 } from 'reactstrap';
 import Pulse from './Pulse.png';
 import firebase from 'firebase'; 

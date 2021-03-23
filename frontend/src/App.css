@@ -3,9 +3,23 @@
   --secondaryColor: #486581;
   --primaryColor: #9fb3c8;
 }
-.fix {
-  margin-right: 15px !important;
+.fixRow {
+  margin-right: 0 !important;
 }
+.profile {
+  color: var(--white1);
+}
+.profileInfo {
+  margin-top: 2rem;
+}
+.fixCol {
+  padding: 0 !important;
+}
+
+.greeting {
+  margin-top: 2rem;
+}
+
 .progressBar {
   display: flex;
   width: 50%;

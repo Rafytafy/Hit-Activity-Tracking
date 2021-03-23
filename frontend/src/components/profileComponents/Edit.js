@@ -80,9 +80,6 @@ const Edit = (props) => {
                 <ModalBody> 
             <Form onSubmit = {onSubmit}>
             <FormGroup>
-            <Row> 
-                <h1> Edit Profile </h1>
-            </Row>
                 <label className="custom-file-upload">
                     <Input type="file" onChange={pickFile} />
                     Choose Profile Picture

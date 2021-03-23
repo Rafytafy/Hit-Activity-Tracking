@@ -16,11 +16,15 @@ const Dash = (props) => {
     return ( 
         <div> 
             <div className="topDash">
-                <Row className = "fix">
-                    <img src={DefaultPicture} style={{ width: '10em' }} alt="Logo" />
-                    <h1> Trainer Dashboard
+                <Row className = "fixRow">
+                    <img src={DefaultPicture} style={{ width: '15em' }} alt="Logo" />
+                    <div className="greeting">
+                        <h1> Trainer Dashboard
                     <br />
-                     Hi {props.currentUser.name.firstName}, Welcome back! </h1>   
+                        <h2> Hi {props.currentUser.name.firstName}, Welcome back! </h2>
+                    </h1>
+                    </div>
+                    
                 </Row>
                 
             </div>
