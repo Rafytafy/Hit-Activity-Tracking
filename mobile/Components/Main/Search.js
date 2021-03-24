@@ -18,7 +18,7 @@ import {
   subscribe,
 } from "../../Actions/SubscriberActions";
 
-import styles from "../../styles";
+import styles,{color2Dark} from "../../styles";
 const filler = {
   firstName: "who",
   lastName: "cares",
@@ -120,7 +120,7 @@ setTrainerBio(trainer.bio)
                     marginHorizontal: 10,
                   }}
                   activeOpacity={0.2}
-                  underlayColor="#0F7E78"
+                  underlayColor={color2Dark}
                   onPress={() => {
                     const name = {
                       first: item.name.firstName,
@@ -206,7 +206,7 @@ setTrainerBio(trainer.bio)
                   marginHorizontal: 10,
                 }}
                 activeOpacity={0.2}
-                underlayColor="#0F7E78"
+                underlayColor={color2Dark}
                 onPress={() => {
                   const subPair = {
                     user: user,
@@ -233,7 +233,7 @@ setTrainerBio(trainer.bio)
                   marginHorizontal: 10,
                 }}
                 activeOpacity={0.2}
-                underlayColor="#0F7E78"
+                underlayColor={color2Dark}
                 onPress={() => {
                   setModalVisible(!modalVisible);
                 }}

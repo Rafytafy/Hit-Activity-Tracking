@@ -30,7 +30,7 @@ import {
 } from "../../Actions/SubscriberActions";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import styles, { color2,color3 } from "../../styles";
+import styles, { color2,color3,color2Dark } from "../../styles";
 import Fitbit from './Fitbit'
 const filler = {
   firstName: "who",
@@ -199,7 +199,7 @@ function Profile(props) {
               marginBottom: 30,
             }}
             activeOpacity={0.2}
-            underlayColor="#0F7E78"
+            underlayColor={color2Dark}
             onPress={() => {
               setModalVisible(!modalVisible);
             }}
@@ -285,7 +285,7 @@ function Profile(props) {
                   marginHorizontal: 10,
                 }}
                 activeOpacity={0.2}
-                underlayColor="#0F7E78"
+                underlayColor={color2Dark}
                 onPress={() => {
                   choosephoto();
                 }}
@@ -303,7 +303,7 @@ function Profile(props) {
                   marginVertical: 10,
                 }}
                 activeOpacity={0.2}
-                underlayColor="#0F7E78"
+                underlayColor={color2Dark}
                 onPress={() => {
                   takePhoto();
                 }}
@@ -323,7 +323,7 @@ function Profile(props) {
                   marginHorizontal: 10,
                 }}
                 activeOpacity={0.2}
-                underlayColor="#0F7E78"
+                underlayColor={color2Dark}
                 onPress={() => {
                   setModalVisible(!modalVisible);
                 }}
@@ -360,7 +360,7 @@ function Profile(props) {
                 marginVertical: 8,
               }}
               activeOpacity={0.2}
-              underlayColor="#0F7E78"
+              underlayColor={color2Dark}
               onPress={() => {
                 var now = new Date().getTime();
                 const newWeight = {
@@ -418,15 +418,17 @@ function Profile(props) {
       
         </View>
         <Text>{"\n"}</Text>
+        <Fitbit />
+        <Text>{"\n"}</Text>
         <TouchableHighlight
           style={styles.loginButton}
           activeOpacity={0.2}
-          underlayColor="#0F7E78"
+          underlayColor={color2Dark}
           onPress={() => logOut()}
         >
           <Text style={{ fontSize: 20, color: color3 }}>Log Out</Text>
         </TouchableHighlight>
-        <Fitbit />
+        
         <Text>{"\n"}</Text>
       </View>
     </ScrollView>
