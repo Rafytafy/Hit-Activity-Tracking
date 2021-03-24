@@ -24,7 +24,7 @@ export class Main extends Component{
    setTimeout(() => {
     this.props.getWeights(this.props.profileData._id);
     
-   }, 2500);
+   }, 1000);
   
   }
   render() {

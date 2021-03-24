@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Button, Text, View, Image, TouchableHighlight } from "react-native";
-import styles from "../styles";
+import styles,{color2Dark} from "../styles";
 export default function Landing({ navigation }) {
   return (
     <View style={styles.landContainer}>
@@ -21,7 +21,7 @@ export default function Landing({ navigation }) {
         style={styles.largeButton}
         onPress={() => navigation.navigate("Login")}
         activeOpacity={0.2}
-        underlayColor= "#0F7E78"
+        underlayColor= {color2Dark}
       >
         <Text style={{ fontSize: 25, color: "#fdfdfd" }}>Login</Text>
       </TouchableHighlight>
@@ -32,7 +32,7 @@ export default function Landing({ navigation }) {
         style={styles.largeButton}
         onPress={() => navigation.navigate("SignUp")}
         activeOpacity={0.2}
-        underlayColor= "#0F7E78"
+        underlayColor= {color2Dark}
       >
         <Text style={{ fontSize: 25, color: "#fdfdfd" }}>Sign Up</Text>
       </TouchableHighlight>
