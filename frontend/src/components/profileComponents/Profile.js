@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'; 
-import { Row, Col, Container } from 'reactstrap';
+import { Row, Col, Container, Jumbotron } from 'reactstrap';
 import axios from 'axios'; 
 import firebase from 'firebase'; 
 import ProfileInfo from './ProfileInfo';
@@ -32,12 +32,12 @@ const Profile = (props) =>
     return (
         <div className="profile">
             <Row className = "fixRow">
-                <Col sm={{ size: 'auto'} }>  <img src={DefaultPicture} style={{ width: '15em' }} alt="Logo" />
+                <Col sm={{ size: 'auto', }}>
+                    <img src={DefaultPicture} style={{ width: '15em' }} alt="Logo" />
+                    </Col>
                     {/* <ProfileInfo profilePath={img} /> */}
                     <br />
-                    <h3> Programs </h3>
-                </Col>
-                <Container className = "profileInfo"> 
+                    <Container className = "profileInfo"> 
                     <Col> <h3> Trainer </h3>
             <h1> {props.currentUser.name.firstName} {props.currentUser.name.lastName}</h1>
                         <h4> {location} {socials} </h4>
@@ -50,9 +50,35 @@ const Profile = (props) =>
                     </Col>
                 </Container>
                 
-                
-             <Col>
+                <Col className = "fixCol">
+                    <div className="testimonials">
+                        <h1> Testimonials </h1>
+                    </div>
+                    
+                    <Jumbotron className = "bigJumbo">
+                        
+                    </Jumbotron>
             </Col>
+                     <div className= "programs">
+                    <h1> Programs </h1>
+                    <br/>
+                        <Row>
+                            <Jumbotron className = "jumbo">
+                            </Jumbotron>
+                            <div className = "dashDivider"/>
+                        <Jumbotron className = "jumbo">
+                            </Jumbotron>
+                            <div className = "dashDivider"/>
+                            <Jumbotron className = "jumbo">
+                            </Jumbotron>
+                        </Row>
+                        
+                    </div>
+                    
+                   
+                   
+               
+               
             </Row>
             
        </div>

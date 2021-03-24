@@ -6,14 +6,35 @@
 .fixRow {
   margin-right: 0 !important;
 }
+.testimonials {
+  margin-top: 2rem;
+  margin-left: 89px;
+}
 .profile {
   color: var(--white1);
 }
 .profileInfo {
   margin-top: 2rem;
+  height: 50%;
+  margin-right: 15rem;
 }
-.fixCol {
-  padding: 0 !important;
+
+.programs {
+  margin-left: 4rem;
+  margin-right: 10rem;
+}
+.jumbo {
+  width: 20rem;
+  height: 15rem;
+  border-radius: 12rem !important;
+}
+
+.bigJumbo {
+  width: 25rem;
+  min-height: 45rem;
+  max-height: 60rem;
+  border-radius: 8rem !important;
+  margin-bottom: -21rem !important;
 }
 
 .greeting {
