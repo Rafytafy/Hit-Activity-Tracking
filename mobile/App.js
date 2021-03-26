@@ -100,7 +100,7 @@ export class App extends Component {
               component={Main}
               options={{ headerShown: false }}
             />
-            <Stack.Screen name='WorkoutSession' component={WorkoutSessionScreen} />
+            <Stack.Screen name='WorkoutSession' component={WorkoutSessionScreen}  options={{ headerShown: false }} />
           </Stack.Navigator>
         </NavigationContainer>
       </Provider>

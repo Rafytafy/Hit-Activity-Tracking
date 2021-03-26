@@ -1,8 +1,8 @@
 import * as React from 'react';
 import * as WebBrowser from 'expo-web-browser';
-import { makeRedirectUri, useAuthRequest, ResponseType, GrantType  } from 'expo-auth-session';
-import axios from "axios";
-import { Button, Platform } from 'react-native';
+import { makeRedirectUri, useAuthRequest, ResponseType  } from 'expo-auth-session';
+import { Text, Platform,TouchableHighlight } from 'react-native';
+import styles,{color2Dark,color3} from '../../styles'
 import { connect } from "react-redux";
 
 WebBrowser.maybeCompleteAuthSession();
@@ -51,15 +51,18 @@ function Fitbit(props) {
   }, [response]);
 
   return (
-    <Button
-      disabled={!request}
-      title="Login"
-      onPress={() => {
-        promptAsync();
-        console.log(request)
-        console.log(response)
-        }}
-    />
+    <TouchableHighlight style={styles.loginButton}
+    activeOpacity={0.2}
+    underlayColor={color2Dark}
+    onPress={() => {
+      promptAsync();
+      console.log(request)
+      }}
+  >
+    <Text style={{ fontSize: 20, color: color3 }}>Connect to Fitbit </Text>
+
+    </TouchableHighlight>
+   
   );
 }
 

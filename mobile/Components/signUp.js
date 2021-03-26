@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import firebase from "firebase";
 import axios from "axios";
-import styles from "../styles";
+import styles,{color2Dark} from "../styles";
 
 export function signUp() {
   const [firstName, setFirstName] = useState("");
@@ -243,7 +243,7 @@ export function signUp() {
             style={styles.loginButton}
             onPress={() => register()}
             activeOpacity={0.2}
-            underlayColor="#0F7E78"
+            underlayColor={color2Dark}
           >
             <Text style={{ fontSize: 25, color: "#fdfdfd" }}>Sign Up</Text>
           </TouchableHighlight>
