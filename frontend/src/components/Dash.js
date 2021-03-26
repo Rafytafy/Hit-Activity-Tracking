@@ -1,8 +1,8 @@
 import React from 'react'; 
 import { useHistory } from 'react-router-dom';
-import { Row, Button} from 'reactstrap';
+import { Row, Button, Col} from 'reactstrap';
 import {connect} from 'react-redux'
-
+import DefaultPicture from '../images/default-profile-picture.png'
 
 const Dash = (props) => {
     
@@ -15,9 +15,18 @@ const Dash = (props) => {
     
     return ( 
         <div> 
-            <div className = "topDash"> 
-                <h1> Trainer Dashboard</h1>
-                <h2> Hi {props.currentUser.name.firstName}, Welcome back!</h2>
+            <div className="topDash">
+                <Row className = "fixRow">
+                    <img src={DefaultPicture} style={{ width: '15em' }} alt="Logo" />
+                    <div className="greeting">
+                        <h1> Trainer Dashboard
+                    <br />
+                        <h2> Hi {props.currentUser.name.firstName}, Welcome back! </h2>
+                    </h1>
+                    </div>
+                    
+                </Row>
+                
             </div>
                 <div className = "dash">
                     <Row>
