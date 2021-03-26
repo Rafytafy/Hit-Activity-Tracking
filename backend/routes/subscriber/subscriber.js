@@ -183,15 +183,14 @@ router.get("/getSubPhoto/:id", (req, res) => {
   });
 });
 
-//@route put subscriber/accessToken/:id
+//@route put subscriber/fitbitTokens/:id
 //@desc add access token to user
 //@access public
 router.put("/fitbitTokens/:id", (req, res) => {
   Subscriber.findByIdAndUpdate(
     req.params.id,
     { 
-      accessToken: req.body.accessToken,
-      refreshToken: req.body.refreshToken
+      accessToken: req.body.accessToken
     },
     (err, subscriber) => {
       if (err) {

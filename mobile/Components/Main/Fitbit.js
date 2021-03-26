@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as WebBrowser from 'expo-web-browser';
 import { makeRedirectUri, useAuthRequest, ResponseType  } from 'expo-auth-session';
 import { Text, Platform,TouchableHighlight } from 'react-native';
+import axios from 'axios'
 import styles,{color2Dark,color3} from '../../styles'
 import { connect } from "react-redux";
 
@@ -18,7 +19,6 @@ function Fitbit(props) {
   const [request, response, promptAsync] = useAuthRequest(
     {
       responseType: ResponseType.Token,
-      grantType: 'authorization_code',
       clientId: '22C58S',
       clientSecret: 'ae99c2aecb225e4a0bf93effcbc5a7c3',
       scopes: ['heartrate'],
@@ -34,19 +34,12 @@ function Fitbit(props) {
 
   React.useEffect(() => {
     if (response?.type === 'success') {
-      const { code } = response.params;
-      // axios
-      //   .put(`http://10.0.0.249:5000/subscriber/fitbitTokens/${props.currentUser}`, {
-      //     accessToken: response.params.accessToken,
-      //     refreshToken:
-      //   })
-      //   .then((res) => {
-      //     console.log(res);
-      //   })
-      //   .catch((err) => {
-      //     console.log(err);
-      //   });
-      console.log(response)
+      const { access_token, state } = response.params;
+      
+      axios.put(`http://10.0.0.249:5000/subscriber/fitbitTokens/${props.currentUser}`, {accessToken: access_token})
+        .then((res) => console.log(res))      
+
+      console.log(`The code is: ${code}`)
       }
   }, [response]);
 
