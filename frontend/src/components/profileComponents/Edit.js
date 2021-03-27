@@ -1,4 +1,4 @@
-import React, {useState, useEffect,} from 'react'; 
+import React, {useState, useEffect, state} from 'react'; 
 import firebase from 'firebase'
 import axios from 'axios';
 import ProfileInfo from './ProfileInfo';
@@ -12,6 +12,7 @@ const Edit = (props) => {
     const [plans, setPlans] = useState("");
     const [socials, setSocials] = useState("");
     const [bio, setBio] = useState("");
+    const [testimonials, setTestimonials] = useState("");
     const [modal, setModal] = useState(false)
     
     const toggle = () => setModal(!modal)
@@ -19,8 +20,13 @@ const Edit = (props) => {
     useEffect(() => {
         axios.get(`http://localhost:5000/trainer/${uid}`).then((res) => {
             console.log(res);
-        setImg(res.data[0].profilePicURL)
-            
+            setImg(res.data[0].profilePicURL)
+            setLocation(res.data[0].location)
+            setBio(res.data[0].bio)
+            setPlans(res.data[0].plans)
+            setSocials(res.data[0].socials)
+            setBio(res.data[0].bio)
+            setTestimonials(res.data[0].testimonials)
         })
         
     }, []);
@@ -38,16 +44,19 @@ const Edit = (props) => {
             case "bio":
                 setBio(e.target.value)
                 break;
-            default: console.log("u suck")
+            case "testimonials":
+                setTestimonials(e.target.value)
+                break;
+            default: console.log("this works")
         }   
     }
-    const onSubmit = (e) => {
+    const onSubmit = () => {
         
-        axios.put(`http://localhost:5000/trainer/${uid}`, {bio, location, socials, plans}).then((res) => {
+        axios.put(`http://localhost:5000/trainer/${uid}`, {bio, location, socials, plans, testimonials}).then((res) => {
             console.log(res);
-            window.location.reload();
+            
         })
-       
+        window.location.reload();
     }
     function pickFile(e) {
             console.log("hello");
@@ -92,14 +101,16 @@ const Edit = (props) => {
                                     type="text"
                                     name="location"
                                     id="locationName"
-                                    placeholder="Enter Location"
+                                placeholder="Enter Location"
+                                value={location}
                                     onChange={onChange}
                     />
             <Label for="socialName">Socials</Label>
                                 <Input 
                                     type="textarea"
                                     name="socials"
-                                    id="socialName"
+                                id="socialName"
+                                    value={socials}
                                     placeholder="Enter Socials"
                         onChange={onChange}
                         
@@ -108,7 +119,8 @@ const Edit = (props) => {
                                 <Input 
                                     type="text"
                                     name="plans"
-                                    id="planName"
+                                id="planName"
+                                    value={plans}
                                     placeholder="Enter Workout Plans"
                         onChange={onChange}
                     />
@@ -116,8 +128,18 @@ const Edit = (props) => {
                                 <Input 
                                     type="textarea"
                                     name="bio"
-                                    id="bioName"
+                                id="bioName"
+                                    value={bio}
                                     placeholder="Enter Bio"
+                        onChange={onChange}
+                            />
+                             <Label for="testimonials"> Reviews </Label>
+                            <Input
+                                type="textarea"
+                                name="testimonials"
+                                id="testName"
+                                placeholder="Enter reviews"
+                                value={testimonials}
                         onChange={onChange}
                     />
              </FormGroup>
