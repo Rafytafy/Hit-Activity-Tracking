@@ -33,9 +33,11 @@ const Profile = (props) =>
         <div className="profile">
             <Row className = "fixRow">
                 <Col sm={{ size: 'auto', }}>
-                    <img src={DefaultPicture} style={{ width: '15em' }} alt="Logo" />
-                    </Col>
-                    {/* <ProfileInfo profilePath={img} /> */}
+                    <ProfileInfo profilePath={img} className = "profilePic" />
+                    {/* <img src={DefaultPicture} style={{ width: '15em' }} alt="Logo" /> */}
+                </Col>
+                
+                    
                     <br />
                     <Container className = "profileInfo"> 
                     <Col> <h3> Trainer </h3>
@@ -63,7 +65,8 @@ const Profile = (props) =>
                     <h1> Programs </h1>
                     <br/>
                         <Row>
-                            <Jumbotron className = "jumbo">
+                        <Jumbotron className="jumbo">
+                            
                             </Jumbotron>
                             <div className = "dashDivider"/>
                         <Jumbotron className = "jumbo">

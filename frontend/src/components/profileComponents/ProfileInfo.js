@@ -16,8 +16,7 @@ const ProfileInfo = (props) => {
     
 return (
     <div>
-        
-        <img src={img} alt="text" style={{ width: '15em' }}/>
+        <img src={img} alt="text" className="profilePic" />
     </div>
 );
  
