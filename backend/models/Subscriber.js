@@ -41,6 +41,7 @@ const SubscriberSchema = new Schema({
         type: String,
         default: ''
     },
+    workoutSessions: [],
     routines: []
 })
 

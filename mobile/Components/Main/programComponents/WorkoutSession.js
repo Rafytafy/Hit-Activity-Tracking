@@ -17,6 +17,7 @@ import styles, {
   color1Dark,
   color1,
 } from "../../../styles";
+import axios from "axios";
 const width = Dimensions.get("screen").width;
 function WorkoutSession(props) {
   const [isWorkoutSessionStarted, setIsWorkoutSessionStarted] = useState(false),
@@ -27,9 +28,12 @@ function WorkoutSession(props) {
     [workoutImageUrl, setWorkoutImageUrl] = useState(),
     [currentIterationOfSession, setCurrentIterationOfSession] = useState(0),
     [idOfWorkout, SetIdOfWorkout] = useState("0"),
-    [curWorkoutNum, setCurWorkoutNum] = useState(1);
+    [curWorkoutNum, setCurWorkoutNum] = useState(1),
+    [startTime, setStartTime] = useState('');
 
   const startWorkout = () => {
+    var today = new Date();
+    setStartTime(`${today.getHours().toString()}:${today.getMinutes().toString()}`)
     setIsWorkoutSessionStarted(true);
     setWorkoutName(props.routine.workouts[0].workout.name);
     let image = props.routine.workouts[0].workout.imageURL;
@@ -81,6 +85,15 @@ function WorkoutSession(props) {
         props.routine.workouts[currentIterationOfSession + 1].workout._id
       );
     } else {
+      var today = new Date();
+      endTime = `${today.getHours().toString()}:${today.getMinutes().toString()}`
+      axios.post('http://10.0.0.249:5000/workoutSession', 
+      {
+        access_token: props.profileData.accessToken,
+        start: startTime,
+        end: endTime,
+        id: props.currentUser
+      })
       Alert.alert("Session Completed", "Keep up the good work!", [
         { text: "OK", onPress: () => console.log("OK Pressed") },
       ]);
@@ -158,6 +171,8 @@ function WorkoutSession(props) {
 
 const mapStateToProps = (store) => ({
   routine: store.subscriber.currentRoutine,
+  currentUser: store.subscriber.currentUser,
+  profileData: store.subscriber.profileData
 });
 
 export default connect(mapStateToProps, null)(WorkoutSession);
