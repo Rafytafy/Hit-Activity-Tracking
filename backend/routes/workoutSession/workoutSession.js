@@ -12,10 +12,11 @@ const WorkoutSession = require("../../models/WorkoutSession");
 //@desc add access token to user
 //@access public
 router.post("/", (req, res) => {
-    
+    let TWENTY_MINUTES = 1200000;
+
     var config = {
         method: 'get',
-        url: `https://api.fitbit.com/1/user/-/activities/heart/date/today/1d/1min/time/17:00/18:00.json`,
+        url: `https://api.fitbit.com/1/user/-/activities/heart/date/today/1d/1sec/time/${req.body.start}/${req.body.end}.json`,
         headers: { 
           'Authorization': `Bearer ${req.body.access_token}`
         }
@@ -31,42 +32,26 @@ router.post("/", (req, res) => {
             })
 
             newWorkoutSession.save().then(item =>{
-                // Subscriber.findByIdAndUpdate(
-                //     req.body.id,
-                //     { 
-                //       accessToken: req.body.accessToken
-                //     },
-                //     (err, subscriber) => {
-                //       if (err) {
-                //         res.send("Error could not add tokens to subscriber");
-                //       } else {
-                //         res.send("Successfuly added tokens to subscriber");
-                //       }
-                //     }
-                //   );
+                Subscriber.findByIdAndUpdate(
+                    req.body.id,
+                    { 
+                      "$push": {workoutSessions: item._id}
+                    },
+                    (err, subscriber) => {
+                      if (err) {
+                        res.send("Error could not add tokens to subscriber");
+                      } else {
+                        res.send("Successfuly added tokens to subscriber");
+                      }
+                    }
+                  );
             });
         })
         .catch(function (error) {
           console.log(error);
         });
-      }, 1000)
+      }, TWENTY_MINUTES)
       
-
-
-
-      Subscriber.findByIdAndUpdate(
-    req.params.id,
-    { 
-      accessToken: req.body.accessToken
-    },
-    (err, subscriber) => {
-      if (err) {
-        res.send("Error could not add tokens to subscriber");
-      } else {
-        res.send("Successfuly added tokens to subscriber");
-      }
-    }
-  );
 });
 
 module.exports = router;

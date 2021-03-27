@@ -39,7 +39,7 @@ function Fitbit(props) {
       axios.put(`http://10.0.0.249:5000/subscriber/fitbitTokens/${props.currentUser}`, {accessToken: access_token})
         .then((res) => console.log(res))      
 
-      console.log(`The code is: ${code}`)
+    
       }
   }, [response]);
 
