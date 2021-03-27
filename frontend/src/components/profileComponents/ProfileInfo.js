@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'; 
 import firebase from 'firebase'; 
-
+import DefaultPicture from '../../images/default-profile-picture.png'
 const ProfileInfo = (props) => {
     const [img, setImg] = useState("");
     useEffect(() => {
@@ -12,11 +12,12 @@ const ProfileInfo = (props) => {
             })
         }
     }, [props.profilePath]);
-        
+    if (!img) {setImg(DefaultPicture)}
+         
     
 return (
     <div>
-        <img src={img} alt="text" className="profilePic" />
+        <img src={img} alt= "Your profile" className="profilePic" />
     </div>
 );
  

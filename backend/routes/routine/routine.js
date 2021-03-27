@@ -18,7 +18,7 @@ router.get('/:id', (req, res) => {
             if(!trainer) {
                return res.send(err);
             }
-        
+            
              res.send(trainer.routines)
         })
 })

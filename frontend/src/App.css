@@ -21,6 +21,7 @@
 .profilePic {
   padding-top: 1rem;
   margin-left: 1rem;
+  margin-right: 1rem;
   border-radius: 100px;
   height: 12rem;
   width: 12rem;
@@ -28,6 +29,7 @@
   background-position: center center;
   background-size: cover;
 }
+
 .programs {
   margin-left: 4rem;
   margin-right: 10rem;
@@ -36,6 +38,9 @@
   width: 20rem;
   height: 15rem;
   border-radius: 12rem !important;
+  color: rgb(97, 97, 97);
+  align-items: center;
+  justify-content: center;
 }
 
 .bigJumbo {
@@ -44,6 +49,7 @@
   max-height: 60rem;
   border-radius: 8rem !important;
   margin-bottom: -21rem !important;
+  color: rgb(97, 97, 97);
 }
 
 .greeting {

@@ -6,6 +6,7 @@ import ProfileInfo from './ProfileInfo';
 import { connect } from 'react-redux';
 import Edit from './Edit';
 import DefaultPicture from '../../images/default-profile-picture.png'
+import {deleteRoutine, setCurrentRoutine} from '../../redux/actions/index'
 
 const Profile = (props) => 
 {
@@ -14,7 +15,7 @@ const Profile = (props) =>
     const [plans, setPlans] = useState("");
     const [socials, setSocials] = useState("");
     const [bio, setBio] = useState("");
-
+    const [testimonials, setTestimonials] = useState("");
     const uid = firebase.auth().currentUser.uid;
 
     useEffect(() => {
@@ -24,9 +25,11 @@ const Profile = (props) =>
         setLocation(res.data[0].location)
         setPlans(res.data[0].plans)
         setBio(res.data[0].bio)
-        setSocials(res.data[0].socials) 
+        setSocials(res.data[0].socials)
+        setTestimonials(res.data[0].testimonials)
         })
-        
+        if (!img) { setImg(DefaultPicture) }
+       
     },[]);
 
     return (
@@ -58,7 +61,9 @@ const Profile = (props) =>
                     </div>
                     
                     <Jumbotron className = "bigJumbo">
-                        
+                        <p>{testimonials}</p>
+                        <hr />
+                        <p> {testimonials} </p>
                     </Jumbotron>
             </Col>
                      <div className= "programs">
@@ -69,10 +74,12 @@ const Profile = (props) =>
                             
                             </Jumbotron>
                             <div className = "dashDivider"/>
-                        <Jumbotron className = "jumbo">
+                        <Jumbotron className="jumbo">
+                            
                             </Jumbotron>
                             <div className = "dashDivider"/>
-                            <Jumbotron className = "jumbo">
+                        <Jumbotron className="jumbo">
+                            
                             </Jumbotron>
                         </Row>
                         
