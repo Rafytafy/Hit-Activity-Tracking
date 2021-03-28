@@ -1,23 +1,44 @@
-import React from 'react'; 
+import React, { useState, useEffect} from 'react'; 
 import { useHistory } from 'react-router-dom';
-import { Row, Button} from 'reactstrap';
+import { Row, Button, Col} from 'reactstrap';
 import {connect} from 'react-redux'
-
+import DefaultPicture from '../images/default-profile-picture.png'
+import ProfileInfo from './profileComponents/ProfileInfo';
+import axios from 'axios';
+import firebase from 'firebase';
 
 const Dash = (props) => {
     
-    const history = useHistory();   
+    const history = useHistory();
+    const [img, setImg] = useState("");
 
     const toClients = () => { history.push('/Clients') }
     const toMessages = () => { history.push('/Messages') }
     const toRoutines = () => { history.push('/Routines') }
     const toWorkouts = () => { history.push('/workouts') }
     
+    useEffect(() => {
+        const uid = firebase.auth().currentUser.uid;
+        axios.get(`http://localhost:5000/trainer/${uid}`).then((res) => {
+            console.log(res);
+            setImg(res.data[0].profilePicURL)
+        })
+    }, []);
     return ( 
         <div> 
-            <div className = "topDash"> 
-                <h1> Trainer Dashboard</h1>
-                <h2> Hi {props.currentUser.name.firstName}, Welcome back!</h2>
+            <div className="topDash">
+                <Row className="fixRow">
+                    <ProfileInfo profilePath={img} className = "profilePic" />
+                    {/* <img src={DefaultPicture} style={{ width: '15em' }} alt="Logo" /> */}
+                    <div className="greeting">
+                        <h1> Trainer Dashboard
+                    <br />
+                        <h2> Hi {props.currentUser.name.firstName}, Welcome back! </h2>
+                    </h1>
+                    </div>
+                    
+                </Row>
+                
             </div>
                 <div className = "dash">
                     <Row>
