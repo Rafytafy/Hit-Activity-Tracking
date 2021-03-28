@@ -29,7 +29,7 @@ const Dash = (props) => {
             <div className="topDash">
                 <Row className="fixRow">
                     <ProfileInfo profilePath={img} className = "profilePic" />
-                    {/* <img src={DefaultPicture} style={{ width: '15em' }} alt="Logo" /> */}
+                    
                     <div className="greeting">
                         <h1> Trainer Dashboard
                     <br />
