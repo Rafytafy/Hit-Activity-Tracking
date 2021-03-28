@@ -12,7 +12,7 @@ export default function Landing({ navigation }) {
             height: 200,
             width: 200,
           }}
-          source={require("../assets/logoRT.png")}
+          source={require("../assets/logoBDB.png")}
         />
       </View>
       <View style={{ flex: 2 }}></View>

@@ -109,11 +109,11 @@ function WorkoutSession(props) {
           <View style={{ ...styles.workoutCard }}>
             <View style={{ justifyContent: "center", flex: 1 }}>
               <Text style={{ fontSize: 30, color: color2 }}>
-                {props.routine.name}
+                {props.routine.name}:
               </Text>
             </View>
             <View style={{ flex: 1 }}>
-              <Text style={{ fontSize: 40, color: color2 }}>
+              <Text style={{ fontSize: 30, color: color2 }}>
                 Exercise {curWorkoutNum}
               </Text>
             </View>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import firebase from 'firebase'
+import firebase from "firebase";
 import {
   View,
   Text,
@@ -16,16 +16,18 @@ import {
   fetchTrainers,
   fetchTrainer,
   subscribe,
+  fetchAllTrainers,
 } from "../../Actions/SubscriberActions";
 
-import styles,{color2Dark} from "../../styles";
+import styles, { color2Dark } from "../../styles";
 const filler = {
   firstName: "who",
   lastName: "cares",
 };
 
 function Search(props) {
-  const [search, setSearch] = useState("");
+  const [query, setQuery] = useState("");
+
   const [searchResults, setSearchResult] = useState([]);
   const [user, setUser] = useState(null);
   const [trainer, setTrainer] = useState([]);
@@ -43,27 +45,37 @@ function Search(props) {
     setUser(profileData.uid);
     setSearchResult(searchResult);
     setTrainer(trainer);
+
+    if (query == "" && searchResult.length == 0) {
+      console.log("empty");
+      props.fetchAllTrainers();
+    }
     if (typeof trainer.name !== "undefined") {
       settrainerid(trainer._id);
       setTrainerName(trainer.name);
       setTrainerEmail(trainer.email);
-      if(trainer.bio!==''){
-setTrainerBio(trainer.bio)
-      }
-      if(trainer.location!==''){
-        setTrainerLoc(trainer.location)
-      }
-      if(trainer.socials!==''){
-        setTrainerSoc(trainer.socials)
-      }
-      
-      
-      if(trainer.profilePicURL!=='') {
-        firebase.storage().ref(trainer.profilePicURL).getDownloadURL().then((url) => {
+      trainer.bio !== ""
+        ? trainer.bio.length > 200
+          ? setTrainerBio(trainer.bio.substring(0, 90) + "...")
+          : setTrainerBio(trainer.bio)
+        : setTrainerBio("");
+
+      trainer.location !== ""
+        ? setTrainerLoc(trainer.location)
+        : setTrainerLoc("");
+
+      trainer.socials !== ""
+        ? setTrainerSoc(trainer.socials)
+        : setTrainerSoc("");
+      if (trainer.profilePicURL !== "") {
+        firebase
+          .storage()
+          .ref(trainer.profilePicURL)
+          .getDownloadURL()
+          .then((url) => {
             setTrainerIMG(url);
-           
-        })
-      }else {
+          });
+      } else {
         firebase
           .storage()
           .ref("empty.png")
@@ -90,7 +102,9 @@ setTrainerBio(trainer.bio)
           style={styles.textInput}
           placeholder="Search For Trainer"
           onChangeText={(search) => {
+            setQuery(search);
             if (search) {
+              console.log("if");
               props.fetchTrainers(search);
             }
           }}
@@ -104,37 +118,35 @@ setTrainerBio(trainer.bio)
               <View
                 style={{
                   flexDirection: "row",
-                  justifyContent: "space-between",
-                  alignItems:'center'
                 }}
               >
-               
-                <Text style={{ fontSize: 20, color: "#333" }}>
-                  {item.name.firstName} {item.name.lastName}
-                </Text>
-                <TouchableHighlight
-                  style={{
-                    ...styles.loginButton,
-                    height: 30,
-                    width: 100,
-                    marginHorizontal: 10,
-                  }}
-                  activeOpacity={0.2}
-                  underlayColor={color2Dark}
-                  onPress={() => {
-                    const name = {
-                      first: item.name.firstName,
-                      last: item.name.lastName,
-                    };
-                    props.fetchTrainer(name);
-
-                    setModalVisible(!modalVisible);
-                  }}
-                >
-                  <Text style={{ fontSize: 12, color: "#fdfdfd" }}>
-                    More Info
+                <View style={{ flex: 1, marginLeft: 15 }}>
+                  <Text style={{ fontSize: 20, color: "#333" }}>
+                    {item.name.firstName} {item.name.lastName}
                   </Text>
-                </TouchableHighlight>
+                </View>
+                <View style={{ flex: 1 }}>
+                  <TouchableHighlight
+                    style={{
+                      ...styles.moreInfoButton,
+                    }}
+                    activeOpacity={0.2}
+                    underlayColor={color2Dark}
+                    onPress={() => {
+                      const name = {
+                        first: item.name.firstName,
+                        last: item.name.lastName,
+                      };
+                      props.fetchTrainer(name);
+
+                      setModalVisible(!modalVisible);
+                    }}
+                  >
+                    <Text style={{ fontSize: 16, color: "#fdfdfd" }}>
+                      More Info
+                    </Text>
+                  </TouchableHighlight>
+                </View>
               </View>
             </View>
           )}
@@ -160,7 +172,7 @@ setTrainerBio(trainer.bio)
               alignItems: "center",
             }}
           >
-             <View
+            <View
               style={{
                 margin: 20,
                 backgroundColor: "white",
@@ -172,74 +184,111 @@ setTrainerBio(trainer.bio)
                   width: 0,
                   height: 2,
                 },
-                shadowOpacity: 0.25,
+                shadowOpacity: 0.6,
                 shadowRadius: 4,
                 elevation: 5,
-                height:'70%',
-              width:'85%',
-              alignItems:'center',
-              justifyContent:'center'
+                height: "70%",
+                width: "85%",
+                alignItems: "center",
               }}
             >
-               <Image source={{uri:trainerIMG}}
-                style={{height:150,width:150,borderRadius:100,marginBottom:10}}/>
-              <Text style={{textAlign:'center',fontSize:20}}>
-                {trainerName.firstName} {trainerName.lastName}
-                {"\n\n"}
+            
+                <View
+                  style={{
+                    flex:1,
+               
+                    alignItems: "center",
+                    marginBottom: 10,
+                  }}
+                >
+                  <View style={{ flex: 1, alignItems: "center" }}>
+                    <Text style={{ textAlign: "center", fontSize: 24 }}>
+                      {trainerName.firstName} {trainerName.lastName}
+                    </Text>
+                  </View>
+
+                  <View style={{ flex: 1, alignItems: "center" }}>
+                    <Text style={{ fontSize: 24 }}>{trainerLoc}</Text>
+                  </View>
+                </View>
+         
+              <View stlye={{flex:2}}>
+                <Image
+                  source={{ uri: trainerIMG }}
+                  style={{
+                    height: 150,
+                    width: 150,
+                    borderRadius: 100,
+                    marginBottom: 10,
+                  }}
+                />
+              </View>
+              <View style = {{flex:3}}>
+
               
-                {trainerEmail}
-                {"\n\n"}
+              <Text
+                style={{ textAlign: "center", fontSize: 20, marginTop: 10 }}
+              >
                 {trainerBio}
-                {"\n\n"}
-                {trainerLoc}
-                {"\n\n"}
-                {trainerSoc}
-                {"\n\n"}
-              
               </Text>
-
-              <TouchableHighlight
-                style={{
-                  ...styles.loginButton,
-                  height: 40,
-                  width: 130,
-                  marginHorizontal: 10,
-                }}
-                activeOpacity={0.2}
-                underlayColor={color2Dark}
-                onPress={() => {
-                  const subPair = {
-                    user: user,
-                    trainer: trainerid,
-                  };
-                  props.subscribe(subPair)
-                  Alert.alert("Subscribed To ", `${trainerName.firstName} ${trainerName.lastName}`, [
-                    { text: "OK", onPress: () => console.log("OK Pressed") },
-                  ]);;
-                }}
-              >
-                <Text style={{ fontSize: 20, color: "#fdfdfd" }}>
-                  Subscribe
+              <View style={{ alignItems: "center", marginTop: 10 }}>
+                <Text style={{ textAlign: "center", fontSize: 20 }}>
+                  Find me at
                 </Text>
-              </TouchableHighlight>
+                <Text style={{ textAlign: "center", fontSize: 20 }}>
+                  {trainerEmail}
+                </Text>
+                <Text style={{ textAlign: "center", fontSize: 20 }}>
+                  {trainerSoc}
+                </Text>
+              </View>
+              </View>
+              <View style={{ felx: 2 }}>
+                <TouchableHighlight
+                  style={{
+                    ...styles.loginButton,
+                    height: 40,
+                    width: 200,
+                    marginHorizontal: 10,
+                  }}
+                  activeOpacity={0.2}
+                  underlayColor={color2Dark}
+                  onPress={() => {
+                    const subPair = {
+                      user: user,
+                      trainer: trainerid,
+                    };
+                    props.subscribe(subPair);
+                    Alert.alert(
+                      "Subscribed To ",
+                      `${trainerName.firstName} ${trainerName.lastName}`,
+                      [{ text: "OK", onPress: () => console.log("OK Pressed") }]
+                    );
+                  }}
+                >
+                  <Text style={{ fontSize: 20, color: "#fdfdfd" }}>
+                    Subscribe
+                  </Text>
+                </TouchableHighlight>
 
-              <Text>{"\n\n"}</Text>
+                <Text>{""}</Text>
 
-              <TouchableHighlight
-                style={{
-                  ...styles.loginButton,
-                  height: 40,
-                  width: 130,
-                  marginHorizontal: 10,
-                }}
-                activeOpacity={0.2}
-                underlayColor={color2Dark}
-                onPress={() => {
-                  setModalVisible(!modalVisible);
-                }}
-              >
-                <Text style={{ fontSize: 20, color: "#fdfdfd" }}>Exit </Text>
-              </TouchableHighlight>
+                <TouchableHighlight
+                  style={{
+                    ...styles.loginButton,
+                    height: 40,
+                    width: 200,
+                    marginHorizontal: 10,
+                  }}
+                  activeOpacity={0.2}
+                  underlayColor={color2Dark}
+                  onPress={() => {
+                    setModalVisible(!modalVisible);
+                  }}
+                >
+                  <Text style={{ fontSize: 20, color: "#fdfdfd" }}>Exit </Text>
+                </TouchableHighlight>
+              </View>
             </View>
           </View>
         </Modal>
@@ -254,5 +303,8 @@ const mapStateToProps = (store) => ({
   trainer: store.subscriber.trainer,
 });
 const mapDispatchProps = (dispatch) =>
-  bindActionCreators({ fetchTrainers, fetchTrainer, subscribe }, dispatch);
+  bindActionCreators(
+    { fetchTrainers, fetchTrainer, subscribe, fetchAllTrainers },
+    dispatch
+  );
 export default connect(mapStateToProps, mapDispatchProps)(Search);

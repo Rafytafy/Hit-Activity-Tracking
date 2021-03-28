@@ -14,9 +14,14 @@ import {loadSubToken, loadProfileData, setCurrentRoutine} from '../../../Actions
 import styles ,{color2Dark,color3}  from "../../../styles";
 function Program(props) {
   let screenWidth = Dimensions.get('window').width;
-  
+  const dummy={firstName:'cur',lastName:'user'}
+ const [name,setName] = useState(dummy) 
+ console.log(dummy)
   useEffect( () => {
-    
+    const { currentUser,  profileData,routines  } = props;
+    if (typeof profileData.name !== "undefined") {
+    setName(profileData.name)}
+   
   });
 
   const calculateDuration = (arr) =>{
@@ -59,6 +64,18 @@ const displayWorkoutsDur =(arr) =>
                 alignItems: "center",
               }}
             >
+
+
+<View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
+ 
+  <Text style ={{fontSize:40,color:'#FFF',textAlign:'center',fontWeight:'bold'}}>
+  Welcome {'\n\n'} {name.firstName} {name.lastName}
+</Text>
+
+
+</View>
+<View style={{flex:2}}>
+
               <View style={styles.programCard}>
                 <View style={{flex:2,alignItems:'center',marginTop:20}}>
                 <Text style={{fontSize: 36}}>{routine.name}</Text>
@@ -92,6 +109,12 @@ const displayWorkoutsDur =(arr) =>
               
              
               </View>
+
+              </View>
+
+
+
+
             </View>
             
           ))

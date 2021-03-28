@@ -33,6 +33,14 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     justifyContent: "center",
     alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.4,
+    shadowRadius: 4,
+    elevation: 5,
   },
   loginButton: {
     height: 50,
@@ -41,6 +49,32 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     justifyContent: "center",
     alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.4,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  moreInfoButton:{
+    height: 30,
+    width: 120,
+    marginHorizontal: 10,
+    marginVertical:0,
+    backgroundColor: color2,
+    borderRadius: 30,
+    justifyContent: "center",
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.6,
+    shadowRadius: 4,
+    elevation: 5,
   },
   inputCard: {
     alignItems: "center",
@@ -48,8 +82,15 @@ const styles = StyleSheet.create({
     backgroundColor: color3,
     height: 450,
     width: 350,
-    shadowOffset: { width: 2, height: 2 },
-    shadowColor: color4,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.6,
+    shadowRadius: 4,
+    elevation: 5,
+ 
     padding: 20,
     borderRadius: 8,
   },
@@ -58,8 +99,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: color3,
     width: 350,
-    shadowOffset: { width: 2, height: 2 },
-    shadowColor: color4,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.6,
+    shadowRadius: 4,
+    elevation: 5,
     padding: 20,
     borderRadius: 8,
   },
@@ -106,8 +153,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: color3,
     width: 350,
-    shadowOffset: { width: 2, height: 2 },
-    shadowColor: color4,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.6,
+    shadowRadius: 4,
+    elevation: 5,
     padding: 20,
     borderRadius: 8,
   },
@@ -126,6 +179,14 @@ const styles = StyleSheet.create({
     backgroundColor: color3,
     borderRadius: 8,
     margin: 5,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.6,
+    shadowRadius: 4,
+    elevation: 5,
   },
   programCard:{
  
@@ -135,6 +196,14 @@ const styles = StyleSheet.create({
     backgroundColor: color3,
     borderRadius: 8,
     margin: 5,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.6,
+    shadowRadius: 4,
+    elevation: 5,
   },
   workoutCard:{
     alignItems:'center',
@@ -144,7 +213,15 @@ const styles = StyleSheet.create({
     backgroundColor:color3,
     justifyContent:'center',
     borderRadius:25,
-    marginBottom:20
+    marginBottom:20,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.6,
+    shadowRadius: 4,
+    elevation: 5,
 
 
   },
@@ -156,7 +233,15 @@ const styles = StyleSheet.create({
     backgroundColor:color3,
     justifyContent:'center',
     borderRadius:25,
-    marginBottom:20
+    marginBottom:20,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.6,
+    shadowRadius: 4,
+    elevation: 5,
   },
   workoutImage:{
  
