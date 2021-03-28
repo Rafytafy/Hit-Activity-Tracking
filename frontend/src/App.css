@@ -242,3 +242,14 @@ body {
   padding-top: 1px;
   padding-bottom: 1px;
 }
+
+.floatRight{
+  position:absolute;
+  right:15px;
+  text-align: right;
+}
+.client-bottom-align{
+  padding-top: 4rem;
+  position: relative;
+  bottom: 0;
+}

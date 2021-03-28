@@ -122,6 +122,7 @@ class WorkoutModal extends Component {
                                         <option value="Shoulders">Shoulders</option>
                                         <option value="Deltoids">Deltoids</option>
                                         <option value="Traps">Traps</option>
+                                        <option value="Glutes">Glutes</option>
                                         <option value="Hamstrings">Hamstrings</option>
                                         <option value="Quadriceps">Quadriceps</option>
                                         <option value="Calves">Calves</option>
