@@ -37,7 +37,7 @@ class Workouts extends Component {
                         
                         <Col xs="4" className="mb-3">
                             <Card className="shadow">
-                            {/* <Card.Img variant="bottom" src={DefaultPicture}/>  */}
+                            <CardImg variant="bottom" src={workout.imageURL}/> 
                                 <CardBody>
                                     <CardTitle tag="h5">{workout.name}</CardTitle>
                                     <CardSubtitle tag="h6">{workout.primary} {workout.secondary}</CardSubtitle>

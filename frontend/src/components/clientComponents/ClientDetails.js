@@ -32,8 +32,10 @@ function ClientDetails(props) {
       const age = Math.floor(diff / 31536000000);
       const setAge = (age);
 
-     // var weight_array= (props.client.weights.weight)
-     // var last_element = weight_array[weight_array.length - 1];
+      //pop most recent weight
+      var weight_array= (props.client.weights)
+      var last_element = weight_array[weight_array.length - 1].weight;
+      
     return ( 
 
     <Container className="container-fluid">
@@ -41,8 +43,6 @@ function ClientDetails(props) {
             <div className="d-flex">
                 <Col xs={6}>
                 <img src={DefaultPicture} style={{width: '10em'}}/>
-                
-                
                 <div>
                     <h1 className="display-4">{props.client.name.firstName} {props.client.name.lastName}</h1>
                 </div>
@@ -52,7 +52,7 @@ function ClientDetails(props) {
                     
                     <h6>Age: {age}</h6>
                     <h6>Weight: {props.client.initWeight}</h6>
-                    {/* <h6>Current Weight: {last_element}</h6> */}
+                    <h6>Current Weight: {last_element}</h6>
                     <h6>Height: {props.client.height.feet}' {props.client.height.inches}"</h6>
                     <h4 className="client-bottom-align">{props.client.email}</h4>
                 </div>
