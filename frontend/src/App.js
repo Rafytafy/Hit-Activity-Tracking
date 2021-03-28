@@ -8,12 +8,12 @@ import {fetchClients, fetchCurrentUser, fetchWorkouts, fetchRoutines} from './re
 //components
 import Register from "./components/Register";
 import Navbar from "./components/Navbar";
-import Profile from "./components/Profile";
+import Profile from "./components/profileComponents/Profile";
 import Login from "./components/Login";
 import Clients from "./components/clientComponents/Clients";
 import ClientDetails from "./components/clientComponents/ClientDetails";
 import Dash from "./components/Dash";
-import Edit from "./components/Edit";
+import Edit from "./components/profileComponents/Edit";
 import Messages from "./components/Messages";
 import Routines from "./components/routineComponents/Routines";
 import Workouts from "./components/workoutComponents/Workouts";
