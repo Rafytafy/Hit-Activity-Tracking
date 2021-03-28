@@ -8,10 +8,9 @@ import axios from 'axios';
 import firebase from 'firebase';
 
 const Dash = (props) => {
-    const uid = firebase.auth().currentUser.uid;
+    
+    const history = useHistory();
     const [img, setImg] = useState("");
-
-    const history = useHistory();   
 
     const toClients = () => { history.push('/Clients') }
     const toMessages = () => { history.push('/Messages') }
@@ -19,6 +18,7 @@ const Dash = (props) => {
     const toWorkouts = () => { history.push('/workouts') }
     
     useEffect(() => {
+        const uid = firebase.auth().currentUser.uid;
         axios.get(`http://localhost:5000/trainer/${uid}`).then((res) => {
             console.log(res);
             setImg(res.data[0].profilePicURL)
