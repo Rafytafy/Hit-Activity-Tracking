@@ -7,7 +7,7 @@ import Detail from './Detail'
 import Edit from './Edit'
 import { Container, Col, Row, Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle, Button } from 'reactstrap'
-
+import DefaultPicture from '../../images/default-profile-picture.png'
 
 class Workouts extends Component {
     componentWillReceiveProps(nextProps){
@@ -34,9 +34,10 @@ class Workouts extends Component {
                     </div>
                     <Row>
                     {this.props.workouts.map((workout) => 
-                    
+                        
                         <Col xs="4" className="mb-3">
                             <Card className="shadow">
+                            {/* <Card.Img variant="bottom" src={DefaultPicture}/>  */}
                                 <CardBody>
                                     <CardTitle tag="h5">{workout.name}</CardTitle>
                                     <CardSubtitle tag="h6">{workout.primary} {workout.secondary}</CardSubtitle>
@@ -46,13 +47,12 @@ class Workouts extends Component {
                                             <Edit workout={workout}/>
                                         </div>
                                     </CardText>
-
                                 </CardBody>
                             </Card>
-                        </Col>
+                        {/* <img src={workout.imageURL} alt="text" style={{height:'200px', width:'300px'}}/> */}
+                        </Col>   
                     )}
-                    </Row>
-                    
+                    </Row>       
             </Container>
         )
     }
@@ -65,4 +65,4 @@ const mapStateToProps = (store) => ({
     updatedWorkout: store.workouts.updatedWorkout
 })
 
-export default connect(mapStateToProps, null)(Workouts)
+export default  connect(mapStateToProps, null)(Workouts)
