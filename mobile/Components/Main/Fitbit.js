@@ -2,7 +2,9 @@ import * as React from 'react';
 import * as WebBrowser from 'expo-web-browser';
 import { makeRedirectUri, useAuthRequest, ResponseType  } from 'expo-auth-session';
 import { Text, Platform,TouchableHighlight } from 'react-native';
+import axios from 'axios'
 import styles,{color2Dark,color3} from '../../styles'
+import { connect } from "react-redux";
 
 WebBrowser.maybeCompleteAuthSession();
 const useProxy = true;
@@ -13,7 +15,7 @@ const discovery = {
   revocationEndpoint: 'https://api.fitbit.com/oauth2/revoke',
 };
 
-function Fitbit() {
+function Fitbit(props) {
   const [request, response, promptAsync] = useAuthRequest(
     {
       responseType: ResponseType.Token,
@@ -32,8 +34,12 @@ function Fitbit() {
 
   React.useEffect(() => {
     if (response?.type === 'success') {
-      const { code } = response.params;
-      console.log(response.params)
+      const { access_token, state } = response.params;
+      
+      axios.put(`http://10.0.0.249:5000/subscriber/fitbitTokens/${props.currentUser}`, {accessToken: access_token})
+        .then((res) => console.log(res))      
+
+    
       }
   }, [response]);
 
@@ -53,4 +59,8 @@ function Fitbit() {
   );
 }
 
-export default Fitbit
+const mapStateToProps = (store) => ({
+  currentUser: store.subscriber.currentUser,
+});
+
+export default connect(mapStateToProps, null)(Fitbit)

@@ -27,7 +27,9 @@ const TrainerSchema = new Schema({
         type: String,
          
     },
-
+    testimonials: {
+        type: String
+    },
     socials: {
         type: String,
         
