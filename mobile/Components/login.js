@@ -9,7 +9,7 @@ import {
   Alert,
 } from "react-native";
 import firebase from "firebase";
-import styles from "../styles";
+import styles,{color2Dark} from "../styles";
 
 export function login() {
   const [email, setEmail] = useState("");
@@ -59,7 +59,7 @@ export function login() {
           style={styles.loginButton}
           onPress={() => authLogin()}
           activeOpacity={0.2}
-          underlayColor="#0F7E78"
+          underlayColor={color2Dark}
         >
           <Text style={{ fontSize: 25, color: "#fdfdfd" }}>Login</Text>
         </TouchableHighlight>

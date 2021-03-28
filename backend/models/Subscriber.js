@@ -33,6 +33,15 @@ const SubscriberSchema = new Schema({
         type: String,
         default: ''
     },
+    accessToken: {
+        type: String,
+        default: ''
+    },
+    refreshToken: {
+        type: String,
+        default: ''
+    },
+    workoutSessions: [],
     routines: []
 })
 

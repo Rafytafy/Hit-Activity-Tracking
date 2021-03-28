@@ -14,7 +14,8 @@ const register   = require('./routes/register/register'),
       workout    = require('./routes/workout/workout'),
       subscriber = require('./routes/subscriber/subscriber'),
       routine    = require('./routes/routine/routine'),
-      subData    = require('./routes/subData/subData');
+      subData    = require('./routes/subData/subData'),
+      workoutSession = require('./routes/workoutSession/workoutSession');
 
 admin.initializeApp({
 credential: admin.credential.cert(serviceAccount),
@@ -44,6 +45,7 @@ app.use('/trainer', trainer);
 app.use('/subscriber', subscriber);
 app.use('/workout', workout);
 app.use('/routine', routine);
+app.use('/workoutSession', workoutSession);
 
 const port = process.env.PORT || 5000;
 

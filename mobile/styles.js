@@ -1,8 +1,13 @@
-import { StyleSheet } from "react-native";
-export const color1 = "#7E0F15";
-export const color2 = "#0F7E78";
-export const color3 = "#FAFAFA";
+import { StyleSheet ,Dimensions} from "react-native";
+export const color1 = "#9FB3C8";
+export const color2 = "#486581";
+export const color3 = "#f0f4f8";
 export const color4 = "#333333";
+export const color2Dark = '#132f49';
+export const color1Dark='#BCCCDC'
+const height= Dimensions.get('screen').height
+const width = Dimensions.get('screen').width
+
 const styles = StyleSheet.create({
   landContainer: {
     flex: 1,
@@ -123,14 +128,42 @@ const styles = StyleSheet.create({
     margin: 5,
   },
   programCard:{
-    justifyContent: "center",
-    alignItems: "center",
-    height: 350,
+ 
+ 
+    height:500,
     width: 350,
     backgroundColor: color3,
     borderRadius: 8,
     margin: 5,
+  },
+  workoutCard:{
+    alignItems:'center',
+  marginTop:50,
+    width:width*.90,
+    flex:3,
+    backgroundColor:color3,
+    justifyContent:'center',
+    borderRadius:25,
+    marginBottom:20
+
+
+  },
+  timerCard:{
+    alignItems:'center',
+
+    width:width*.90,
+    flex:3,
+    backgroundColor:color3,
+    justifyContent:'center',
+    borderRadius:25,
+    marginBottom:20
+  },
+  workoutImage:{
+ 
+     flex:3,
+   
   }
 });
+
 
 export default styles;
