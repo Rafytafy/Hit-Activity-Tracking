@@ -102,21 +102,71 @@ class WorkoutModal extends Component {
                                 
                                 <Label for="primary">Primary</Label>
                                 <Input 
-                                    type="text"
+                                    type="select"
                                     name="primary"
                                     id="primary"
-                                    value={this.state.primary}
-                                    onChange={this.onChange}
-                                />
+                                    placeholder="Enter muscle group"
+                                    onChange={this.onChange}>
+                                        <option value="" disabled selected>Main muscle group</option>
+                                        <option value="Full Body">Full Body</option>
+                                        <option value="Upper Body">Upper Body</option>
+                                        <option value="Lower Body">Lower Body</option>
+                                        <option value="Arms">Arms</option>
+                                        <option value="Biceps">Biceps</option>
+                                        <option value="Triceps">Triceps</option>
+                                        <option value="Forearms">Forearms</option>
+                                        <option value="Core">Core</option>
+                                        <option value="Abs">Abs</option>
+                                        <option value="Obliques">Obliques</option>
+                                        <option value="Back">Back</option>
+                                        <option value="Upper Back">Back (Upper)</option>
+                                        <option value="Lower Back">Back (Lower)</option>
+                                        <option value="Chest">Chest</option>
+                                        <option value="Upper Chest">Chest (Upper)</option>
+                                        <option value="Lower Chest">Chest (Lower)</option>
+                                        <option value="Shoulders">Shoulders</option>
+                                        <option value="Deltoids">Deltoids</option>
+                                        <option value="Traps">Traps</option>
+                                        <option value="Glutes">Glutes</option>
+                                        <option value="Hamstrings">Hamstrings</option>
+                                        <option value="Quadriceps">Quadriceps</option>
+                                        <option value="Calves">Calves</option>
+                                    <br/>
+                                </Input>
                                 
                                 <Label for="secondary">Secondary</Label>
                                 <Input 
-                                    type="text"
+                                    type="select"
                                     name="secondary"
                                     id="secondary"
-                                    value={this.state.secondary}
-                                    onChange={this.onChange}
-                                />
+                                    placeholder="Enter muscle group"
+                                    onChange={this.onChange}>
+                                        <option value="" disabled selected>Secondary muscle group</option>
+                                        <option value="Full Body">Full Body</option>
+                                        <option value="Upper Body">Upper Body</option>
+                                        <option value="Lower Body">Lower Body</option>
+                                        <option value="Arms">Arms</option>
+                                        <option value="Biceps">Biceps</option>
+                                        <option value="Triceps">Triceps</option>
+                                        <option value="Forearms">Forearms</option>
+                                        <option value="Core">Core</option>
+                                        <option value="Abs">Abs</option>
+                                        <option value="Obliques">Obliques</option>
+                                        <option value="Back">Back</option>
+                                        <option value="Upper Back">Back (Upper)</option>
+                                        <option value="Lower Back">Back (Lower)</option>
+                                        <option value="Chest">Chest</option>
+                                        <option value="Upper Chest">Chest (Upper)</option>
+                                        <option value="Lower Chest">Chest (Lower)</option>
+                                        <option value="Shoulders">Shoulders</option>
+                                        <option value="Deltoids">Deltoids</option>
+                                        <option value="Traps">Traps</option>
+                                        <option value="Glutes">Glutes</option>
+                                        <option value="Hamstrings">Hamstrings</option>
+                                        <option value="Quadriceps">Quadriceps</option>
+                                        <option value="Calves">Calves</option>
+                                    <br/>
+                                </Input>
 
                                 <Label for="instructions">Instructions</Label>
                                 <Input 
