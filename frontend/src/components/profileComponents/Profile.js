@@ -16,9 +16,10 @@ const Profile = (props) =>
     const [socials, setSocials] = useState("");
     const [bio, setBio] = useState("");
     const [testimonials, setTestimonials] = useState("");
-    const uid = firebase.auth().currentUser.uid;
+    
 
     useEffect(() => {
+        const uid = firebase.auth().currentUser.uid;
         axios.get(`http://localhost:5000/trainer/${uid}`).then((res) => {
             console.log(res);
         setImg(res.data[0].profilePicURL)
