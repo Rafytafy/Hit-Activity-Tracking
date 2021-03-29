@@ -111,6 +111,7 @@ class WorkoutModal extends Component {
                                         <option value="Biceps">Biceps</option>
                                         <option value="Triceps">Triceps</option>
                                         <option value="Forearms">Forearms</option>
+                                        <option value="Core">Core</option>
                                         <option value="Abs">Abs</option>
                                         <option value="Obliques">Obliques</option>
                                         <option value="Back">Back</option>
@@ -145,6 +146,7 @@ class WorkoutModal extends Component {
                                         <option value="Biceps">Biceps</option>
                                         <option value="Triceps">Triceps</option>
                                         <option value="Forearms">Forearms</option>
+                                        <option value="Core">Core</option>
                                         <option value="Abs">Abs</option>
                                         <option value="Obliques">Obliques</option>
                                         <option value="Back">Back</option>
@@ -156,6 +158,7 @@ class WorkoutModal extends Component {
                                         <option value="Shoulders">Shoulders</option>
                                         <option value="Deltoids">Deltoids</option>
                                         <option value="Traps">Traps</option>
+                                        <option value="Glutes">Glutes</option>
                                         <option value="Hamstrings">Hamstrings</option>
                                         <option value="Quadriceps">Quadriceps</option>
                                         <option value="Calves">Calves</option>

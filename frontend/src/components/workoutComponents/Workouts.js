@@ -36,11 +36,12 @@ class Workouts extends Component {
                     {this.props.workouts.map((workout) => 
                         
                         <Col xs="4" className="mb-3">
-                            <Card className="shadow">
-                            <CardImg variant="bottom" src={workout.imageURL}/> 
+                            <Card className="shadow" >
+                            <CardImg variant="bottom" src={workout.imageURL} /> 
                                 <CardBody>
                                     <CardTitle tag="h5">{workout.name}</CardTitle>
-                                    <CardSubtitle tag="h6">{workout.primary} {workout.secondary}</CardSubtitle>
+                                    <CardSubtitle tag="h6">Primary: {workout.primary}
+                                                <div/> Secondary: {workout.secondary}</CardSubtitle>
                                     <CardText>
                                         <div style={{display: "flex"}}>
                                             <Detail workout={workout}/>
@@ -49,7 +50,6 @@ class Workouts extends Component {
                                     </CardText>
                                 </CardBody>
                             </Card>
-                        {/* <img src={workout.imageURL} alt="text" style={{height:'200px', width:'300px'}}/> */}
                         </Col>   
                     )}
                     </Row>       
