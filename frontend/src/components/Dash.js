@@ -21,7 +21,14 @@ const Dash = (props) => {
         const uid = firebase.auth().currentUser.uid;
         axios.get(`http://localhost:5000/trainer/${uid}`).then((res) => {
             console.log(res);
-            setImg(res.data[0].profilePicURL)
+            try {
+                setImg(res.data[0].profilePicURL)
+            }
+            catch (e)
+            {
+                console.error(e);
+            }
+            
         })
     }, []);
     return ( 
@@ -29,7 +36,7 @@ const Dash = (props) => {
             <div className="topDash">
                 <Row className="fixRow">
                     <ProfileInfo profilePath={img} className = "profilePic" />
-                    {/* <img src={DefaultPicture} style={{ width: '15em' }} alt="Logo" /> */}
+                    
                     <div className="greeting">
                         <h1> Trainer Dashboard
                     <br />
@@ -42,20 +49,16 @@ const Dash = (props) => {
             </div>
                 <div className = "dash">
                     <Row>
-
-                    <Button className="shaded shadow-lg" onClick = {toMessages} > 
-                        <h1>Messages</h1>
-                    </Button>
                     <div className="dashDivider"/>
-                    <Button className="shaded shadow-lg" size="lg" onClick = { toClients }> 
+                    <Button className="shadow-lg" size="lg" onClick = { toClients }> 
                         <h1>Clients</h1>
                     </Button>
                         <div className = "dashDivider"/>
-                    <Button className="shaded shadow-lg" onClick = { toRoutines }> 
+                    <Button className="shadow-lg" onClick = { toRoutines }> 
                         <h1>Routines</h1>
                     </Button>
                     <div className = "dashDivider"/>
-                    <Button className="shaded shadow-lg" onClick = { toWorkouts }> 
+                    <Button className="shadow-lg" onClick = { toWorkouts }> 
                         <h1> Workouts</h1>
                     </Button>
                     </Row> 

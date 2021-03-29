@@ -163,6 +163,7 @@ input[type="file"] {
 .shaded {
   border-radius: 3rem !important;
 }
+
 .button {
   display: flex;
   justify-content: center;
@@ -211,10 +212,11 @@ body {
   background-color: var(--primaryColor);
 }
 .dash button {
-  width: 250px;
-  height: 180px;
+  width: 350px;
+  height: 280px;
   color: var(--secondaryColor);
   background-color: var(--white1);
+  border-radius: 6rem !important;
 }
 .topDash {
   margin-left: 20px;
@@ -239,4 +241,15 @@ body {
   margin-bottom: 1px;
   padding-top: 1px;
   padding-bottom: 1px;
+}
+
+.floatRight{
+  position:absolute;
+  right:15px;
+  text-align: right;
+}
+.client-bottom-align{
+  padding-top: 3.8rem;
+  position: relative;
+  bottom: 0;
 }

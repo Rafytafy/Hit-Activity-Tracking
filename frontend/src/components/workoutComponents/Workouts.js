@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
-import { Container, Table } from 'reactstrap'
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux'
 import { clearWorkoutState } from '../../redux/actions/index'
 import  WorkoutModal  from './WorkoutModal'
 import Detail from './Detail'
 import Edit from './Edit'
-
+import { Container, Col, Row, Card, CardImg, CardText, CardBody,
+    CardTitle, CardSubtitle, Button } from 'reactstrap'
+import DefaultPicture from '../../images/default-profile-picture.png'
 
 class Workouts extends Component {
     componentWillReceiveProps(nextProps){
@@ -26,39 +27,32 @@ class Workouts extends Component {
     render() {
         return (
             <Container>
-                <div className="workouts">
-                <div style={{display: "flex"}}>
-                    <h2>Workouts</h2>
-                    <WorkoutModal />
-                </div>
-                <Table>
-                    <thead>
-                        <th>Name</th>
-                        <th>Primary</th>
-                        <th>Secondary</th>
-                        <th>Action</th>
-                    </thead>
-                    <tbody>
-                    {this.props.workouts.map((workout) =>
-                            <tr key={workout._id}>
-                                <th>{workout.name}</th>
-                                <th>{workout.primary}</th>
-                                <th>{workout.secondary}</th>
-                                <th>
-                                    <div style={{display: "flex", justifyContent: "left"}}>
+                    <div className="workouts">
                     
-                                    
-                                        <Detail workout={workout} />
-                                        <Edit workout={workout}/>
-                                    </div>
-                                </th>
-                            </tr>
-                            )}
-                        <tr>
-                        </tr>
-                    </tbody>
-                </Table>
-                </div>
+                     <h2>Workouts</h2>
+                     <WorkoutModal />
+                    </div>
+                    <Row>
+                    {this.props.workouts.map((workout) => 
+                        
+                        <Col xs="4" className="mb-3">
+                            <Card className="shadow" >
+                            <CardImg variant="bottom" src={workout.imageURL} /> 
+                                <CardBody>
+                                    <CardTitle tag="h5">{workout.name}</CardTitle>
+                                    <CardSubtitle tag="h6">Primary: {workout.primary}
+                                                <div/> Secondary: {workout.secondary}</CardSubtitle>
+                                    <CardText>
+                                        <div style={{display: "flex"}}>
+                                            <Detail workout={workout}/>
+                                            <Edit workout={workout}/>
+                                        </div>
+                                    </CardText>
+                                </CardBody>
+                            </Card>
+                        </Col>   
+                    )}
+                    </Row>       
             </Container>
         )
     }
@@ -71,4 +65,4 @@ const mapStateToProps = (store) => ({
     updatedWorkout: store.workouts.updatedWorkout
 })
 
-export default connect(mapStateToProps, null)(Workouts)
+export default  connect(mapStateToProps, null)(Workouts)
