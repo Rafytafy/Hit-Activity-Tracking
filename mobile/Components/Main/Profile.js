@@ -74,7 +74,9 @@ function Profile(props) {
       setWeights(weights);
      
       var wl=weights.length
+      if(wl!== 0){
       setCurWeight(weights[wl-1].y)
+      }
      
       setProfData(profileData);
       setUser(profileData._id);
@@ -268,20 +270,21 @@ function Profile(props) {
                   width: 0,
                   height: 2,
                 },
-                shadowOpacity: 0.25,
+                shadowOpacity: 0.9,
                 shadowRadius: 4,
                 elevation: 5,
-                height: "70%",
-                width: "85%",
+                height: "30%",
+                width: "90%",
                 alignItems: "center",
-                justifyContent: "center",
+                justifyContent: "space-between",
+                marginVertical:25
               }}
             >
-              <TouchableHighlight
+   <TouchableHighlight
                 style={{
                   ...styles.loginButton,
                   height: 40,
-                  width: 130,
+                  width: 220,
                   marginHorizontal: 10,
                 }}
                 activeOpacity={0.2}
@@ -298,7 +301,7 @@ function Profile(props) {
                 style={{
                   ...styles.loginButton,
                   height: 40,
-                  width: 130,
+                  width: 220,
                   marginHorizontal: 10,
                   marginVertical: 10,
                 }}
@@ -313,13 +316,13 @@ function Profile(props) {
                 </Text>
               </TouchableHighlight>
 
-              <Text>{"\n\n\n\n"}</Text>
+            
 
               <TouchableHighlight
                 style={{
                   ...styles.loginButton,
                   height: 40,
-                  width: 130,
+                  width: 220,
                   marginHorizontal: 10,
                 }}
                 activeOpacity={0.2}
@@ -330,6 +333,8 @@ function Profile(props) {
               >
                 <Text style={{ fontSize: 20, color:color3 }}>Exit </Text>
               </TouchableHighlight>
+            
+           
             </View>
           </View>
         </Modal>

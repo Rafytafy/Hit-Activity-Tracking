@@ -9,6 +9,8 @@ import {
   Modal,
   TouchableHighlight,
   Alert,
+  SafeAreaView,
+  ScrollView
 } from "react-native";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -55,7 +57,7 @@ function Search(props) {
       setTrainerName(trainer.name);
       setTrainerEmail(trainer.email);
       trainer.bio !== ""
-        ? trainer.bio.length > 200
+        ? trainer.bio.length > 90
           ? setTrainerBio(trainer.bio.substring(0, 90) + "...")
           : setTrainerBio(trainer.bio)
         : setTrainerBio("");
@@ -88,6 +90,7 @@ function Search(props) {
   });
 
   return (
+ 
     <View style={styles.container}>
       <View
         style={{
@@ -111,8 +114,10 @@ function Search(props) {
         />
       </View>
       <View>
+      
         <FlatList
           data={searchResults}
+          scrollEnabled={true}
           renderItem={({ item }) => (
             <View style={styles.weightCard}>
               <View
@@ -294,6 +299,7 @@ function Search(props) {
         </Modal>
       </View>
     </View>
+
   );
 }
 const mapStateToProps = (store) => ({

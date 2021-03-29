@@ -72,6 +72,7 @@ function WorkoutSession(props) {
       setCurWorkoutNum(curWorkoutNum + 1);
       let image = props.routine.workouts[currentIterationOfSession + 1].workout.imageURL;
       console.log(image);
+      console.log('next')
 
       setWorkoutImageUrl(image);
       setCurrentIterationOfSession(currentIterationOfSession + 1);
@@ -118,14 +119,48 @@ function WorkoutSession(props) {
     >
       {!isWorkoutSessionStarted ? (
         <View>
+<View style={{flex:3, justifyContent:'space-between',marginTop:70,marginBottom:40, alignItems:'center'}}
+>
+<Text style={{color:color3, fontSize:80,fontWeight:'900' }}>
+  Are  
+</Text>
+<Text style={{color:color3, fontSize:80,fontWeight:'900' }}>
+  You  
+</Text>
+<Text style={{color:color3, fontSize:80,fontWeight:'900' }}>
+  Ready ? 
+</Text>
+
+
+
+  </View>
+<View style={{flex:1}}>
+  </View>
+
+          <View style={{flex:2}}>
           <TouchableHighlight
-            style={{ ...styles.loginButton }}
+            style={{ ...styles.loginButton, width:300,height:150,}}
             activeOpacity={0.2}
             underlayColor={color2Dark}
             onPress={() => startWorkout()}
           >
-            <Text style={{ fontSize: 20, color: color3 }}>Begin Workout</Text>
+          
+            
+   <View>
+   <Text style={{ fontSize: 32, color: color3,textAlign:'center',fontWeight:'bold' }}>Begin</Text>
+   <Text>
+
+   </Text>
+   <Text style={{ fontSize: 32, color: color3,textAlign:'center',fontWeight:'bold' }}>Workout</Text>
+   </View>
+
+        
+           
+    
           </TouchableHighlight>
+
+          </View>
+         
         </View>
       ) : (
         <View style={{ alignItems: "center" }}>

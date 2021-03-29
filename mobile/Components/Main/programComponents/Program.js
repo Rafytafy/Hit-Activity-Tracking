@@ -16,7 +16,7 @@ function Program(props) {
   let screenWidth = Dimensions.get('window').width;
   const dummy={firstName:'cur',lastName:'user'}
  const [name,setName] = useState(dummy) 
- console.log(dummy)
+
   useEffect( () => {
     const { currentUser,  profileData,routines  } = props;
     if (typeof profileData.name !== "undefined") {
@@ -69,7 +69,7 @@ const displayWorkoutsDur =(arr) =>
 <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
  
   <Text style ={{fontSize:40,color:'#FFF',textAlign:'center',fontWeight:'bold'}}>
-  Welcome {'\n\n'} {name.firstName} {name.lastName}
+  Welcome, {'\n\n'} {name.firstName}  {name.lastName}
 </Text>
 
 
@@ -103,7 +103,7 @@ const displayWorkoutsDur =(arr) =>
           underlayColor={color2Dark}
           onPress={() => startWorkout(routine)} 
         >
-          <Text style={{ fontSize: 20, color: color3 }}>Start</Text>
+          <Text style={{ fontSize: 20, color: color3 }}>Enter Workout</Text>
         </TouchableHighlight>
         </View>
               
@@ -127,8 +127,13 @@ const displayWorkoutsDur =(arr) =>
       
     }
   return (
+
+
+
+  
     <ScrollView style={styles.scrollContainer} horizontal= {true} pagingEnabled={true}>
-       
+
+
         {renderProgramCards()}
       
     </ScrollView>

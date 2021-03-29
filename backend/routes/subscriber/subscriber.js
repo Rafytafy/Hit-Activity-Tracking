@@ -194,8 +194,10 @@ router.put("/fitbitTokens/:id", (req, res) => {
     },
     (err, subscriber) => {
       if (err) {
+    
         res.send("Error could not add tokens to subscriber");
       } else {
+        
         res.send("Successfuly added tokens to subscriber");
       }
     }

@@ -181,7 +181,7 @@ export function fetchAllTrainers(){
   return (dispatch) => {
 
     axios
-      .get(`http://10.0.0.9:5000/trainer/`)
+      .get(`http://10.0.0.14:5000/trainer/`)
       .then((res) => {
       
         dispatch({ type: subActions.getSearchResult, payload: res.data });
