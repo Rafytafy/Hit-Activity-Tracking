@@ -21,7 +21,14 @@ const Dash = (props) => {
         const uid = firebase.auth().currentUser.uid;
         axios.get(`http://localhost:5000/trainer/${uid}`).then((res) => {
             console.log(res);
-            setImg(res.data[0].profilePicURL)
+            try {
+                setImg(res.data[0].profilePicURL)
+            }
+            catch (e)
+            {
+                console.error(e);
+            }
+            
         })
     }, []);
     return ( 
