@@ -36,7 +36,7 @@ function Fitbit(props) {
     if (response?.type === 'success') {
       const { access_token, state } = response.params;
       
-      axios.put(`http://10.0.0.249:5000/subscriber/fitbitTokens/${props.currentUser}`, {accessToken: access_token})
+      axios.put(`http://hit-activity-tracking-backend.herokuapp.com/subscriber/fitbitTokens/${props.currentUser}`, {accessToken: access_token})
         .then((res) => console.log(res))      
 
     
