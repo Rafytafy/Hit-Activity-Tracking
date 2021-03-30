@@ -37,6 +37,7 @@ function WorkoutSession(props) {
     setIsWorkoutSessionStarted(true);
     setWorkoutName(props.routine.workouts[0].workout.name);
     let image = props.routine.workouts[0].workout.imageURL;
+    console.log(props.profileData.accessToken)
     console.log(image);
 
     setWorkoutImageUrl(image);
@@ -96,7 +97,7 @@ function WorkoutSession(props) {
             start: startTime,
             end: endTime,
             id: props.currentUser,
-            routine: props.routine._id
+            routine: props.routine
           })
           Alert.alert("Session Completed", "Keep up the good work!", [
             { text: "OK", onPress: () => console.log("OK Pressed") },
