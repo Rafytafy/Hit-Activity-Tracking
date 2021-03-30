@@ -90,7 +90,7 @@ function WorkoutSession(props) {
         
           var today = new Date();
           endTime = `${today.getHours().toString()}:${today.getMinutes().toString()}`
-          axios.post('http://10.0.0.249:5000/workoutSession', 
+          axios.post('http://hit-activity-tracking-backend.herokuapp.com/workoutSession', 
           {
             access_token: props.profileData.accessToken,
             start: startTime,
