@@ -22,18 +22,23 @@ const width = Dimensions.get("screen").width;
 function WorkoutSession(props) {
   const [isWorkoutSessionStarted, setIsWorkoutSessionStarted] = useState(false),
     [workoutName, setWorkoutName] = useState(""),
-    [workoutDuration, setWorkoutDuration] = useState(
-      props.routine.workouts[0].duration * 60
+    [workoutDuration, setWorkoutDuration] = useState(10
+      // props.routine.workouts[0].duration * 60
     ),
     [workoutImageUrl, setWorkoutImageUrl] = useState(),
     [currentIterationOfSession, setCurrentIterationOfSession] = useState(0),
     [idOfWorkout, SetIdOfWorkout] = useState("0"),
-    [curWorkoutNum, setCurWorkoutNum] = useState(1),
+    [curWorkoutNum, setCurWorkoutNum] = useState(`Exercise ${currentIterationOfSession+1}`),
     [startTime, setStartTime] = useState(""),
     [readyTimer, setReadyTimer] = useState(false),
     [nextWorkoutName, setNextWorkoutName] = useState("false"),
-    [nextWorkoutTimer, setNextWorkoutTimer] = useState(false);
+    [durationString,setDurationString] = useState(`${workoutDuration} Seconds`),
+    [nextWorkoutTimer, setNextWorkoutTimer] = useState(true);
 
+
+    const goToMain= ()=> {
+      props.navigation.navigate("Main")
+    }
   const startWorkout = () => {
     var today = new Date();
     setStartTime(
@@ -47,50 +52,65 @@ function WorkoutSession(props) {
     setWorkoutImageUrl(image);
   };
 
-  const beginSession = async () => {
-    // iterate through elements of array
-    for (let i = 0; i < props.routine.workouts.length; i++) {
-      // Display workout name
-      console.log(i);
-      await workout(props.routine.workouts[i]);
+  // const beginSession = async () => {
+  //   // iterate through elements of array
+  //   for (let i = 0; i < props.routine.workouts.length; i++) {
+  //     // Display workout name
+  //     console.log(i);
+  //     await workout(props.routine.workouts[i]);
 
-      //Display image of workout (LOW PRIO)
-      //Display working timer
-      console.log("Hello from new function");
-    }
-  };
+  //     //Display image of workout (LOW PRIO)
+  //     //Display working timer
+  //     console.log("Hello from new function");
+  //   }
+  // };
 
-  const workout = async (item) => {
-    return new Promise((resolve) => {
-      setWorkoutName(item.workout.name);
-      setWorkoutDuration(item.duration * 60);
-      setTimeout(async () => {
-        console.log(`Duration: ${item.duration}`);
-        console.log(item);
-        resolve("success");
-      }, item.duration * 1000);
-    });
-  };
+  // const workout = async (item) => {
+  //   return new Promise((resolve) => {
+  //     setWorkoutName(item.workout.name);
+  //     setWorkoutDuration(item.duration * 60);
+  //     setTimeout(async () => {
+  //       console.log(`Duration: ${item.duration}`);
+  //       console.log(item);
+  //       resolve("success");
+  //     }, item.duration * 1000);
+  //   });
+  // };
 
   const setNextWorkout = () => {
     if (props.routine.workouts.length !== currentIterationOfSession + 1) {
-      setCurWorkoutNum(curWorkoutNum + 1);
-      let image =
-        props.routine.workouts[currentIterationOfSession + 1].workout.imageURL;
-      console.log(image);
-      console.log("next");
-
+      if(!nextWorkoutTimer){
+        setCurWorkoutNum(`Exercise ${currentIterationOfSession+2}`);
+        let image =
+          props.routine.workouts[currentIterationOfSession + 1].workout.videoURL;
+     
+  
+        setWorkoutImageUrl(image);
+        setCurrentIterationOfSession(currentIterationOfSession + 1);
+        setDurationString(10)
+        setWorkoutDuration(10
+          // props.routine.workouts[currentIterationOfSession + 1].duration * 60
+        );
+        setWorkoutName(
+          props.routine.workouts[currentIterationOfSession + 1].workout.name
+        );
+        SetIdOfWorkout(
+          props.routine.workouts[currentIterationOfSession + 1].workout._id
+        );
+      }else{
+        let image =
+        props.routine.workouts[currentIterationOfSession + 1].workout.videoURL;
+   
+        setCurWorkoutNum(`Get Ready For`);
       setWorkoutImageUrl(image);
-      setCurrentIterationOfSession(currentIterationOfSession + 1);
-      setWorkoutDuration(
-        props.routine.workouts[currentIterationOfSession + 1].duration * 60
-      );
-      setWorkoutName(
-        props.routine.workouts[currentIterationOfSession + 1].workout.name
-      );
-      SetIdOfWorkout(
-        props.routine.workouts[currentIterationOfSession + 1].workout._id
-      );
+        setWorkoutName(
+          props.routine.workouts[currentIterationOfSession + 1].workout.name)
+          setDurationString(' ')
+      setWorkoutDuration(5)
+      SetIdOfWorkout('bewtween')
+      }
+      
+     
     } else {
       if (props.profileData.accessToken !== undefined) {
         var today = new Date();
@@ -105,7 +125,8 @@ function WorkoutSession(props) {
           routine: props.routine._id,
         });
         Alert.alert("Session Completed", "Keep up the good work!", [
-          { text: "OK", onPress: () => console.log("OK Pressed") },
+          { text: "OK", onPress: () => {goToMain()
+             console.log("OK Pressed") }},
         ]);
       } else {
         Alert.alert(
@@ -199,7 +220,7 @@ function WorkoutSession(props) {
                 source={{
                   uri:
                     props.routine.workouts[currentIterationOfSession].workout
-                      .imageURL,
+                      .videoURL,
                 }}
                 style={{
                   height: 250,
@@ -213,7 +234,6 @@ function WorkoutSession(props) {
               <CountDown
                 id={"beginingTimer"}
                 until={2}
-                S
                 size={60}
                 timeToShow={["M", "S"]}
                 onFinish={() => {
@@ -227,7 +247,7 @@ function WorkoutSession(props) {
             </View>
           </View>
         )
-      ) : !nextWorkoutTimer ? (
+      ) :  
         <View style={{ alignItems: "center" }}>
           <View style={{ ...styles.workoutCard }}>
             <View style={{ justifyContent: "center", flex: 1 }}>
@@ -237,7 +257,7 @@ function WorkoutSession(props) {
             </View>
             <View style={{ flex: 1 }}>
               <Text style={{ fontSize: 30, color: color2 }}>
-                Exercise {curWorkoutNum}
+              {curWorkoutNum}
               </Text>
             </View>
             <View style={{ flex: 2, justifyContent: "center" }}>
@@ -245,7 +265,7 @@ function WorkoutSession(props) {
             </View>
             <View style={{ flex: 1 }}>
               <Text style={{ fontSize: 30, color: color2 }}>
-                {workoutDuration} Seconds
+                {durationString} 
               </Text>
             </View>
           </View>
@@ -263,69 +283,33 @@ function WorkoutSession(props) {
           <View style={{ ...styles.timerCard }}>
             <CountDown
               id={idOfWorkout}
-              until={10}
-              S
+              until={workoutDuration }
+              
               size={60}
               timeToShow={["M", "S"]}
               onFinish={() => {
                 setNextWorkoutTimer(!nextWorkoutTimer);
 
-                currentIterationOfSession + 1 < props.routine.workouts.length
-                  ? setNextWorkoutName(
-                      `Get Ready For ${
-                        props.routine.workouts[currentIterationOfSession + 1]
-                          .workout.name
-                      }`
-                    )
-                  : setNextWorkoutName("cooldown");
-                    }
+                // currentIterationOfSession + 1 < props.routine.workouts.length
+                //   ? setNextWorkoutName(
+                //       `Get Ready For ${
+                //         props.routine.workouts[currentIterationOfSession + 1]
+                //           .workout.name
+                //       }`
+                //     )
+                //   : setNextWorkoutName("cooldown");
+               setNextWorkout()  }
+
               }
               digitStyle={{ backgroundColor: color2 }}
               digitTxtStyle={{ color: color3 }}
               timeLabelStyle={{ color: color2 }}
             />
           </View>
-        </View>
-      ) : (
-        <View style={{ alignItems: "center" }}>
-          <View style={{ ...styles.workoutCard }}>
-            <View style={{ justifyContent: "center", flex: 1 }}>
-              <Text style={{ fontSize: 30, color: color2 }}>
-                {nextWorkoutName}:
-              </Text>
-            </View>
+        </View> 
   
-          </View>
-          <View style={{ flex: 3 }}>
-            {/* <Image
-            source={{ uri: props.routine.workouts[curWorkoutNum].workout.imageURL }}
-            style={{
-              height: 250,
-              width: width * 0.9,
-              borderRadius: 25,
-              marginBottom: 30,
-            }}
-          /> */}
-          </View>
-          <View style={{ ...styles.timerCard }}>
-            <CountDown
-              id={"inbetweenTImer"}
-              until={4}
-              S
-              size={60}
-              timeToShow={["M", "S"]}
-              onFinish={() => {
-                  setNextWorkout();
-                if (nextWorkoutName !== "cooldown")
-                  setNextWorkoutTimer(!nextWorkoutTimer);
-              }}
-              digitStyle={{ backgroundColor: color2 }}
-              digitTxtStyle={{ color: color3 }}
-              timeLabelStyle={{ color: color2 }}
-            />
-          </View>
-        </View>
-      )}
+       
+     }
     </View>
   );
 }

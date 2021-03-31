@@ -10,141 +10,139 @@ import {
 import { getRoutines } from "../../../Actions/SubscriberActions";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import {loadSubToken, loadProfileData, setCurrentRoutine} from '../../../Actions/SubscriberActions'
-import styles ,{color2Dark,color3,color2}  from "../../../styles";
+import {
+  loadSubToken,
+  loadProfileData,
+  setCurrentRoutine,
+} from "../../../Actions/SubscriberActions";
+import styles, { color2Dark, color3, color2 } from "../../../styles";
 function Program(props) {
-  let screenWidth = Dimensions.get('window').width;
-  const dummy={firstName:'cur',lastName:'user'}
- const [name,setName] = useState(dummy) 
+  let screenWidth = Dimensions.get("window").width;
+  const dummy = { firstName: "cur", lastName: "user" };
+  const [name, setName] = useState(dummy);
 
-  useEffect( () => {
-    const { currentUser,  profileData,routines  } = props;
+  useEffect(() => {
+    const { currentUser, profileData, routines } = props;
     if (typeof profileData.name !== "undefined") {
-    setName(profileData.name)}
-   
+      setName(profileData.name);
+    }
   });
 
-  const calculateDuration = (arr) =>{
-    let totalDuration = 0
-    for(let i = 0; i < arr.length; i++){
-        totalDuration += arr[i].duration;
+  const calculateDuration = (arr) => {
+    let totalDuration = 0;
+    for (let i = 0; i < arr.length; i++) {
+      totalDuration += arr[i].duration;
     }
-    return totalDuration
-}
-const displayWorkouts =(arr) =>
-{
-  let workoutNames = ''
-  for(let i = 0; i < arr.length; i++){
-    workoutNames= workoutNames + String(i+1) +'. ' +  arr[i].workout.name + "\n"
-  }
-  return workoutNames
-}
-const displayWorkoutsDur =(arr) =>
-{
-  let workoutDurs= ''
-  for(let i = 0; i < arr.length; i++){
-    workoutDurs= workoutDurs   +  arr[i].duration +' min\n'
-  }
-  return workoutDurs
-}
+    return totalDuration;
+  };
+  const displayWorkouts = (arr) => {
+    let workoutNames = "";
+    for (let i = 0; i < arr.length; i++) {
+      workoutNames =
+        workoutNames + String(i + 1) + ". " + arr[i].workout.name + "\n";
+    }
+    return workoutNames;
+  };
+  const displayWorkoutsDur = (arr) => {
+    let workoutDurs = "";
+    for (let i = 0; i < arr.length; i++) {
+      workoutDurs = workoutDurs + arr[i].duration + " min\n";
+    }
+    return workoutDurs;
+  };
 
   const startWorkout = (routine) => {
-    props.setCurrentRoutine(routine)
-    props.navigation.navigate('WorkoutSession')
-  } 
+    props.setCurrentRoutine(routine);
+    props.navigation.navigate("WorkoutSession");
+  };
 
-    const renderProgramCards = () => {
-      if(typeof props.routines !== "undefined"){
-        return (
-          props.routines.map((routine) => (
-            <View
+  const renderProgramCards = () => {
+    if (typeof props.routines !== "undefined") {
+      return props.routines.map((routine) => (
+        <View
+          style={{
+            width: screenWidth,
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <View style={{ ...styles.introCard }}>
+            <Text
               style={{
-                width: screenWidth,
-                justifyContent: "center",
-                alignItems: "center",
+                fontSize: 40,
+                color: color2,
+                textAlign: "center",
+                fontWeight: "bold",
               }}
             >
-
-
-<View style={{...styles.introCard ,}}>
- 
-  <Text style ={{fontSize:40,color:color2,textAlign:'center',fontWeight:'bold'}}>
-  Welcome, {'\n\n'} {name.firstName}  {name.lastName}
-</Text>
-
-
-</View>
-<View style={{height:'65%'}}>
-
-              <View style={styles.programCard}>
-                <View style={{flex:2,alignItems:'center',marginTop:20}}>
-                <Text style={{fontSize: 36}}>{routine.name}</Text>
-              <Text style={{fontSize: 25}}>Duration: {calculateDuration(routine.workouts)} Minutes</Text>
+              Welcome, {"\n\n"} {name.firstName} {name.lastName}
+            </Text>
+          </View>
+          <View style={{ height: "65%" }}>
+            <View style={styles.programCard}>
+              <View style={{ flex: 2, alignItems: "center", marginTop: 20 }}>
+                <Text style={{ fontSize: 36 }}>{routine.name}</Text>
+                <Text style={{ fontSize: 25 }}>
+                  Duration: {calculateDuration(routine.workouts)} Minutes
+                </Text>
+              </View>
+              <View style={{ flex: 4, marginHorizontal: "5%" }}>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    marginHorizontal: 15,
+                  }}
+                >
+                  <Text style={{ fontSize: 27 }}>
+                    {displayWorkouts(routine.workouts)}
+                  </Text>
+                  <Text style={{ fontSize: 27, borderLeftColor: "#000" }}>
+                    {displayWorkoutsDur(routine.workouts)}
+                  </Text>
                 </View>
-             <View style={{flex:4, marginHorizontal:'5%'}}>
-             <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "center",
-              marginHorizontal: 15,
-            }}
-          >
-            <Text style={{fontSize:27}}>{displayWorkouts(routine.workouts)}</Text>
-            <Text style={{fontSize:27,borderLeftColor:'#000'}}>{displayWorkoutsDur(routine.workouts)}</Text>
-           
-          </View> 
-            
-             </View>
-        <View style={{flex:1, alignItems:'center'}}>
-        <TouchableHighlight
-          style={{...styles.loginButton, width:'70%'}}
-          activeOpacity={0.2}
-          underlayColor={color2Dark}
-          onPress={() => startWorkout(routine)} 
-        >
-          <Text style={{ fontSize: 20, color: color3 }}>Enter Workout</Text>
-        </TouchableHighlight>
-        </View>
-              
-             
               </View>
-
+              <View style={{ flex: 1, alignItems: "center" }}>
+                <TouchableHighlight
+                  style={{ ...styles.loginButton, width: "70%" }}
+                  activeOpacity={0.2}
+                  underlayColor={color2Dark}
+                  onPress={() => startWorkout(routine)}
+                >
+                  <Text style={{ fontSize: 20, color: color3 }}>
+                    Enter Workout
+                  </Text>
+                </TouchableHighlight>
               </View>
-
-
-
-
             </View>
-            
-          ))
-          
-        )
-      }
-      else {
-        <Text>No Program</Text>
-      }
-      
+          </View>
+        </View>
+      ));
+    } else {
+      <Text>No Program</Text>;
     }
+  };
   return (
-
-
-
-  
-    <ScrollView style={styles.scrollContainer} horizontal= {true} pagingEnabled={true}>
-
-
-        {renderProgramCards()}
-      
+    <ScrollView
+      style={styles.scrollContainer}
+      horizontal={true}
+      pagingEnabled={true}
+    >
+      {renderProgramCards()}
     </ScrollView>
   );
 }
 const mapStateToProps = (store) => ({
   currentUser: store.subscriber.currentUser,
   profileData: store.subscriber.profileData,
-  routines: store.subscriber.profileData.routines
+  routines: store.subscriber.profileData.routines,
 });
 
-const mapDispatchProps = (dispatch) => bindActionCreators({ loadSubToken, loadProfileData, setCurrentRoutine }, dispatch);
+const mapDispatchProps = (dispatch) =>
+  bindActionCreators(
+    { loadSubToken, loadProfileData, setCurrentRoutine },
+    dispatch
+  );
 
 export default connect(mapStateToProps, mapDispatchProps)(Program);

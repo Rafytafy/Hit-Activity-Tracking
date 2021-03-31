@@ -98,10 +98,11 @@ function Profile(props) {
     
       firebase
         .storage()
-        .ref(profileImg)
+        .ref('/workout_gifs/boxjump.gif')
         .getDownloadURL()
         .then((url) => {
-          setSubIMG(url);
+          setSubIMG(url)
+          console.log(url);
         });
     } else {
       firebase
