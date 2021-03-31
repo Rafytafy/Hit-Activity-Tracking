@@ -113,7 +113,7 @@ function Search(props) {
           }}
         />
       </View>
-      <View>
+      <View style={{marginTop:20,marginBottom:150}}>
       
         <FlatList
           data={searchResults}

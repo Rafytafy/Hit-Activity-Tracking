@@ -11,7 +11,7 @@ import { getRoutines } from "../../../Actions/SubscriberActions";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {loadSubToken, loadProfileData, setCurrentRoutine} from '../../../Actions/SubscriberActions'
-import styles ,{color2Dark,color3}  from "../../../styles";
+import styles ,{color2Dark,color3,color2}  from "../../../styles";
 function Program(props) {
   let screenWidth = Dimensions.get('window').width;
   const dummy={firstName:'cur',lastName:'user'}
@@ -66,15 +66,15 @@ const displayWorkoutsDur =(arr) =>
             >
 
 
-<View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
+<View style={{...styles.introCard ,}}>
  
-  <Text style ={{fontSize:40,color:'#FFF',textAlign:'center',fontWeight:'bold'}}>
+  <Text style ={{fontSize:40,color:color2,textAlign:'center',fontWeight:'bold'}}>
   Welcome, {'\n\n'} {name.firstName}  {name.lastName}
 </Text>
 
 
 </View>
-<View style={{flex:2}}>
+<View style={{height:'65%'}}>
 
               <View style={styles.programCard}>
                 <View style={{flex:2,alignItems:'center',marginTop:20}}>
@@ -90,8 +90,8 @@ const displayWorkoutsDur =(arr) =>
               marginHorizontal: 15,
             }}
           >
-            <Text style={{fontSize:20}}>{displayWorkouts(routine.workouts)}</Text>
-            <Text style={{fontSize:20}}>{displayWorkoutsDur(routine.workouts)}</Text>
+            <Text style={{fontSize:27}}>{displayWorkouts(routine.workouts)}</Text>
+            <Text style={{fontSize:27,borderLeftColor:'#000'}}>{displayWorkoutsDur(routine.workouts)}</Text>
            
           </View> 
             

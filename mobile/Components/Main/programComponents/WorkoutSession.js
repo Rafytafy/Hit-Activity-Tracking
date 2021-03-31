@@ -29,11 +29,16 @@ function WorkoutSession(props) {
     [currentIterationOfSession, setCurrentIterationOfSession] = useState(0),
     [idOfWorkout, SetIdOfWorkout] = useState("0"),
     [curWorkoutNum, setCurWorkoutNum] = useState(1),
-    [startTime, setStartTime] = useState('');
+    [startTime, setStartTime] = useState(""),
+    [readyTimer, setReadyTimer] = useState(false),
+    [nextWorkoutName, setNextWorkoutName] = useState("false"),
+    [nextWorkoutTimer, setNextWorkoutTimer] = useState(false);
 
   const startWorkout = () => {
     var today = new Date();
-    setStartTime(`${today.getHours().toString()}:${today.getMinutes().toString()}`)
+    setStartTime(
+      `${today.getHours().toString()}:${today.getMinutes().toString()}`
+    );
     setIsWorkoutSessionStarted(true);
     setWorkoutName(props.routine.workouts[0].workout.name);
     let image = props.routine.workouts[0].workout.imageURL;
@@ -70,9 +75,10 @@ function WorkoutSession(props) {
   const setNextWorkout = () => {
     if (props.routine.workouts.length !== currentIterationOfSession + 1) {
       setCurWorkoutNum(curWorkoutNum + 1);
-      let image = props.routine.workouts[currentIterationOfSession + 1].workout.imageURL;
+      let image =
+        props.routine.workouts[currentIterationOfSession + 1].workout.imageURL;
       console.log(image);
-      console.log('next')
+      console.log("next");
 
       setWorkoutImageUrl(image);
       setCurrentIterationOfSession(currentIterationOfSession + 1);
@@ -86,28 +92,28 @@ function WorkoutSession(props) {
         props.routine.workouts[currentIterationOfSession + 1].workout._id
       );
     } else {
-        if(props.profileData.accessToken !== undefined){
-
-        
-          var today = new Date();
-          endTime = `${today.getHours().toString()}:${today.getMinutes().toString()}`
-          axios.post('http://10.0.0.249:5000/workoutSession', 
-          {
-            access_token: props.profileData.accessToken,
-            start: startTime,
-            end: endTime,
-            id: props.currentUser,
-            routine: props.routine._id
-          })
-          Alert.alert("Session Completed", "Keep up the good work!", [
-            { text: "OK", onPress: () => console.log("OK Pressed") },
-          ]);
-        }
-        else {
-          Alert.alert("Session Completed", "Connect to a Fitbit to record heart rate", [
-            { text: "OK", onPress: () => console.log("OK Pressed") },
-          ]);
-        }
+      if (props.profileData.accessToken !== undefined) {
+        var today = new Date();
+        endTime = `${today
+          .getHours()
+          .toString()}:${today.getMinutes().toString()}`;
+        axios.post("http://10.0.0.249:5000/workoutSession", {
+          access_token: props.profileData.accessToken,
+          start: startTime,
+          end: endTime,
+          id: props.currentUser,
+          routine: props.routine._id,
+        });
+        Alert.alert("Session Completed", "Keep up the good work!", [
+          { text: "OK", onPress: () => console.log("OK Pressed") },
+        ]);
+      } else {
+        Alert.alert(
+          "Session Completed",
+          "Connect to a Fitbit to record heart rate",
+          [{ text: "OK", onPress: () => console.log("OK Pressed") }]
+        );
+      }
     }
   };
 
@@ -118,51 +124,110 @@ function WorkoutSession(props) {
       }}
     >
       {!isWorkoutSessionStarted ? (
-        <View>
-<View style={{flex:3, justifyContent:'space-between',marginTop:70,marginBottom:40, alignItems:'center'}}
->
-<Text style={{color:color3, fontSize:80,fontWeight:'900' }}>
-  Are  
-</Text>
-<Text style={{color:color3, fontSize:80,fontWeight:'900' }}>
-  You  
-</Text>
-<Text style={{color:color3, fontSize:80,fontWeight:'900' }}>
-  Ready ? 
-</Text>
+        !readyTimer ? (
+          <View>
+            <View
+              style={{
+                flex: 3,
+                justifyContent: "space-between",
+                marginTop: 70,
+                marginBottom: 40,
+                alignItems: "center",
+              }}
+            >
+              <Text style={{ color: color3, fontSize: 80, fontWeight: "900" }}>
+                Are
+              </Text>
+              <Text style={{ color: color3, fontSize: 80, fontWeight: "900" }}>
+                You
+              </Text>
+              <Text style={{ color: color3, fontSize: 80, fontWeight: "900" }}>
+                Ready ?
+              </Text>
+            </View>
+            <View style={{ flex: 1 }}></View>
 
-
-
-  </View>
-<View style={{flex:1}}>
-  </View>
-
-          <View style={{flex:2}}>
-          <TouchableHighlight
-            style={{ ...styles.loginButton, width:300,height:150,}}
-            activeOpacity={0.2}
-            underlayColor={color2Dark}
-            onPress={() => startWorkout()}
-          >
-          
-            
-   <View>
-   <Text style={{ fontSize: 32, color: color3,textAlign:'center',fontWeight:'bold' }}>Begin</Text>
-   <Text>
-
-   </Text>
-   <Text style={{ fontSize: 32, color: color3,textAlign:'center',fontWeight:'bold' }}>Workout</Text>
-   </View>
-
-        
-           
-    
-          </TouchableHighlight>
-
+            <View style={{ flex: 2 }}>
+              <TouchableHighlight
+                style={{ ...styles.loginButton, width: 300, height: 150 }}
+                activeOpacity={0.2}
+                underlayColor={color2Dark}
+                onPress={() => setReadyTimer(!readyTimer)}
+              >
+                <View>
+                  <Text
+                    style={{
+                      fontSize: 32,
+                      color: color3,
+                      textAlign: "center",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Begin
+                  </Text>
+                  <Text></Text>
+                  <Text
+                    style={{
+                      fontSize: 32,
+                      color: color3,
+                      textAlign: "center",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Workout
+                  </Text>
+                </View>
+              </TouchableHighlight>
+            </View>
           </View>
-         
-        </View>
-      ) : (
+        ) : (
+          <View style={{ alignItems: "center" }}>
+            <View style={{ ...styles.workoutCard }}>
+              <View style={{ justifyContent: "center", flex: 1 }}>
+                <Text style={{ fontSize: 30, color: color2 }}>
+                  Get ready for{" "}
+                  {
+                    props.routine.workouts[currentIterationOfSession].workout
+                      .name
+                  }
+                  :
+                </Text>
+              </View>
+            </View>
+            <View style={{ flex: 3 }}>
+              <Image
+                source={{
+                  uri:
+                    props.routine.workouts[currentIterationOfSession].workout
+                      .imageURL,
+                }}
+                style={{
+                  height: 250,
+                  width: width * 0.9,
+                  borderRadius: 25,
+                  marginBottom: 30,
+                }}
+              />
+            </View>
+            <View style={{ ...styles.timerCard }}>
+              <CountDown
+                id={"beginingTimer"}
+                until={2}
+                S
+                size={60}
+                timeToShow={["M", "S"]}
+                onFinish={() => {
+                  setReadyTimer(!readyTimer);
+                  startWorkout();
+                }}
+                digitStyle={{ backgroundColor: color2 }}
+                digitTxtStyle={{ color: color3 }}
+                timeLabelStyle={{ color: color2 }}
+              />
+            </View>
+          </View>
+        )
+      ) : !nextWorkoutTimer ? (
         <View style={{ alignItems: "center" }}>
           <View style={{ ...styles.workoutCard }}>
             <View style={{ justifyContent: "center", flex: 1 }}>
@@ -175,7 +240,7 @@ function WorkoutSession(props) {
                 Exercise {curWorkoutNum}
               </Text>
             </View>
-            <View style={{ flex: 2,justifyContent:'center' }}>
+            <View style={{ flex: 2, justifyContent: "center" }}>
               <Text style={{ fontSize: 50, color: color2 }}>{workoutName}</Text>
             </View>
             <View style={{ flex: 1 }}>
@@ -198,11 +263,62 @@ function WorkoutSession(props) {
           <View style={{ ...styles.timerCard }}>
             <CountDown
               id={idOfWorkout}
-              until={workoutDuration}
+              until={10}
               S
               size={60}
               timeToShow={["M", "S"]}
-              onFinish={() => setNextWorkout()}
+              onFinish={() => {
+                setNextWorkoutTimer(!nextWorkoutTimer);
+
+                currentIterationOfSession + 1 < props.routine.workouts.length
+                  ? setNextWorkoutName(
+                      `Get Ready For ${
+                        props.routine.workouts[currentIterationOfSession + 1]
+                          .workout.name
+                      }`
+                    )
+                  : setNextWorkoutName("cooldown");
+                    }
+              }
+              digitStyle={{ backgroundColor: color2 }}
+              digitTxtStyle={{ color: color3 }}
+              timeLabelStyle={{ color: color2 }}
+            />
+          </View>
+        </View>
+      ) : (
+        <View style={{ alignItems: "center" }}>
+          <View style={{ ...styles.workoutCard }}>
+            <View style={{ justifyContent: "center", flex: 1 }}>
+              <Text style={{ fontSize: 30, color: color2 }}>
+                {nextWorkoutName}:
+              </Text>
+            </View>
+  
+          </View>
+          <View style={{ flex: 3 }}>
+            {/* <Image
+            source={{ uri: props.routine.workouts[curWorkoutNum].workout.imageURL }}
+            style={{
+              height: 250,
+              width: width * 0.9,
+              borderRadius: 25,
+              marginBottom: 30,
+            }}
+          /> */}
+          </View>
+          <View style={{ ...styles.timerCard }}>
+            <CountDown
+              id={"inbetweenTImer"}
+              until={4}
+              S
+              size={60}
+              timeToShow={["M", "S"]}
+              onFinish={() => {
+                  setNextWorkout();
+                if (nextWorkoutName !== "cooldown")
+                  setNextWorkoutTimer(!nextWorkoutTimer);
+              }}
               digitStyle={{ backgroundColor: color2 }}
               digitTxtStyle={{ color: color3 }}
               timeLabelStyle={{ color: color2 }}
@@ -217,7 +333,7 @@ function WorkoutSession(props) {
 const mapStateToProps = (store) => ({
   routine: store.subscriber.currentRoutine,
   currentUser: store.subscriber.currentUser,
-  profileData: store.subscriber.profileData
+  profileData: store.subscriber.profileData,
 });
 
 export default connect(mapStateToProps, null)(WorkoutSession);

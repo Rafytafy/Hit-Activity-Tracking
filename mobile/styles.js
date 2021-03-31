@@ -94,6 +94,25 @@ const styles = StyleSheet.create({
     padding: 20,
     borderRadius: 8,
   },
+  introCard: {
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: color3,
+    width: 350,
+    margin:50,
+    height:'20%',
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.6,
+    shadowRadius: 4,
+    elevation: 5,
+ 
+    padding: 20,
+    borderRadius: 8,
+  },
   singupCard: {
     alignItems: "center",
     justifyContent: "center",
