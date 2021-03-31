@@ -13,7 +13,7 @@ const WorkoutSession = require("../../models/WorkoutSession");
 //@access public
 router.post("/", (req, res) => {
     let TWENTY_MINUTES = 1200000;
-
+    console.log(req.body)
     var config = {
         method: 'get',
         url: `https://api.fitbit.com/1/user/-/activities/heart/date/today/1d/1sec/time/${req.body.start}/${req.body.end}.json`,
