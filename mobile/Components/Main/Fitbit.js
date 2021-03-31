@@ -37,10 +37,8 @@ function Fitbit(props) {
   React.useEffect(() => {
     if (response?.type === 'success') {
       const { access_token, state } = response.params;
-      console.log(access_token)
-      console.log(response)
-      console.log('got here')
-      axios.put(`http://10.0.0.14:5000/subscriber/fitbitTokens/${props.currentUser}`, {accessToken: access_token})
+      
+      axios.put(`http://hit-activity-tracking-backend.herokuapp.com/subscriber/fitbitTokens/${props.currentUser}`, {accessToken: access_token})
         .then((res) => console.log(res))      
 
     

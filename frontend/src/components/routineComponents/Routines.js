@@ -3,7 +3,6 @@ import { useHistory } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux'
 import {setCurrentRoutine} from '../../redux/actions/index'
-
 import { Container, Row, Col, Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle, Button } from 'reactstrap'
 

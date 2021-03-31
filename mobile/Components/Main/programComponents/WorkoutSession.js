@@ -112,29 +112,29 @@ function WorkoutSession(props) {
       
      
     } else {
-      if (props.profileData.accessToken !== undefined) {
-        var today = new Date();
-        endTime = `${today
-          .getHours()
-          .toString()}:${today.getMinutes().toString()}`;
-        axios.post("http://10.0.0.249:5000/workoutSession", {
-          access_token: props.profileData.accessToken,
-          start: startTime,
-          end: endTime,
-          id: props.currentUser,
-          routine: props.routine._id,
-        });
-        Alert.alert("Session Completed", "Keep up the good work!", [
-          { text: "OK", onPress: () => {goToMain()
-             console.log("OK Pressed") }},
-        ]);
-      } else {
-        Alert.alert(
-          "Session Completed",
-          "Connect to a Fitbit to record heart rate",
-          [{ text: "OK", onPress: () => console.log("OK Pressed") }]
-        );
-      }
+        if(props.profileData.accessToken !== undefined){
+
+        
+          var today = new Date();
+          endTime = `${today.getHours().toString()}:${today.getMinutes().toString()}`
+          axios.post('http://hit-activity-tracking-backend.herokuapp.com/workoutSession', 
+          {
+            access_token: props.profileData.accessToken,
+            start: startTime,
+            end: endTime,
+            id: props.currentUser,
+            routine: props.routine._id
+          })
+          Alert.alert("Session Completed", "Keep up the good work!", [
+            { text: "OK", onPress: () => {goToMain()
+              console.log("OK Pressed") }},
+          ]);
+        }
+        else {
+          Alert.alert("Session Completed", "Connect to a Fitbit to record heart rate", [
+            { text: "OK", onPress: () => console.log("OK Pressed") },
+          ]);
+        }
     }
   };
 
