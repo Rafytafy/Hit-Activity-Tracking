@@ -33,20 +33,21 @@ function Program(props) {
     for (let i = 0; i < arr.length; i++) {
       totalDuration += arr[i].duration;
     }
+    totalDuration = totalDuration.toFixed(2)
     return totalDuration;
   };
   const displayWorkouts = (arr) => {
     let workoutNames = "";
     for (let i = 0; i < arr.length; i++) {
       workoutNames =
-        workoutNames + String(i + 1) + ". " + arr[i].workout.name + "\n";
+        workoutNames + arr[i].workout.name + "\n";
     }
     return workoutNames;
   };
   const displayWorkoutsDur = (arr) => {
     let workoutDurs = "";
     for (let i = 0; i < arr.length; i++) {
-      workoutDurs = workoutDurs + arr[i].duration + " min\n";
+      workoutDurs = workoutDurs + arr[i].duration.toFixed(2) + " min\n";
     }
     return workoutDurs;
   };
@@ -95,10 +96,10 @@ function Program(props) {
                     marginHorizontal: 15,
                   }}
                 >
-                  <Text style={{ fontSize: 27 }}>
+                  <Text style={{ fontSize: 24 }}>
                     {displayWorkouts(routine.workouts)}
                   </Text>
-                  <Text style={{ fontSize: 27, borderLeftColor: "#000" }}>
+                  <Text style={{ fontSize: 24, borderLeftColor: "#000" }}>
                     {displayWorkoutsDur(routine.workouts)}
                   </Text>
                 </View>
