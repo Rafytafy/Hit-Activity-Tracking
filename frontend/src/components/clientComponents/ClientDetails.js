@@ -45,7 +45,7 @@ function ClientDetails(props) {
     
 
     const renderGraphData = () => {
-        let data = [["value", "time"]]
+        let data = [["time", "value"]]
         for(let i = 0; i < props.client.workoutSessions[props.client.workoutSessions.length - 1].heartrate.length; i++){
             data = [...data, [props.client.workoutSessions[props.client.workoutSessions.length - 1].heartrate[i].time, props.client.workoutSessions[0].heartrate[i].value]]
             
@@ -86,7 +86,7 @@ function ClientDetails(props) {
                     loader={<div>Loading Chart</div>}
                     data={renderGraphData()}
                     options={{
-                    title: `Routine: ${props.client.workoutSessions[props.client.workoutSessions.length - 1].routine.name}\n Date: ${props.client.workoutSessions[props.client.workoutSessions.length - 1].date}`,
+                    title: `Routine: ${props.client.workoutSessions[props.client.workoutSessions.length - 1].routine.name}\n Date: ${props.client.workoutSessions[props.client.workoutSessions.length - 1].date.slice(0, 10)}`,
                     chartArea: { width: '30%' },
                     hAxis: {
                         title: 'Time',
