@@ -202,4 +202,20 @@ router.put("/fitbitTokens/:id", (req, res) => {
   );
 });
 
+//@route get subscriber/workout_session/:id
+//@desc Get workout session of user
+//@access public
+router.get("/workout_session/:id", (req, res) => {
+  Subscriber.findById(req.params.id)
+    .populate("workoutSessions")
+    .exec((err, subscriber) => {
+      if(err){
+        res.send(err)
+      }
+      else{
+        res.send(subscriber.workoutSessions)
+      }
+    })
+})
+
 module.exports = router;

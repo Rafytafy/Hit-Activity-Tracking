@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import axios from 'axios'
 import { Container, Jumbotron, Button, ListGroup, ListGroupItem, Col} from 'reactstrap'
 import {connect} from 'react-redux'
@@ -6,6 +6,7 @@ import  { bindActionCreators } from 'redux';
 import {setCurrentClient} from '../../redux/actions/index'
 import {useHistory, useParams} from 'react-router-dom';
 import DefaultPicture from '../../images/default-profile-picture.png'
+import Chart from "react-google-charts";
 
 
 function ClientDetails(props) {
@@ -15,11 +16,17 @@ function ClientDetails(props) {
     useEffect(() => {
         if(props.client.name.firstName === ""){
             axios.get(`http://localhost:5000/subscriber/${id}`)
-            .then((req) => {
-                props.setCurrentClient(req.data)
+            .then((res) => {
+                props.setCurrentClient(res.data)
             })
         }
-      });
+
+        
+        
+        
+        
+        
+      }, []);
       
       //convert birthday to age
       var today = new Date();
@@ -35,11 +42,22 @@ function ClientDetails(props) {
       //pop most recent weight
       var weight_array= (props.client.weights)
       var last_element = weight_array[weight_array.length - 1].weight;
-      
+    
+
+    const renderGraphData = () => {
+        let data = [["value", "time"]]
+        for(let i = 0; i < props.client.workoutSessions[props.client.workoutSessions.length - 1].heartrate.length; i++){
+            data = [...data, [props.client.workoutSessions[props.client.workoutSessions.length - 1].heartrate[i].time, props.client.workoutSessions[0].heartrate[i].value]]
+            
+        }
+        console.log( props.client.workoutSessions)
+        return data
+    }
     return ( 
 
     <Container className="container-fluid">
         <Jumbotron className="mt-3">
+            
             <div className="d-flex">
                 <Col xs={6}>
                 <img src={DefaultPicture} style={{width: '10em'}}/>
@@ -60,9 +78,28 @@ function ClientDetails(props) {
             </div>
             <hr className="my-2" />
             <h3>Recent Activity</h3>
-            <h3 className="d-flex justify-content-center">
-                No recent activity
-            </h3>
+            <div style={{ display: 'flex', maxWidth: 1000 }}>
+                <Chart
+                    width={1000}
+                    height={300}
+                    chartType="LineChart"
+                    loader={<div>Loading Chart</div>}
+                    data={renderGraphData()}
+                    options={{
+                    title: `Routine: ${props.client.workoutSessions[props.client.workoutSessions.length - 1].routine.name}\n Date: ${props.client.workoutSessions[props.client.workoutSessions.length - 1].date}`,
+                    chartArea: { width: '30%' },
+                    hAxis: {
+                        title: 'Time',
+                        minValue: 0,
+                    },
+                    vAxis: {
+                        title: 'Heart Rate',
+                    },
+                    }}
+                    legendToggle
+                />
+                
+            </div>
             <hr className="my-2" />
             <h3>Current Program</h3>
             {props.client.routines !== null ?
