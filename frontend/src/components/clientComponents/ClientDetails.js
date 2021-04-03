@@ -13,6 +13,7 @@ function ClientDetails(props) {
     const history = useHistory();
     let { id } = useParams();
 
+    
     useEffect(() => {
         if(props.client.name.firstName === ""){
             axios.get(`http://localhost:5000/subscriber/${id}`)
@@ -50,7 +51,9 @@ function ClientDetails(props) {
             data = [...data, [props.client.workoutSessions[props.client.workoutSessions.length - 1].heartrate[i].time, props.client.workoutSessions[0].heartrate[i].value]]
             
         }
-        console.log( props.client.workoutSessions)
+
+        
+        console.log(props.client.workoutSessions)
         return data
     }
     return ( 
@@ -77,28 +80,42 @@ function ClientDetails(props) {
                 </Col>
             </div>
             <hr className="my-2" />
-            <h3>Recent Activity</h3>
-            <div style={{ display: 'flex', maxWidth: 1000 }}>
-                <Chart
-                    width={1000}
-                    height={300}
-                    chartType="LineChart"
-                    loader={<div>Loading Chart</div>}
-                    data={renderGraphData()}
-                    options={{
-                    title: `Routine: ${props.client.workoutSessions[props.client.workoutSessions.length - 1].routine.name}\n Date: ${props.client.workoutSessions[props.client.workoutSessions.length - 1].date.slice(0, 10)}`,
-                    chartArea: { width: '30%' },
-                    hAxis: {
-                        title: 'Time',
-                        minValue: 0,
-                    },
-                    vAxis: {
-                        title: 'Heart Rate',
-                    },
-                    }}
-                    legendToggle
-                />
-                
+            <div className="clearfix">
+                <h3>Recent Activity</h3>
+                    {props.client.workoutSessions[0] ? //Check if workoutSessions exist for user
+                        (   <>
+                            <div style={{ display: 'flex', maxWidth: 1000 }}>
+                                <Chart
+                                    width={1000}
+                                    height={300}
+                                    chartType="LineChart"
+                                    loader={<div>Loading Chart</div>}
+                                    data={renderGraphData()}
+                                    options={{
+                                    title: `Routine: ${props.client.workoutSessions[props.client.workoutSessions.length - 1].routine.name}\n Date: ${props.client.workoutSessions[props.client.workoutSessions.length - 1].date.slice(0, 10)}`,
+                                    chartArea: { width: '30%' },
+                                    hAxis: {
+                                        title: 'Time',
+                                        minValue: 0,
+                                    },
+                                    vAxis: {
+                                        title: 'Heart Rate',
+                                    },
+                                    }}
+                                    legendToggle
+                                />
+                                
+                                </div>
+                                <Button className="float-right mt-3" onClick={() => history.push(`/workoutSession/${props.client._id}`)}>View History</Button>
+                                </>
+                                )
+                        :
+                        (
+                            <h3 className="d-flex justify-content-center">
+                            No recent activity
+                            </h3>
+                        )
+                    }     
             </div>
             <hr className="my-2" />
             <h3>Current Program</h3>

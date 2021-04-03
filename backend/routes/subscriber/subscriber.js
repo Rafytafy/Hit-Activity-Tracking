@@ -8,7 +8,7 @@ const Trainer = require("../../models/Trainer");
 //@desc get subscriber data by id
 //@access public
 router.get("/:id", (req, res) => {
-  Subscriber.findById(req.params.id, (err, subscriber) => {
+  Subscriber.findById(req.params.id).populate("workoutSessions").exec((err, subscriber) => {
     if (err) {
       res.send("There was an error retrieving the user");
     } else {
