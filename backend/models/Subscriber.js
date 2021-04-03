@@ -41,7 +41,10 @@ const SubscriberSchema = new Schema({
         type: String,
         default: ''
     },
-    workoutSessions: [],
+    workoutSessions: [{
+        type: Schema.Types.ObjectId,
+        ref: "workout_session"
+    }],
     routines: []
 })
 
