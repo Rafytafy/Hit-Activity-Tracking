@@ -30,6 +30,7 @@ function WorkoutSessions(props) {
             data = [...data, [session.heartrate[i].time, session.heartrate[i].value]]   
         }
 
+        console.log(data)
         return data
     }
 
