@@ -190,7 +190,7 @@ class WorkoutModal extends Component {
                                     value={this.state.instructions}
                                     onChange={this.onChange}
                                 />
-                                 <Row> </Row>
+                                <Row> </Row>
                                 <label className="custom-file-upload">
                                 <Input type="file" onChange={this.setPicture} />
                                  Choose Image
