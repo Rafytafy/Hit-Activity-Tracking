@@ -16,8 +16,10 @@ const Profile = (props) =>
     const [socials, setSocials] = useState("");
     const [bio, setBio] = useState("");
     const [testimonials, setTestimonials] = useState("");
+    const [routine1, setRoutine1] = useState("");
+    const [routine2, setRoutine2] = useState("");
+    const [routine3, setRoutine3] = useState("");
     
-
     useEffect(() => {
         const uid = firebase.auth().currentUser.uid;
         axios.get(`http://localhost:5000/trainer/${uid}`).then((res) => {
@@ -29,6 +31,19 @@ const Profile = (props) =>
         setSocials(res.data[0].socials)
         setTestimonials(res.data[0].testimonials)
         })
+        axios.get(`http://localhost:5000/routine/${uid}`).then((res) => {
+            console.log(res);
+            try {
+                setRoutine1(res.data[0].name)
+                setRoutine2(res.data[1].name)
+                setRoutine3(res.data[2].name)
+            
+            }
+            catch (e) {
+                console.error(e);
+            }
+        })
+        
         if (!img) { setImg(DefaultPicture) }
        
     },[]);
@@ -68,19 +83,19 @@ const Profile = (props) =>
                     </Jumbotron>
             </Col>
                      <div className= "programs">
-                    <h1> Programs </h1>
+                    <h1> Some of my Routines </h1>
                     <br/>
                         <Row>
                         <Jumbotron className="jumbo">
-                            
+                            <h2> {routine1} </h2>
                             </Jumbotron>
                             <div className = "dashDivider"/>
                         <Jumbotron className="jumbo">
-                            
+                            <h2> {routine2} </h2>
                             </Jumbotron>
                             <div className = "dashDivider"/>
                         <Jumbotron className="jumbo">
-                            
+                            <h2> {routine3} </h2>
                             </Jumbotron>
                         </Row>
                         

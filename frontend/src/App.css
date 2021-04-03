@@ -41,6 +41,7 @@
   color: rgb(97, 97, 97);
   align-items: center;
   justify-content: center;
+  text-align: center;
 }
 
 .bigJumbo {
@@ -114,6 +115,7 @@
   flex-direction: column;
   text-align: center;
   background-color: var(--primaryColor);
+  color: var(--white1);
 }
 .routines {
   color: var(--white1);
@@ -155,7 +157,6 @@ input[type="file"] {
   flex-direction: column;
 }
 .title {
-  color: var(--primaryColor);
   margin-bottom: 15px;
   margin-top: 0;
 }
@@ -197,6 +198,7 @@ body {
   flex-direction: column;
   text-align: center;
   background-color: var(--primaryColor);
+  color: var(--white1);
 }
 
 .dash {
@@ -243,12 +245,12 @@ body {
   padding-bottom: 1px;
 }
 
-.floatRight{
-  position:absolute;
-  right:15px;
+.floatRight {
+  position: absolute;
+  right: 15px;
   text-align: right;
 }
-.client-bottom-align{
+.client-bottom-align {
   padding-top: 3.8rem;
   position: relative;
   bottom: 0;
