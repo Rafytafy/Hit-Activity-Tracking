@@ -8,7 +8,7 @@ const Trainer = require("../../models/Trainer");
 //@desc get subscriber data by id
 //@access public
 router.get("/:id", (req, res) => {
-  Subscriber.findById(req.params.id, (err, subscriber) => {
+  Subscriber.findById(req.params.id).populate("workoutSessions").exec((err, subscriber) => {
     if (err) {
       res.send("There was an error retrieving the user");
     } else {
@@ -203,5 +203,21 @@ router.put("/fitbitTokens/:id", (req, res) => {
     }
   );
 });
+
+//@route get subscriber/workout_session/:id
+//@desc Get workout session of user
+//@access public
+router.get("/workout_session/:id", (req, res) => {
+  Subscriber.findById(req.params.id)
+    .populate("workoutSessions")
+    .exec((err, subscriber) => {
+      if(err){
+        res.send(err)
+      }
+      else{
+        res.send(subscriber.workoutSessions)
+      }
+    })
+})
 
 module.exports = router;

@@ -117,14 +117,14 @@ function WorkoutSession(props) {
 
         
           var today = new Date();
-          endTime = `${today.getHours().toString()}:${today.getMinutes().toString()}`
+          endTime = `${today.getHours().toString()}:${(today.getMinutes() + 1).toString()}`
           axios.post('http://hit-activity-tracking-backend.herokuapp.com/workoutSession', 
           {
             access_token: props.profileData.accessToken,
             start: startTime,
             end: endTime,
             id: props.currentUser,
-            routine: props.routine._id
+            routine: props.routine
           })
           Alert.alert("Session Completed", "Keep up the good work!", [
             { text: "OK", onPress: () => {goToMain()
