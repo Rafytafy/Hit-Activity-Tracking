@@ -5,6 +5,8 @@ import { Text, Platform,TouchableHighlight } from 'react-native';
 import axios from 'axios'
 import styles,{color2Dark,color3} from '../../styles'
 import { connect } from "react-redux";
+import {bindActionCreators} from 'redux'
+import {loadProfileData} from '../../Actions/SubscriberActions'
 
 WebBrowser.maybeCompleteAuthSession();
 const useProxy = true;
@@ -19,8 +21,10 @@ function Fitbit(props) {
   const [request, response, promptAsync] = useAuthRequest(
     {
       responseType: ResponseType.Token,
-      clientId: '22C58S',
-      clientSecret: 'ae99c2aecb225e4a0bf93effcbc5a7c3',
+      clientId: '22C63G',
+      // '22C58S',
+      clientSecret:'d0828f373ac2341d1f9275203c0dace2',
+      // 'ae99c2aecb225e4a0bf93effcbc5a7c3',
       scopes: ['heartrate'],
       // For usage in managed apps using the proxy
       redirectUri: makeRedirectUri({
@@ -35,9 +39,9 @@ function Fitbit(props) {
   React.useEffect(() => {
     if (response?.type === 'success') {
       const { access_token, state } = response.params;
-      
+      console.log(access_token)
       axios.put(`http://hit-activity-tracking-backend.herokuapp.com/subscriber/fitbitTokens/${props.currentUser}`, {accessToken: access_token})
-        .then((res) => console.log(res))      
+        .then((res) => props.loadProfileData())      
 
     
       }
@@ -63,4 +67,7 @@ const mapStateToProps = (store) => ({
   currentUser: store.subscriber.currentUser,
 });
 
-export default connect(mapStateToProps, null)(Fitbit)
+const mapDispatchProps =(dispatch)=> bindActionCreators({loadProfileData},dispatch)
+
+
+export default connect(mapStateToProps, mapDispatchProps)(Fitbit)

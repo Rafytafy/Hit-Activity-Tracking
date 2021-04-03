@@ -6,13 +6,13 @@ export default function Landing({ navigation }) {
     <View style={styles.landContainer}>
         
       <View style={{ flex: 1 }}></View>
-      <View style={{ flex: 4, justifyContent: "center", alignItems: "center" }}>
+      <View style={{ flex: 5, justifyContent: "center", alignItems: "center" }}>
         <Image
           style={{
-            height: 200,
-            width: 200,
+            height: 250,
+            width: 250,
           }}
-          source={require("../assets/logoRT.png")}
+          source={require("../assets/logoBDB.png")}
         />
       </View>
       <View style={{ flex: 2 }}></View>
