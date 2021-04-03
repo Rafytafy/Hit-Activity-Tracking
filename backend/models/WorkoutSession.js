@@ -3,10 +3,7 @@ const mongoose = require('mongoose'),
 
 
 const WorkoutSessionSchema = new Schema({
-    routine: {
-        type: Schema.Types.ObjectId,
-        ref: "routine"
-    },
+    routine: {},
     user: {
         type: Schema.Types.ObjectId,
         ref: "Subscriber"

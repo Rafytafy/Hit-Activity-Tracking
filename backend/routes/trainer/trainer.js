@@ -56,7 +56,7 @@ router.get('/subscribers/:id', (req, res) => {
             }
             else{
                 for(let i = 0; i < trainer.clients.length; i++){
-                    Subscriber.findOne({ uid: trainer.clients[i]}, (err, subscriber) => {
+                    Subscriber.findOne({ uid: trainer.clients[i]}).populate("workoutSessions").exec( (err, subscriber) => {
                         if(err){
                             console.log(err)
                         }

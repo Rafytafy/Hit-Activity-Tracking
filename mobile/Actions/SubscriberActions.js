@@ -167,7 +167,7 @@ export function getPhoto(id) {
     .catch((err) => {
       dispatch({ type: subActions.getPhotoFailed, payload: err });
     });
-   }, 2000);
+   }, 1500);
   };
 }
 
@@ -175,4 +175,20 @@ export function setCurrentRoutine(routine){
   return (dispatch) => {
     dispatch({type: subActions.setCurrentRoutine, payload: routine})
   }
+}
+
+export function fetchAllTrainers(){
+  return (dispatch) => {
+
+    axios
+      .get(`http://10.0.0.14:5000/trainer/`)
+      .then((res) => {
+      
+        dispatch({ type: subActions.getSearchResult, payload: res.data });
+      })
+      .catch((err) => {
+        dispatch({ type: subActions.getSearchResultFailed, payload: err });
+      });
+  };
+  
 }
