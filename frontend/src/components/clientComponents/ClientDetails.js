@@ -7,13 +7,27 @@ import {setCurrentClient} from '../../redux/actions/index'
 import {useHistory, useParams} from 'react-router-dom';
 import DefaultPicture from '../../images/default-profile-picture.png'
 import Chart from "react-google-charts";
+import { setGlobalCssModule } from 'reactstrap/es/utils';
 
+const filler= {
+    firstName: "Missing",
+    lastName: "Name"
+};
 
 function ClientDetails(props) {
     const history = useHistory();
     let { id } = useParams();
+    const [currentClient, setCurrentClient]=useState([]);
+    const [name, setName] = useState(filler);
+    const [age, setAge] = useState(0);
+    const [height, setHeight] = useState([]);
+    const [weight, setWeight] = useState([]);
+    const [curWeight, setCurWeight] = useState('...');
+    const [email, setEmail] = useState('Email Unavailable');
+    
 
     
+
     useEffect(() => {
         if(props.client.name.firstName === ""){
             axios.get(`http://localhost:5000/subscriber/${id}`)
@@ -21,14 +35,7 @@ function ClientDetails(props) {
                 props.setCurrentClient(res.data)
             })
         }
-
-        
-        
-        
-        
-        
-      }, []);
-      
+        const {currentClient, client, curWeight, weight, email} = props; 
       //convert birthday to age
       var today = new Date();
       var cDay = today.getDate();
@@ -38,13 +45,21 @@ function ClientDetails(props) {
       var birth = new Date(props.client.birthdate);
       var diff = Math.abs(todayDate - birth);
       const age = Math.floor(diff / 31536000000);
-      const setAge = (age);
-
+      setAge(age);
+      setName(client.name);
+      setHeight(client.height);
+      setWeight(client.initWeight);
+      setEmail(client.email);
+      var w1 = client.weights.length;
+      if(w1 !== 0){
+          setCurWeight(client.weights[w1-1].weight)
+      }
+      
       //pop most recent weight
-      var weight_array= (props.client.weights)
-      var last_element = weight_array[weight_array.length - 1].weight;
-    
+      //var weight_array= (props.client.weights)
+      //var last_element = weight_array[weight_array.length - 1].weight;
 
+      }, []);
     const renderGraphData = () => {
         let data = [["time", "value"]]
         for(let i = 0; i < props.client.workoutSessions[props.client.workoutSessions.length - 1].heartrate.length; i++){
@@ -65,58 +80,29 @@ function ClientDetails(props) {
                 <Col xs={6}>
                 <img src={DefaultPicture} style={{width: '10em'}}/>
                 <div>
-                    <h1 className="display-4">{props.client.name.firstName} {props.client.name.lastName}</h1>
+                    <h1 className="display-4">{name.firstName} {name.lastName}</h1>
                 </div>
                 </Col>
                 <Col>
                 <div className="floatRight">
                     
                     <h6>Age: {age}</h6>
-                    <h6>Weight: {props.client.initWeight}</h6>
-                    <h6>Current Weight: {last_element}</h6>
-                    <h6>Height: {props.client.height.feet}' {props.client.height.inches}"</h6>
-                    <h4 className="client-bottom-align">{props.client.email}</h4>
+                    <h6>Weight: {weight}</h6>
+                    {
+                        curWeight ? 
+                        (
+                            <h6>Current Weight: {curWeight}</h6>
+                        )
+                        :
+                        <h6>Current Weight: Loading</h6>
+                    }
+                    <h6>Height: {height.feet}' {height.inches}"</h6>
+                    <h4 className="client-bottom-align">{email}</h4>
                 </div>
                 </Col>
             </div>
             <hr className="my-2" />
-            <div className="clearfix">
-                <h3>Recent Activity</h3>
-                    {props.client.workoutSessions[0] ? //Check if workoutSessions exist for user
-                        (   <>
-                            <div style={{ display: 'flex', maxWidth: 1000 }}>
-                                <Chart
-                                    width={1000}
-                                    height={300}
-                                    chartType="LineChart"
-                                    loader={<div>Loading Chart</div>}
-                                    data={renderGraphData()}
-                                    options={{
-                                    title: `Routine: ${props.client.workoutSessions[props.client.workoutSessions.length - 1].routine.name}\n Date: ${props.client.workoutSessions[props.client.workoutSessions.length - 1].date.slice(0, 10)}`,
-                                    chartArea: { width: '90%' },
-                                    hAxis: {
-                                        title: 'Time',
-                                        minValue: 0,
-                                    },
-                                    vAxis: {
-                                        title: 'Heart Rate',
-                                    },
-                                    }}
-                                    legendToggle
-                                />
-                                
-                                </div>
-                                <Button className="float-right mt-3" onClick={() => history.push(`/workoutSession/${props.client._id}`)}>View History</Button>
-                                </>
-                                )
-                        :
-                        (
-                            <h3 className="d-flex justify-content-center">
-                            No recent activity
-                            </h3>
-                        )
-                    }     
-            </div>
+            {/* k */}
             <hr className="my-2" />
             <h3>Current Program</h3>
             {props.client.routines !== null ?
