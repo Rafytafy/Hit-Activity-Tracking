@@ -13,15 +13,21 @@ const filler= {
     firstName: "Missing",
     lastName: "Name"
 };
+const filler2={
+    feet:0,
+    inches:0
+};
 
 function ClientDetails(props) {
     const history = useHistory();
     let { id } = useParams();
-    const [currentClient, setCurrentClient]=useState([]);
+    const [client, setClient]=useState([]);
     const [name, setName] = useState(filler);
+    const [user, setUser] = useState(null);
     const [age, setAge] = useState(0);
-    const [height, setHeight] = useState([]);
-    const [weight, setWeight] = useState([]);
+    const [height, setHeight] = useState(filler2);
+    //const [weights, setWeights]= useState([0]);
+    const [weight, setWeight] = useState(0);
     const [curWeight, setCurWeight] = useState('...');
     const [email, setEmail] = useState('Email Unavailable');
     
@@ -29,6 +35,7 @@ function ClientDetails(props) {
     
 
     useEffect(() => {
+        console.log("useEffect called");
         if(props.client.name.firstName === ""){
             axios.get(`http://localhost:5000/subscriber/${id}`)
             .then((res) => {
@@ -36,25 +43,33 @@ function ClientDetails(props) {
             })
         }
         const {currentClient, client, curWeight, weight, email} = props; 
-      //convert birthday to age
-      var today = new Date();
-      var cDay = today.getDate();
-      var cMonth = today.getMonth();
-      var cYear = today.getFullYear();
-      var todayDate = new Date(cYear, cMonth, cDay);
-      var birth = new Date(props.client.birthdate);
-      var diff = Math.abs(todayDate - birth);
-      const age = Math.floor(diff / 31536000000);
-      setAge(age);
-      setName(client.name);
-      setHeight(client.height);
-      setWeight(client.initWeight);
-      setEmail(client.email);
-      var w1 = client.weights.length;
-      if(w1 !== 0){
-          setCurWeight(client.weights[w1-1].weight)
-      }
       
+        var today = new Date();
+        var cDay = today.getDate();
+        var cMonth = today.getMonth();
+        var cYear = today.getFullYear();
+        var todayDate = new Date(cYear, cMonth, cDay);
+        var birth = new Date(props.client.birthdate);
+        var diff = Math.abs(todayDate - birth);
+        const age = Math.floor(diff / 31536000000);
+                  
+      
+      if(typeof client._id !== "undefined"){
+       //setWeights(weight);
+        
+        var w1 = client.weights.length;
+        if(w1 !== 0){
+          setCurWeight(client.weights[w1-1].weight)
+          setHeight(client.height);
+          setClient(client);
+          setUser(client._id)
+          setAge(age);
+          setName(client.name); 
+          
+          setWeight(client.initWeight);
+          setEmail(client.email);
+      }
+      }
       //pop most recent weight
       //var weight_array= (props.client.weights)
       //var last_element = weight_array[weight_array.length - 1].weight;
