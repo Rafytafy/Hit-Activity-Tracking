@@ -7,8 +7,6 @@ import { connect } from 'react-redux';
 import Edit from './Edit';
 import DefaultPicture from '../../images/default-profile-picture.png'
 import { calculateDuration } from '../../helperFunctions/functions'
-import { useParams } from 'react-router-dom';
-
 
 const Profile = (props) => 
 {
@@ -50,7 +48,7 @@ const Profile = (props) =>
             <Row className = "fixRow">
                 <Col sm={{ size: 'auto', }}>
                     <ProfileInfo profilePath={img} className = "profilePic" />
-                    {/* <img src={DefaultPicture} style={{ width: '15em' }} alt="Logo" /> */}
+                   
                 </Col>
                 
                     
