@@ -2,7 +2,6 @@ import React, { useState, useEffect} from 'react';
 import { useHistory } from 'react-router-dom';
 import { Row, Button, Col} from 'reactstrap';
 import {connect} from 'react-redux'
-import DefaultPicture from '../images/default-profile-picture.png'
 import ProfileInfo from './profileComponents/ProfileInfo';
 import axios from 'axios';
 import firebase from 'firebase';
@@ -13,7 +12,6 @@ const Dash = (props) => {
     const [img, setImg] = useState("");
 
     const toClients = () => { history.push('/Clients') }
-    const toMessages = () => { history.push('/Messages') }
     const toRoutines = () => { history.push('/Routines') }
     const toWorkouts = () => { history.push('/workouts') }
     
