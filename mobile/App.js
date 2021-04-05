@@ -1,7 +1,9 @@
 import { StatusBar } from "expo-status-bar";
 import React, { Component } from "react";
 import { Text, View } from "react-native";
-
+import { LogBox } from 'react-native';
+LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
+LogBox.ignoreAllLogs();//Ignore all log notifications
 import firebase from "firebase/app";
 const firebaseConfig = {
   apiKey: "AIzaSyDk_hueTUcYP2ULeS2dIIZwiKHybq8esC0",

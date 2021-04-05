@@ -98,7 +98,7 @@ function Profile(props) {
     
       firebase
         .storage()
-        .ref('/workout_gifs/boxjump.gif')
+        .ref(profileImg)
         .getDownloadURL()
         .then((url) => {
           setSubIMG(url)

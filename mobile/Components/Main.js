@@ -34,7 +34,7 @@ export class Main extends Component{
              <Tab.Screen name="Program" component={ProgramScreen} 
               options={{ 
                 tabBarIcon:({color, size})=>(
-                    <MaterialCommunityIcons name="basketball" color={color} size={26}/>
+                    <MaterialCommunityIcons name="dumbbell" color={color} size={26}/>
                   ),
               }}/>
               <Tab.Screen name="Search" component={SearchScreen} 
