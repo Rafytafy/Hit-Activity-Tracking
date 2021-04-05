@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import firebase from "firebase";
 import { Input, Alert, Button, FormGroup, Form, Row } from "reactstrap"
 import { useHistory } from 'react-router-dom';
-import Heartbeat from './Heartbeat.png';
+import Heartbeat from '../../images/Heartbeat.png'
 const ForgotPass = () => {
     const [email, setEmail] = useState("");
     const [alert, setAlert] = useState(false);
