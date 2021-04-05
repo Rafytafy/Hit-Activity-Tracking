@@ -90,7 +90,7 @@ const Profile = (props) =>
                                     <>
                             <Jumbotron className="jumbo">
                             <h2> {routine.name} </h2>
-                             <h2> {calculateDuration(routine.workouts)} </h2>
+                             <h2> Duration: {calculateDuration(routine.workouts)} Minutes </h2>
                             </Jumbotron>
                             <div className="dashDivider" />
                                     </> 
