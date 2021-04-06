@@ -9,9 +9,11 @@ import DefaultPicture from '../../images/default-profile-picture.png'
 import Chart from "react-google-charts";
 
 
+
 function ClientDetails(props) {
     const history = useHistory();
     let { id } = useParams();
+    const [picture, setPicture] = useState("");
 
     
     useEffect(() => {
@@ -19,13 +21,11 @@ function ClientDetails(props) {
             axios.get(`http://localhost:5000/subscriber/${id}`)
             .then((res) => {
                 props.setCurrentClient(res.data)
+                setPicture(res.data[0].profilePicUrl)
             })
         }
 
-        
-        
-        
-        
+        if (!picture) { setPicture(DefaultPicture) }
         
       }, []);
       
@@ -51,8 +51,6 @@ function ClientDetails(props) {
             data = [...data, [props.client.workoutSessions[props.client.workoutSessions.length - 1].heartrate[i].time, props.client.workoutSessions[props.client.workoutSessions.length - 1].heartrate[i].value]]
             
         }
-
-        
         console.log(data)
         return data
     }
@@ -63,7 +61,7 @@ function ClientDetails(props) {
             
             <div className="d-flex">
                 <Col xs={6}>
-                <img src={DefaultPicture} style={{width: '10em'}}/>
+                <img src={picture} style={{width: '10em'}}/>
                 <div>
                     <h1 className="display-4">{props.client.name.firstName} {props.client.name.lastName}</h1>
                 </div>
