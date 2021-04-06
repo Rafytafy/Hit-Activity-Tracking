@@ -9,7 +9,7 @@ import {
   NavLink,
 
 } from 'reactstrap';
-import Pulse from './Pulse.png';
+import Pulse from '../images/Pulse.png';
 import firebase from 'firebase'; 
 import { useHistory, Link } from 'react-router-dom';
 
@@ -21,7 +21,10 @@ const NavBar = (props) => {
     
     const signOut = () => { 
       firebase.auth().signOut().then(() => {
+        console.log("I signed out")
         history.push('/');
+        window.location.reload();
+       
   // Sign-out successful.
         }).catch((error) => {
           
