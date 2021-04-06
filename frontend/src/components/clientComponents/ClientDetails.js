@@ -42,7 +42,7 @@ function ClientDetails(props) {
 
       //pop most recent weight
       var weight_array= (props.client.weights)
-      var last_element = weight_array[weight_array.length - 1].weight;
+      
     
 
     const renderGraphData = () => {
@@ -70,19 +70,26 @@ function ClientDetails(props) {
                 </Col>
                 <Col>
                 <div className="floatRight">
-                    
-                    <h6>Age: {age}</h6>
-                    <h6>Weight: {props.client.initWeight}</h6>
-                    <h6>Current Weight: {last_element}</h6>
-                    <h6>Height: {props.client.height.feet}' {props.client.height.inches}"</h6>
-                    <h4 className="client-bottom-align">{props.client.email}</h4>
+                    { props.client.weights ?
+                        ( 
+                            <>
+                                <h6>Age: {age}</h6>
+                                <h6>Weight: {props.client.initWeight}</h6>
+                                <h6>Current Weight: {weight_array[weight_array.length - 1].weight}</h6>
+                                <h6>Height: {props.client.height.feet}' {props.client.height.inches}"</h6>
+                                <h4 className="client-bottom-align">{props.client.email}</h4>
+                            </>
+                        )
+                        :
+                        (<></>)
+                    }       
                 </div>
                 </Col>
             </div>
             <hr className="my-2" />
             <div className="clearfix">
                 <h3>Recent Activity</h3>
-                    {props.client.workoutSessions[0] ? //Check if workoutSessions exist for user
+                    {props.client.workoutSessions && props.client.weights? //Check if workoutSessions exist for user
                         (   <>
                             <div style={{ display: 'flex', maxWidth: 1000 }}>
                                 <Chart
