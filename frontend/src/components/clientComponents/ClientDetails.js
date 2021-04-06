@@ -7,23 +7,28 @@ import {setCurrentClient} from '../../redux/actions/index'
 import {useHistory, useParams} from 'react-router-dom';
 import DefaultPicture from '../../images/default-profile-picture.png'
 import Chart from "react-google-charts";
-
-
+import firebase from 'firebase';
 
 function ClientDetails(props) {
     const history = useHistory();
     let { id } = useParams();
     const [picture, setPicture] = useState("");
-
     
     useEffect(() => {
         if(props.client.name.firstName === ""){
             axios.get(`http://localhost:5000/subscriber/${id}`)
             .then((res) => {
                 props.setCurrentClient(res.data)
-                setPicture(res.data[0].profilePicUrl)
+            
             })
         }
+        axios.get(`http://localhost:5000/subscriber/${id}`)
+            .then((res) => {
+                props.setCurrentClient(res.data)
+                firebase.storage().ref(res.data.profilePicURL).getDownloadURL().then((url) => {
+                    setPicture(url);
+                })
+            })
 
         if (!picture) { setPicture(DefaultPicture) }
         
