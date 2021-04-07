@@ -31,6 +31,7 @@ router.post('/', (req, res) => {
         trainerId: req.body.id,
         name: req.body.name,
         workouts: req.body.workouts,
+        targetHeartrate: req.body.targetHeartrate
     })
     newRoutine.save()
         .then( item => {
