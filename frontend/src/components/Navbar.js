@@ -12,6 +12,7 @@ import {
 import Pulse from '../images/Pulse.png';
 import firebase from 'firebase'; 
 import { useHistory, Link } from 'react-router-dom';
+import Hamburger from '../images/hamburger.png';
 
 const NavBar = (props) => {
   const history = useHistory(); 
@@ -44,7 +45,9 @@ const NavBar = (props) => {
         </NavbarBrand>
         </Link>
         
-        <NavbarToggler onClick={toggle} />
+        <NavbarToggler onClick={toggle}>
+        <img src = {Hamburger} alt = "hamburger" className = "hamburger"/>
+        </NavbarToggler>
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>
             <NavItem>

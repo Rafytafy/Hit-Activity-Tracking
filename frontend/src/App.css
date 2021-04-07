@@ -75,6 +75,11 @@
   color: var(--white1);
 }
 
+.hamburger {
+  width: 3rem;
+  height: 3rem;
+}
+
 .inactive {
   color: var(--white1);
   padding-right: 25px;
