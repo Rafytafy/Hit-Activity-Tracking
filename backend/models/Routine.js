@@ -11,6 +11,10 @@ const RoutineSchema = new Schema({
         type: String,
         required: true
     },
+    targetHeartrate: {
+        type: Number,
+        required: true
+    },
     workouts: [
         {
             workout: {
