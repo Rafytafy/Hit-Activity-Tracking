@@ -78,11 +78,11 @@ const Profile = (props) =>
                     </Jumbotron>
             </Col>
                      <div className= "programs">
-                    <h1> My Routines </h1>
+                    <h1> Some of my Routines </h1>
                     <br/>
                     <Row>
                         {
-                            routines.map(routine =>
+                            routines.slice(0, 3).map(routine =>
                             {
                                 return (
                                     <>
