@@ -6,7 +6,7 @@ import ProfileInfo from './ProfileInfo';
 import { connect } from 'react-redux';
 import Edit from './Edit';
 import DefaultPicture from '../../images/default-profile-picture.png'
-import {deleteRoutine, setCurrentRoutine} from '../../redux/actions/index'
+import { calculateDuration } from '../../helperFunctions/functions'
 
 const Profile = (props) => 
 {
@@ -16,9 +16,10 @@ const Profile = (props) =>
     const [socials, setSocials] = useState("");
     const [bio, setBio] = useState("");
     const [testimonials, setTestimonials] = useState("");
-    const uid = firebase.auth().currentUser.uid;
+    const [routines, setRoutines] = useState([]);
 
     useEffect(() => {
+        const uid = firebase.auth().currentUser.uid;
         axios.get(`http://localhost:5000/trainer/${uid}`).then((res) => {
             console.log(res);
         setImg(res.data[0].profilePicURL)
@@ -27,7 +28,17 @@ const Profile = (props) =>
         setBio(res.data[0].bio)
         setSocials(res.data[0].socials)
         setTestimonials(res.data[0].testimonials)
+            
         })
+        
+        axios.get(`http://localhost:5000/routine/${uid}`).then((res) => {
+            console.log(res);
+            setRoutines(res.data)
+        })
+            .catch((error) => {
+                console.log(error);
+        })
+        
         if (!img) { setImg(DefaultPicture) }
        
     },[]);
@@ -37,7 +48,7 @@ const Profile = (props) =>
             <Row className = "fixRow">
                 <Col sm={{ size: 'auto', }}>
                     <ProfileInfo profilePath={img} className = "profilePic" />
-                    {/* <img src={DefaultPicture} style={{ width: '15em' }} alt="Logo" /> */}
+                   
                 </Col>
                 
                     
@@ -67,20 +78,23 @@ const Profile = (props) =>
                     </Jumbotron>
             </Col>
                      <div className= "programs">
-                    <h1> Programs </h1>
+                    <h1> My Routines </h1>
                     <br/>
-                        <Row>
-                        <Jumbotron className="jumbo">
-                            
+                    <Row>
+                        {
+                            routines.map(routine =>
+                            {
+                                return (
+                                    <>
+                            <Jumbotron className="jumbo">
+                            <h2> {routine.name} </h2>
+                             <h2> Duration: {calculateDuration(routine.workouts)} Minutes </h2>
                             </Jumbotron>
-                            <div className = "dashDivider"/>
-                        <Jumbotron className="jumbo">
-                            
-                            </Jumbotron>
-                            <div className = "dashDivider"/>
-                        <Jumbotron className="jumbo">
-                            
-                            </Jumbotron>
+                            <div className="dashDivider" />
+                                    </> 
+                                )
+                            })
+                        }
                         </Row>
                         
                     </div>
@@ -98,7 +112,8 @@ const Profile = (props) =>
 }
 
 const mapStateToProps = (store) => ({
-    currentUser: store.user.data[0]
+    currentUser: store.user.data[0],
+    routine: store.routines.currentRoutine
 })
 
 export default  connect(mapStateToProps, null)(Profile);
