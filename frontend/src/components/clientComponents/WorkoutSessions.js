@@ -1,11 +1,14 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {connect} from 'react-redux'
 import axios from 'axios'
 import Chart from "react-google-charts";
 import {Jumbotron, Container, Button} from 'reactstrap';
 import {useHistory, useParams} from 'react-router-dom';
 import  { bindActionCreators } from 'redux';
-import {setCurrentClient} from '../../redux/actions/index'
+import {setCurrentClient} from '../../redux/actions/index';
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
+import moment from 'moment';
 
 
 function WorkoutSessions(props) {
@@ -13,13 +16,12 @@ function WorkoutSessions(props) {
     const history = useHistory();
     let { id } = useParams();
 
+    const [value, onChange] = useState(new Date());
+
     useEffect(() => {
-        
-            console.log("Hello")
             axios.get(`http://localhost:5000/subscriber/${id}`)
             .then((res) => {
                 props.setCurrentClient(res.data)
-                console.log(props.client)
             })
         
       }, []);
@@ -29,22 +31,13 @@ function WorkoutSessions(props) {
         for(let i = 0; i < session.heartrate.length; i++){
             data = [...data, [session.heartrate[i].time, session.heartrate[i].value]]   
         }
-
-        console.log(data)
         return data
     }
 
-    return (
-        <Container className="container-fluid">
-            <Jumbotron className="mt-3">
-                <h1>Workout Sessions</h1>        
-                {
-                props.client.workoutSessions ?
-                (
-                props.client.workoutSessions.map((session) => (
-                    
-                    <div className="mt-5" style={{ display: 'flex', maxWidth: 1050 }}>
-                        <Chart
+    const renderGraph = (session) => {
+        console.log(session)
+        if(moment(value).isoWeek() == moment(session.date).isoWeek())
+        return (<Chart
                             width={1050}
                             height={300}
                             chartType="LineChart"
@@ -62,7 +55,31 @@ function WorkoutSessions(props) {
                             },
                             }}
                             legendToggle
-                        />
+                        />)
+    }
+
+    return (
+        <Container className="container-fluid">
+            <Jumbotron className="mt-3">
+                <h1>Workout Sessions</h1>
+                <div>
+                    <Calendar
+                        onChange={(selectedDate) => {
+                            onChange(selectedDate)
+                            console.log(selectedDate)
+                        }}
+                        value={value}
+                    />
+                </div>
+                <h3>Week of: {value.toString()}</h3>
+                {/* {console.log(moment(value).isoWeek() == moment("2020-04-17GMT11:45:00Z").isoWeek())}         */}
+                {
+                props.client.workoutSessions !== undefined ?
+                (
+                props.client.workoutSessions.map((session) => (
+                    
+                    <div className="mt-5" style={{ display: 'flex', maxWidth: 1050 }}>
+                        {renderGraph(session)}
                     </div>
                 )))
                 :

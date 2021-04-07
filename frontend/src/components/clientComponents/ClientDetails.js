@@ -56,7 +56,6 @@ function ClientDetails(props) {
             data = [...data, [props.client.workoutSessions[props.client.workoutSessions.length - 1].heartrate[i].time, props.client.workoutSessions[props.client.workoutSessions.length - 1].heartrate[i].value]]
             
         }
-        console.log(data)
         return data
     }
     return ( 
@@ -92,7 +91,7 @@ function ClientDetails(props) {
             <hr className="my-2" />
             <div className="clearfix">
                 <h3>Recent Activity</h3>
-                    {props.client.workoutSessions[0] !== undefined? //Check if workoutSessions exist for user
+                    {props.client.workoutSessions? //Check if workoutSessions exist for user
                         (   <>
                             <div style={{ display: 'flex', maxWidth: 1000 }}>
                                 <Chart
