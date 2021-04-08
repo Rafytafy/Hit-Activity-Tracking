@@ -183,7 +183,10 @@ function Profile(props) {
       }, 3000);
     }
   };
+  const viewSessions = () => {
 
+    props.navigation.navigate("SessionView");
+  };
   return (
     <ScrollView style={styles.scrollContainer}>
       <View
@@ -430,11 +433,20 @@ function Profile(props) {
           style={styles.loginButton}
           activeOpacity={0.2}
           underlayColor={color2Dark}
+          // onPress={() =>   viewSessions()}
+        >
+          <Text style={{ fontSize: 20, color: color3 }}>View Sessions</Text>
+        </TouchableHighlight>
+        <Text>{"\n"}</Text>
+        <TouchableHighlight
+          style={styles.loginButton}
+          activeOpacity={0.2}
+          underlayColor={color2Dark}
           onPress={() => logOut()}
         >
           <Text style={{ fontSize: 20, color: color3 }}>Log Out</Text>
         </TouchableHighlight>
-        
+      
         <Text>{"\n"}</Text>
       </View>
     </ScrollView>

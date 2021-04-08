@@ -20,7 +20,7 @@ import Login from "./Components/login";
 import SignUp from "./Components/signUp";
 import Main from "./Components/Main";
 import WorkoutSessionScreen from "./Components/Main/programComponents/WorkoutSession"
-
+import SessionView from "./Components/Main/SessionView"
 
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
@@ -103,6 +103,7 @@ export class App extends Component {
               options={{ headerShown: false }}
             />
             <Stack.Screen name='WorkoutSession' component={WorkoutSessionScreen}  options={{ headerShown: false }} />
+            <Stack.Screen name='SessionView' component={SessionView}  options={{ headerShown: false }} />
           </Stack.Navigator>
         </NavigationContainer>
       </Provider>
