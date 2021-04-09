@@ -110,8 +110,6 @@ function ClientDetails(props) {
             data = [...data, [props.client.workoutSessions[props.client.workoutSessions.length - 1].heartrate[i].time, props.client.workoutSessions[props.client.workoutSessions.length - 1].heartrate[i].value]]
             
         }
-
-        
         console.log(data)
         return data
     }
