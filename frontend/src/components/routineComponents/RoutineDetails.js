@@ -29,6 +29,7 @@ function RoutineDetails(props) {
         <Container>
             <Jumbotron className="mt-3">
                 <h1 className="display-3">{props.routine.name}</h1>
+                <h4>Target Heart Rate: {props.routine.targetHeartrate}%</h4>
                 <h3 className="lead">Total duration: {calculateDuration(props.routine.workouts)}</h3>
                 <hr className="my-2" />
                 <ListGroup>

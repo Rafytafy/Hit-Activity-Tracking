@@ -6,22 +6,21 @@ import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux'
 import {fetchClients, fetchCurrentUser, fetchWorkouts, fetchRoutines} from './redux/actions/index'
 //components
-import Register from "./components/Register";
+import Register from "./components/loginComponents/Register";
 import Navbar from "./components/Navbar";
 import Profile from "./components/profileComponents/Profile";
-import Login from "./components/Login";
+import Login from "./components/loginComponents/Login";
 import Clients from "./components/clientComponents/Clients";
 import ClientDetails from "./components/clientComponents/ClientDetails";
 import Dash from "./components/Dash";
 import Edit from "./components/profileComponents/Edit";
-import Messages from "./components/Messages";
 import Routines from "./components/routineComponents/Routines";
 import Workouts from "./components/workoutComponents/Workouts";
 import RoutineDetails from "./components/routineComponents/RoutineDetails";
 import CreateRoutine from "./components/routineComponents/CreateRoutine";
 import CreateProgram from "./components/clientComponents/ClientNewProgram";
+import ForgotPass from "./components/loginComponents/ForgotPass";
 import WorkoutSessions from "./components/clientComponents/WorkoutSessions";
-import ForgotPass from "./components/ForgotPass";
 
 function App(props) {
   var firebaseConfig = {
@@ -87,7 +86,6 @@ function App(props) {
             <Route path="/Clients" component={Clients} />
             <Route path="/clientDetails/:id" component={ClientDetails} />
             <Route path="/Edit" component={Edit} />
-            <Route path="/Messages" component={Messages} />
             <Route path="/workouts" component={Workouts} />
             <Route path="/Routines" component={Routines} />
             <Route path="/RoutineDetails/:id" component={RoutineDetails} />

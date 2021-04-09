@@ -3,15 +3,16 @@ import { useHistory } from 'react-router-dom';
 import firebase from 'firebase'
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux'
-import {fetchCurrentUser, fetchWorkouts, fetchRoutines} from '../redux/actions/index'
-import { Form, FormGroup, Input, Button, Row,   } from 'reactstrap';
-import Heartbeat from './Heartbeat.png';
+import {fetchCurrentUser, fetchWorkouts, fetchRoutines} from '../../redux/actions/index'
+import { Form, FormGroup, Input, Button, Row, Alert  } from 'reactstrap';
+import Heartbeat from '../../images/Heartbeat.png';
 
 const Login = (props) => {
 
 //States
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const history = useHistory(); 
   
   const authLogin = async () => {
@@ -23,12 +24,14 @@ const Login = (props) => {
         props.fetchCurrentUser();
         props.fetchWorkouts();
         props.fetchRoutines();
+      
     })
     .catch((error) => {
-        console.log(error)
+      console.log(error)
+      setError(true);
     })
   }
-  
+  const onDismiss = () => {setError(false)}
   
   const forgotPassword = () => { history.push('/ForgotPass')}
   const toRegister = () => { history.push('/Register') }
@@ -66,7 +69,11 @@ const Login = (props) => {
             <Button onClick={forgotPassword} color="secondary" size="lg"> Forgot Password?</Button>
           </div>
       </FormGroup>
-        </Form>
+      </Form>
+       <div className = "space"/>
+      <Row>
+              <Alert color = "danger" isOpen={error} toggle = {onDismiss}> Invalid credentials. </Alert>
+            </Row>
         </div>
   );
   
