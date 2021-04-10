@@ -7,43 +7,14 @@ import {setCurrentClient} from '../../redux/actions/index'
 import {useHistory, useParams} from 'react-router-dom';
 import DefaultPicture from '../../images/default-profile-picture.png'
 import Chart from "react-google-charts";
-<<<<<<< HEAD
-import { setGlobalCssModule } from 'reactstrap/es/utils';
-
-const filler= {
-    firstName: "Missing",
-    lastName: "Name"
-};
-const filler2={
-    feet:0,
-    inches:0
-};
-=======
 import firebase from 'firebase';
->>>>>>> main
 
 function ClientDetails(props) {
     const history = useHistory();
     let { id } = useParams();
-<<<<<<< HEAD
-    const [client, setClient]=useState([]);
-    const [name, setName] = useState(filler);
-    const [user, setUser] = useState(null);
-    const [age, setAge] = useState(0);
-    const [height, setHeight] = useState(filler2);
-    //const [weights, setWeights]= useState([0]);
-    const [weight, setWeight] = useState(0);
-    const [curWeight, setCurWeight] = useState('...');
-    const [email, setEmail] = useState('Email Unavailable');
-    
-
-=======
     const [picture, setPicture] = useState("");
->>>>>>> main
     
-
     useEffect(() => {
-        console.log("useEffect called");
         if(props.client.name.firstName === ""){
             axios.get(`http://localhost:5000/subscriber/${id}`)
             .then((res) => {
@@ -51,9 +22,6 @@ function ClientDetails(props) {
             
             })
         }
-<<<<<<< HEAD
-        const {currentClient, client, curWeight, weight, email} = props; 
-=======
         axios.get(`http://localhost:5000/subscriber/${id}`)
             .then((res) => {
                 props.setCurrentClient(res.data)
@@ -65,45 +33,23 @@ function ClientDetails(props) {
         if (!picture) { setPicture(DefaultPicture) }
         
       }, []);
->>>>>>> main
       
-        var today = new Date();
-        var cDay = today.getDate();
-        var cMonth = today.getMonth();
-        var cYear = today.getFullYear();
-        var todayDate = new Date(cYear, cMonth, cDay);
-        var birth = new Date(props.client.birthdate);
-        var diff = Math.abs(todayDate - birth);
-        const age = Math.floor(diff / 31536000000);
-                  
-      
-      if(typeof client._id !== "undefined"){
-       //setWeights(weight);
-        
-        var w1 = client.weights.length;
-        if(w1 !== 0){
-          setCurWeight(client.weights[w1-1].weight)
-          setHeight(client.height);
-          setClient(client);
-          setUser(client._id)
-          setAge(age);
-          setName(client.name); 
-          
-          setWeight(client.initWeight);
-          setEmail(client.email);
-      }
-      }
+      //convert birthday to age
+      var today = new Date();
+      var cDay = today.getDate();
+      var cMonth = today.getMonth();
+      var cYear = today.getFullYear();
+      var todayDate = new Date(cYear, cMonth, cDay);
+      var birth = new Date(props.client.birthdate);
+      var diff = Math.abs(todayDate - birth);
+      const age = Math.floor(diff / 31536000000);
+      const setAge = (age);
+
       //pop most recent weight
-<<<<<<< HEAD
-      //var weight_array= (props.client.weights)
-      //var last_element = weight_array[weight_array.length - 1].weight;
-=======
       var weight_array= (props.client.weights)
       
     
->>>>>>> main
 
-      }, []);
     const renderGraphData = () => {
         let data = [["time", "value"]]
         for(let i = 0; i < props.client.workoutSessions[props.client.workoutSessions.length - 1].heartrate.length; i++){
@@ -120,29 +66,13 @@ function ClientDetails(props) {
             
             <div className="d-flex">
                 <Col xs={6}>
-                <img src={DefaultPicture} style={{width: '10em'}}/>
                 <img src={picture} style={{width: '10em'}}/>
                 <div>
-                    <h1 className="display-4">{name.firstName} {name.lastName}</h1>
+                    <h1 className="display-4">{props.client.name.firstName} {props.client.name.lastName}</h1>
                 </div>
                 </Col>
                 <Col>
                 <div className="floatRight">
-<<<<<<< HEAD
-                    
-                    <h6>Age: {age}</h6>
-                    <h6>Weight: {weight}</h6>
-                    {
-                        curWeight ? 
-                        (
-                            <h6>Current Weight: {curWeight}</h6>
-                        )
-                        :
-                        <h6>Current Weight: Loading</h6>
-                    }
-                    <h6>Height: {height.feet}' {height.inches}"</h6>
-                    <h4 className="client-bottom-align">{email}</h4>
-=======
                     { props.client.weights ?
                         ( 
                             <>
@@ -156,14 +86,10 @@ function ClientDetails(props) {
                         :
                         (<></>)
                     }       
->>>>>>> main
                 </div>
                 </Col>
             </div>
             <hr className="my-2" />
-<<<<<<< HEAD
-            {/* k */}
-=======
             <div className="clearfix">
                 <h3>Recent Activity</h3>
                     {props.client.workoutSessions[0] !== undefined? //Check if workoutSessions exist for user
@@ -201,7 +127,6 @@ function ClientDetails(props) {
                         )
                     }     
             </div>
->>>>>>> main
             <hr className="my-2" />
             <h3>Current Program</h3>
             {props.client.routines !== null ?
