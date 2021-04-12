@@ -60,13 +60,64 @@ function WorkoutSessions(props) {
                         }}
                         legendToggle
                     />
-                    <h5>Target heart rate: {Math.floor((220 - calculateAge()) * (session.routine.targetHeartrate / 100))}</h5>
-                    <h5>Actual heart rate: {calculateMaxHeartrateReached(session.heartrate)}</h5>   
+                    <div className="row mt-5">
+                        <div className="col-sm">
+                            {renderPieChart(session)}
+                        </div>
+                        <div className="col-sm d-flex align-items-center flex-column justify-content-center">
+                            <h5>Target heart rate: {calculateTargetHeart(session.routine.targetHeartrate)}</h5>
+                            <h5>Max heart rate reached: {calculateMaxHeartrateReached(session.heartrate)}</h5>
+                            <h5>Average heaert: {calculateAverageHeartrate(session.heartrate)}</h5>
+                        </div>
+                    </div>
+                    
+                    <hr />  
                 </>
             )
         }
     }
     
+    const renderPieChart = (session) => {
+        let data = [
+            ['Heartrate', 'Instance above or below target'],
+        ]
+        let targetHeartrate = calculateTargetHeart(session.routine.targetHeartrate)
+
+        data = populatePieChartData(session, data, targetHeartrate);
+
+        return (
+            <Chart
+                width={'500px'}
+                height={'300px'}
+                chartType="PieChart"
+                loader={<div>Loading Chart</div>}
+                data={data}
+                options={{
+                    title: 'Time Above Target Heart Rate',
+                }}
+                rootProps={{ 'data-testid': '1' }}
+            />
+        )
+    }
+
+    const populatePieChartData = (session, data, targetHeartrate) =>{
+       let aboveHeartRate = ['Above Target', 0];
+       let belowHeartRate = ['Below Target', 0];
+       
+       for(let i = 0; i < session.heartrate.length; i++){
+           if(session.heartrate[i].value >= targetHeartrate){
+               aboveHeartRate[1] += 1;
+           }
+           else{
+               belowHeartRate[1] += 1;
+           }
+       }
+
+       data = [...data, aboveHeartRate, belowHeartRate]
+       
+       return data
+    } 
+
     const calculateAge = () => {
       var today = new Date();
       var cDay = today.getDate();
@@ -87,6 +138,20 @@ function WorkoutSessions(props) {
             }
         }
         return maxFound
+    }
+
+    const calculateAverageHeartrate = (heartrates) => {
+        let sum = 0;
+        for(let i = 0; i < heartrates.length; i++){
+            sum += heartrates[i].value
+        }
+
+        let average = Math.round(sum/(heartrates.length))
+        return average
+    }
+
+    const calculateTargetHeart = (targetHeartrate) => {
+        return Math.floor((220 - calculateAge()) * (targetHeartrate / 100))
     }
 
     return (
