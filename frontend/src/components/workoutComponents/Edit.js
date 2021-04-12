@@ -196,13 +196,14 @@ class WorkoutModal extends Component {
                                  Choose Image
                                 </label>
                                 <img src={this.state.imageURL} alt="text" style={{height:'100px', width:'100px'}}/>
-                                <Label for="gif"> Add GIF </Label>
-                                <Row> </Row>
+                                <Label for="gif"/>
+                                
                                 <label className="custom-file-upload">
                                 <Input type="file" onChange={this.setGif} />
                                  Choose GIF
                                 </label>
                                 <img src={this.state.videoURL} alt="text" style={{height:'100px', width:'100px'}}/>
+                                
                             </FormGroup>
                         </Form>
                     </ModalBody>
