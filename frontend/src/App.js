@@ -21,6 +21,7 @@ import CreateRoutine from "./components/routineComponents/CreateRoutine";
 import CreateProgram from "./components/clientComponents/ClientNewProgram";
 import ForgotPass from "./components/loginComponents/ForgotPass";
 import WorkoutSessions from "./components/clientComponents/WorkoutSessions";
+import Footer from './components/Footer';
 
 function App(props) {
   var firebaseConfig = {
@@ -77,6 +78,7 @@ function App(props) {
           <Route exact path="/" component={Login} />
             <Route path="/Register" component={Register} />
             <Route path="/ForgotPass" component={ForgotPass} />
+            <Footer />
           </>
             :
           <>
@@ -92,7 +94,7 @@ function App(props) {
             <Route path="/createRoutine" component={CreateRoutine} />
             <Route path="/createProgram/:id" component={CreateProgram} />
             <Route path="/workoutSession/:id" component={WorkoutSessions} />
-           
+           <Footer />
           </>
       }
         </Router>    
