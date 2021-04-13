@@ -432,8 +432,8 @@ function Profile(props) {
         <TouchableHighlight
           style={styles.loginButton}
           activeOpacity={0.2}
-          underlayColor={color2Dark}
-          // onPress={() =>   viewSessions()}
+          underlayColor={color2Dark} 
+          onPress={() => viewSessions()}
         >
           <Text style={{ fontSize: 20, color: color3 }}>View Sessions</Text>
         </TouchableHighlight>
@@ -441,12 +441,12 @@ function Profile(props) {
         <TouchableHighlight
           style={styles.loginButton}
           activeOpacity={0.2}
-          underlayColor={color2Dark}
+          underlayColor={color2Dark} 
           onPress={() => logOut()}
         >
           <Text style={{ fontSize: 20, color: color3 }}>Log Out</Text>
         </TouchableHighlight>
-      
+
         <Text>{"\n"}</Text>
       </View>
     </ScrollView>

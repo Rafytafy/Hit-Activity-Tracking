@@ -11,7 +11,7 @@ import SearchScreen from './Main/Search'
 import ProfileScreen from './Main/Profile'
 
 import { NavigationContainer } from '@react-navigation/native'
-import {loadSubToken,loadProfileData,getWeights} from '../Actions/SubscriberActions'
+import {loadSubToken,loadProfileData,getWeights,getSessions} from '../Actions/SubscriberActions'
 const Tab=createBottomTabNavigator();
 
 
@@ -23,7 +23,7 @@ export class Main extends Component{
    this.props.loadProfileData();
    setTimeout(() => {
     this.props.getWeights(this.props.profileData._id);
-    
+    this.props.getSessions(this.props.profileData._id)
    }, 1000);
   
   }
@@ -69,7 +69,7 @@ const mapStateToProps=(store)=> ({
   profileData: store.subscriber.profileData
   
 })
-const mapDispatchProps=(dispatch)=> bindActionCreators({loadSubToken,loadProfileData,getWeights},dispatch)
+const mapDispatchProps=(dispatch)=> bindActionCreators({loadSubToken,loadProfileData,getWeights,getSessions},dispatch)
  
 
 export default connect(mapStateToProps, mapDispatchProps) (Main);

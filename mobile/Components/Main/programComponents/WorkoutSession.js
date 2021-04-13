@@ -107,7 +107,7 @@ function WorkoutSession(props) {
         setWorkoutName(
           props.routine.workouts[currentIterationOfSession + 1].workout.name)
           setDurationString(' ')
-      setWorkoutDuration(5)
+      setWorkoutDuration(15)
       SetIdOfWorkout('bewtween')
       }
       
