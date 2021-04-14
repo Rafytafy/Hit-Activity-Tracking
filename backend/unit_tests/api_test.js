@@ -34,6 +34,7 @@ describe("Trainer APIs", function(){
         .end(function (err, res) {
             expect(res).to.have.status(200);
             expect(res.body).to.be.an("array");
+            expect(res.body[0].name.firstName).to.equal("Rafael")
             done();
         });
     })
