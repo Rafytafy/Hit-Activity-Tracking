@@ -149,7 +149,8 @@ function ClientDetails(props) {
             </div>
             <hr className="my-2" />
             <Button onClick={() => history.push('/Clients')}> Back to Clients</Button>
-        </Jumbotron>
+            </Jumbotron>
+            
     </Container>
 )
 }
