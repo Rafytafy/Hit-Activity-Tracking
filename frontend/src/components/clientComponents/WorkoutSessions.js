@@ -9,6 +9,7 @@ import {setCurrentClient} from '../../redux/actions/index';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import moment from 'moment';
+import RoutineModal from './RoutineModal'
 
 
 function WorkoutSessions(props) {
@@ -68,6 +69,7 @@ function WorkoutSessions(props) {
                             <h5>Target heart rate: {calculateTargetHeart(session.routine.targetHeartrate)}</h5>
                             <h5>Max heart rate reached: {calculateMaxHeartrateReached(session.heartrate)}</h5>
                             <h5>Average heaert: {calculateAverageHeartrate(session.heartrate)}</h5>
+                            <RoutineModal session={session}/>
                         </div>
                     </div>
                     
@@ -119,13 +121,13 @@ function WorkoutSessions(props) {
     } 
 
     const calculateAge = () => {
-      var today = new Date();
-      var cDay = today.getDate();
-      var cMonth = today.getMonth();
-      var cYear = today.getFullYear();
-      var todayDate = new Date(cYear, cMonth, cDay);
-      var birth = new Date(props.client.birthdate);
-      var diff = Math.abs(todayDate - birth);
+      let today = new Date();
+      let cDay = today.getDate();
+      let cMonth = today.getMonth();
+      let cYear = today.getFullYear();
+      let todayDate = new Date(cYear, cMonth, cDay);
+      let birth = new Date(props.client.birthdate);
+      let diff = Math.abs(todayDate - birth);
       const age = Math.floor(diff / 31536000000);
       return age
     }
