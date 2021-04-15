@@ -19,7 +19,8 @@ class WorkoutModal extends Component {
         primary: this.props.workout.primary,
         secondary: this.props.workout.secondary,
         instructions: this.props.workout.instructions,
-        imageURL: this.props.workout.imageURL
+        imageURL: this.props.workout.imageURL,
+        videoURL: this.props.workout.videoURL
     }
 
     toggle = () => {
@@ -49,7 +50,8 @@ class WorkoutModal extends Component {
             primary: this.state.primary,
             secondary: this.state.secondary,
             instructions: this.state.instructions,
-            imageURL: this.state.imageURL
+            imageURL: this.state.imageURL,
+            videoURL: this.state.videoURL
         }; 
 
         this.props.updateWorkout(newWorkout)
@@ -57,7 +59,7 @@ class WorkoutModal extends Component {
         this.toggle();
     }
 
-     setPicture = (e) => { 
+    setPicture = (e) => { 
         let file = e.target.files[0];
         let storageRef = firebase.storage().ref('workout_photos/' + file.name);
         storageRef.put(file)
@@ -68,8 +70,20 @@ class WorkoutModal extends Component {
             firebase.storage().ref(imgPath).getDownloadURL().then((url) => {
             this.setState({ imageURL: url})
             })
-    })
-        
+        })
+    }
+    setGif = (e) => { 
+        let file = e.target.files[0];
+        let storageRef = firebase.storage().ref('workout_gifs/' + file.name);
+        storageRef.put(file)
+        .then(async (snapshot) => {
+            let vidPath = snapshot.metadata.fullPath
+            console.log(snapshot);
+            this.setState({ videoURL: vidPath })
+            firebase.storage().ref(vidPath).getDownloadURL().then((url) => {
+            this.setState({ videoURL: url})
+            })
+        })
     }
 
     render() {
@@ -176,12 +190,20 @@ class WorkoutModal extends Component {
                                     value={this.state.instructions}
                                     onChange={this.onChange}
                                 />
-                                 <Row> </Row>
+                                <Row> </Row>
                                 <label className="custom-file-upload">
                                 <Input type="file" onChange={this.setPicture} />
                                  Choose Image
                                 </label>
                                 <img src={this.state.imageURL} alt="text" style={{height:'100px', width:'100px'}}/>
+                                <Label for="gif"/>
+                                
+                                <label className="custom-file-upload">
+                                <Input type="file" onChange={this.setGif} />
+                                 Choose GIF
+                                </label>
+                                <img src={this.state.videoURL} alt="text" style={{height:'100px', width:'100px'}}/>
+                                
                             </FormGroup>
                         </Form>
                     </ModalBody>
