@@ -9,11 +9,13 @@ function CreateRoutine(props) {
     const history = useHistory();
 
     const [name, setName] = useState(""),
+          [targetHeartrate, setTargetHeartrate] = useState(null),
           [selectedWorkoutPlans, setSelectedWorkoutPlans] = useState([]),
           [selectedWorkout, setSelectedWorkout] = useState({}),
           [duration, setDuration] = useState(0),
           [visibleError, setVisibleError] = useState(false),
           [visibleComplete, setVisibleComplete] = useState(false),
+          [visbleHeartrateError, setVisbleHeartrateError] = useState(false),
           [visibleNameError, setVisibleNameError] = useState(false);
     
     
@@ -49,10 +51,15 @@ function CreateRoutine(props) {
         if(name === ''){
             setVisibleNameError(true)
         }
+        else if(targetHeartrate < 0 || targetHeartrate > 100)
+        {
+            setVisbleHeartrateError(true)
+        }
         else{
             let newRoutine = {
                 id: props.currentUser.uid,
                 name: name,
+                targetHeartrate: targetHeartrate,
                 workouts: selectedWorkoutPlans
             }
     
@@ -68,12 +75,23 @@ function CreateRoutine(props) {
             <Jumbotron className="mt-5">
                 <Alert color='danger' isOpen={visibleError} toggle={() => setVisibleError(false)}>Make sure you have a workout selected and a duration before you add to routine</Alert>
                 <Alert color='success' isOpen={visibleComplete} toggle={() => setVisibleComplete(false)}>Successfuly created new routine</Alert>
-                <Alert color='danger' isOpen={visibleNameError} toggle={() => setVisibleNameError(false)}>You need to add a name to the routine</Alert>
+                <Alert color='danger' isOpen={visibleNameError} toggle={() => setVisibleNameError(false)}>You need to add a name and target heartrate to the routine</Alert>
+                <Alert color='danger' isOpen={visbleHeartrateError} toggle={() => setVisbleHeartrateError(false)}>Heart rate percentage must be between 0 - 100</Alert>
                 <Form>
                     <h1>Create New Routine</h1>
-                    <FormGroup className="d-flex">
-                        <Label className="mt-auto mr-3" for="exampleSelectMulti">Name: </Label>
-                        <Input size="small" type="text" onChange={(e) => setName(e.target.value)}></Input>        
+                    <FormGroup>
+                        <Label className="mt-auto mr-3" for="name">Name: </Label>
+                        <Input id="name" size="small" type="text" onChange={(e) => setName(e.target.value)}></Input>        
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for="exampleNumber">Heart Rate(%):</Label>
+                        <Input
+                        type="number"
+                        name="number"
+                        id="exampleNumber"
+                        placeholder="number placeholder"
+                        onChange={(e) => setTargetHeartrate(parseInt(e.target.value))}
+                        />
                     </FormGroup>
                     <FormGroup>
                         <Label for="exampleSelectMulti">Select Workout</Label>
