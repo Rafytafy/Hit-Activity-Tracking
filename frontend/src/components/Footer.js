@@ -10,9 +10,9 @@ const Footer = () => {
                     <div className="col-sm-12 col-md-6">
                         <h6> About</h6>
                         <p className="text-justify">
-                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-                             dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                            Pulse PT (Personal Trainer) is a high-intesity fitness app designed to help individuals who want a healthier lifestyle, and trainers who would like better and more advanced tracking
+                             features for their clients. With this app trainers can create workout plans specailly designed for each client based on their needs, and track their progress
+                            via heart rate. 
                         </p>
                     </div>
                     <div className="col-xs-6 col-md-3">

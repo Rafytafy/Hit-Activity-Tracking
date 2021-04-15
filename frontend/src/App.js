@@ -71,14 +71,14 @@ function App(props) {
   }
   
   return (
-    <div className = "content">
+    <div> 
       <Router>
         {!loggedIn ?
             <>
           <Route exact path="/" component={Login} />
             <Route path="/Register" component={Register} />
             <Route path="/ForgotPass" component={ForgotPass} />
-            
+            <Footer />
           </>
             :
           <>
@@ -94,11 +94,11 @@ function App(props) {
             <Route path="/createRoutine" component={CreateRoutine} />
             <Route path="/createProgram/:id" component={CreateProgram} />
             <Route path="/workoutSession/:id" component={WorkoutSessions} />
-           
+           <Footer />
           </>
       }
       </Router>
-      <Footer />
+      
     </div>
   );
  

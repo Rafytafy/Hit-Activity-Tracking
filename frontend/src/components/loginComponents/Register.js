@@ -57,9 +57,11 @@ const Register = (props) => {
     }
   
   return (
-    <div className="login">
-      <Form> 
+     <div className = "register"> 
+      
+      <Form>
         <FormGroup>
+          
           <div className = "title"> 
           <img src ={Heartbeat} alt="Logo"/>
             <h1> Pulse Register </h1>
@@ -96,14 +98,20 @@ const Register = (props) => {
               <Button onClick={toLogin} color="secondary" size="lg"> Back to Login </Button>
             </Row>
             <div className="space" />
+            
+          </div>
+          
+         
+      </FormGroup>
+      </Form>
+      <div className="error">
             <Row>
               <Alert color = "danger" isOpen={error} toggle = {onDismiss}> Please enter a valid Email, and a Password at least 6 characters. </Alert>
-            </Row>
-        </div>
-      </FormGroup>
-    </Form>
+          </Row>
+          </div>
+      </div>
      
-     </div>
+    
      
     
       
