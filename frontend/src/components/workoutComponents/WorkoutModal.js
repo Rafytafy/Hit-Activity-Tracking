@@ -185,20 +185,20 @@ class WorkoutModal extends Component {
                                     placeholder="Enter instructions for workout"
                                     onChange={this.onChange}
                                 />
-                            <Label for="picture"> Add Image </Label>
+                            <Label for="picture"> Add Media </Label>
                                 <Row> </Row>
                                 <label className="custom-file-upload">
                                 <Input type="file" onChange={this.setPicture} />
                                  Choose Image
                                 </label>
                                 <img src={this.state.imageURL} alt="text" style={{height:'100px', width:'100px'}}/>
-                            <Label for="gif"> Add GIF </Label>
-                                <Row> </Row>
+                                <Label for="gif"/>
+                                
                                 <label className="custom-file-upload">
                                 <Input type="file" onChange={this.setGif} />
                                  Choose GIF
                                 </label>
-                                <img src={this.state.videoURL} alt="text" style={{height:'100px', width:'100px'}}/>
+                                <img src={this.state.videoURL} alt="text" style={{height:'100px', width:'100px'}}/>                               
                                 <Button
                                     color="dark"
                                     style={{marginTop: '2rem'}}
