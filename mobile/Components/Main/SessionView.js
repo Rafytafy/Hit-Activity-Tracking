@@ -118,6 +118,7 @@ return( Math.round(totHR/counter))
                  style={{
               marginTop:20,
                    flexDirection: "row",
+                   borderBottomWidth:2
                  }}
                >
                  <View style={{ flex: 1, marginLeft: 15 }}>
@@ -132,23 +133,44 @@ return( Math.round(totHR/counter))
                    </Text>
                    </View>
                  </View>
-                 <View>
-            <Text style={{ marginTop:10,fontSize: 24, color: "#333" ,textAlign:'center'}}>
-              {''}
-             Target HR:  {Math.round(item.routine.targetHeartrate*.01*maxHR)} BPM 
-             </Text>
-             <Text style={{ marginTop:10,fontSize: 24, color: "#333" ,textAlign:'center'}}>
- 
-             Average HR: {avgHR(item)} BPM
-              </Text>
-              <Text style={{ marginTop:10,fontSize: 24, color: "#333" ,textAlign:'center'}}>
- 
- Maximum HR: {maxHRcalc(item)} BPM 
-  </Text>
-              </View>
+
+                 
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    marginTop:5
+
+                  }}
+                >
+                  <Text style={{ fontSize: 24,paddingRight:20}}>
+               Target HR: {"\n"}
+                  Average HR:  {"\n"}
+                  Maximum HR:
+                  </Text>
+                  <Text style={{ fontSize: 24, textAlign:'right'}}>
+                {Math.round(item.routine.targetHeartrate*.01*maxHR)} BPM  {"\n"}
+                   {avgHR(item)} BPM{"\n"}
+                  {maxHRcalc(item)} BPM 
+                  </Text>
+                </View>
+         
+
+
+             
+
+
+
+
+
+
+              
                  <View >
-                   <Text style={{ textAlign:'center',marginTop:80,marginBottom:-140,marginLeft:5,fontSize:25}}>
-                    {calculateSuccess(item)}%
+                   <Text  style={{ textAlign:'center',fontSize:22,marginTop:15}}>
+                   Above Target HR
+                   </Text>
+                   <Text style={{ textAlign:'center',marginTop:70,marginBottom:-140,marginLeft:5,fontSize:25}}>
+                   {calculateSuccess(item)}%
              </Text>
                  <VictoryPie
                  
