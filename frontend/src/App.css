@@ -186,8 +186,8 @@ body {
 }
 
 .login {
-  margin-top: 200px;
-  margin-bottom: 64px;
+  margin-top: 114px;
+  margin-bottom: 114px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -212,8 +212,8 @@ body {
 }
 
 .register {
-  margin-top: 250px;
-  margin-bottom: 40px !important;
+  margin-top: 102px;
+  margin-bottom: 102px !important;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -226,8 +226,8 @@ body {
 }
 
 .forgot {
-  margin-top: 250px;
-  margin-bottom: 102px;
+  margin-top: 133px;
+  margin-bottom: 133px;
   display: flex;
   justify-content: center;
   align-items: center;
