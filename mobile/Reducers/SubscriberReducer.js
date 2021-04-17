@@ -22,7 +22,9 @@ export const subActions = {
   uploadSubPhotoFailed: "UPLOAD_SUB_PHOTO_FAILED",
   getPhoto: "GET_SUB_PHOTO",
   getPhotoFailed: "GET_SUB_PHOTO_FAILED",
-  setCurrentRoutine: "SET_CURRENT_ROUTINE"
+  setCurrentRoutine: "SET_CURRENT_ROUTINE",
+  getSessions:'GET_SESSION_HISTORY',
+  getSesssionsFailed:'GET_SESSION_HISTORY_FAILED'
 };
 const initialSubState = {
   error: null,
@@ -38,7 +40,8 @@ const initialSubState = {
   weights: [],
   rotuines: [],
   profileImg: null,
-  currentRoutine: {}
+  currentRoutine: {},
+  sessions:[]
 };
 const subscriberReducer = (state = initialSubState, action) => {
   switch (action.type) {
@@ -178,6 +181,16 @@ const subscriberReducer = (state = initialSubState, action) => {
         ...state,
         currentRoutine: action.payload,
       }
+      case subActions.getSessions:
+      return {
+        ...state,
+        sessions: action.payload,
+      };
+    case subActions.getSesssionsFailed:
+      return {
+        ...state,
+        error: action.payload,
+      };
   }
   return state;
 };

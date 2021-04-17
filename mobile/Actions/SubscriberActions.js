@@ -192,3 +192,17 @@ export function fetchAllTrainers(){
   };
   
 }
+export function getSessions(id){
+  return (dispatch) => {
+
+    axios
+      .get(`http://10.0.0.14:5000/subscriber/workout_session/${id}`)
+      .then((res) => {
+      
+        dispatch({ type: subActions.getSessions, payload: res.data });
+      })
+      .catch((err) => {
+        dispatch({ type: subActions.getSesssionsFailed, payload: err });
+      });
+  }
+}

@@ -1,7 +1,9 @@
 import { StatusBar } from "expo-status-bar";
 import React, { Component } from "react";
 import { Text, View } from "react-native";
-
+import { LogBox } from 'react-native';
+LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
+LogBox.ignoreAllLogs();//Ignore all log notifications
 import firebase from "firebase/app";
 const firebaseConfig = {
   apiKey: "AIzaSyDk_hueTUcYP2ULeS2dIIZwiKHybq8esC0",
@@ -18,7 +20,7 @@ import Login from "./Components/login";
 import SignUp from "./Components/signUp";
 import Main from "./Components/Main";
 import WorkoutSessionScreen from "./Components/Main/programComponents/WorkoutSession"
-
+import SessionView from "./Components/Main/SessionView"
 
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
@@ -101,6 +103,7 @@ export class App extends Component {
               options={{ headerShown: false }}
             />
             <Stack.Screen name='WorkoutSession' component={WorkoutSessionScreen}  options={{ headerShown: false }} />
+            <Stack.Screen name='SessionView' component={SessionView}  options={{ headerShown: false }} />
           </Stack.Navigator>
         </NavigationContainer>
       </Provider>
