@@ -167,7 +167,7 @@ return( Math.round(totHR/counter))
               
                  <View >
                    <Text  style={{ textAlign:'center',fontSize:22,marginTop:15}}>
-                   Above Target HR
+                   Time Above Target HR
                    </Text>
                    <Text style={{ textAlign:'center',marginTop:70,marginBottom:-140,marginLeft:5,fontSize:25}}>
                    {calculateSuccess(item)}%
