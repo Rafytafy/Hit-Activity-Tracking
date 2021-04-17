@@ -70,10 +70,12 @@ const Login = (props) => {
           </div>
       </FormGroup>
       </Form>
-       <div className = "space"/>
+      <div className="space" />
+      <div className="error">
       <Row>
               <Alert color = "danger" isOpen={error} toggle = {onDismiss}> Invalid credentials. </Alert>
-            </Row>
+        </Row>
+      </div>
         </div>
   );
   

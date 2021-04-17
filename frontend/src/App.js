@@ -3,8 +3,9 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
 import firebase from 'firebase';
 import { bindActionCreators } from 'redux';
-import {connect} from 'react-redux'
-import {fetchClients, fetchCurrentUser, fetchWorkouts, fetchRoutines} from './redux/actions/index'
+import {connect, Provider } from 'react-redux'
+import { fetchClients, fetchCurrentUser, fetchWorkouts, fetchRoutines } from './redux/actions/index'
+
 //components
 import Register from "./components/loginComponents/Register";
 import Navbar from "./components/Navbar";
@@ -21,7 +22,8 @@ import CreateRoutine from "./components/routineComponents/CreateRoutine";
 import CreateProgram from "./components/clientComponents/ClientNewProgram";
 import ForgotPass from "./components/loginComponents/ForgotPass";
 import WorkoutSessions from "./components/clientComponents/WorkoutSessions";
-
+import Footer from './components/Footer';
+import Nav from './components/loginComponents/Nav';
 function App(props) {
   var firebaseConfig = {
     apiKey: "AIzaSyDk_hueTUcYP2ULeS2dIIZwiKHybq8esC0",
@@ -70,13 +72,16 @@ function App(props) {
   }
   
   return (
-    <div>
+    
+    <div> 
       <Router>
         {!loggedIn ?
-            <>
+          <>
+            <Nav/>
           <Route exact path="/" component={Login} />
             <Route path="/Register" component={Register} />
             <Route path="/ForgotPass" component={ForgotPass} />
+            <Footer />
           </>
             :
           <>
@@ -92,11 +97,13 @@ function App(props) {
             <Route path="/createRoutine" component={CreateRoutine} />
             <Route path="/createProgram/:id" component={CreateProgram} />
             <Route path="/workoutSession/:id" component={WorkoutSessions} />
-           
+           <Footer />
           </>
       }
-        </Router>    
-    </div>
+      </Router>
+      
+      </div>
+    
   );
  
 }
