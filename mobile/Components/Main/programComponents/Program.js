@@ -20,11 +20,22 @@ function Program(props) {
   let screenWidth = Dimensions.get("window").width;
   const dummy = { firstName: "cur", lastName: "user" };
   const [name, setName] = useState(dummy);
+  const [maxHR, setMaxHR] = useState(220);
 
   useEffect(() => {
     const { currentUser, profileData, routines } = props;
     if (typeof profileData.name !== "undefined") {
       setName(profileData.name);
+      var today = new Date();
+      var cDay = today.getDate();
+      var cMonth = today.getMonth();
+      var cYear = today.getFullYear();
+      var todayDate = new Date(cYear, cMonth, cDay);
+
+      var birth = new Date(profileData.birthdate);
+      var diff = Math.abs(todayDate - birth);
+      const age = Math.floor(diff / 31536000000);
+      setMaxHR(220-age);
     }
   });
 
@@ -86,6 +97,9 @@ function Program(props) {
                 <Text style={{ fontSize: 25 }}>
                   Duration: {calculateDuration(routine.workouts)} Minutes
                 </Text>
+                <Text style={{ fontSize: 25 }}>
+                  Target HR: {Math.round(maxHR*(routine.targetHeartrate*.01))} BPM 
+                </Text>
               </View>
               <View style={{ flex: 4, marginHorizontal: "5%" }}>
                 <View
@@ -104,6 +118,9 @@ function Program(props) {
                   </Text>
                 </View>
               </View>
+            
+        
+      
               <View style={{ flex: 1, alignItems: "center" }}>
                 <TouchableHighlight
                   style={{ ...styles.loginButton, width: "70%" }}

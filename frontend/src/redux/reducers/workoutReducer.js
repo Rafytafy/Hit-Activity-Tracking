@@ -5,7 +5,9 @@ const initialState = {
     _id: "",
     name: "",
     primary: "",
-    secondary: ""
+    secondary: "",
+    imageURL: "",
+    videoURL: ""
   }],
   workout: {},
   deletedWorkout: {},

@@ -24,6 +24,7 @@ const Detail = (props) => {
           <p>{props.workout.instructions}</p>
           <h5> image: </h5>
          <img src={props.workout.imageURL} alt="text" style={{height:'200px', width:'300px'}}/>
+         <img src={props.workout.videoURL} alt="text" style={{height:'200px', width:'300px'}}/>
         </ModalBody>
         <ModalFooter>
           <Button color="secondary" onClick={toggle}>Back</Button>

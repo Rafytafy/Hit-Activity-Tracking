@@ -20,7 +20,8 @@ class WorkoutModal extends Component {
         primary: '',
         secondary: '',
         instructions: '',
-        imageURL: ''
+        imageURL: '',
+        videoURL: ''
     }
     
     toggle = () => {
@@ -43,10 +44,20 @@ class WorkoutModal extends Component {
             firebase.storage().ref(imgPath).getDownloadURL().then((url) => {
             this.setState({ imageURL: url})
             })
-    })
-        
-        
-    
+        })
+    }   
+    setGif = (e) => { 
+        let file = e.target.files[0];
+        let storageRef = firebase.storage().ref('workout_gifs/' + file.name);
+        storageRef.put(file)
+        .then(async (snapshot) => {
+            let vidPath = snapshot.metadata.fullPath
+            console.log(snapshot);
+            this.setState({ videoURL: vidPath })
+            firebase.storage().ref(vidPath).getDownloadURL().then((url) => {
+            this.setState({ videoURL: url})
+            })
+        })
     }
     onSubmit = (e) => {
         window.location.reload();
@@ -57,6 +68,7 @@ class WorkoutModal extends Component {
             secondary: this.state.secondary,
             instructions: this.state.instructions,
             imageURL: this.state.imageURL,
+            videoURL: this.state.videoURL
         };
  
 
@@ -86,7 +98,7 @@ class WorkoutModal extends Component {
                     <ModalBody>
                         <Form onSubmit={this.onSubmit}>
                             <FormGroup>
-                                <Label for="workoutName">Name</Label>
+                            <Label for="workoutName">Name</Label>
                                 <Input 
                                     type="text"
                                     name="name"
@@ -96,7 +108,7 @@ class WorkoutModal extends Component {
                                 />
                                 
                                 
-                                <Label for="primary">Primary</Label>
+                            <Label for="primary">Primary</Label>
                                 <Input 
                                     type="select"
                                     name="primary"
@@ -131,7 +143,7 @@ class WorkoutModal extends Component {
                                 </Input>
                                     
                             
-                                <Label for="secondary">Secondary</Label>
+                            <Label for="secondary">Secondary</Label>
                                 <Input 
                                     type="select"
                                     name="secondary"
@@ -165,7 +177,7 @@ class WorkoutModal extends Component {
                                     <br/>
                                 </Input>
 
-                                <Label for="instructions">Instructions</Label>
+                            <Label for="instructions">Instructions</Label>
                                 <Input 
                                     type="textarea"
                                     name="instructions"
@@ -173,14 +185,20 @@ class WorkoutModal extends Component {
                                     placeholder="Enter instructions for workout"
                                     onChange={this.onChange}
                                 />
-                                <Label for="picture"> Add Image </Label>
+                            <Label for="picture"> Add Media </Label>
                                 <Row> </Row>
                                 <label className="custom-file-upload">
                                 <Input type="file" onChange={this.setPicture} />
                                  Choose Image
                                 </label>
                                 <img src={this.state.imageURL} alt="text" style={{height:'100px', width:'100px'}}/>
-                    
+                                <Label for="gif"/>
+                                
+                                <label className="custom-file-upload">
+                                <Input type="file" onChange={this.setGif} />
+                                 Choose GIF
+                                </label>
+                                <img src={this.state.videoURL} alt="text" style={{height:'100px', width:'100px'}}/>                               
                                 <Button
                                     color="dark"
                                     style={{marginTop: '2rem'}}
