@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { deleteWorkout, updateWorkout } from '../../redux/actions/index';
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux';
+import blank from '../../images/1x1.png';
 import {
     Button, Modal, ModalHeader, ModalBody, Form, ModalFooter,
     FormGroup,
@@ -191,18 +192,25 @@ class WorkoutModal extends Component {
                                     onChange={this.onChange}
                                 />
                                 <Row> </Row>
-                                <label className="custom-file-upload">
-                                <Input type="file" onChange={this.setPicture} />
-                                 Choose Image
+                                <Label for="picture"> Add Media </Label>
+                                <Row> </Row>
+                                <label className="custom-file-upload"> 
+                                Change Image
                                 </label>
-                                <img src={this.state.imageURL} alt="text" style={{height:'100px', width:'100px'}}/>
-                                <Label for="gif"/>
-                                
+                                <Input type="file" onChange={this.setPicture} />
+                                {" "} &nbsp; {" "} &nbsp;
                                 <label className="custom-file-upload">
                                 <Input type="file" onChange={this.setGif} />
-                                 Choose GIF
+                                 Change GIF
                                 </label>
-                                <img src={this.state.videoURL} alt="text" style={{height:'100px', width:'100px'}}/>
+                                
+                                <Row></Row>
+                                <img src={this.state.imageURL} 
+                                    onError={(e)=>{e.target.onerror = null; e.target.src= blank}} style={{height:'100px', width:'100px'}}/>
+                                <Label for="gif"/>
+                                {" "} &nbsp; {" "} &nbsp; {" "} &nbsp; {" "} &nbsp;
+                                <img src={this.state.videoURL} 
+                                    className="setMedia" onError={(e)=>{e.target.onerror = null; e.target.src= blank }} style={{height:'100px', width:'100px'}}/>                               
                                 
                             </FormGroup>
                         </Form>
