@@ -63,7 +63,7 @@ class WorkoutModal extends Component {
         })
     }
     onSubmit = (e) => {
-        window.location.reload();
+       
         e.preventDefault()
         const newWorkout = {
             name: this.state.name,
@@ -77,8 +77,11 @@ class WorkoutModal extends Component {
         //Add item via addItem action 
         console.log("Hello from modal")
         this.props.postWorkouts(newWorkout)
-
          this.toggle();
+         setTimeout(() => {
+            window.location.reload();
+         }, 300);
+       
     };
 
    
