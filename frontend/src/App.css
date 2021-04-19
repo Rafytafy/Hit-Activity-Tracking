@@ -143,7 +143,7 @@ input[type="file"] {
 .custom-file-upload {
   border: 1px solid #ccc;
   display: inline-block;
-  
+
   padding: 6px 12px;
   cursor: pointer;
 }
@@ -240,7 +240,9 @@ body {
   background-color: var(--primaryColor);
   color: var(--white1);
 }
-
+.program {
+  margin-bottom: 130px !important;
+}
 .dash {
   display: flex;
   justify-content: center;
@@ -291,6 +293,12 @@ body {
   padding-top: 1rem;
   padding-bottom: 1rem;
 }
+
+.iconSpace {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
 .floatRight {
   position: absolute;
   right: 15px;

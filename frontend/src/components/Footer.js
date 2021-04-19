@@ -45,10 +45,10 @@ const Footer = () => {
                         </div>
                         <div class="col-md-4 col-sm-6 col-xs-12">
             <ul class="social-icons">
-              <li><FontAwesomeIcon icon={faFacebook} size = "3x" /></li>
-              <li> <FontAwesomeIcon icon={faTwitter} size = "3x"/> </li>
-              <li><FontAwesomeIcon icon={faGithub} size = "3x"/> </li>
-              <li><FontAwesomeIcon icon={faDiscord} size = "3x"/> </li>
+              <li><FontAwesomeIcon className = "iconSpace" icon={faFacebook} size = "3x" /></li>
+              <li> <FontAwesomeIcon className = "iconSpace" icon={faTwitter} size = "3x"/> </li>
+              <li><FontAwesomeIcon className = "iconSpace" icon={faGithub} size = "3x"/> </li>
+              <li><FontAwesomeIcon className = "iconSpace" icon={faDiscord} size = "3x"/> </li>
             </ul>
           </div>
                     </div>

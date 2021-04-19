@@ -61,8 +61,8 @@ function ClientNewProgram(props) {
     }
 
     return (
-        <div>
-            <Container>
+        <div className ="program">
+            <Container className = "program">
                 <Jumbotron className="mt-4">
                     <h1 className="display-4">Create Program for {props.client.name.firstName}</h1>
                     <FormGroup className="clearfix">
