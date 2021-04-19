@@ -22,7 +22,8 @@ class WorkoutModal extends Component {
         secondary: '',
         instructions: '',
         imageURL: '',
-        videoURL: ''
+        videoURL: '',
+        readyToSubmit: false
     }
     
     toggle = () => {
@@ -57,6 +58,7 @@ class WorkoutModal extends Component {
             this.setState({ videoURL: vidPath })
             firebase.storage().ref(vidPath).getDownloadURL().then((url) => {
             this.setState({ videoURL: url})
+            this.setState({readyToSubmit: true})
             })
         })
     }
@@ -186,26 +188,31 @@ class WorkoutModal extends Component {
                                     onChange={this.onChange}
                                 />
                             <Label for="picture"> Add Media </Label>
-                                <Row> </Row>
-                                <label className="custom-file-upload"> 
-                                Choose Image
-                                </label>
-                                <Input type="file" onChange={this.setPicture} />
-                                {" "} &nbsp; {" "} &nbsp;
-                                <label className="custom-file-upload">
-                                <Input type="file" onChange={this.setGif} />
-                                 Choose GIF
-                                </label>
-                                
-                                <Row></Row>
-                                <img src={this.state.imageURL} 
-                                    onError={(e)=>{e.target.onerror = null; e.target.src= blank}} style={{height:'100px', width:'100px'}}/>
-                                <Label for="gif"/>
-                                {" "} &nbsp; {" "} &nbsp; {" "} &nbsp; {" "} &nbsp;
-                                <img src={this.state.videoURL} 
-                                    className="setMedia" onError={(e)=>{e.target.onerror = null; e.target.src= blank }} style={{height:'100px', width:'100px'}}/>                               
+                                <Row> 
+                                    <Col  lg="6">
+                                        <label className="custom-file-upload"> 
+                                        Choose Image
+                                        <Input type="file" onChange={this.setPicture} />
+                                        {" "} &nbsp; {" "} &nbsp;
+                                        </label>
+                                        <img src={this.state.imageURL} 
+                                        onError={(e)=>{e.target.onerror = null; e.target.src= blank}} style={{height:'100px', width:'100px'}}/>
+                                    <Label for="gif"/>
+                                        
+                                    </Col>
+                                    <Col lg="6">
+                                    <label className="custom-file-upload">
+                                        <Input type="file" onChange={this.setGif} />
+                                        Choose GIF
+                                        </label>
+                                        {" "} &nbsp; {" "} &nbsp; {" "} &nbsp; {" "} &nbsp;
+                                        <img src={this.state.videoURL} 
+                                            className="setMedia" onError={(e)=>{e.target.onerror = null; e.target.src= blank }} style={{height:'100px', width:'100px'}}/>
+                                    </Col>
+                                </Row>                               
                                 <Button
                                     color="dark"
+                                    disabled={!this.state.readyToSubmit}
                                     style={{marginTop: '2rem'}}
                                     block>Create Workout
                                 </Button>

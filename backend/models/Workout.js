@@ -25,7 +25,7 @@ const WorkoutSchema = new Schema({
     videoURL: {
         type: String,
         default: ''
-    },
+    }
 })
 
 module.exports = mongoose.model('workout', WorkoutSchema);
