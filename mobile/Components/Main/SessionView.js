@@ -121,7 +121,7 @@ return( Math.round(totHR/counter))
                    borderBottomWidth:2
                  }}
                >
-                 <View style={{ flex: 1, marginLeft: 15 }}>
+                 <View style={{ flex: 2, marginLeft: 15 }}>
                   <Text style={{ fontSize: 36, color: "#333" }}>
                     {item.routine.name}
                   </Text>

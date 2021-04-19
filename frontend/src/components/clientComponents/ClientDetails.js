@@ -52,10 +52,12 @@ function ClientDetails(props) {
 
     const renderGraphData = () => {
         let data = [["time", "value"]]
-        for(let i = 0; i < props.client.workoutSessions[props.client.workoutSessions.length - 1].heartrate.length; i++){
+        if (props.client.workoutSessions.length>0){  for(let i = 0; i < props.client.workoutSessions[props.client.workoutSessions.length - 1].heartrate.length; i++){
             data = [...data, [props.client.workoutSessions[props.client.workoutSessions.length - 1].heartrate[i].time, props.client.workoutSessions[props.client.workoutSessions.length - 1].heartrate[i].value]]
             
         }
+    }
+        
         return data
     }
     return ( 
@@ -76,7 +78,7 @@ function ClientDetails(props) {
                         ( 
                             <>
                                 <h6>Age: {age}</h6>
-                                <h6>Weight: {props.client.initWeight}</h6>
+                                <h6>Initial Weight: {props.client.initWeight}</h6>
                                 <h6>Current Weight: {weight_array[weight_array.length - 1].weight}</h6>
                                 <h6>Height: {props.client.height.feet}' {props.client.height.inches}"</h6>
                                 <h4 className="client-bottom-align">{props.client.email}</h4>
@@ -91,7 +93,7 @@ function ClientDetails(props) {
             <hr className="my-2" />
             <div className="clearfix">
                 <h3>Recent Activity</h3>
-                    {props.client.workoutSessions !== undefined ? //Check if workoutSessions exist for user
+                    {props.client.workoutSessions.length>0 ? //Check if workoutSessions exist for user
                         (   <>
                             <div style={{ display: 'flex', maxWidth: 1000 }}>
                                 <Chart

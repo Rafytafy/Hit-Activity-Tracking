@@ -68,7 +68,7 @@ function WorkoutSessions(props) {
                         <div className="col-sm d-flex align-items-center flex-column justify-content-center">
                             <h5>Target heart rate: {calculateTargetHeart(session.routine.targetHeartrate)}</h5>
                             <h5>Max heart rate reached: {calculateMaxHeartrateReached(session.heartrate)}</h5>
-                            <h5>Average heaert: {calculateAverageHeartrate(session.heartrate)}</h5>
+                            <h5>Average heart rate: {calculateAverageHeartrate(session.heartrate)}</h5>
                             <RoutineModal session={session}/>
                         </div>
                     </div>
