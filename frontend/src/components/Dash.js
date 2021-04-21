@@ -51,10 +51,12 @@ const Dash = (props) => {
                     <Button className="shadow-lg" size="lg" onClick = { toClients }> 
                         <h1>Clients</h1>
                     </Button>
-                        <div className = "dashDivider"/>
-                    <Button className="shadow-lg" onClick = { toRoutines }> 
-                        <h1>Routines</h1>
-                    </Button>
+                    <div className="dashDivider" />
+                    <div className="routineButton">
+                    <Button className="shadow-lg" onClick={toRoutines}>
+                            <h1>Routines</h1>
+                        </Button>
+                    </div>
                     <div className = "dashDivider"/>
                     <Button className="shadow-lg" onClick = { toWorkouts }> 
                         <h1> Workouts</h1>
