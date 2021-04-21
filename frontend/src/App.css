@@ -116,6 +116,16 @@
   background-color: var(--primaryColor);
   margin-bottom: 18rem;
 }
+
+@media (max-width: 1000px) {
+  .routines [class^="row"] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+}
+
 .row {
   margin: 0px 0px 0px 0px !important;
 }
@@ -131,6 +141,14 @@
   background-color: var(--primaryColor) !important;
   color: var(--white1) !important;
   padding-top: 3%;
+}
+@media (max-width: 800px) {
+  .workout [class^="row"] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
 }
 .workouts table {
   color: var(--white1);
@@ -275,7 +293,7 @@ body {
     margin: 1rem 1rem 1rem 1rem;
   }
   .routineButton {
-    margin-left: 1.6rem !important;
+    margin-left: 1.7rem !important;
   }
 }
 @media (max-width: 900px) {
@@ -296,7 +314,7 @@ body {
     margin: 1rem 1rem 1rem 1rem;
   }
   .routineButton {
-    margin-left: 1.6rem !important;
+    margin-left: 1.7rem !important;
   }
 }
 
@@ -318,7 +336,7 @@ body {
     margin: 1rem 1rem 1rem 1rem;
   }
   .routineButton {
-    margin-left: 1.6rem !important;
+    margin-left: 1.7rem !important;
   }
 }
 

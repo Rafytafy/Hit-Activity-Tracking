@@ -31,11 +31,12 @@ function Routines(props) {
 
     
     return (
+        <div>
             <Container className='routines'>
                 <h1>Your Routines</h1>
-                <Row>
+                <Row xs = '4'>
                 {props.routines.map((routine) =>
-                    <Col xs="4" className="mb-3">
+                    <Col xs = '4' className="mb-4">
                         <Card className="shadow">
                             <CardBody>
                                 <CardTitle tag="h5">{routine.name}</CardTitle>
@@ -51,6 +52,7 @@ function Routines(props) {
                 </Col>
                 </Row>
             </Container>
+        </div>
         )
     
 }

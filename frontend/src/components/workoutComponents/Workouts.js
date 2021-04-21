@@ -26,7 +26,7 @@ class Workouts extends Component {
     
     render() {
         return (
-            <Container>
+            <Container className = "workout">
                     <div className="workouts">
                     
                      <h2>Workouts</h2>
