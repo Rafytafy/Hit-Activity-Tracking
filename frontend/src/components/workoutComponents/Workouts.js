@@ -35,7 +35,7 @@ class Workouts extends Component {
                     <Row>
                     {this.props.workouts.map((workout) => 
                         
-                        <Col xs="4" className="mb-3">
+                        <Col xs ='8' sm='6' md='4'  className="mb-3">
                             <Card className="shadow" >
                             <CardImg variant="bottom" src={workout.imageURL} /> 
                                 <CardBody>
