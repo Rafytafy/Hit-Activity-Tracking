@@ -16,6 +16,7 @@ import {
   VictoryLine,
   VictoryScatter,
 } from "victory-native";
+const getAge = require("../../functions/getAge")
 import * as ImagePicker from "expo-image-picker";
 import { Camera } from "expo-camera";
 import firebase from "firebase";
@@ -83,16 +84,8 @@ function Profile(props) {
 
       setName(profileData.name);
       setHeight(profileData.height);
-      var today = new Date();
-      var cDay = today.getDate();
-      var cMonth = today.getMonth();
-      var cYear = today.getFullYear();
-      var todayDate = new Date(cYear, cMonth, cDay);
 
-      var birth = new Date(profileData.birthdate);
-      var diff = Math.abs(todayDate - birth);
-      const age = Math.floor(diff / 31536000000);
-      setAge(age);
+      setAge(getAge(profileData.birthdate));
     }
     if (profileImg !== "") {
     
@@ -121,7 +114,6 @@ function Profile(props) {
       props.clearState();
     }, 500);
   };
-
   const uploadImg = async (uri, path) => {
     console.log("start");
 

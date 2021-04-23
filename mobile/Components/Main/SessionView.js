@@ -24,6 +24,8 @@ import {
     getSessions
   
   } from "../../Actions/SubscriberActions"
+import getAge from "../../functions/getAge";
+import avgHR from "../../functions/average"
 function SessionView(props) {
     const [sessions, setSessions] = useState([]);
     const[ heartRates,SetHeartRates] = useState([{time:1,value:5}]);
@@ -33,31 +35,14 @@ function SessionView(props) {
     
     
     useEffect(() => {
-     
       const { currentUser, profileData, sessions } = props;
-      console.log(currentUser)
-
-
-      setSessions(sessions);
- 
-      var today = new Date();
-      var cDay = today.getDate();
-      var cMonth = today.getMonth();
-      var cYear = today.getFullYear();
-      var todayDate = new Date(cYear, cMonth, cDay);
-    
-      var birth = new Date(profileData.birthdate);
-      var diff = Math.abs(todayDate - birth);
-      const age = Math.floor(diff / 31536000000);
-      setMaxHR(220 - age);
+      setSessions(sessions.reverse());
+      setMaxHR(220 - getAge(profileData.birthdate));
     });
 
- 
     const formatDate = (date) => {
       var temp = new Date(date)
-      var Day = temp.getDate();
-      var Month = temp.getMonth();
-      var Year = temp.getFullYear();
+    
       return(`${temp.toLocaleString('default', { month: 'short' })} ${temp.getDate()}.`)
 
     }
@@ -72,16 +57,8 @@ return max
 }
 
 
-    const avgHR =(sesh) =>
-    {
-      var totHR=0
-      var counter=0
-sesh.heartrate.forEach(ele =>{
-totHR+=ele.value
-counter+=1
-})
-return( Math.round(totHR/counter))
-    }
+
+
     const calculateSuccess =( (sesh) => {
       var tarHR = Math.round(maxHR * (sesh.routine.targetHeartrate * 0.01));
       settarHR(tarHR)

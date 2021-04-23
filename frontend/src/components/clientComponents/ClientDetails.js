@@ -13,6 +13,7 @@ function ClientDetails(props) {
     const history = useHistory();
     let { id } = useParams();
     const [picture, setPicture] = useState("");
+
     
     useEffect(() => {
         if(props.client.name.firstName === ""){
