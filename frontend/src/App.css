@@ -116,6 +116,15 @@
   background-color: var(--primaryColor);
   margin-bottom: 18rem;
 }
+
+@media (max-width: 1000px) {
+  .routines [class^="row"] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
 .row {
   margin: 0px 0px 0px 0px !important;
 }
@@ -131,6 +140,21 @@
   background-color: var(--primaryColor) !important;
   color: var(--white1) !important;
   padding-top: 3%;
+}
+@media (max-width: 700px) {
+  .workout [class^="row"] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .noImg {
+    display: none;
+  }
+  .workouts {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 .workouts table {
   color: var(--white1);
@@ -192,8 +216,8 @@ body {
 }
 
 .login {
-  margin-top: 5.95%;
-  margin-bottom: 5.95%;
+  margin-top: 7.12rem;
+  margin-bottom: 7.12rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -218,8 +242,8 @@ body {
 }
 
 .register {
-  margin-top: 5.33%;
-  margin-bottom: 5.33% !important;
+  margin-top: 6.37rem;
+  margin-bottom: 6.37rem !important;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -232,8 +256,8 @@ body {
 }
 
 .forgot {
-  margin-top: 6.94%;
-  margin-bottom: 6.94%;
+  margin-top: 8.31rem;
+  margin-bottom: 8.31rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -258,8 +282,79 @@ body {
   color: inherit;
   text-decoration: none;
   background-color: var(--primaryColor);
-  margin-bottom: 181px;
+  margin-bottom: 10rem;
 }
+
+@media (max-width: 1200px) {
+  .dash [class^="row"] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .topDash {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .shadow-lg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem 1rem 1rem 1rem;
+  }
+  .routineButton {
+    margin-left: 1.7rem !important;
+  }
+}
+@media (max-width: 900px) {
+  .dash [class^="row"] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .topDash {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .shadow-lg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem 1rem 1rem 1rem;
+  }
+  .routineButton {
+    margin-left: 1.7rem !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .dash [class^="row"] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .topDash {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 50%;
+  }
+  .topDash .fixRow {
+    margin-left: 13.2rem !important;
+  }
+  .shadow-lg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem 1rem 1rem 1rem;
+  }
+  .routineButton {
+    margin-left: 1.4rem !important;
+  }
+}
+
 .dash button {
   width: 350px;
   height: 280px;

@@ -26,7 +26,7 @@ class Workouts extends Component {
     
     render() {
         return (
-            <Container>
+            <Container className = "workout">
                     <div className="workouts">
                     
                      <h2>Workouts</h2>
@@ -35,9 +35,9 @@ class Workouts extends Component {
                     <Row>
                     {this.props.workouts.map((workout) => 
                         
-                        <Col xs="4" className="mb-3">
+                        <Col xs ='8' sm='6' md='4'  className="mb-3">
                             <Card className="shadow" >
-                            <CardImg variant="bottom" src={workout.imageURL} /> 
+                            <CardImg className = "noImg" variant="bottom" src={workout.imageURL} /> 
                                 <CardBody>
                                     <CardTitle tag="h5">{workout.name}</CardTitle>
                                     <CardSubtitle tag="h6">Primary: {workout.primary}
