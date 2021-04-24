@@ -68,7 +68,7 @@ function WorkoutSessions(props) {
                         <div className="col-sm d-flex align-items-center flex-column justify-content-center">
                             <h5>Target heart rate: {calculateTargetHeart(session.routine.targetHeartrate)}</h5>
                             <h5>Max heart rate reached: {calculateMaxHeartrateReached(session.heartrate)}</h5>
-                            <h5>Average heaert: {calculateAverageHeartrate(session.heartrate)}</h5>
+                            <h5>Average heart rate: {calculateAverageHeartrate(session.heartrate)}</h5>
                             <RoutineModal session={session}/>
                         </div>
                     </div>
@@ -160,16 +160,16 @@ function WorkoutSessions(props) {
         <Container className="container-fluid">
             <Jumbotron className="mt-3">
                 <h1>Workout Sessions</h1>
-                <div>
+                <div className="d-flex">
                     <Calendar
                         onChange={(selectedDate) => {
                             onChange(selectedDate)
                         }}
                         value={value}
                     />
+                
+                    <h3 className="align-self-center flex-column m-auto">Week of: {value.toString().slice(0, 15)}</h3>
                 </div>
-                <h3>Week of: {value.toString()}</h3>
-                <h3></h3>
                 <hr />
                 {
                 props.client.workoutSessions !== undefined ?
