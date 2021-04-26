@@ -2,7 +2,7 @@
 
 ## How to Start Application
 
-###Backend
+### Backend
 Note: backend is used for web-app, our backend is deployed on heroku but it is mainly used by the Mobile App
 1. cd into backend
 2. npm install
