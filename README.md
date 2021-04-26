@@ -23,6 +23,6 @@ Note: Make sure the backend server is turned on first.
 4. expo start
 
 
-###Heroku
+### Heroku
 
 Our backend is hosted on Heroku. You dont have to worrry about this.
