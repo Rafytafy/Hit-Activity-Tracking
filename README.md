@@ -3,7 +3,6 @@
 ## How to Start Application
 
 ### Backend
-Note: backend is used for web-app, our backend is deployed on heroku but it is mainly used by the Mobile App
 1. cd into backend
 2. npm install
 3. node server.js
@@ -17,7 +16,7 @@ Note: Make sure the backend server is turned on first.
 
 ### Mobile Side 
 
-1. cd into frontend
+1. cd into mobile
 2. Install expo to your computer [expo](https://docs.expo.io/get-started/installation/)
 3. npm install
 4. expo start
@@ -25,4 +24,4 @@ Note: Make sure the backend server is turned on first.
 
 ### Heroku
 
-Our backend is hosted on Heroku. You dont have to worrry about this.
+Our backend is hosted on Heroku.
